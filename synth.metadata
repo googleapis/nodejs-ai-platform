@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-ai-platform.git",
-        "sha": "182128bfa593c787e2f0970ba224a68595b45971"
+        "sha": "cefdd8844606367305aa190913db91f9cbb0054c"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "989670e868daaad6ce0306e6ec1b9ff40659c19e",
-        "internalRef": "333377977"
+        "sha": "2987612c6aacc1857ee35468e7aeb1c393460799",
+        "internalRef": "333583499"
       }
     }
   ],
@@ -78,7 +78,6 @@
     "README.md",
     "api-extractor.json",
     "linkinator.config.json",
-    "package-lock.json.1524042991",
     "protos/google/cloud/aiplatform/v1beta1/accelerator_type.proto",
     "protos/google/cloud/aiplatform/v1beta1/annotation.proto",
     "protos/google/cloud/aiplatform/v1beta1/annotation_spec.proto",
@@ -118,6 +117,7 @@
     "protos/protos.js",
     "protos/protos.json",
     "renovate.json",
+    "samples/README.md",
     "src/index.ts",
     "src/v1beta1/dataset_service_client.ts",
     "src/v1beta1/dataset_service_client_config.json",

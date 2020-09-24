@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const aiplatform = require('aiplatform');
+const aiplatform = require('@google-cloud/aiplatform');
 
 function main() {
   const datasetServiceClient = new aiplatform.DatasetServiceClient();

@@ -24,7 +24,7 @@ import {
   PipelineServiceClient,
   PredictionServiceClient,
   SpecialistPoolServiceClient,
-} from 'aiplatform';
+} from '@google-cloud/aiplatform';
 
 function main() {
   new DatasetServiceClient();

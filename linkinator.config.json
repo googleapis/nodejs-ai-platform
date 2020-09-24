@@ -5,7 +5,9 @@
     "www.googleapis.com",
     "img.shields.io",
     "googleapis.dev/nodejs/aiplatform/latest",
-    "github.com/googleapis/nodejs-ai-platform/blob/master/CHANGELOG.md"
+    "github.com/googleapis/nodejs-ai-platform/blob/master/CHANGELOG.md",
+    "github.com/googleapis/nodejs-ai-platform/tree/master/samples",
+    "github.com/googleapis/nodejs-ai-platform/blob/master/samples/quickstart.js"
   ],
   "silent": true,
   "concurrency": 10
