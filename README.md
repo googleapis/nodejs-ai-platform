@@ -5,7 +5,7 @@
 # [AI Platform: Node.js Client](https://github.com/googleapis/nodejs-ai-platform)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/aiplatform.svg)](https://www.npmjs.org/package/aiplatform)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/aiplatform.svg)](https://www.npmjs.org/package/@google-cloud/aiplatform)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-ai-platform/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-ai-platform)
 
 
@@ -51,7 +51,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install aiplatform
+npm install @google-cloud/aiplatform
 ```
 
 
