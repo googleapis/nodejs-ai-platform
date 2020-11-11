@@ -18,27 +18,37 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
-
+const {uuid} = require('uuidv4');
 const cp = require('child_process');
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
-const filename = 'resources/daisy.jpg';
-const endpointId = process.env.PREDICT_IMAGE_CLASS_ENDPOINT_ID;
+
+const datasetDisplayName = `temp_create_dataset_video_test_${uuid()}`;
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
-describe('AI platform predict image classification', () => {
-  it('should make predictions using the image classification model', async () => {
+let datasetId;
+
+describe('AI platform create dataset video', () => {
+  it('should create a new video dataset in the parent resource', async () => {
     const stdout = execSync(
-        `node ./predict-image-classification.js ${filename} \
-                                                ${endpointId} \
-                                                ${project} \
-                                                ${location}`,
+        `node ./create-dataset-video.js ${datasetDisplayName} ${project} \
+                                        ${location}`,
         {
           cwd,
         },
     );
-    assert.match(stdout, /Predict image classification response/);
+    assert.match(stdout, /Create dataset video response/);
+    datasetId = stdout.split(
+        '/locations/us-central1/datasets/',
+    )[1].split('\n')[0];
+  });
+  after('should delete the created dataset', async () => {
+    execSync(
+        `node ./delete-dataset.js ${datasetId} ${project} ${location}`,
+        {
+          cwd,
+        },
+    );
   });
 });

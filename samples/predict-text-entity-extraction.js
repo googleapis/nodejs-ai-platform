@@ -16,8 +16,8 @@
 
 'use strict';
 
-function main(filename, endpointId, project, location = 'us-central1') {
-  // [START aiplatform_predict_image_classification]
+async function main(filename, endpointId, project, location = 'us-central1') {
+  // [START aiplatform_predict_text_entity_extraction]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
@@ -27,15 +27,9 @@ function main(filename, endpointId, project, location = 'us-central1') {
   // const endpointId = "YOUR_ENDPOINT_ID";
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
-  const aiplatform = require('@google-cloud/aiplatform');
-  const {
-    instance,
-    params,
-    prediction,
-  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
 
   // Imports the Google Cloud Prediction Service Client library
-  const {PredictionServiceClient} = aiplatform;
+  const {PredictionServiceClient} = require('@google-cloud/aiplatform');
 
   // Specifies the location of the api endpoint
   const clientOptions = {
@@ -45,25 +39,31 @@ function main(filename, endpointId, project, location = 'us-central1') {
   // Instantiates a client
   const predictionServiceClient = new PredictionServiceClient(clientOptions);
 
-  async function predictImageClassification() {
+  async function predictTextEntityExtraction() {
     // Configure the endpoint resource
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
-<<<<<<< HEAD
-
-    const parametersObj = new params.ImageClassificationPredictionParams({
-      confidenceThreshold: 0.5,
-      maxPredictions: 5,
-    });
-    const parameters = parametersObj.toValue();
+    const parameters = {
+      structValue: {
+        fields: {
+          confidenceThreshold: {numberValue: 0.5},
+          maxPredictions: {numberValue: 5},
+        },
+      },
+    };
 
     const fs = require('fs');
-    const image = fs.readFileSync(filename, 'base64');
-    const instanceObj = new instance.ImageClassificationPredictionInstance({
-      content: image,
-    });
-    const instanceValue = instanceObj.toValue();
+    const text = fs.readFileSync(filename, 'utf8');
+    const instance = {
+      structValue: {
+        fields: {
+          content: {
+            stringValue: text,
+          },
+        },
+      },
+    };
 
-    const instances = [instanceValue];
+    const instances = [instance];
     const request = {
       endpoint,
       instances,
@@ -73,28 +73,19 @@ function main(filename, endpointId, project, location = 'us-central1') {
     // Predict request
     const [response] = await predictionServiceClient.predict(request);
 
-    console.log('Predict image classification response');
+    console.log(`Predict text entity extraction response :`);
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
     const predictions = response.predictions;
-    console.log('\tPredictions :');
-    for (const predictionValue of predictions) {
-      const predictionResultObj = prediction.ClassificationPredictionResult.fromValue(
-        predictionValue
-      );
-      for (const [i, label] of predictionResultObj.displayNames.entries()) {
-        console.log(`\tDisplay name: ${label}`);
-        console.log(`\tConfidences: ${predictionResultObj.confidences[i]}`);
-        console.log(`\tIDs: ${predictionResultObj.ids[i]}\n\n`);
-      }
+    console.log(`\tPredictions :`);
+    for (const prediction of predictions) {
+      console.log(`\t\tPrediction : ${JSON.stringify(prediction)}`);
     }
   }
-  predictImageClassification();
-  // [END aiplatform_predict_image_classification]
+  // [END aiplatform_predict_text_entity_extraction]
+  await predictTextEntityExtraction();
 }
 
-process.on('unhandledRejection', err => {
-  console.error(err.message);
+main(...process.argv.slice(2)).catch((err) => {
+  console.error(err);
   process.exitCode = 1;
 });
-
-main(...process.argv.slice(2));

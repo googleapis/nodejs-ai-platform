@@ -18,27 +18,26 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
-
 const cp = require('child_process');
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
-const filename = 'resources/daisy.jpg';
-const endpointId = process.env.PREDICT_IMAGE_CLASS_ENDPOINT_ID;
+
+const datasetId = process.env.VIDEO_CLASS_DATASET_ID;
+const gcsSourceUri = 'gs://automl-video-demo-data/traffic_videos/traffic_videos_train.csv';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
-describe('AI platform predict image classification', () => {
-  it('should make predictions using the image classification model', async () => {
+describe('AI platform import data video classification', () => {
+  it('should import video classification data to dataset', async () => {
     const stdout = execSync(
-        `node ./predict-image-classification.js ${filename} \
-                                                ${endpointId} \
-                                                ${project} \
-                                                ${location}`,
+        `node ./import-data-video-classification.js ${datasetId} \
+                                                    ${gcsSourceUri} \
+                                                    ${project} \
+                                                    ${location}`,
         {
           cwd,
         },
     );
-    assert.match(stdout, /Predict image classification response/);
+    assert.match(stdout, /Import data video classification response/);
   });
 });

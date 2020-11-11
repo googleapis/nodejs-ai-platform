@@ -18,27 +18,27 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
-
 const cp = require('child_process');
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
-const filename = 'resources/daisy.jpg';
-const endpointId = process.env.PREDICT_IMAGE_CLASS_ENDPOINT_ID;
+
+const datasetId = process.env.TEXT_CLASS_SINGLE_DATASET_ID;
+const gcsSourceUri = 'gs://cloud-ml-data/NL-classification/happiness.csv';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
-describe('AI platform predict image classification', () => {
-  it('should make predictions using the image classification model', async () => {
+describe('AI platform import data text classification', () => {
+  it('should import data to text classification dataset', async () => {
     const stdout = execSync(
-        `node ./predict-image-classification.js ${filename} \
-                                                ${endpointId} \
-                                                ${project} \
-                                                ${location}`,
+        `node ./import-data-text-classification-single-label.js \
+                                                    ${datasetId} \
+                                                    ${gcsSourceUri} \
+                                                    ${project} \
+                                                    ${location}`,
         {
           cwd,
         },
     );
-    assert.match(stdout, /Predict image classification response/);
+    assert.match(stdout, /Import data text classification single label response/);
   });
 });

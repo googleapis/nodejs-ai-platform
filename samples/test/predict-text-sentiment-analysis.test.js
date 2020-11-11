@@ -18,27 +18,26 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
-
 const cp = require('child_process');
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
-const filename = 'resources/daisy.jpg';
-const endpointId = process.env.PREDICT_IMAGE_CLASS_ENDPOINT_ID;
+
+const filename = 'resources/textSentiment.txt';
+const endpointId = process.env.PREDICT_TEXT_SENTIMENT_ENDPOINT_ID;
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
-describe('AI platform predict image classification', () => {
-  it('should make predictions using the image classification model', async () => {
+describe('AI platform predict text sentiment analysis', () => {
+  it('should make predictions using the text sentiment model', async () => {
     const stdout = execSync(
-        `node ./predict-image-classification.js ${filename} \
-                                                ${endpointId} \
-                                                ${project} \
-                                                ${location}`,
+        `node ./predict-text-sentiment-analysis.js ${filename} \
+                                                   ${endpointId} \
+                                                   ${project} \
+                                                   ${location}`,
         {
           cwd,
         },
     );
-    assert.match(stdout, /Predict image classification response/);
+    assert.match(stdout, /Predict text sentiment analysis response/);
   });
 });

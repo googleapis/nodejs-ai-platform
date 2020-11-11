@@ -18,27 +18,27 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
-
 const cp = require('child_process');
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
-const filename = 'resources/daisy.jpg';
-const endpointId = process.env.PREDICT_IMAGE_CLASS_ENDPOINT_ID;
+
+const filename = 'resources/tablesReg.txt';
+const endpointId = process.env.PREDICT_TABLES_REGRESSION_ENDPOINT_ID;
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
-describe('AI platform predict image classification', () => {
-  it('should make predictions using the image classification model', async () => {
+describe('AI platform predict tabular regression', () => {
+  it('should make predictions using the tabular regression model', async () => {
     const stdout = execSync(
-        `node ./predict-image-classification.js ${filename} \
-                                                ${endpointId} \
-                                                ${project} \
-                                                ${location}`,
+        `node ./predict-tabular-regression.js ${filename} \
+                                             ${endpointId} \
+                                             ${project} \
+                                             ${location}`,
         {
           cwd,
         },
     );
-    assert.match(stdout, /Predict image classification response/);
+    console.log(stdout);
+    assert.match(stdout, /Predict tabular regression response/);
   });
 });

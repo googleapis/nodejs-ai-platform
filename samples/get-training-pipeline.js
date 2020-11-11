@@ -16,32 +16,19 @@
 
 'use strict';
 
-function main(
-  datasetId,
-  modelDisplayName,
-  trainingPipelineDisplayName,
-  project,
-  location = 'us-central1'
-) {
-  // [START aiplatform_create_training_pipeline_image_classification]
+async function main(trainingPipelineId, project, location = 'us-central1') {
+  // [START aiplatform_get_training_pipeline]
   /**
-   * TODO(developer): Uncomment these variables before running the sample.
+   * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
    */
-  /*
-  const datasetId = 'YOUR DATASET';
-  const modelDisplayName = 'NEW MODEL NAME;
-  const trainingPipelineDisplayName = 'NAME FOR TRAINING PIPELINE';
-  const project = 'YOUR PROJECT ID';
-  const location = 'us-central1';
-    */
-  // Imports the Google Cloud Pipeline Service Client library
-  const aiplatform = require('@google-cloud/aiplatform');
 
-  const {
-    definition,
-  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.trainingjob;
-  const ModelType = definition.AutoMlImageClassificationInputs.ModelType;
+  // const trainingPipelineId = 'YOUR_TRAINING_PIPELINE_ID';
+  // const project = 'YOUR_PROJECT_ID';
+  // const location = 'YOUR_PROJECT_LOCATION';
+
+  // Imports the Google Cloud Pipeline Service Client library
+  const {PipelineServiceClient} = require('@google-cloud/aiplatform');
 
   // Specifies the location of the api endpoint
   const clientOptions = {
@@ -49,46 +36,21 @@ function main(
   };
 
   // Instantiates a client
-  const pipelineServiceClient = new aiplatform.PipelineServiceClient(
-    clientOptions
-  );
+  const pipelineServiceClient = new PipelineServiceClient(clientOptions);
 
-  async function createTrainingPipelineImageClassification() {
-    // Configure the parent resource
-    const parent = `projects/${project}/locations/${location}`;
-
-    // Values should match the input expected by your model.
-    const trainingTaskInputsMessage = new definition.AutoMlImageClassificationInputs(
-      {
-        multiLabel: true,
-        modelType: ModelType.CLOUD,
-        budgetMilliNodeHours: 8000,
-        disableEarlyStopping: false,
-      }
-    );
-
-    const trainingTaskInputs = trainingTaskInputsMessage.toValue();
-
-    const trainingTaskDefinition =
-      'gs://google-cloud-aiplatform/schema/trainingjob/definition/automl_image_classification_1.0.0.yaml';
-
-    const modelToUpload = {displayName: modelDisplayName};
-    const inputDataConfig = {datasetId: datasetId};
-    const trainingPipeline = {
-      displayName: trainingPipelineDisplayName,
-      trainingTaskDefinition,
-      trainingTaskInputs,
-      inputDataConfig,
-      modelToUpload,
+  async function getTrainingPipeline() {
+    // Configure the parent resources
+    const name = `projects/${project}/locations/${location}/trainingPipelines/${trainingPipelineId}`;
+    const request = {
+      name,
     };
-    const request = { parent, trainingPipeline };
 
-    // Create training pipeline request
-    const [response] = await pipelineServiceClient.createTrainingPipeline(request);
+    // Get training pipeline request
+    const [response] = await pipelineServiceClient.getTrainingPipeline(request);
 
-    console.log(`Create training pipeline image classification response`);
+    console.log(`Get training pipeline response`);
     console.log(`\tName : ${response.name}`);
-    console.log(`\tDisplay Name: ${response.displayName}`);
+    console.log(`\tDisplay name: ${response.displayName}`);
     console.log(
         `\tTraining task definition : ${response.trainingTaskDefinition}`,
     );
@@ -97,10 +59,9 @@ function main(
         ${JSON.stringify(response.trainingTaskInputs)}`,
     );
     console.log(
-        `\tTraining task metadata : \
-        ${JSON.stringify(response.trainingTaskMetadata)}`,
+        `\tTraining task metadata : ${response.trainingTaskMetadata}`,
     );
-    console.log(`\tState ; ${response.state}`);
+    console.log(`\tState : ${response.state}`);
     console.log(`\tCreate time : ${JSON.stringify(response.createTime)}`);
     console.log(`\tStart time : ${JSON.stringify(response.startTime)}`);
     console.log(`\tEnd time : ${JSON.stringify(response.endTime)}`);
@@ -152,9 +113,9 @@ function main(
     const predefinedSplit = inputDataConfiguration.predefinedSplit;
     console.log(`\t\tPredefined split`);
     if (predefinedSplit == null) {
-      console.log(`\t\t\tkey : {}`);
+      console.log(`\t\t\tKey : {}`);
     } else {
-      console.log(`\t\t\tkey : ${predefinedSplit.key}`);
+      console.log(`\t\t\tKey : ${predefinedSplit.key}`);
     }
 
     const timestampSplit = inputDataConfiguration.timestampSplit;
@@ -181,7 +142,7 @@ function main(
     const modelToBeUploaded = response.modelToUpload;
     console.log(`\tModel to upload`);
     console.log(`\t\tName : ${modelToBeUploaded.name}`);
-    console.log(`\t\tDisplayName : ${modelToBeUploaded.displayName}`);
+    console.log(`\t\tDisplay name : ${modelToBeUploaded.displayName}`);
     console.log(`\t\tDescription : ${modelToBeUploaded.description}`);
     console.log(
         `\t\tMetadata schema uri : ${modelToBeUploaded.metadataSchemaUri}`,
@@ -225,7 +186,7 @@ function main(
       );
       console.log(
           `\t\t\tParameters schema uri : \
-          ${predictSchemata.prametersSchemaUri}`,
+          ${predictSchemata.parametersSchemaUri}`,
       );
       console.log(
           `\t\t\tPrediction schema uri : \
@@ -234,7 +195,6 @@ function main(
     }
 
     const [supportedExportFormats] = modelToBeUploaded.supportedExportFormats;
-    console.log(`\t\tSupported export formats`);
     if (supportedExportFormats == null) {
       console.log(`\t\tSupported export format`);
     } else {
@@ -266,7 +226,7 @@ function main(
       console.log(`\t\t\tHealth route : ${containerSpec.healthRoute}`);
 
       const envs = containerSpec.env;
-      if (env == null) {
+      if (envs == null) {
         console.log(`\t\t\tEnv`);
       } else {
         for (env of envs) {
@@ -288,17 +248,8 @@ function main(
     }
 
     const [deployedModels] = modelToBeUploaded.deployedModels;
-    if (deployedModels == null) {
-      console.log(`\t\tDeployed model`);
-    } else {
-      for (deployedModel of deployedModels) {
-        console.log(`\t\tDeployed model`);
-        console.log(`\t\t\tEndpoint : ${deployedModel.endpoint}`);
-        console.log(
-            `\t\t\tDeployed model id : ${deployedModel.deployedModelId}`,
-        );
-      }
-    }
+    console.log(`\t\tDeployed model`);
+    console.log(`\t\t\t${deployedModels}`);
 
     const explanationSpec = modelToBeUploaded.explanationSpec;
     console.log(`\t\tExplanation spec`);
@@ -344,15 +295,14 @@ function main(
       console.log(`\t\tCode : ${error.code}`);
       console.log(`\t\tMessage : ${error.message}`);
     }
+    
   }
-
-  createTrainingPipelineImageClassification();
-  // [END aiplatform_create_training_pipeline_image_classification]
+  // [END aiplatform_get_training_pipeline]
+  // await getTrainingPipeline();
+  setTimeout(getTrainingPipeline, 60000);
 }
 
-process.on('unhandledRejection', err => {
-  console.error(err.message);
+main(...process.argv.slice(2)).catch((err) => {
+  console.error(err);
   process.exitCode = 1;
 });
-
-main(...process.argv.slice(2));

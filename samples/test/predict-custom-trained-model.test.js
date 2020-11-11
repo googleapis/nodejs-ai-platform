@@ -18,20 +18,19 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
-
 const cp = require('child_process');
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
-const filename = 'resources/daisy.jpg';
-const endpointId = process.env.PREDICT_IMAGE_CLASS_ENDPOINT_ID;
+
+const filename = 'resources/customModel.txt';
+const endpointId = process.env.PREDICT_CUSTOM_TRAINED_MODEL_ENDPOINT_ID;
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
-describe('AI platform predict image classification', () => {
-  it('should make predictions using the image classification model', async () => {
+describe('AI platform predict custom trained model', () => {
+  it('should make predictions using the custom trained model', async () => {
     const stdout = execSync(
-        `node ./predict-image-classification.js ${filename} \
+        `node ./predict-custom-trained-model.js ${filename} \
                                                 ${endpointId} \
                                                 ${project} \
                                                 ${location}`,
@@ -39,6 +38,7 @@ describe('AI platform predict image classification', () => {
           cwd,
         },
     );
-    assert.match(stdout, /Predict image classification response/);
+    console.log(stdout);
+    assert.match(stdout, /Predict custom trained model response/);
   });
 });

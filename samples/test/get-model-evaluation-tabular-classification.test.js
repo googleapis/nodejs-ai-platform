@@ -18,27 +18,26 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
-
 const cp = require('child_process');
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
-const filename = 'resources/daisy.jpg';
-const endpointId = process.env.PREDICT_IMAGE_CLASS_ENDPOINT_ID;
+
+const modelId = process.env.MODEL_EVALUATION_TABLES_CLASSIFICATION_MODEL_ID;
+const evaluationId = process.env.MODEL_EVALUATION_TABLES_CLASSIFICATION_EVALUATION_ID;
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
-describe('AI platform predict image classification', () => {
-  it('should make predictions using the image classification model', async () => {
+describe('AI platform get tabular classification model evaluation', () => {
+  it('should get the evaluation from the specified model', async () => {
     const stdout = execSync(
-        `node ./predict-image-classification.js ${filename} \
-                                                ${endpointId} \
-                                                ${project} \
-                                                ${location}`,
+        `node ./get-model-evaluation-tabular-classification.js ${modelId} \
+                                                              ${evaluationId} \
+                                                              ${project} \
+                                                              ${location}`,
         {
           cwd,
         },
     );
-    assert.match(stdout, /Predict image classification response/);
+    assert.match(stdout, /Get model evaluation tabular classification response/);
   });
 });
