@@ -33,7 +33,9 @@ for version in versions:
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(
     source_location='build/src', versions=versions)
-s.copy(templates, excludes=[])
+s.copy(templates, excludes=[
+  "continuous/node12/samples-test.cfg",
+  "presubmit/node12/samples-test.cfg"
+])
 
 node.postprocess_gapic_library()
-
