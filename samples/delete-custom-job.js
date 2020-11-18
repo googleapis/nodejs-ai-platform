@@ -16,11 +16,7 @@
 
 'use strict';
 
-async function main(
-    customJobId,
-    project,
-    location = 'us-central1',
-) {
+async function main(customJobId, project, location = 'us-central1') {
   // [START aiplatform_delete_custom_job]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -44,7 +40,7 @@ async function main(
 
   async function deleteCustomJob() {
     // Configure the name resource
-    const name = jobServiceClient.customJobPath(project, location, customJobId)
+    const name = jobServiceClient.customJobPath(project, location, customJobId);
     const request = {
       name,
     };
@@ -52,14 +48,14 @@ async function main(
     // Delete custom job request
     const [response] = await jobServiceClient.deleteCustomJob(request);
 
-    console.log(`Delete custom job response`);
+    console.log('Delete custom job response');
     console.log(`${response}`);
   }
-  // [END aiplatform_delete_custom_job]
   setTimeout(deleteCustomJob, 60000);
+  // [END aiplatform_delete_custom_job]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

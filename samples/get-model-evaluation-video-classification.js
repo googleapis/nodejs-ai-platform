@@ -49,19 +49,18 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
     // Create get model evaluation request
     const [response] = await modelServiceClient.getModelEvaluation(request);
 
-    console.log(`Get model evaluation video classification response`);
+    console.log('Get model evaluation video classification response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tMetrics schema uri : ${response.metricsSchemaUri}`);
     console.log(`\tMetrics : ${JSON.stringify(response.metrics)}`);
     console.log(`\tCreate time : ${JSON.stringify(response.createTime)}`);
     console.log(`\tSlice dimensions : ${response.sliceDimensions}`);
   }
-  // [END aiplatform_get_model_evaluation_video_classification]
   await getModelEvaluationVideoClassification();
+  // [END aiplatform_get_model_evaluation_video_classification]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });
-

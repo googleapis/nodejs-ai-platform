@@ -18,14 +18,17 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {uuid} = require('uuidv4');
+const {after, describe, it} = require('mocha');
+
+const uuid = require('uuid').v4;
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const displayName = `temp_create_data_labeling_job_video_test_${uuid()}`;
 const datasetId = process.env.DATA_LABELING_VIDEO_DATASET_ID;
-const instructionUri = 'gs://ucaip-sample-resources/images/datalabeling_instructions.pdf';
+const instructionUri =
+  'gs://ucaip-sample-resources/images/datalabeling_instructions.pdf';
 const annotationSpec = 'cars';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
@@ -35,34 +38,33 @@ let dataLabelingJobId;
 describe('AI platform create data labeling job video', () => {
   it('should create a new data labeling job video', async () => {
     const stdout = execSync(
-        `node ./create-data-labeling-job-video.js ${displayName} ${datasetId} \
+      `node ./create-data-labeling-job-video.js ${displayName} ${datasetId} \
                                                   ${instructionUri} \
                                                   ${annotationSpec} \
                                                   ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Create data labeling job video response/);
-    dataLabelingJobId = stdout.split(
-        '/locations/us-central1/dataLabelingJobs/',
-    )[1].split('\n')[0];
+    dataLabelingJobId = stdout
+      .split('/locations/us-central1/dataLabelingJobs/')[1]
+      .split('\n')[0];
   });
   after('should cancel the data labeling job and delete it', async () => {
     execSync(
-        `node ./cancel-data-labeling-job.js ${dataLabelingJobId} ${project} \
+      `node ./cancel-data-labeling-job.js ${dataLabelingJobId} ${project} \
                                             ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     execSync(
-        `node ./delete-data-labeling-job.js ${dataLabelingJobId} ${project} \
+      `node ./delete-data-labeling-job.js ${dataLabelingJobId} ${project} \
                                             ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
   });
 });
-

@@ -47,16 +47,17 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
     };
 
     // Get and print out a list of all the evaluation slices for this resource
-    const [response] = await modelServiceClient.listModelEvaluationSlices(request);
+    const [response] = await modelServiceClient.listModelEvaluationSlices(
+      request
+    );
     console.log('List model evaluation response', response);
     console.log(response);
   }
-  // [END aiplatform_list_model_evaluation_slices]
   await listModelEvaluationSlices();
+  // [END aiplatform_list_model_evaluation_slices]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });
-

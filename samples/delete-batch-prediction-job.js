@@ -46,15 +46,15 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
     };
 
     // Get and print out a list of all the endpoints for this resource
-    const [response] = await jobServiceClient.deleteBatchPredictionJob(request);
+    await jobServiceClient.deleteBatchPredictionJob(request);
 
-    console.log(`Delete batch prediction job response :`);
+    console.log('Delete batch prediction job response :');
   }
-  // [END aiplatform_delete_batch_prediction_job]
   await deleteBatchPredictionJob();
+  // [END aiplatform_delete_batch_prediction_job]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

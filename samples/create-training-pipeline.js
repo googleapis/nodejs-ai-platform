@@ -17,12 +17,12 @@
 'use strict';
 
 async function main(
-    datasetId,
-    modelDisplayName,
-    trainingPipelineDisplayName,
-    trainingTaskDefinition,
-    project,
-    location = 'us-central1',
+  datasetId,
+  modelDisplayName,
+  trainingPipelineDisplayName,
+  trainingTaskDefinition,
+  project,
+  location = 'us-central1'
 ) {
   // [START aiplatform_create_training_pipeline]
   /**
@@ -79,20 +79,20 @@ async function main(
     };
 
     // Create training pipeline request
-    const [response] = await pipelineServiceClient.createTrainingPipeline(request);
-    console.log(`Create training pipeline response`);
+    const [response] = await pipelineServiceClient.createTrainingPipeline(
+      request
+    );
+    console.log('Create training pipeline response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tDisplay Name: ${response.displayName}`);
     console.log(
-        `\tTraining task definition : ${response.trainingTaskDefinition}`,
+      `\tTraining task definition : ${response.trainingTaskDefinition}`
     );
     console.log(
-        `\tTraining task inputs : \
-        ${JSON.stringify(response.trainingTaskInputs)}`,
+      `\tTraining task inputs : \
+        ${JSON.stringify(response.trainingTaskInputs)}`
     );
-    console.log(
-        `\tTraining task metadata : ${response.trainingTaskMetadata}`,
-    );
+    console.log(`\tTraining task metadata : ${response.trainingTaskMetadata}`);
     console.log(`\tState ; ${response.state}`);
     console.log(`\tCreate time : ${JSON.stringify(response.createTime)}`);
     console.log(`\tStart time : ${JSON.stringify(response.startTime)}`);
@@ -101,148 +101,136 @@ async function main(
     console.log(`\tLabels : ${JSON.stringify(response.labels)}`);
 
     const inputDataConfiguration = response.inputDataConfig;
-    console.log(`\tInput data config`);
+    console.log('\tInput data config');
     console.log(`\t\tDataset id : ${inputDataConfiguration.datasetId}`);
     console.log(
-        `\t\tAnnotations filter : \
-        ${inputDataConfiguration.annotationsFilter}`,
+      `\t\tAnnotations filter : \
+        ${inputDataConfiguration.annotationsFilter}`
     );
 
     const fractionSplit = inputDataConfiguration.fractionSplit;
-    console.log(`\t\tFraction split`);
-    if (fractionSplit == null) {
-      console.log(`\t\t\tTraining fraction : {}`);
-      console.log(`\t\t\tValidation fraction : {}`);
-      console.log(`\t\t\tTest fraction : {}`);
+    console.log('\t\tFraction split');
+    if (fractionSplit === null) {
+      console.log('\t\t\tTraining fraction : {}');
+      console.log('\t\t\tValidation fraction : {}');
+      console.log('\t\t\tTest fraction : {}');
     } else {
       console.log(
-          `\t\t\tTraining fraction : ${fractionSplit.trainingFraction}`,
+        `\t\t\tTraining fraction : ${fractionSplit.trainingFraction}`
       );
       console.log(
-          `\t\t\tValidation fraction : ${fractionSplit.validationFraction}`,
+        `\t\t\tValidation fraction : ${fractionSplit.validationFraction}`
       );
       console.log(`\t\t\tTest fraction : ${fractionSplit.testFraction}`);
     }
 
     const filterSplit = inputDataConfiguration.filterSplit;
-    console.log(`\t\tFilter split `);
-    if (filterSplit == null) {
-      console.log(`\t\t\tTraining filter : {}`);
-      console.log(`\t\t\tValidation filter : {}`);
-      console.log(`\t\t\tTest filter : {}`);
+    console.log('\t\tFilter split ');
+    if (filterSplit === null) {
+      console.log('\t\t\tTraining filter : {}');
+      console.log('\t\t\tValidation filter : {}');
+      console.log('\t\t\tTest filter : {}');
     } else {
-      console.log(
-          `\t\t\tTraining filter : ${filterSplit.trainingFilter}`,
-      );
-      console.log(
-          `\t\t\tValidation filter : ${filterSplit.validationFilter}`,
-      );
-      console.log(
-          `\t\t\tTest filter : ${filterSplit.testFilter}`,
-      );
+      console.log(`\t\t\tTraining filter : ${filterSplit.trainingFilter}`);
+      console.log(`\t\t\tValidation filter : ${filterSplit.validationFilter}`);
+      console.log(`\t\t\tTest filter : ${filterSplit.testFilter}`);
     }
 
     const predefinedSplit = inputDataConfiguration.predefinedSplit;
-    console.log(`\t\tPredefined split`);
-    if (predefinedSplit == null) {
-      console.log(`\t\t\tkey : {}`);
+    console.log('\t\tPredefined split');
+    if (predefinedSplit === null) {
+      console.log('\t\t\tkey : {}');
     } else {
       console.log(`\t\t\tkey : ${predefinedSplit.key}`);
     }
 
     const timestampSplit = inputDataConfiguration.timestampSplit;
-    console.log(`\t\tTimestamp split`);
-    if (timestampSplit == null) {
-      console.log(`\t\t\tTraining fraction : {}`);
-      console.log(`\t\t\tValidation fraction : {}`);
-      console.log(`\t\t\tTest fraction : {}`);
-      console.log(`\t\t\tKey : {}`);
+    console.log('\t\tTimestamp split');
+    if (timestampSplit === null) {
+      console.log('\t\t\tTraining fraction : {}');
+      console.log('\t\t\tValidation fraction : {}');
+      console.log('\t\t\tTest fraction : {}');
+      console.log('\t\t\tKey : {}');
     } else {
       console.log(
-          `\t\t\tTraining fraction : ${timestampSplit.trainingFraction}`,
+        `\t\t\tTraining fraction : ${timestampSplit.trainingFraction}`
       );
       console.log(
-          `\t\t\tValidation fraction : \
-          ${timestampSplit.validationFraction}`,
+        `\t\t\tValidation fraction : \
+          ${timestampSplit.validationFraction}`
       );
-      console.log(
-          `\t\t\tTest fraction : ${timestampSplit.testFraction}`,
-      );
+      console.log(`\t\t\tTest fraction : ${timestampSplit.testFraction}`);
       console.log(`\t\t\tKey : ${timestampSplit.key}`);
     }
 
     const modelToBeUploaded = response.modelToUpload;
-    console.log(`\tModel to upload`);
+    console.log('\tModel to upload');
     console.log(`\t\tName : ${modelToBeUploaded.name}`);
     console.log(`\t\tDisplayName : ${modelToBeUploaded.displayName}`);
     console.log(`\t\tDescription : ${modelToBeUploaded.description}`);
     console.log(
-        `\t\tMetadata schema uri : ${modelToBeUploaded.metadataSchemaUri}`,
+      `\t\tMetadata schema uri : ${modelToBeUploaded.metadataSchemaUri}`
+    );
+    console.log(`\t\tMetadata : ${JSON.stringify(modelToBeUploaded.metadata)}`);
+    console.log(
+      `\t\tTraining pipeline : ${modelToBeUploaded.trainingPipeline}`
+    );
+    console.log(`\t\tArtifact uri : ${modelToBeUploaded.artifactUri}`);
+    console.log(
+      `\t\tSupported deployment resource types : \
+        ${modelToBeUploaded.supportedDeploymentResourceTypes}`
     );
     console.log(
-        `\t\tMetadata : ${JSON.stringify(modelToBeUploaded.metadata)}`,
+      `\t\tSupported input storage formats : \
+        ${modelToBeUploaded.supportedInputStorageFormats}`
     );
     console.log(
-        `\t\tTraining pipeline : ${modelToBeUploaded.trainingPipeline}`,
-    );
-    console.log(
-        `\t\tArtifact uri : ${modelToBeUploaded.artifactUri}`,
-    );
-    console.log(
-        `\t\tSupported deployment resource types : \
-        ${modelToBeUploaded.supportedDeploymentResourceTypes}`,
-    );
-    console.log(
-        `\t\tSupported input storage formats : \
-        ${modelToBeUploaded.supportedInputStorageFormats}`,
-    );
-    console.log(
-        `\t\tSupported output storage formats : \
-        ${modelToBeUploaded.supportedOutputStoragFormats}`,
+      `\t\tSupported output storage formats : \
+        ${modelToBeUploaded.supportedOutputStoragFormats}`
     );
     console.log(`\t\tCreate time : ${modelToBeUploaded.createTime}`);
     console.log(`\t\tUpdate time : ${modelToBeUploaded.updateTime}`);
     console.log(`\t\tLabels : ${modelToBeUploaded.labels}`);
 
     const predictSchemata = modelToBeUploaded.predictSchemata;
-    if (predictSchemata == null) {
-      console.log(`\t\tPredict schemata`);
-      console.log(`\t\t\tInstance schema uri : {}`);
-      console.log(`\t\t\tParameters schema uri : {}`);
-      console.log(`\t\t\tPrediction schema uri : {}`);
+    if (predictSchemata === null) {
+      console.log('\t\tPredict schemata');
+      console.log('\t\t\tInstance schema uri : {}');
+      console.log('\t\t\tParameters schema uri : {}');
+      console.log('\t\t\tPrediction schema uri : {}');
     } else {
-      console.log(`\t\tPredict schemata`);
+      console.log('\t\tPredict schemata');
       console.log(
-          `\t\t\tInstance schema uri : \
-          ${predictSchemata.instanceSchemaUri}`,
+        `\t\t\tInstance schema uri : \
+          ${predictSchemata.instanceSchemaUri}`
       );
       console.log(
-          `\t\t\tParameters schema uri : \
-          ${predictSchemata.prametersSchemaUri}`,
+        `\t\t\tParameters schema uri : \
+          ${predictSchemata.prametersSchemaUri}`
       );
       console.log(
-          `\t\t\tPrediction schema uri : \
-          ${predictSchemata.predictionSchemaUri}`,
+        `\t\t\tPrediction schema uri : \
+          ${predictSchemata.predictionSchemaUri}`
       );
     }
 
     const [supportedExportFormats] = modelToBeUploaded.supportedExportFormats;
-    console.log(`\t\tSupported export formats`);
+    console.log('\t\tSupported export formats');
     console.log(`\t\t\t${supportedExportFormats}`);
 
     const containerSpec = modelToBeUploaded.containerSpec;
-    console.log(`\t\tContainer Spec`);
-    if (containerSpec == null) {
+    console.log('\t\tContainer Spec');
+    if (containerSpec === null) {
       console.log(`\t\t\t${JSON.stringify(containerSpec)}`);
-      console.log(`\t\t\tImage uri : {}`);
-      console.log(`\t\t\tCommand : {}`);
-      console.log(`\t\t\tArgs : {}`);
-      console.log(`\t\t\tPredict route : {}`);
-      console.log(`\t\t\tHealth route : {}`);
-      console.log(`\t\t\tEnv`);
-      console.log(`\t\t\t{}`);
-      console.log(`\t\t\tPort`);
-      console.log(`\t\t\t{}`);
+      console.log('\t\t\tImage uri : {}');
+      console.log('\t\t\tCommand : {}');
+      console.log('\t\t\tArgs : {}');
+      console.log('\t\t\tPredict route : {}');
+      console.log('\t\t\tHealth route : {}');
+      console.log('\t\t\tEnv');
+      console.log('\t\t\t{}');
+      console.log('\t\t\tPort');
+      console.log('\t\t\t{}');
     } else {
       console.log(`\t\t\t${JSON.stringify(containerSpec)}`);
       console.log(`\t\t\tImage uri : ${containerSpec.imageUri}`);
@@ -251,67 +239,63 @@ async function main(
       console.log(`\t\t\tPredict route : ${containerSpec.predictRoute}`);
       console.log(`\t\t\tHealth route : ${containerSpec.healthRoute}`);
       const env = containerSpec.env;
-      console.log(`\t\t\tEnv`);
+      console.log('\t\t\tEnv');
       console.log(`\t\t\t${env}`);
       const ports = containerSpec.ports;
-      console.log(`\t\t\tPort`);
+      console.log('\t\t\tPort');
       console.log(`\t\t\t${ports}`);
     }
 
     const [deployedModels] = modelToBeUploaded.deployedModels;
-    console.log(`\t\tDeployed model`);
+    console.log('\t\tDeployed model');
     console.log(`\t\t\t${deployedModels}`);
 
     const explanationSpec = modelToBeUploaded.explanationSpec;
-    console.log(`\t\tExplanation spec`);
-    console.log(`\t\t\tparameters`);
-    if (explanationSpec == null) {
-      console.log(`\t\t\t\tSampled shapley attribution`);
-      console.log(`\t\t\t\t\tPath count : {}`);
+    console.log('\t\tExplanation spec');
+    console.log('\t\t\tparameters');
+    if (explanationSpec === null) {
+      console.log('\t\t\t\tSampled shapley attribution');
+      console.log('\t\t\t\t\tPath count : {}');
     } else {
       const parameters = explanationSpec.parameters;
       const sampledShapleyAttribution = parameters.sampledShapleyAttribution;
-      console.log(`\t\t\t\tSampled shapley attribution`);
+      console.log('\t\t\t\tSampled shapley attribution');
       console.log(
-          `\t\t\t\t\tPath count : \
-          ${sampledShapleyAttribution.pathCount}`,
+        `\t\t\t\t\tPath count : \
+          ${sampledShapleyAttribution.pathCount}`
       );
     }
 
-    console.log(`\t\t\tMetadata`);
-    if (explanationSpec == null) {
-      console.log(`\t\t\t\tInputs : {}`);
-      console.log(`\t\t\t\tOutputs : {}`);
-      console.log(`\t\t\t\tFeature attributions schema uri : {}`);
+    console.log('\t\t\tMetadata');
+    if (explanationSpec === null) {
+      console.log('\t\t\t\tInputs : {}');
+      console.log('\t\t\t\tOutputs : {}');
+      console.log('\t\t\t\tFeature attributions schema uri : {}');
     } else {
       const metadata = explanationSpec.metadata;
+      console.log(`\t\t\t\tInputs : ${JSON.stringify(metadata.inputs)}`);
+      console.log(`\t\t\t\tOutputs : ${JSON.stringify(metadata.outputs)}`);
       console.log(
-          `\t\t\t\tInputs : ${JSON.stringify(metadata.inputs)}`,
-      );
-      console.log(
-          `\t\t\t\tOutputs : ${JSON.stringify(metadata.outputs)}`,
-      );
-      console.log(
-          `\t\t\t\tFeature attributions schema uri : \
-          ${metadata.featureAttributionsSchemaUri}`,
+        `\t\t\t\tFeature attributions schema uri : \
+          ${metadata.featureAttributionsSchemaUri}`
       );
     }
 
     const error = response.error;
-    console.log(`\tError`);
-    if (error == null) {
-      console.log(`\t\tCode : {}`);
-      console.log(`\t\tMessage : {}`);
+    console.log('\tError');
+    if (error === null) {
+      console.log('\t\tCode : {}');
+      console.log('\t\tMessage : {}');
     } else {
       console.log(`\t\tCode : ${error.code}`);
       console.log(`\t\tMessage : ${error.message}`);
     }
   }
-  // [END aiplatform_create_training_pipeline]
   await createTrainingPipeline();
+  // [END aiplatform_create_training_pipeline]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

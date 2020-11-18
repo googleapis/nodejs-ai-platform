@@ -49,7 +49,7 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
     // Create get model evaluation request
     const [response] = await modelServiceClient.getModelEvaluation(request);
 
-    console.log(`Get model evaluation image classification response`);
+    console.log('Get model evaluation image classification response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tMetrics schema uri : ${response.metricsSchemaUri}`);
     console.log(`\tMetrics : ${JSON.stringify(response.metrics)}`);
@@ -57,41 +57,41 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
     console.log(`\tSlice dimensions : ${response.sliceDimensions}`);
 
     const modelExplanation = response.modelExplanation;
-    if (modelExplanation == null) {
+    if (modelExplanation === null) {
       console.log(`\tModel explanation: ${JSON.stringify(modelExplanation)}`);
     } else {
       const meanAttributions = modelExplanation.meanAttributions;
       for (const meanAttribution of meanAttributions) {
-        console.log(`\t\tMean attribution`);
+        console.log('\t\tMean attribution');
         console.log(
-            `\t\t\tBaseline output value : \
-             ${meanAttribution.baselineOutputValue}`,
+          `\t\t\tBaseline output value : \
+             ${meanAttribution.baselineOutputValue}`
         );
         console.log(
-            `\t\t\tInstance output value : \
-             ${meanAttribution.instanceOutputValue}`,
+          `\t\t\tInstance output value : \
+             ${meanAttribution.instanceOutputValue}`
         );
         console.log(
-            `\t\t\tFeature attributions : \
-             ${JSON.stringify(meanAttribution.featureAttributions)}`,
+          `\t\t\tFeature attributions : \
+             ${JSON.stringify(meanAttribution.featureAttributions)}`
         );
         console.log(`\t\t\tOutput index : ${meanAttribution.outputIndex}`);
         console.log(
-            `\t\t\tOutput display name : \
-             ${meanAttribution.outputDisplayName}`,
+          `\t\t\tOutput display name : \
+             ${meanAttribution.outputDisplayName}`
         );
         console.log(
-            `\t\t\tApproximation error : \
-             ${meanAttribution.approximationError}`,
+          `\t\t\tApproximation error : \
+             ${meanAttribution.approximationError}`
         );
       }
     }
   }
-  // [END aiplatform_get_model_evaluation_image_classification]
   await getModelEvaluationImageClassification();
+  // [END aiplatform_get_model_evaluation_image_classification]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

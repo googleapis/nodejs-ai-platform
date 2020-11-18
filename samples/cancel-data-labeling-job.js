@@ -46,15 +46,15 @@ async function main(dataLabelingJobId, project, location = 'us-central1') {
     };
 
     // Cancel data labeling job request
-    const [response] = await jobServiceClient.cancelDataLabelingJob(request);
+    await jobServiceClient.cancelDataLabelingJob(request);
 
-    console.log(`Cancel data labeling job response :`);
+    console.log('Cancel data labeling job response :');
   }
-  // [END aiplatform_cancel_data_labeling_job]
   await cancelDataLabelingJob();
+  // [END aiplatform_cancel_data_labeling_job]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

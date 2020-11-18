@@ -46,15 +46,14 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
     };
 
     // Cancel batch prediction job request
-    const [response] = await jobServiceClient.cancelBatchPredictionJob(request);
-
-    console.log(`Cancel batch prediction job response :`);
+    await jobServiceClient.cancelBatchPredictionJob(request);
+    console.log('Cancel batch prediction job response :');
   }
-  // [END aiplatform_cancel_batch_prediction_job]
   await cancelBatchPredictionJob();
+  // [END aiplatform_cancel_batch_prediction_job]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

@@ -16,11 +16,7 @@
 
 'use strict';
 
-async function main(
-    trainingPipelineId,
-    project,
-    location = 'us-central1',
-) {
+async function main(trainingPipelineId, project, location = 'us-central1') {
   // [START aiplatform_cancel_training_pipeline]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -45,24 +41,24 @@ async function main(
   async function cancelTrainingPipeline() {
     // Configure the resource
     const name = pipelineServiceClient.trainingPipelinePath(
-        project,
-        location,
-        trainingPipelineId,
+      project,
+      location,
+      trainingPipelineId
     );
     const request = {
-      'name': name,
+      name: name,
     };
 
     // Cancel training pipeline request
-    const [response] = await pipelineServiceClient.cancelTrainingPipeline(request);
+    await pipelineServiceClient.cancelTrainingPipeline(request);
 
-    console.log(`Cancel training pipeline response :`);
+    console.log('Cancel training pipeline response :');
   }
-  // [END aiplatform_cancel_training_pipeline]
   await cancelTrainingPipeline();
+  // [END aiplatform_cancel_training_pipeline]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

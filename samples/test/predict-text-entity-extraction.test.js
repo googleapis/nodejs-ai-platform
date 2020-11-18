@@ -18,8 +18,10 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const filename = 'resources/textExtract.txt';
@@ -30,13 +32,13 @@ const location = process.env.LOCATION;
 describe('AI platform predict text entity extraction', () => {
   it('should make predictions using the text extraction model', async () => {
     const stdout = execSync(
-        `node ./predict-text-entity-extraction.js ${filename} \
+      `node ./predict-text-entity-extraction.js ${filename} \
                                                   ${endpointId} \
                                                   ${project} \
                                                   ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Predict text entity extraction response/);
   });

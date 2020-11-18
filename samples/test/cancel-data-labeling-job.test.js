@@ -18,15 +18,18 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {uuid} = require('uuidv4');
+const {after, describe, it} = require('mocha');
+const uuid = require('uuid').v4;
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const displayName = `temp_create_data_labeling_job_test_${uuid()}`;
 const datasetId = process.env.DATA_LABELING_DATASET_ID;
-const instructionUri = 'gs://ucaip-sample-resources/images/datalabeling_instructions.pdf';
-const inputsSchemaUri = 'gs://google-cloud-aiplatform/schema/datalabelingjob/inputs/image_classification.yaml';
+const instructionUri =
+  'gs://ucaip-sample-resources/images/datalabeling_instructions.pdf';
+const inputsSchemaUri =
+  'gs://google-cloud-aiplatform/schema/datalabelingjob/inputs/image_classification.yaml';
 const annotationSpec = 'daisy';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
@@ -36,34 +39,34 @@ let dataLabelingJobId;
 describe('AI platform cancel data labeling job', () => {
   it('should cancel the created data labeling job', async () => {
     const createOut = execSync(
-        `node ./create-data-labeling-job.js ${displayName} ${datasetId} \
+      `node ./create-data-labeling-job.js ${displayName} ${datasetId} \
                                             ${instructionUri} \
                                             ${inputsSchemaUri} \
                                             ${annotationSpec} \
                                             ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
-    dataLabelingJobId = createOut.split(
-        '/locations/us-central1/dataLabelingJobs/',
-    )[1].split('\n')[0];
+    dataLabelingJobId = createOut
+      .split('/locations/us-central1/dataLabelingJobs/')[1]
+      .split('\n')[0];
     const stdout = execSync(
-        `node ./cancel-data-labeling-job.js ${dataLabelingJobId} ${project} \
+      `node ./cancel-data-labeling-job.js ${dataLabelingJobId} ${project} \
                                             ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Cancel data labeling job response :/);
   });
   after('should delete the data labeling job', async () => {
     execSync(
-        `node ./delete-data-labeling-job.js ${dataLabelingJobId} ${project} \
+      `node ./delete-data-labeling-job.js ${dataLabelingJobId} ${project} \
                                             ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
   });
 });

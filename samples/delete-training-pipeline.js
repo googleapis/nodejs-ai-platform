@@ -16,11 +16,7 @@
 
 'use strict';
 
-async function main(
-    trainingPipelineId,
-    project,
-    location = 'us-central1',
-) {
+async function main(trainingPipelineId, project, location = 'us-central1') {
   // [START aiplatform_delete_training_pipeline]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -45,30 +41,32 @@ async function main(
   async function deleteTrainingPipeline() {
     // Configure the resource
     const name = pipelineServiceClient.trainingPipelinePath(
-        project,
-        location,
-        trainingPipelineId,
+      project,
+      location,
+      trainingPipelineId
     );
     const request = {
-      'name': name,
+      name: name,
     };
 
     // Delete training pipeline request
-    const [response] = await pipelineServiceClient.deleteTrainingPipeline(request);
+    const [response] = await pipelineServiceClient.deleteTrainingPipeline(
+      request
+    );
     console.log(`Long running operation : ${response.name}`);
 
     // Wait for operation to complete
     await response.promise();
     const result = response.result;
 
-    console.log(`Delete training pipeline response :`);
+    console.log('Delete training pipeline response :');
     console.log(`${result}`);
   }
-  // [END aiplatform_delete_training_pipeline]
   setTimeout(deleteTrainingPipeline, 60000);
+  // [END aiplatform_delete_training_pipeline]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

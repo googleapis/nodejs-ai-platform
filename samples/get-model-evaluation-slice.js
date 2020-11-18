@@ -17,11 +17,12 @@
 'use strict';
 
 async function main(
-    modelId,
-    evaluationId,
-    sliceId,
-    project,
-    location='us-central1') {
+  modelId,
+  evaluationId,
+  sliceId,
+  project,
+  location = 'us-central1'
+) {
   // [START aiplatform_get_model_evaluation_slice]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -51,24 +52,26 @@ async function main(
     };
 
     // Get and print out a list of all the endpoints for this resource
-    const [response] = await modelServiceClient.getModelEvaluationSlice(request);
+    const [response] = await modelServiceClient.getModelEvaluationSlice(
+      request
+    );
 
-    console.log(`Get model evaluation slice`);
+    console.log('Get model evaluation slice');
     console.log(`\tName : ${response.name}`);
     console.log(`\tMetrics_Schema_Uri : ${response.metricsSchemaUri}`);
     console.log(`\tMetrics : ${JSON.stringify(response.metrics)}`);
     console.log(`\tCreate time : ${JSON.stringify(response.createTime)}`);
 
-    console.log(`Slice`);
+    console.log('Slice');
     const slice = response.slice;
     console.log(`\tDimension :${slice.dimension}`);
     console.log(`\tValue :${slice.value}`);
   }
-  // [END aiplatform_get_model_evaluation_slice]
   await getModelEvaluationSlice();
+  // [END aiplatform_get_model_evaluation_slice]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

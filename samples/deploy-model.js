@@ -17,11 +17,12 @@
 'use strict';
 
 async function main(
-    modelId,
-    deployedModelDisplayName,
-    endpointId,
-    project,
-    location = 'us-central1') {
+  modelId,
+  deployedModelDisplayName,
+  endpointId,
+  project,
+  location = 'us-central1'
+) {
   // [START aiplatform_deploy_model]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -52,14 +53,14 @@ async function main(
     // key '0' assigns traffic for the newly deployed model
     // Traffic percentage values must add up to 100
     // Leave dictionary empty if endpoint should not accept any traffic
-    const trafficSplit = {'0': 100};
+    const trafficSplit = {0: 100};
     const deployedModel = {
       // format: 'projects/{project}/locations/{location}/models/{model}'
-      'model': modelName,
-      'displayName': deployedModelDisplayName,
+      model: modelName,
+      displayName: deployedModelDisplayName,
       // AutoML Vision models require `automatic_resources` field
       // Other model types may require `dedicated_resources` field instead
-      'automaticResources': {'minReplicaCount': 1, 'maxReplicaCount': 1},
+      automaticResources: {minReplicaCount: 1, maxReplicaCount: 1},
     };
     const request = {
       endpoint,
@@ -75,25 +76,25 @@ async function main(
     await response.promise();
     const result = response.result;
 
-    console.log(`Deploy model response`);
+    console.log('Deploy model response');
     const modelDeployed = result.deployedModel;
-    console.log(`\tDeployed model`);
-    if (modelDeployed == null) {
-      console.log(`\t\tId : {}`);
-      console.log(`\t\tModel : {}`);
-      console.log(`\t\tDisplay name : {}`);
-      console.log(`\t\tCreate time : {}`);
+    console.log('\tDeployed model');
+    if (modelDeployed === null) {
+      console.log('\t\tId : {}');
+      console.log('\t\tModel : {}');
+      console.log('\t\tDisplay name : {}');
+      console.log('\t\tCreate time : {}');
 
-      console.log(`\t\tDedicated resources`);
-      console.log(`\t\t\tMin replica count : {}`);
-      console.log(`\t\t\tMachine spec {}`);
-      console.log(`\t\t\t\tMachine type : {}`);
-      console.log(`\t\t\t\tAccelerator type : {}`);
-      console.log(`\t\t\t\tAccelerator count : {}`);
+      console.log('\t\tDedicated resources');
+      console.log('\t\t\tMin replica count : {}');
+      console.log('\t\t\tMachine spec {}');
+      console.log('\t\t\t\tMachine type : {}');
+      console.log('\t\t\t\tAccelerator type : {}');
+      console.log('\t\t\t\tAccelerator count : {}');
 
-      console.log(`\t\tAutomatic resources`);
-      console.log(`\t\t\tMin replica count : {}`);
-      console.log(`\t\t\tMax replica count : {}`);
+      console.log('\t\tAutomatic resources');
+      console.log('\t\t\tMin replica count : {}');
+      console.log('\t\t\tMax replica count : {}');
     } else {
       console.log(`\t\tId : ${modelDeployed.id}`);
       console.log(`\t\tModel : ${modelDeployed.model}`);
@@ -101,53 +102,51 @@ async function main(
       console.log(`\t\tCreate time : ${modelDeployed.createTime}`);
 
       const dedicatedResources = modelDeployed.dedicatedResources;
-      console.log(`\t\tDedicated resources`);
-      if (dedicatedResources == null) {
-        console.log(`\t\t\tMin replica count : {}`);
-        console.log(`\t\t\tMachine spec {}`);
-        console.log(`\t\t\t\tMachine type : {}`);
-        console.log(`\t\t\t\tAccelerator type : {}`);
-        console.log(`\t\t\t\tAccelerator count : {}`);
+      console.log('\t\tDedicated resources');
+      if (dedicatedResources === null) {
+        console.log('\t\t\tMin replica count : {}');
+        console.log('\t\t\tMachine spec {}');
+        console.log('\t\t\t\tMachine type : {}');
+        console.log('\t\t\t\tAccelerator type : {}');
+        console.log('\t\t\t\tAccelerator count : {}');
       } else {
         console.log(
-            `\t\t\tMin replica count : \
-            ${dedicatedResources.minReplicaCount}`,
+          `\t\t\tMin replica count : \
+            ${dedicatedResources.minReplicaCount}`
         );
         const machineSpec = dedicatedResources.machineSpec;
-        console.log(`\t\t\tMachine spec`);
+        console.log('\t\t\tMachine spec');
+        console.log(`\t\t\t\tMachine type : ${machineSpec.machineType}`);
         console.log(
-            `\t\t\t\tMachine type : ${machineSpec.machineType}`,
+          `\t\t\t\tAccelerator type : ${machineSpec.acceleratorType}`
         );
         console.log(
-            `\t\t\t\tAccelerator type : ${machineSpec.acceleratorType}`,
-        );
-        console.log(
-            `\t\t\t\tAccelerator count : ${machineSpec.acceleratorCount}`,
+          `\t\t\t\tAccelerator count : ${machineSpec.acceleratorCount}`
         );
       }
 
       const automaticResources = modelDeployed.automaticResources;
-      console.log(`\t\tAutomatic resources`);
-      if (automaticResources == null) {
-        console.log(`\t\t\tMin replica count : {}`);
-        console.log(`\t\t\tMax replica count : {}`);
+      console.log('\t\tAutomatic resources');
+      if (automaticResources === null) {
+        console.log('\t\t\tMin replica count : {}');
+        console.log('\t\t\tMax replica count : {}');
       } else {
         console.log(
-            `\t\t\tMin replica count : \
-            ${automaticResources.minReplicaCount}`,
+          `\t\t\tMin replica count : \
+            ${automaticResources.minReplicaCount}`
         );
         console.log(
-            `\t\t\tMax replica count : \
-            ${automaticResources.maxReplicaCount}`,
+          `\t\t\tMax replica count : \
+            ${automaticResources.maxReplicaCount}`
         );
       }
     }
   }
-  // [END aiplatform_deploy_model]
   await deployModel();
+  // [END aiplatform_deploy_model]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

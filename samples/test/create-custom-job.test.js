@@ -18,13 +18,14 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {uuid} = require('uuidv4');
+const {after, describe, it} = require('mocha');
+const uuid = require('uuid').v4;
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const customJobDisplayName = `temp_create_custom_job_test${uuid()}`;
-const containerImageUri = `gcr.io/ucaip-test/ucaip-training-test:latest`;
+const containerImageUri = 'gcr.io/ucaip-test/ucaip-training-test:latest';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
@@ -33,33 +34,33 @@ let customJobId;
 describe('AI platform create custom job', () => {
   it('should create a new custom job', async () => {
     const stdout = execSync(
-        `node ./create-custom-job.js ${customJobDisplayName} \
+      `node ./create-custom-job.js ${customJobDisplayName} \
                                      ${containerImageUri} \
                                      ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Create custom job response/);
-    customJobId = stdout.split(
-        '/locations/us-central1/customJobs/',
-    )[1].split('\n')[0];
+    customJobId = stdout
+      .split('/locations/us-central1/customJobs/')[1]
+      .split('\n')[0];
   });
 
   after('should cancel the customJob and delete it', async () => {
     execSync(
-        `node ./cancel-custom-job.js ${customJobId} ${project} \
+      `node ./cancel-custom-job.js ${customJobId} ${project} \
                                      ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     execSync(
-        `node ./delete-custom-job.js ${customJobId} ${project} \
+      `node ./delete-custom-job.js ${customJobId} ${project} \
                                      ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
   });
 });

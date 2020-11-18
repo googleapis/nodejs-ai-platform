@@ -17,10 +17,10 @@
 'use strict';
 
 async function main(
-    datasetId,
-    gcsSourceUri,
-    project,
-    location = 'us-central1',
+  datasetId,
+  gcsSourceUri,
+  project,
+  location = 'us-central1'
 ) {
   // [START aiplatform_import_data_video_object_tracking]
   /**
@@ -48,8 +48,9 @@ async function main(
     // Here we use only one import config with one source
     const importConfigs = [
       {
-        'gcsSource': {'uris': [gcsSourceUri]},
-        'importSchemaUri': 'gs://google-cloud-aiplatform/schema/dataset/ioformat/video_object_tracking_io_format_1.0.0.yaml',
+        gcsSource: {uris: [gcsSourceUri]},
+        importSchemaUri:
+          'gs://google-cloud-aiplatform/schema/dataset/ioformat/video_object_tracking_io_format_1.0.0.yaml',
       },
     ];
     const request = {
@@ -65,16 +66,15 @@ async function main(
     const [importDataResponse] = await response.promise();
 
     console.log(
-        `Import data video object tracking response : \
-        ${JSON.stringify(importDataResponse)}`,
+      `Import data video object tracking response : \
+        ${JSON.stringify(importDataResponse)}`
     );
   }
-  // [END aiplatform_import_data_video_object_tracking]
   await importDataVideoObjectTracking();
+  // [END aiplatform_import_data_video_object_tracking]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });
-

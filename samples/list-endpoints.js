@@ -50,8 +50,8 @@ async function main(projectId, location = 'us-central1') {
       }
     }
   }
-  // [END aiplatform_list_endpoints]
   await listEndpoints();
+  // [END aiplatform_list_endpoints]
 }
 
 main(...process.argv.slice(2)).catch(err => {

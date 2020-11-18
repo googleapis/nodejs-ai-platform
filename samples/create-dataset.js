@@ -17,10 +17,11 @@
 'use strict';
 
 async function main(
-    datasetDisplayName,
-    metadataSchemaUri,
-    project,
-    location = 'us-central1') {
+  datasetDisplayName,
+  metadataSchemaUri,
+  project,
+  location = 'us-central1'
+) {
   // [START aiplatform_create_dataset]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -48,8 +49,8 @@ async function main(
     const parent = `projects/${project}/locations/${location}`;
     // Configure the dataset resource
     const dataset = {
-      'displayName': datasetDisplayName,
-      'metadataSchemaUri': metadataSchemaUri,
+      displayName: datasetDisplayName,
+      metadataSchemaUri: metadataSchemaUri,
     };
     const request = {
       parent,
@@ -67,20 +68,20 @@ async function main(
     console.log(`\tName : ${createDatasetResponse.name}`);
     console.log(`\tDisplay name : ${createDatasetResponse.displayName}`);
     console.log(
-        `\tMetadata schema uri : ${createDatasetResponse.metadataSchemaUri}`,
+      `\tMetadata schema uri : ${createDatasetResponse.metadataSchemaUri}`
     );
     console.log(
-        `\tMetadata : ${JSON.stringify(createDatasetResponse.metadata)}`,
+      `\tMetadata : ${JSON.stringify(createDatasetResponse.metadata)}`
     );
     console.log(`\tCreate time : ${createDatasetResponse.createTime}`);
     console.log(`\tUpdate time : ${createDatasetResponse.updateTime}`);
     console.log(`\tLabels : ${JSON.stringify(createDatasetResponse.labels)}`);
   }
-  // [END aiplatform_create_dataset]
   await createDataset();
+  // [END aiplatform_create_dataset]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

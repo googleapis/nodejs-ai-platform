@@ -18,8 +18,10 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const customJobId = process.env.CUSTOM_JOB_ID;
@@ -29,10 +31,10 @@ const location = process.env.LOCATION;
 describe('AI platform get custom job', () => {
   it('should get the specified custom job', async () => {
     const stdout = execSync(
-        `node ./get-custom-job.js ${customJobId} ${project} ${location}`,
-        {
-          cwd,
-        },
+      `node ./get-custom-job.js ${customJobId} ${project} ${location}`,
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Get custom job response/);
   });

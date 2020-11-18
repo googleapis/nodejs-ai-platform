@@ -49,53 +49,53 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
     // Create get model evaluation request
     const [response] = await modelServiceClient.getModelEvaluation(request);
 
-    console.log(`Get model evaluation image object detection response`);
+    console.log('Get model evaluation image object detection response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tMetrics schema uri : ${response.metricsSchemaUri}`);
     console.log(`\tCreate time : ${JSON.stringify(response.createTime)}`);
     console.log(`\tSlice dimensions : ${response.sliceDimensions}`);
 
     const modelExplanation = response.modelExplanation;
-    console.log(`\tModel explanation`);
-    if (modelExplanation == null) {
-      console.log(`\t\t{}`);
+    console.log('\tModel explanation');
+    if (modelExplanation === null) {
+      console.log('\t\t{}');
     } else {
       const meanAttributions = modelExplanation.meanAttributions;
-      if (meanAttributions == null) {
-        console.log(`\t\t\t []`);
+      if (meanAttributions === null) {
+        console.log('\t\t\t []');
       } else {
-        for (meanAttribution of meanAttributions) {
-          console.log(`\t\tMean attribution`);
+        for (const meanAttribution of meanAttributions) {
+          console.log('\t\tMean attribution');
           console.log(
-              `\t\t\tBaseline output value : \
-              ${meanAttribution.baselineOutputValue}`,
+            `\t\t\tBaseline output value : \
+              ${meanAttribution.baselineOutputValue}`
           );
           console.log(
-              `\t\t\tInstance output value : \
-              ${meanAttribution.instanceOutputValue}`,
+            `\t\t\tInstance output value : \
+              ${meanAttribution.instanceOutputValue}`
           );
           console.log(
-              `\t\t\tFeature attributions : \
-              ${meanAttribution.featureAttributions}`,
+            `\t\t\tFeature attributions : \
+              ${meanAttribution.featureAttributions}`
           );
           console.log(`\t\t\tOutput index : ${meanAttribution.outputIndex}`);
           console.log(
-              `\t\t\tOutput display name : \
-              ${meanAttribution.outputDisplayName}`,
+            `\t\t\tOutput display name : \
+              ${meanAttribution.outputDisplayName}`
           );
           console.log(
-              `\t\t\tApproximation error : \
-              ${meanAttribution.approximationError}`,
+            `\t\t\tApproximation error : \
+              ${meanAttribution.approximationError}`
           );
         }
       }
     }
   }
-  // [END aiplatform_get_model_evaluation_image_object_detection]
   await getModelEvaluationImageObjectDetection();
+  // [END aiplatform_get_model_evaluation_image_object_detection]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

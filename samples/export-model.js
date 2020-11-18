@@ -17,11 +17,12 @@
 'use strict';
 
 async function main(
-    modelId, 
-    gcsDestinationOutputUriPrefix,
-    exportFormat,
-    project,
-    location = 'us-central1') {
+  modelId,
+  gcsDestinationOutputUriPrefix,
+  exportFormat,
+  project,
+  location = 'us-central1'
+) {
   // [START aiplatform_export_model]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -51,9 +52,9 @@ async function main(
     const name = `projects/${project}/locations/${location}/models/${modelId}`;
     // Configure the outputConfig resources
     const outputConfig = {
-      'exportFormatId': exportFormat,
-      'gcsDestination': {
-        'outputUriPrefix': gcsDestinationOutputUriPrefix,
+      exportFormatId: exportFormat,
+      gcsDestination: {
+        outputUriPrefix: gcsDestinationOutputUriPrefix,
       },
     };
     const request = {
@@ -71,12 +72,11 @@ async function main(
 
     console.log(`Export model response : ${JSON.stringify(result)}`);
   }
-  // [END aiplatform_export_model]
   await exportModel();
+  // [END aiplatform_export_model]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });
-
