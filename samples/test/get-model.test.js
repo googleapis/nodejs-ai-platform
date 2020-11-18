@@ -18,8 +18,10 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const modelId = process.env.MODEL_ID;
@@ -29,10 +31,10 @@ const location = process.env.LOCATION;
 describe('AI platform get model', () => {
   it('should get the specified model', async () => {
     const stdout = execSync(
-        `node ./get-model.js ${modelId} ${project} ${location}`,
-        {
-          cwd,
-        },
+      `node ./get-model.js ${modelId} ${project} ${location}`,
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Get model response/);
   });

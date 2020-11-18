@@ -18,8 +18,10 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const filename = 'resources/textSentiment.txt';
@@ -30,13 +32,13 @@ const location = process.env.LOCATION;
 describe('AI platform predict text sentiment analysis', () => {
   it('should make predictions using the text sentiment model', async () => {
     const stdout = execSync(
-        `node ./predict-text-sentiment-analysis.js ${filename} \
+      `node ./predict-text-sentiment-analysis.js ${filename} \
                                                    ${endpointId} \
                                                    ${project} \
                                                    ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Predict text sentiment analysis response/);
   });

@@ -48,7 +48,6 @@ function main(filename, endpointId, project, location = 'us-central1') {
   async function predictImageClassification() {
     // Configure the endpoint resource
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
-<<<<<<< HEAD
 
     const parametersObj = new params.ImageClassificationPredictionParams({
       confidenceThreshold: 0.5,

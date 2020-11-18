@@ -83,19 +83,19 @@ async function main(filename, endpointId, project, location = 'us-central1') {
     // Predict request
     const [response] = await predictionServiceClient.predict(request);
 
-    console.log(`Predict tabular classification response`);
+    console.log('Predict tabular classification response');
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
     const predictions = response.predictions;
-    console.log(`\tPredictions :`);
+    console.log('\tPredictions :');
     for (const prediction of predictions) {
       console.log(`\t\tPrediction : ${JSON.stringify(prediction)}`);
     }
   }
-  // [END aiplatform_predict_tabular_classification]
   await predictTabularClassification();
+  // [END aiplatform_predict_tabular_classification]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

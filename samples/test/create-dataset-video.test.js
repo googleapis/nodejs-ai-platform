@@ -18,9 +18,11 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {uuid} = require('uuidv4');
+const {after, describe, it} = require('mocha');
+
+const uuid = require('uuid').v4;
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const datasetDisplayName = `temp_create_dataset_video_test_${uuid()}`;
@@ -32,23 +34,20 @@ let datasetId;
 describe('AI platform create dataset video', () => {
   it('should create a new video dataset in the parent resource', async () => {
     const stdout = execSync(
-        `node ./create-dataset-video.js ${datasetDisplayName} ${project} \
+      `node ./create-dataset-video.js ${datasetDisplayName} ${project} \
                                         ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Create dataset video response/);
-    datasetId = stdout.split(
-        '/locations/us-central1/datasets/',
-    )[1].split('\n')[0];
+    datasetId = stdout
+      .split('/locations/us-central1/datasets/')[1]
+      .split('\n')[0];
   });
   after('should delete the created dataset', async () => {
-    execSync(
-        `node ./delete-dataset.js ${datasetId} ${project} ${location}`,
-        {
-          cwd,
-        },
-    );
+    execSync(`node ./delete-dataset.js ${datasetId} ${project} ${location}`, {
+      cwd,
+    });
   });
 });

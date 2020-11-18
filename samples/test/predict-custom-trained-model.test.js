@@ -18,8 +18,10 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const filename = 'resources/customModel.txt';
@@ -30,13 +32,13 @@ const location = process.env.LOCATION;
 describe('AI platform predict custom trained model', () => {
   it('should make predictions using the custom trained model', async () => {
     const stdout = execSync(
-        `node ./predict-custom-trained-model.js ${filename} \
+      `node ./predict-custom-trained-model.js ${filename} \
                                                 ${endpointId} \
                                                 ${project} \
                                                 ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     console.log(stdout);
     assert.match(stdout, /Predict custom trained model response/);

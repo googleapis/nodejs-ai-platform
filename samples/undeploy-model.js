@@ -16,11 +16,12 @@
 
 'use strict';
 
-async function main(     
-    deployedModelId, 
-    endpointId, 
-    project,
-    location = 'us-central1') {
+async function main(
+  deployedModelId,
+  endpointId,
+  project,
+  location = 'us-central1'
+) {
   // [START aiplatform_undeploy_model]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -45,10 +46,10 @@ async function main(
   const endpointServiceClient = new EndpointServiceClient(clientOptions);
 
   async function undeployModel() {
-    // Configure the parent resource 
+    // Configure the parent resource
     const request = {
       deployedModelId,
-      endpoint,  
+      endpoint,
     };
 
     // Get and print out a list of all the endpoints for this resource
@@ -57,17 +58,15 @@ async function main(
 
     // Wait for operation to complete
     await response.promise();
-      
-    console.log(`Undeploy model response`);
+
+    console.log('Undeploy model response');
     console.log(response);
-    
   }
-  // [END aiplatform_undeploy_model]
   await undeployModel();
+  // [END aiplatform_undeploy_model]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });
-

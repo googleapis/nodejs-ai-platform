@@ -18,9 +18,11 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {uuid} = require('uuidv4');
+const {after, describe, it} = require('mocha');
+
+const uuid = require('uuid').v4;
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const datasetId = process.env.TRAINING_PIPELINE_VIDEO_OBJECT_DETECT_DATASET_ID;
@@ -34,35 +36,37 @@ let trainingPipelineId;
 describe('AI platform create training pipeline object tracking', () => {
   it('should create a new object tracking training pipeline', async () => {
     const stdout = execSync(
-        `node ./create-training-pipeline-video-object-tracking.js \
+      `node ./create-training-pipeline-video-object-tracking.js \
                                             ${datasetId} ${modelDisplayName} \
                                             ${trainingPipelineDisplayName} \
                                             ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
-    assert.match(stdout, /Create training pipeline video object tracking response/);
-    trainingPipelineId = stdout.split(
-        '/locations/us-central1/trainingPipelines/',
-    )[1].split('\n')[0];
+    assert.match(
+      stdout,
+      /Create training pipeline video object tracking response/
+    );
+    trainingPipelineId = stdout
+      .split('/locations/us-central1/trainingPipelines/')[1]
+      .split('\n')[0];
   });
 
   after('should cancel the training pipeline and delete it', async () => {
     execSync(
-        `node ./cancel-training-pipeline.js ${trainingPipelineId} ${project} \
+      `node ./cancel-training-pipeline.js ${trainingPipelineId} ${project} \
                                             ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     execSync(
-        `node ./delete-training-pipeline.js ${trainingPipelineId} ${project} \
+      `node ./delete-training-pipeline.js ${trainingPipelineId} ${project} \
                                             ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
   });
 });
-

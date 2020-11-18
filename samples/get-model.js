@@ -47,7 +47,7 @@ async function main(modelId, project, location = 'us-central1') {
     // Get and print out a list of all the endpoints for this resource
     const [response] = await modelServiceClient.getModel(request);
 
-    console.log(`Get model response`);
+    console.log('Get model response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tDisplayName : ${response.displayName}`);
     console.log(`\tDescription : ${response.description}`);
@@ -56,50 +56,48 @@ async function main(modelId, project, location = 'us-central1') {
     console.log(`\tTraining pipeline : ${response.trainingPipeline}`);
     console.log(`\tArtifact uri : ${response.artifactUri}`);
     console.log(
-        `\tSupported deployment resource types : \
-        ${response.supportedDeploymentResourceTypes}`,
+      `\tSupported deployment resource types : \
+        ${response.supportedDeploymentResourceTypes}`
     );
     console.log(
-        `\tSupported input storage formats : \
-        ${response.supportedInputStorageFormats}`,
+      `\tSupported input storage formats : \
+        ${response.supportedInputStorageFormats}`
     );
     console.log(
-        `\tSupported output storage formats : \
-        ${response.supportedOutputStoragFormats}`,
+      `\tSupported output storage formats : \
+        ${response.supportedOutputStoragFormats}`
     );
     console.log(`\tCreate time : ${JSON.stringify(response.createTime)}`);
     console.log(`\tUpdate time : ${JSON.stringify(response.updateTime)}`);
     console.log(`\tLabels : ${JSON.stringify(response.labels)}`);
 
     const predictSchemata = response.predictSchemata;
-    console.log(`\tPredict schemata`);
+    console.log('\tPredict schemata');
+    console.log(`\tInstance schema uri : ${predictSchemata.instanceSchemaUri}`);
     console.log(
-        `\tInstance schema uri : ${predictSchemata.instanceSchemaUri}`,
+      `\tParameters schema uri : ${predictSchemata.prametersSchemaUri}`
     );
     console.log(
-        `\tParameters schema uri : ${predictSchemata.prametersSchemaUri}`,
-    );
-    console.log(
-        `\tPrediction schema uri : ${predictSchemata.predictionSchemaUri}`,
+      `\tPrediction schema uri : ${predictSchemata.predictionSchemaUri}`
     );
 
     const [supportedExportFormats] = response.supportedExportFormats;
-    console.log(`\tSupported export formats`);
+    console.log('\tSupported export formats');
     console.log(`\t${supportedExportFormats}`);
 
     const containerSpec = response.containerSpec;
-    console.log(`\tContainer Spec`);
-    if (containerSpec == null) {
+    console.log('\tContainer Spec');
+    if (containerSpec === null) {
       console.log(`\t\t${JSON.stringify(containerSpec)}`);
-      console.log(`\t\tImage uri : {}`);
-      console.log(`\t\tCommand : {}`);
-      console.log(`\t\tArgs : {}`);
-      console.log(`\t\tPredict route : {}`);
-      console.log(`\t\tHealth route : {}`);
-      console.log(`\t\tEnv`);
-      console.log(`\t\t\t{}`);
-      console.log(`\t\tPort`);
-      console.log(`\t\t{}`);
+      console.log('\t\tImage uri : {}');
+      console.log('\t\tCommand : {}');
+      console.log('\t\tArgs : {}');
+      console.log('\t\tPredict route : {}');
+      console.log('\t\tHealth route : {}');
+      console.log('\t\tEnv');
+      console.log('\t\t\t{}');
+      console.log('\t\tPort');
+      console.log('\t\t{}');
     } else {
       console.log(`\t\t${JSON.stringify(containerSpec)}`);
       console.log(`\t\tImage uri : ${containerSpec.imageUri}`);
@@ -108,10 +106,10 @@ async function main(modelId, project, location = 'us-central1') {
       console.log(`\t\tPredict route : ${containerSpec.predictRoute}`);
       console.log(`\t\tHealth route : ${containerSpec.healthRoute}`);
       const env = containerSpec.env;
-      console.log(`\t\tEnv`);
+      console.log('\t\tEnv');
       console.log(`\t\t\t${JSON.stringify(env)}`);
       const ports = containerSpec.ports;
-      console.log(`\t\tPort`);
+      console.log('\t\tPort');
       console.log(`\t\t\t${JSON.stringify(ports)}`);
     }
 
@@ -119,11 +117,11 @@ async function main(modelId, project, location = 'us-central1') {
     console.log('\tDeployed models');
     console.log('\t\t', deployedModels);
   }
-  // [END aiplatform_get_model]
   await getModel();
+  // [END aiplatform_get_model]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

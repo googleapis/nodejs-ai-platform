@@ -18,25 +18,28 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const datasetId = process.env.VIDEO_OBJECT_TRACKING_DATASET_ID;
-const gcsSourceUri = 'gs://automl-video-demo-data/traffic_videos/traffic_videos_train.csv';
+const gcsSourceUri =
+  'gs://automl-video-demo-data/traffic_videos/traffic_videos_train.csv';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
 describe('AI platform import data video object tracking', () => {
   it('should import video object tracking data to dataset', async () => {
     const stdout = execSync(
-        `node ./import-data-video-object-tracking.js ${datasetId} \
+      `node ./import-data-video-object-tracking.js ${datasetId} \
                                                      ${gcsSourceUri} \
                                                      ${project} \
                                                      ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Import data video object tracking response/);
   });

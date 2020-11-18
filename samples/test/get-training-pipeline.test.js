@@ -18,8 +18,10 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const trainingPipelineId = process.env.GET_TRAINING_PIPELINE_ID;
@@ -29,13 +31,12 @@ const location = process.env.LOCATION;
 describe('AI platform get training pipeline', () => {
   it('should get the training pipeline', async () => {
     const stdout = execSync(
-        `node ./get-training-pipeline.js ${trainingPipelineId} \
+      `node ./get-training-pipeline.js ${trainingPipelineId} \
                                          ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Get training pipeline response/);
   });
 });
-

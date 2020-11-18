@@ -18,9 +18,11 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {uuid} = require('uuidv4');
+const {after, describe, it} = require('mocha');
+
+const uuid = require('uuid').v4;
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const datasetDisplayName = `temp_create_dataset_tables_gcs_test_${uuid()}`;
@@ -33,24 +35,21 @@ let datasetId;
 describe('AI platform create dataset tabular gcs', () => {
   it('should create a new gcs tabular dataset in the parent resource', async () => {
     const stdout = execSync(
-        `node ./create-dataset-tabular-gcs.js ${datasetDisplayName} \
+      `node ./create-dataset-tabular-gcs.js ${datasetDisplayName} \
                                              ${gcsSourceUri} \
                                              ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Create dataset tabular gcs response/);
-    datasetId = stdout.split(
-        '/locations/us-central1/datasets/',
-    )[1].split('/')[0];
+    datasetId = stdout
+      .split('/locations/us-central1/datasets/')[1]
+      .split('/')[0];
   });
   after('should delete created dataset', async () => {
-    execSync(
-        `node ./delete-dataset.js ${datasetId} ${project} ${location}`,
-        {
-          cwd,
-        },
-    );
+    execSync(`node ./delete-dataset.js ${datasetId} ${project} ${location}`, {
+      cwd,
+    });
   });
 });

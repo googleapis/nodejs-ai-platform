@@ -18,15 +18,18 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {uuid} = require('uuidv4');
+const {after, describe, it} = require('mocha');
+const uuid = require('uuid').v4;
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const batchPredictionDisplayName = `temp_create_batch_prediction_video_classification_test${uuid()}`;
 const modelId = process.env.BATCH_PREDICTION_VIDEO_CLASS_MODEL_ID;
-const gcsSourceUri = 'gs://prj-ucaip-tutorials-vcm/dataset/automl-video-demo-data/traffic_predict.jsonl';
-const gcsDestinationOutputUriPrefix = 'gs://prj-ucaip-tutorials-vcm/batchprediction/Video/';
+const gcsSourceUri =
+  'gs://prj-ucaip-tutorials-vcm/dataset/automl-video-demo-data/traffic_predict.jsonl';
+const gcsDestinationOutputUriPrefix =
+  'gs://prj-ucaip-tutorials-vcm/batchprediction/Video/';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
@@ -35,34 +38,37 @@ let batchPredictionJobId;
 describe('AI platform create batch prediction job video classification', () => {
   it('should create a video classification batch prediction job', async () => {
     const stdout = execSync(
-        `node ./create-batch-prediction-job-video-classification.js \
+      `node ./create-batch-prediction-job-video-classification.js \
                                             ${batchPredictionDisplayName} \
                                             ${modelId} ${gcsSourceUri} \
                                             ${gcsDestinationOutputUriPrefix} \
                                             ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
-    assert.match(stdout, /Create batch prediction job video classification response/);
-    batchPredictionJobId = stdout.split(
-        '/locations/us-central1/batchPredictionJobs/',
-    )[1].split('\n')[0];
+    assert.match(
+      stdout,
+      /Create batch prediction job video classification response/
+    );
+    batchPredictionJobId = stdout
+      .split('/locations/us-central1/batchPredictionJobs/')[1]
+      .split('\n')[0];
   });
   after('should cancel delete the batch prediction job', async () => {
     execSync(
-        `node ./cancel-batch-prediction-job.js ${batchPredictionJobId} \
+      `node ./cancel-batch-prediction-job.js ${batchPredictionJobId} \
                                                ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     execSync(
-        `node ./delete-batch-prediction-job.js ${batchPredictionJobId} \
+      `node ./delete-batch-prediction-job.js ${batchPredictionJobId} \
                                                ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
   });
 });

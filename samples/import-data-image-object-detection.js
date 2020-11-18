@@ -17,10 +17,10 @@
 'use strict';
 
 async function main(
-    datasetId,
-    gcsSourceUri,
-    project,
-    location = 'us-central1',
+  datasetId,
+  gcsSourceUri,
+  project,
+  location = 'us-central1'
 ) {
   // [START aiplatform_import_data_image_object_detection]
   /**
@@ -44,16 +44,13 @@ async function main(
   const datasetServiceClient = new DatasetServiceClient(clientOptions);
 
   async function importDataImageObjectDetection() {
-    const name = datasetServiceClient.datasetPath(
-        project,
-        location,
-        datasetId,
-    );
+    const name = datasetServiceClient.datasetPath(project, location, datasetId);
     // Here we use only one import config with one source
     const importConfigs = [
       {
-        'gcsSource': {'uris': [gcsSourceUri]},
-        'importSchemaUri': 'gs://google-cloud-aiplatform/schema/dataset/ioformat/image_bounding_box_io_format_1.0.0.yaml',
+        gcsSource: {uris: [gcsSourceUri]},
+        importSchemaUri:
+          'gs://google-cloud-aiplatform/schema/dataset/ioformat/image_bounding_box_io_format_1.0.0.yaml',
       },
     ];
     const request = {
@@ -69,15 +66,15 @@ async function main(
     await response.promise();
 
     console.log(
-        `Import data image object detection response : \
-        ${JSON.stringify(response.result)}`,
+      `Import data image object detection response : \
+        ${JSON.stringify(response.result)}`
     );
   }
-  // [END aiplatform_import_data_image_object_detection]
   await importDataImageObjectDetection();
+  // [END aiplatform_import_data_image_object_detection]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

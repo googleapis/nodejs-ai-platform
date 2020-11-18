@@ -18,26 +18,29 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const modelId = process.env.LIST_MODEL_EVALUATION_SLICE_SAMPLE_MODEL_ID;
-const evaluationId = process.env.LIST_MODEL_EVALUATION_SLICE_SAMPLE_EVALUATION_ID;
+const evaluationId =
+  process.env.LIST_MODEL_EVALUATION_SLICE_SAMPLE_EVALUATION_ID;
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
 describe('AI platform list model evaluation slices', () => {
-  it(`should list all the evaluation slices from the \
-       specified model`, async () => {
+  it('should list all the evaluation slices from the \
+       specified model', async () => {
     const stdout = execSync(
-        `node ./list-model-evaluation-slices.js ${modelId} \
+      `node ./list-model-evaluation-slices.js ${modelId} \
                                                 ${evaluationId} \
                                                 ${project} \
                                                 ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /List model evaluation response/);
   });

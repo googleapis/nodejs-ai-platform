@@ -41,26 +41,25 @@ async function main(endpointId, project, location = 'us-central1') {
   async function deleteEndpoint() {
     // Configure the parent resource
     const endpoint = {
-      'name': `projects/${project}/locations/${location}/endpoints/${endpointId}`,
+      name: `projects/${project}/locations/${location}/endpoints/${endpointId}`,
     };
 
     // Delete endpoint request
-    const [response]=await endpointServiceClient.deleteEndpoint(endpoint);
+    const [response] = await endpointServiceClient.deleteEndpoint(endpoint);
     console.log(`Long running operation : ${response.name}`);
 
     // Wait for operation to complete
     await response.promise();
     const result = response.result;
 
-    console.log(`Delete endpoint response :`);
+    console.log('Delete endpoint response :');
     console.log(`${result}`);
   }
-  // [END aiplatform_delete_endpoint]
   await deleteEndpoint();
+  // [END aiplatform_delete_endpoint]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });
-

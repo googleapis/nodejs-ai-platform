@@ -16,10 +16,7 @@
 
 'use strict';
 
-async function main(
-    bucketName,
-    uriPrefix,
-) {
+async function main(bucketName, uriPrefix) {
   // [START aiplatform_delete_export_model]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -39,18 +36,19 @@ async function main(
     const options = {
       prefix: uriPrefix,
     };
-    const [files] = await storageClient.bucket(`gs://${bucketName}`).getFiles(options);
+    const [files] = await storageClient
+      .bucket(`gs://${bucketName}`)
+      .getFiles(options);
     for (const file of files) {
       await storageClient.bucket(`gs://${bucketName}`).file(file.name).delete();
     }
     console.log('Export model deleted');
   }
-  // [END aiplatform_delete_export_model]
   await deleteExportModel();
+  // [END aiplatform_delete_export_model]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });
-

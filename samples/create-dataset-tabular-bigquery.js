@@ -17,10 +17,11 @@
 'use strict';
 
 async function main(
-    datasetDisplayName,
-    bigquerySourceUri,
-    project,
-    location = 'us-central1') {
+  datasetDisplayName,
+  bigquerySourceUri,
+  project,
+  location = 'us-central1'
+) {
   // [START aiplatform_create_dataset_tabular_bigquery]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -57,9 +58,7 @@ async function main(
                     fields: {
                       uri: {
                         listValue: {
-                          values: [
-                            {stringValue: bigquerySourceUri},
-                          ],
+                          values: [{stringValue: bigquerySourceUri}],
                         },
                       },
                     },
@@ -73,9 +72,10 @@ async function main(
     };
     // Configure the dataset resource
     const dataset = {
-      'displayName': datasetDisplayName,
-      'metadataSchemaUri': 'gs://google-cloud-aiplatform/schema/dataset/metadata/tabular_1.0.0.yaml',
-      'metadata': metadata,
+      displayName: datasetDisplayName,
+      metadataSchemaUri:
+        'gs://google-cloud-aiplatform/schema/dataset/metadata/tabular_1.0.0.yaml',
+      metadata: metadata,
     };
     const request = {
       parent,
@@ -96,11 +96,11 @@ async function main(
     console.log(`\tMetadata schema uri : ${result.metadataSchemaUri}`);
     console.log(`\tMetadata : ${JSON.stringify(result.metadata)}`);
   }
-  // [END aiplatform_create_dataset_tabular_bigquery]
   await createDatasetTabularBigquery();
+  // [END aiplatform_create_dataset_tabular_bigquery]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

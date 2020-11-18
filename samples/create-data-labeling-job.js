@@ -17,13 +17,13 @@
 'use strict';
 
 async function main(
-    displayName,
-    datasetId,
-    instructionUri,
-    inputsSchemaUri,
-    annotationSpec,
-    project,
-    location = 'us-central1',
+  displayName,
+  datasetId,
+  instructionUri,
+  inputsSchemaUri,
+  annotationSpec,
+  project,
+  location = 'us-central1'
 ) {
   // [START aiplatform_create_data_labeling_job]
   /**
@@ -53,9 +53,7 @@ async function main(
   async function createDataLabelingJob() {
     // Configure the parent resource
     const parent = `projects/${project}/locations/${location}`;
-    const input = [
-      {arrayValue: [annotationSpec]},
-    ];
+    const input = [{arrayValue: [annotationSpec]}];
     const inputs = {
       row: {
         value: input,
@@ -70,7 +68,8 @@ async function main(
       inputsSchemaUri: inputsSchemaUri,
       inputs: inputs,
       annotationLabels: {
-        'aiplatform.googleapis.com/annotation_set_name': 'my_test_saved_query'},
+        'aiplatform.googleapis.com/annotation_set_name': 'my_test_saved_query',
+      },
     };
     const request = {
       parent,
@@ -80,7 +79,7 @@ async function main(
     // Create data labeling job request
     const [response] = await jobServiceClient.createDataLabelingJob(request);
 
-    console.log(`Create data labeling job response`);
+    console.log('Create data labeling job response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tDisplay name : ${response.displayName}`);
     console.log(`\tDatasets : ${response.datasets}`);
@@ -97,27 +96,27 @@ async function main(
 
     const annotationLabels = response.annotationLabels;
     for (const annotationLabel in annotationLabels) {
-      if (annotationLabels.hasOwnProperty(annotationLabel)) {
-        console.log(`\tAnnotation label`);
-        console.log(`\t\tKey : ${annotationLabel.key}`);
+      console.log('\tAnnotation label');
+      if (annotationLabel.key) console.log(`\t\tKey : ${annotationLabel.key}`);
+      if (annotationLabel.value) {
         console.log(`\t\tValue : ${annotationLabel.value}`);
       }
     }
 
     const currentSpend = response.currentSpend;
-    if (currentSpend == null) {
-      console.log(`\tCurrent spend : {}`);
+    if (currentSpend === null) {
+      console.log('\tCurrent spend : {}');
     } else {
-      console.log(`\tCurrent spend`);
+      console.log('\tCurrent spend');
       console.log(`\t\tCurrency code : ${currentSpend.currencyCode}`);
       console.log(`\t\tUnits : ${currentSpend.units}`);
       console.log(`\t\tNanos : ${currentSpend.nanos}`);
     }
   }
-  // [END aiplatform_create_data_labeling_job]
   await createDataLabelingJob();
+  // [END aiplatform_create_data_labeling_job]
 }
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

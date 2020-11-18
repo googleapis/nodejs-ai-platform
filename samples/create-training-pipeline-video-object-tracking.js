@@ -17,11 +17,11 @@
 'use strict';
 
 async function main(
-    datasetId,
-    modelDisplayName,
-    trainingPipelineDisplayName,
-    project,
-    location = 'us-central1',
+  datasetId,
+  modelDisplayName,
+  trainingPipelineDisplayName,
+  project,
+  location = 'us-central1'
 ) {
   // [START aiplatform_create_training_pipeline_video_object_tracking]
   /**
@@ -54,15 +54,16 @@ async function main(
     const trainingTaskInputs = {
       structValue: {
         fields: {
-          modelType: {stringValue: 'CLOUD'}
-        }
-      }
+          modelType: {stringValue: 'CLOUD'},
+        },
+      },
     };
     const modelToUpload = {displayName: modelDisplayName};
     const inputDataConfig = {datasetId: datasetId};
     const trainingPipeline = {
       displayName: trainingPipelineDisplayName,
-      trainingTaskDefinition: 'gs://google-cloud-aiplatform/schema/trainingjob/definition/automl_video_object_tracking_1.0.0.yaml',
+      trainingTaskDefinition:
+        'gs://google-cloud-aiplatform/schema/trainingjob/definition/automl_video_object_tracking_1.0.0.yaml',
       trainingTaskInputs: trainingTaskInputs,
       inputDataConfig: inputDataConfig,
       modelToUpload: modelToUpload,
@@ -73,21 +74,21 @@ async function main(
     };
 
     // Create training pipeline request
-    const [response] = await pipelineServiceClient.createTrainingPipeline(request);
+    const [response] = await pipelineServiceClient.createTrainingPipeline(
+      request
+    );
 
-    console.log(`Create training pipeline video object tracking response`);
+    console.log('Create training pipeline video object tracking response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tDisplay name: ${response.displayName}`);
     console.log(
-        `\tTraining task definition : ${response.trainingTaskDefinition}`,
+      `\tTraining task definition : ${response.trainingTaskDefinition}`
     );
     console.log(
-        `\tTraining task inputs : \
-        ${JSON.stringify(response.trainingTaskInputs)}`,
+      `\tTraining task inputs : \
+        ${JSON.stringify(response.trainingTaskInputs)}`
     );
-    console.log(
-        `\tTraining task metadata : ${response.trainingTaskMetadata}`,
-    );
+    console.log(`\tTraining task metadata : ${response.trainingTaskMetadata}`);
     console.log(`\tState : ${response.state}`);
     console.log(`\tCreate time : ${JSON.stringify(response.createTime)}`);
     console.log(`\tStart time : ${JSON.stringify(response.startTime)}`);
@@ -96,124 +97,112 @@ async function main(
     console.log(`\tLabels : ${JSON.stringify(response.labels)}`);
 
     const inputDataConfiguration = response.inputDataConfig;
-    console.log(`\tInput data config`);
+    console.log('\tInput data config');
     console.log(`\t\tDataset id : ${inputDataConfiguration.datasetId}`);
     console.log(
-        `\t\tAnnotations filter : \
-        ${inputDataConfiguration.annotationsFilter}`,
+      `\t\tAnnotations filter : \
+        ${inputDataConfiguration.annotationsFilter}`
     );
 
     const fractionSplit = inputDataConfiguration.fractionSplit;
-    console.log(`\t\tFraction split`);
-    if (fractionSplit == null) {
-      console.log(`\t\t\tTraining fraction : {}`);
-      console.log(`\t\t\tValidation fraction : {}`);
-      console.log(`\t\t\tTest fraction : {}`);
+    console.log('\t\tFraction split');
+    if (fractionSplit === null) {
+      console.log('\t\t\tTraining fraction : {}');
+      console.log('\t\t\tValidation fraction : {}');
+      console.log('\t\t\tTest fraction : {}');
     } else {
       console.log(
-          `\t\t\tTraining fraction : ${fractionSplit.trainingFraction}`,
+        `\t\t\tTraining fraction : ${fractionSplit.trainingFraction}`
       );
       console.log(
-          `\t\t\tValidation fraction : ${fractionSplit.validationFraction}`,
+        `\t\t\tValidation fraction : ${fractionSplit.validationFraction}`
       );
       console.log(`\t\t\tTest fraction : ${fractionSplit.testFraction}`);
     }
 
     const filterSplit = inputDataConfiguration.filterSplit;
-    console.log(`\t\tFilter split `);
-    if (filterSplit == null) {
-      console.log(`\t\t\tTraining filter : {}`);
-      console.log(`\t\t\tValidation filter : {}`);
-      console.log(`\t\t\tTest filter : {}`);
+    console.log('\t\tFilter split ');
+    if (filterSplit === null) {
+      console.log('\t\t\tTraining filter : {}');
+      console.log('\t\t\tValidation filter : {}');
+      console.log('\t\t\tTest filter : {}');
     } else {
-      console.log(
-          `\t\t\tTraining filter : ${filterSplit.trainingFilter}`,
-      );
-      console.log(
-          `\t\t\tValidation filter : ${filterSplit.validationFilter}`,
-      );
-      console.log(
-          `\t\t\tTest filter : ${filterSplit.testFilter}`,
-      );
+      console.log(`\t\t\tTraining filter : ${filterSplit.trainingFilter}`);
+      console.log(`\t\t\tValidation filter : ${filterSplit.validationFilter}`);
+      console.log(`\t\t\tTest filter : ${filterSplit.testFilter}`);
     }
 
     const predefinedSplit = inputDataConfiguration.predefinedSplit;
-    console.log(`\t\tPredefined split`);
-    if (predefinedSplit == null) {
-      console.log(`\t\t\tKey : {}`);
+    console.log('\t\tPredefined split');
+    if (predefinedSplit === null) {
+      console.log('\t\t\tKey : {}');
     } else {
       console.log(`\t\t\tKey : ${predefinedSplit.key}`);
     }
 
     const timestampSplit = inputDataConfiguration.timestampSplit;
-    console.log(`\t\tTimestamp split`);
-    if (timestampSplit == null) {
-      console.log(`\t\t\tTraining fraction : {}`);
-      console.log(`\t\t\tValidation fraction : {}`);
-      console.log(`\t\t\tTest fraction : {}`);
-      console.log(`\t\t\tKey : {}`);
+    console.log('\t\tTimestamp split');
+    if (timestampSplit === null) {
+      console.log('\t\t\tTraining fraction : {}');
+      console.log('\t\t\tValidation fraction : {}');
+      console.log('\t\t\tTest fraction : {}');
+      console.log('\t\t\tKey : {}');
     } else {
       console.log(
-          `\t\t\tTraining fraction : ${timestampSplit.trainingFraction}`,
+        `\t\t\tTraining fraction : ${timestampSplit.trainingFraction}`
       );
       console.log(
-          `\t\t\tValidation fraction : \
-          ${timestampSplit.validationFraction}`,
+        `\t\t\tValidation fraction : \
+          ${timestampSplit.validationFraction}`
       );
-      console.log(
-          `\t\t\tTest fraction : ${timestampSplit.testFraction}`,
-      );
+      console.log(`\t\t\tTest fraction : ${timestampSplit.testFraction}`);
       console.log(`\t\t\tKey : ${timestampSplit.key}`);
     }
 
     const modelToBeUploaded = response.modelToUpload;
-    console.log(`\tModel to upload`);
+    console.log('\tModel to upload');
     console.log(`\t\tName : ${modelToBeUploaded.name}`);
     console.log(`\t\tDisplay name : ${modelToBeUploaded.displayName}`);
     console.log(`\t\tDescription : ${modelToBeUploaded.description}`);
     console.log(
-        `\t\tMetadata schema uri : ${modelToBeUploaded.metadataSchemaUri}`,
+      `\t\tMetadata schema uri : ${modelToBeUploaded.metadataSchemaUri}`
+    );
+    console.log(`\t\tMetadata : ${JSON.stringify(modelToBeUploaded.metadata)}`);
+    console.log(
+      `\t\tTraining pipeline : ${modelToBeUploaded.trainingPipeline}`
+    );
+    console.log(`\t\tArtifact uri : ${modelToBeUploaded.artifactUri}`);
+    console.log(
+      `\t\tSupported deployment resource types : \
+        ${modelToBeUploaded.supportedDeploymentResourceTypes}`
     );
     console.log(
-        `\t\tMetadata : ${JSON.stringify(modelToBeUploaded.metadata)}`,
+      `\t\tSupported input storage formats : \
+        ${modelToBeUploaded.supportedInputStorageFormats}`
     );
     console.log(
-        `\t\tTraining pipeline : ${modelToBeUploaded.trainingPipeline}`,
-    );
-    console.log(
-        `\t\tArtifact uri : ${modelToBeUploaded.artifactUri}`,
-    );
-    console.log(
-        `\t\tSupported deployment resource types : \
-        ${modelToBeUploaded.supportedDeploymentResourceTypes}`,
-    );
-    console.log(
-        `\t\tSupported input storage formats : \
-        ${modelToBeUploaded.supportedInputStorageFormats}`,
-    );
-    console.log(
-        `\t\tSupported output storage formats : \
-        ${modelToBeUploaded.supportedOutputStorageFormats}`,
+      `\t\tSupported output storage formats : \
+        ${modelToBeUploaded.supportedOutputStorageFormats}`
     );
     console.log(`\t\tCreate time : ${modelToBeUploaded.createTime}`);
     console.log(`\t\tUpdate time : ${modelToBeUploaded.updateTime}`);
     console.log(`\t\tLabels : ${modelToBeUploaded.labels}`);
 
     const error = response.error;
-    console.log(`\tError`);
-    if (error == null) {
-      console.log(`\t\tCode : {}`);
-      console.log(`\t\tMessage : {}`);
+    console.log('\tError');
+    if (error === null) {
+      console.log('\t\tCode : {}');
+      console.log('\t\tMessage : {}');
     } else {
       console.log(`\t\tCode : ${error.code}`);
       console.log(`\t\tMessage : ${error.message}`);
     }
   }
-  // [END aiplatform_create_training_pipeline_video_object_tracking]
   await createTrainingPipelineVideoObjectTracking();
+  // [END aiplatform_create_training_pipeline_video_object_tracking]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

@@ -16,11 +16,7 @@
 
 'use strict';
 
-async function main(
-    customJobId,
-    project,
-    location = 'us-central1',
-) {
+async function main(customJobId, project, location = 'us-central1') {
   // [START aiplatform_get_custom_job]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -52,14 +48,14 @@ async function main(
     // Get custom job request
     const [response] = await jobServiceClient.getCustomJob(request);
 
-    console.log(`Get custom job response`);
+    console.log('Get custom job response');
     console.log(`\t${JSON.stringify(response)}`);
   }
-  // [END aiplatform_get_custom_job]
   await getCustomJob();
+  // [END aiplatform_get_custom_job]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

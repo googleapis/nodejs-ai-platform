@@ -17,11 +17,11 @@
 'use strict';
 
 async function main(
-    datasetId,
-    gcsSourceUri,
-    importSchemaUri,
-    project,
-    location = 'us-central1'
+  datasetId,
+  gcsSourceUri,
+  importSchemaUri,
+  project,
+  location = 'us-central1'
 ) {
   // [START aiplatform_import_data]
   /**
@@ -46,16 +46,12 @@ async function main(
   const datasetServiceClient = new DatasetServiceClient(clientOptions);
 
   async function importData() {
-    const name = datasetServiceClient.datasetPath(
-        project,
-        location,
-        datasetId,
-    );
+    const name = datasetServiceClient.datasetPath(project, location, datasetId);
     // Here we use only one import config with one source
     const importConfigs = [
       {
-        'gcsSource': {'uris': [gcsSourceUri]},
-        'importSchemaUri': importSchemaUri,
+        gcsSource: {uris: [gcsSourceUri]},
+        importSchemaUri: importSchemaUri,
       },
     ];
     const request = {
@@ -70,16 +66,13 @@ async function main(
     // Wait for operation to complete
     await response.promise();
 
-    console.log(
-        `Import data response : ${JSON.stringify(response.result)}`,
-    );
+    console.log(`Import data response : ${JSON.stringify(response.result)}`);
   }
-  // [END aiplatform_import_data]
   await importData();
+  // [END aiplatform_import_data]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });
-

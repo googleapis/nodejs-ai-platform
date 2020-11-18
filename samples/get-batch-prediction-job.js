@@ -47,7 +47,7 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
     // Get batch prediction request
     const [response] = await jobServiceClient.getBatchPredictionJob(request);
 
-    console.log(`Get batch prediction job response`);
+    console.log('Get batch prediction job response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tDisplayName : ${response.displayName}`);
     console.log(`\tModel : ${response.model}`);
@@ -61,58 +61,54 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
     console.log(`\tLabels : ${JSON.stringify(response.labels)}`);
 
     const inputConfig = response.inputConfig;
-    console.log(`\tInput config`);
+    console.log('\tInput config');
     console.log(`\t\tInstances format : ${inputConfig.instancesFormat}`);
 
     const gcsSource = inputConfig.gcsSource;
-    console.log(`\t\tGcs source`);
+    console.log('\t\tGcs source');
     console.log(`\t\t\tUris : ${gcsSource.uris}`);
 
     const bigquerySource = inputConfig.bigquerySource;
-    console.log(`\t\tBigQuery Source`);
-    if (bigquerySource == null) {
-      console.log(`\t\t\tInput Uri : {}`);
+    console.log('\t\tBigQuery Source');
+    if (bigquerySource === null) {
+      console.log('\t\t\tInput Uri : {}');
     } else {
       console.log(`\t\t\tInput Uri : ${bigquerySource.inputUri}`);
     }
 
     const outputConfig = response.outputConfig;
-    console.log(`\t\tOutput config`);
-    console.log(
-        `\t\tPredictions format : ${outputConfig.predictionsFormat}`,
-    );
+    console.log('\t\tOutput config');
+    console.log(`\t\tPredictions format : ${outputConfig.predictionsFormat}`);
 
     const gcsDestination = outputConfig.gcsDestination;
-    console.log(`\t\tGcs Destination`);
-    console.log(
-        `\t\t\tOutput uri prefix : ${gcsDestination.outputUriPrefix}`,
-    );
+    console.log('\t\tGcs Destination');
+    console.log(`\t\t\tOutput uri prefix : ${gcsDestination.outputUriPrefix}`);
 
     const bigqueryDestination = outputConfig.bigqueryDestination;
-    if (bigqueryDestination == null) {
-      console.log(`\t\tBigquery Destination`);
-      console.log(`\t\t\tOutput uri : {}`);
+    if (bigqueryDestination === null) {
+      console.log('\t\tBigquery Destination');
+      console.log('\t\t\tOutput uri : {}');
     } else {
-      console.log(`\t\tBigquery Destination`);
+      console.log('\t\tBigquery Destination');
       console.log(`\t\t\tOutput uri : ${bigqueryDestination.outputUri}`);
     }
 
     const outputInfo = response.outputInfo;
-    if (outputInfo == null) {
-      console.log(`\tOutput info`);
-      console.log(`\t\tGcs output directory : {}`);
-      console.log(`\t\tBigquery_output_dataset : {}`);
+    if (outputInfo === null) {
+      console.log('\tOutput info');
+      console.log('\t\tGcs output directory : {}');
+      console.log('\t\tBigquery_output_dataset : {}');
     } else {
-      console.log(`\tOutput info`);
+      console.log('\tOutput info');
       console.log(
-          `\t\tGcs output directory : ${outputInfo.gcsOutputDirectory}`,
+        `\t\tGcs output directory : ${outputInfo.gcsOutputDirectory}`
       );
       console.log(`\t\tBigquery_output_dataset : 
             ${outputInfo.bigqueryOutputDataset}`);
     }
 
     const error = response.error;
-    console.log(`\tError`);
+    console.log('\tError');
     console.log(`\t\tCode : ${error.code}`);
     console.log(`\t\tMessage : ${error.message}`);
 
@@ -120,38 +116,34 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
     console.log(`\t\tDetails : ${details}`);
 
     const partialFailures = response.partialFailures;
-    console.log(`\tPartial failure`);
+    console.log('\tPartial failure');
     console.log(partialFailures);
 
     const resourcesConsumed = response.resourcesConsumed;
-    console.log(`\tResource consumed`);
-    if (resourcesConsumed == null) {
-      console.log(`\t\tReplica Hours: {}`);
+    console.log('\tResource consumed');
+    if (resourcesConsumed === null) {
+      console.log('\t\tReplica Hours: {}');
     } else {
       console.log(`\t\tReplica Hours: ${resourcesConsumed.replicaHours}`);
     }
 
     const completionStats = response.completionStats;
-    console.log(`\tCompletion status`);
-    if ( completionStats == null) {
-      console.log(`\t\tSuccessful count: {}`);
-      console.log(`\t\tFailed count: {}`);
-      console.log(`\t\tIncomplete count: {}`);
+    console.log('\tCompletion status');
+    if (completionStats === null) {
+      console.log('\t\tSuccessful count: {}');
+      console.log('\t\tFailed count: {}');
+      console.log('\t\tIncomplete count: {}');
     } else {
-      console.log(
-          `\t\tSuccessful count: ${completionStats.successfulCount}`,
-      );
+      console.log(`\t\tSuccessful count: ${completionStats.successfulCount}`);
       console.log(`\t\tFailed count: ${completionStats.failedCount}`);
-      console.log(
-          `\t\tIncomplete count: ${completionStats.incompleteCount}`,
-      );
+      console.log(`\t\tIncomplete count: ${completionStats.incompleteCount}`);
     }
   }
-  // [END aiplatform_get_batch_prediction_job]
   await getBatchPredictionJob();
+  // [END aiplatform_get_batch_prediction_job]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });
