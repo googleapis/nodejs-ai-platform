@@ -16,7 +16,16 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DatasetServiceClient, EndpointServiceClient, JobServiceClient, MigrationServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, SpecialistPoolServiceClient} from '@google-cloud/aiplatform';
+import {
+  DatasetServiceClient,
+  EndpointServiceClient,
+  JobServiceClient,
+  MigrationServiceClient,
+  ModelServiceClient,
+  PipelineServiceClient,
+  PredictionServiceClient,
+  SpecialistPoolServiceClient,
+} from '@google-cloud/aiplatform';
 
 // check that the client class type name can be used
 function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
@@ -40,7 +49,9 @@ function doStuffWithPipelineServiceClient(client: PipelineServiceClient) {
 function doStuffWithPredictionServiceClient(client: PredictionServiceClient) {
   client.close();
 }
-function doStuffWithSpecialistPoolServiceClient(client: SpecialistPoolServiceClient) {
+function doStuffWithSpecialistPoolServiceClient(
+  client: SpecialistPoolServiceClient
+) {
   client.close();
 }
 
