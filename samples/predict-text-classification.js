@@ -16,25 +16,24 @@
 
 'use strict';
 
-async function main(filename, endpointId, project, location = 'us-central1') {
-  // [START aiplatform_predict_image_classification]
+async function main(text, endpointId, project, location) {
+  // [START aiplatform_predict_text_classification]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
    */
 
-  // const filename = "YOUR_PREDICTION_FILE_NAME";
-  // const endpointId = "YOUR_ENDPOINT_ID";
+  // const text = 'YOUR_PREDICTION_TEXT';
+  // const endpointId = 'YOUR_ENDPOINT_ID';
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
   const aiplatform = require('@google-cloud/aiplatform');
   const {
     instance,
-    params,
     prediction,
   } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
 
-  // Imports the Google Cloud Prediction Service Client library
+  // Imports the Google Cloud Model Service Client library
   const {PredictionServiceClient} = aiplatform;
 
   // Specifies the location of the api endpoint
@@ -45,50 +44,41 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   // Instantiates a client
   const predictionServiceClient = new PredictionServiceClient(clientOptions);
 
-  async function predictImageClassification() {
-    // Configure the endpoint resource
+  async function predictTextClassification() {
+    // Configure the resources
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
 
-    const parametersObj = new params.ImageClassificationPredictionParams({
-      confidenceThreshold: 0.5,
-      maxPredictions: 5,
+    let predictionInstance = new instance.TextClassificationPredictionInstance({
+      content: text,
     });
-    const parameters = parametersObj.toValue();
-
-    const fs = require('fs');
-    const image = fs.readFileSync(filename, 'base64');
-    const instanceObj = new instance.ImageClassificationPredictionInstance({
-      content: image,
-    });
-    const instanceValue = instanceObj.toValue();
+    let instanceValue = predictionInstance.toValue();
 
     const instances = [instanceValue];
     const request = {
       endpoint,
       instances,
-      parameters,
     };
 
-    // Predict request
     const [response] = await predictionServiceClient.predict(request);
+    console.log(`Predict text classification response`);
+    console.log(`\tDeployed model id : ${response.deployedModelId}\n\n`);
 
-    console.log(`Predict image classification response`);
-    console.log(`\tDeployed model id : ${response.deployedModelId}`);
-    const predictions = response.predictions;
-    console.log(`\tPredictions :`);
-    for (const predictionValue of predictions) {
-      const predictionResultObj = prediction.ClassificationPredictionResult.fromValue(
-        predictionValue
+    console.log(`Prediction results:`);
+
+    for (const predictionResultValue of response.predictions) {
+      let predictionResult = prediction.ClassificationPredictionResult.fromValue(
+        predictionResultValue
       );
-      for (const [i, label] of predictionResultObj.displayNames.entries()) {
+
+      for (const [i, label] of predictionResult.displayNames.entries()) {
         console.log(`\tDisplay name: ${label}`);
-        console.log(`\tConfidences: ${predictionResultObj.confidences[i]}`);
-        console.log(`\tIDs: ${predictionResultObj.ids[i]}\n\n`);
+        console.log(`\tConfidences: ${predictionResult.confidences[i]}`);
+        console.log(`\tIDs: ${predictionResult.ids[i]}\n\n`);
       }
     }
   }
-  // [END aiplatform_predict_image_classification]
-  await predictImageClassification();
+  // [END aiplatform_predict_text_classification]
+  await predictTextClassification();
 }
 
 main(...process.argv.slice(2)).catch(err => {

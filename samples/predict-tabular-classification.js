@@ -16,26 +16,23 @@
 
 'use strict';
 
-async function main(filename, endpointId, project, location = 'us-central1') {
-  // [START aiplatform_predict_image_classification]
+async function main(endpointId, project, location = 'us-central1') {
+  // [START aiplatform_predict_tabular_classification_sample]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
    */
 
-  // const filename = "YOUR_PREDICTION_FILE_NAME";
-  // const endpointId = "YOUR_ENDPOINT_ID";
+  // const endpointId = 'YOUR_ENDPOINT_ID';
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
   const aiplatform = require('@google-cloud/aiplatform');
   const {
-    instance,
-    params,
     prediction,
   } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
 
   // Imports the Google Cloud Prediction Service Client library
-  const {PredictionServiceClient} = aiplatform;
+  const {PredictionServiceClient, helpers} = aiplatform;
 
   // Specifies the location of the api endpoint
   const clientOptions = {
@@ -45,24 +42,19 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   // Instantiates a client
   const predictionServiceClient = new PredictionServiceClient(clientOptions);
 
-  async function predictImageClassification() {
+  async function predictTablesClassification() {
     // Configure the endpoint resource
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
+    const parameters = helpers.toValue({});
 
-    const parametersObj = new params.ImageClassificationPredictionParams({
-      confidenceThreshold: 0.5,
-      maxPredictions: 5,
+    const instance = helpers.toValue({
+      petal_length: '1.4',
+      petal_width: '1.3',
+      sepal_length: '5.1',
+      sepal_width: '2.8',
     });
-    const parameters = parametersObj.toValue();
 
-    const fs = require('fs');
-    const image = fs.readFileSync(filename, 'base64');
-    const instanceObj = new instance.ImageClassificationPredictionInstance({
-      content: image,
-    });
-    const instanceValue = instanceObj.toValue();
-
-    const instances = [instanceValue];
+    const instances = [instance];
     const request = {
       endpoint,
       instances,
@@ -72,23 +64,22 @@ async function main(filename, endpointId, project, location = 'us-central1') {
     // Predict request
     const [response] = await predictionServiceClient.predict(request);
 
-    console.log(`Predict image classification response`);
-    console.log(`\tDeployed model id : ${response.deployedModelId}`);
+    console.log(`Predict tables classification response`);
+    console.log(`\tDeployed model id : ${response.deployedModelId}\n`);
     const predictions = response.predictions;
-    console.log(`\tPredictions :`);
-    for (const predictionValue of predictions) {
-      const predictionResultObj = prediction.ClassificationPredictionResult.fromValue(
-        predictionValue
+    console.log(`Predictions :`);
+    for (const predictionResultVal of predictions) {
+      const predictionResultObj = prediction.TabularClassificationPredictionResult.fromValue(
+        predictionResultVal
       );
-      for (const [i, label] of predictionResultObj.displayNames.entries()) {
-        console.log(`\tDisplay name: ${label}`);
-        console.log(`\tConfidences: ${predictionResultObj.confidences[i]}`);
-        console.log(`\tIDs: ${predictionResultObj.ids[i]}\n\n`);
+      for (const [i, class_] of predictionResultObj.classes.entries()) {
+        console.log(`\tClass: ${class_}`);
+        console.log(`\tScore: ${predictionResultObj.scores[i]}\n\n`);
       }
     }
   }
-  // [END aiplatform_predict_image_classification]
-  await predictImageClassification();
+  // [END aiplatform_predict_tabular_classification_sample]
+  await predictTablesClassification();
 }
 
 main(...process.argv.slice(2)).catch(err => {

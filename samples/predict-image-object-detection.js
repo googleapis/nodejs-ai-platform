@@ -17,7 +17,7 @@
 'use strict';
 
 async function main(filename, endpointId, project, location = 'us-central1') {
-  // [START aiplatform_predict_image_classification]
+  // [START aiplatform_predict_image_object_detection]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
@@ -45,11 +45,11 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   // Instantiates a client
   const predictionServiceClient = new PredictionServiceClient(clientOptions);
 
-  async function predictImageClassification() {
+  async function predictImageObjectDetection() {
     // Configure the endpoint resource
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
 
-    const parametersObj = new params.ImageClassificationPredictionParams({
+    const parametersObj = new params.ImageObjectDetectionPredictionParams({
       confidenceThreshold: 0.5,
       maxPredictions: 5,
     });
@@ -57,12 +57,12 @@ async function main(filename, endpointId, project, location = 'us-central1') {
 
     const fs = require('fs');
     const image = fs.readFileSync(filename, 'base64');
-    const instanceObj = new instance.ImageClassificationPredictionInstance({
+    const instanceObj = new instance.ImageObjectDetectionPredictionInstance({
       content: image,
     });
-    const instanceValue = instanceObj.toValue();
 
-    const instances = [instanceValue];
+    const instanceVal = instanceObj.toValue();
+    const instances = [instanceVal];
     const request = {
       endpoint,
       instances,
@@ -72,23 +72,24 @@ async function main(filename, endpointId, project, location = 'us-central1') {
     // Predict request
     const [response] = await predictionServiceClient.predict(request);
 
-    console.log(`Predict image classification response`);
+    console.log(`Predict image object detection response`);
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
     const predictions = response.predictions;
-    console.log(`\tPredictions :`);
-    for (const predictionValue of predictions) {
-      const predictionResultObj = prediction.ClassificationPredictionResult.fromValue(
-        predictionValue
+    console.log(`Predictions :`);
+    for (const predictionResultVal of predictions) {
+      const predictionResultObj = prediction.ImageObjectDetectionPredictionResult.fromValue(
+        predictionResultVal
       );
       for (const [i, label] of predictionResultObj.displayNames.entries()) {
         console.log(`\tDisplay name: ${label}`);
         console.log(`\tConfidences: ${predictionResultObj.confidences[i]}`);
-        console.log(`\tIDs: ${predictionResultObj.ids[i]}\n\n`);
+        console.log(`\tIDs: ${predictionResultObj.ids[i]}`);
+        console.log(`\tBounding boxes: ${predictionResultObj.bboxes[i]}\n\n`);
       }
     }
   }
-  // [END aiplatform_predict_image_classification]
-  await predictImageClassification();
+  // [END aiplatform_predict_image_object_detection]
+  await predictImageObjectDetection();
 }
 
 main(...process.argv.slice(2)).catch(err => {
