@@ -13,16 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD
 
 'use strict';
 
+=======
+'use strict';
+>>>>>>> encl-synth
 async function main(filename, endpointId, project, location = 'us-central1') {
   // [START aiplatform_predict_image_classification]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
    */
-
   // const filename = "YOUR_PREDICTION_FILE_NAME";
   // const endpointId = "YOUR_ENDPOINT_ID";
   // const project = 'YOUR_PROJECT_ID';
@@ -54,14 +57,12 @@ async function main(filename, endpointId, project, location = 'us-central1') {
       maxPredictions: 5,
     });
     const parameters = parametersObj.toValue();
-
     const fs = require('fs');
     const image = fs.readFileSync(filename, 'base64');
     const instanceObj = new instance.ImageClassificationPredictionInstance({
       content: image,
     });
     const instanceValue = instanceObj.toValue();
-
     const instances = [instanceValue];
     const request = {
       endpoint,
@@ -90,7 +91,6 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   // [END aiplatform_predict_image_classification]
   await predictImageClassification();
 }
-
 main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
