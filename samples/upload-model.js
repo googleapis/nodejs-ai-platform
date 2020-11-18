@@ -17,12 +17,13 @@
 'use strict';
 
 async function main(
-    modelDisplayName,
-    metadataSchemaUri,
-    imageUri,
-    artifactUri,
-    project,
-    location = 'us-central1') {
+  modelDisplayName,
+  metadataSchemaUri,
+  imageUri,
+  artifactUri,
+  project,
+  location = 'us-central1'
+) {
   // [START aiplatform_upload_model]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -52,17 +53,17 @@ async function main(
     const parent = `projects/${project}/locations/${location}`;
     // Configure the model resources
     const model = {
-      'displayName': modelDisplayName,
-      'metadataSchemaUri': metadataSchemaUri,
-      'artifactUri': artifactUri,
-      'containerSpec': {
-        'imageUri': imageUri,
-        'command': [],
-        'args': [],
-        'env': [{'name': 'envName', 'value': 'envValue'}],
-        'ports': [{'containerPort': 8000}],
-        'predictRoute': '',
-        'healthRoute': '',
+      displayName: modelDisplayName,
+      metadataSchemaUri: metadataSchemaUri,
+      artifactUri: artifactUri,
+      containerSpec: {
+        imageUri: imageUri,
+        command: [],
+        args: [],
+        env: [{name: 'envName', value: 'envValue'}],
+        ports: [{containerPort: 8000}],
+        predictRoute: '',
+        healthRoute: '',
       },
     };
     const request = {
@@ -78,14 +79,14 @@ async function main(
     await response.promise();
     const result = response.result;
 
-    console.log(`Upload model response `);
+    console.log('Upload model response ');
     console.log(`\tModel : ${result.model}`);
   }
-  // [END aiplatform_upload_model]
   await uploadModel();
+  // [END aiplatform_upload_model]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

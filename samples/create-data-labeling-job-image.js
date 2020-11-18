@@ -17,12 +17,12 @@
 'use strict';
 
 async function main(
-    displayName,
-    datasetId,
-    instructionUri,
-    annotationSpec,
-    project,
-    location = 'us-central1',
+  displayName,
+  datasetId,
+  instructionUri,
+  annotationSpec,
+  project,
+  location = 'us-central1'
 ) {
   // [START aiplatform_create_data_labeling_job_image]
   /**
@@ -51,9 +51,7 @@ async function main(
   async function createDataLabelingJobImage() {
     // Configure the parent resource
     const parent = `projects/${project}/locations/${location}`;
-    const input = [
-      {arrayValue: [annotationSpec]},
-    ];
+    const input = [{arrayValue: [annotationSpec]}];
     const inputs = {
       row: {
         value: input,
@@ -65,10 +63,12 @@ async function main(
       datasets: [datasets],
       labelerCount: 1,
       instructionUri: instructionUri,
-      inputsSchemaUri: 'gs://google-cloud-aiplatform/schema/datalabelingjob/inputs/image_classification.yaml',
+      inputsSchemaUri:
+        'gs://google-cloud-aiplatform/schema/datalabelingjob/inputs/image_classification.yaml',
       inputs: inputs,
       annotationLabels: {
-        'aiplatform.googleapis.com/annotation_set_name': 'my_test_saved_query'},
+        'aiplatform.googleapis.com/annotation_set_name': 'my_test_saved_query',
+      },
     };
     const request = {
       parent,
@@ -78,7 +78,7 @@ async function main(
     // Create data labeling job request
     const [response] = await jobServiceClient.createDataLabelingJob(request);
 
-    console.log(`Create data labeling job image response`);
+    console.log('Create data labeling job image response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tDisplay name : ${response.displayName}`);
     console.log(`\tDatasets : ${response.datasets}`);
@@ -95,27 +95,27 @@ async function main(
 
     const annotationLabels = response.annotationLabels;
     for (const annotationLabel in annotationLabels) {
-      if (annotationLabels.hasOwnProperty(annotationLabel)) {
-        console.log(`\tAnnotation label`);
-        console.log(`\t\tKey : ${annotationLabel.key}`);
+      console.log('\tAnnotation label');
+      if (annotationLabel.key) console.log(`\t\tKey : ${annotationLabel.key}`);
+      if (annotationLabel.value) {
         console.log(`\t\tValue : ${annotationLabel.value}`);
       }
     }
 
     const currentSpend = response.currentSpend;
-    if (currentSpend == null) {
-      console.log(`\tCurrent spend : {}`);
+    if (currentSpend === null) {
+      console.log('\tCurrent spend : {}');
     } else {
-      console.log(`\tCurrent spend`);
+      console.log('\tCurrent spend');
       console.log(`\t\tCurrency code : ${currentSpend.currencyCode}`);
       console.log(`\t\tUnits : ${currentSpend.units}`);
       console.log(`\t\tNanos : ${currentSpend.nanos}`);
     }
   }
-  // [END aiplatform_create_data_labeling_job_image]
   await createDataLabelingJobImage();
+  // [END aiplatform_create_data_labeling_job_image]
 }
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

@@ -18,13 +18,16 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {uuid} = require('uuidv4');
+const {after, describe, it} = require('mocha');
+
+const uuid = require('uuid').v4;
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const datasetDisplayName = `temp_create_dataset_tables_bigquery_test_${uuid()}`;
-const bigquerySourceUri = 'bq://prj-ucaip-tutorials.bigquery_dataset.walmart_triptrain_train';
+const bigquerySourceUri =
+  'bq://prj-ucaip-tutorials.bigquery_dataset.walmart_triptrain_train';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
@@ -33,24 +36,21 @@ let datasetId;
 describe('AI platform create dataset tabular bigquery', () => {
   it('should create a new bigquery tabular dataset in the parent resource', async () => {
     const stdout = execSync(
-        `node ./create-dataset-tabular-bigquery.js ${datasetDisplayName} \
+      `node ./create-dataset-tabular-bigquery.js ${datasetDisplayName} \
                                                   ${bigquerySourceUri} \
                                                   ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Create dataset tabular bigquery response/);
-    datasetId = stdout.split(
-        '/locations/us-central1/datasets/',
-    )[1].split('/')[0];
+    datasetId = stdout
+      .split('/locations/us-central1/datasets/')[1]
+      .split('/')[0];
   });
   after('should delete created dataset', async () => {
-    execSync(
-        `node ./delete-dataset.js ${datasetId} ${project} ${location}`,
-        {
-          cwd,
-        },
-    );
+    execSync(`node ./delete-dataset.js ${datasetId} ${project} ${location}`, {
+      cwd,
+    });
   });
 });

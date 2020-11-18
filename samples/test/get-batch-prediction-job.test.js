@@ -18,8 +18,10 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {after, describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const batchPredictionJobId = process.env.BATCH_PREDICTION_JOB_ID;
@@ -29,28 +31,28 @@ const location = process.env.LOCATION;
 describe('AI platform get batch prediction job', () => {
   it('should get the specified batch prediction job', async () => {
     const stdout = execSync(
-        `node ./get-batch-prediction-job.js ${batchPredictionJobId} \
+      `node ./get-batch-prediction-job.js ${batchPredictionJobId} \
                                             ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Get batch prediction job response/);
   });
   after('should cancel delete the batch prediction job', async () => {
     execSync(
-        `node ./cancel-batch-prediction-job.js ${batchPredictionJobId} \
+      `node ./cancel-batch-prediction-job.js ${batchPredictionJobId} \
                                                ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     execSync(
-        `node ./delete-batch-prediction-job.js ${batchPredictionJobId} \
+      `node ./delete-batch-prediction-job.js ${batchPredictionJobId} \
                                                ${project} ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
   });
 });

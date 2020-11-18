@@ -18,8 +18,10 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const datasetId = process.env.TEXT_CLASS_SINGLE_DATASET_ID;
@@ -30,15 +32,18 @@ const location = process.env.LOCATION;
 describe('AI platform import data text classification', () => {
   it('should import data to text classification dataset', async () => {
     const stdout = execSync(
-        `node ./import-data-text-classification-single-label.js \
+      `node ./import-data-text-classification-single-label.js \
                                                     ${datasetId} \
                                                     ${gcsSourceUri} \
                                                     ${project} \
                                                     ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
-    assert.match(stdout, /Import data text classification single label response/);
+    assert.match(
+      stdout,
+      /Import data text classification single label response/
+    );
   });
 });

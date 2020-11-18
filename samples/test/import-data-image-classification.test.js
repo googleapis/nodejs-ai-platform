@@ -18,26 +18,29 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const datasetId = process.env.IMAGE_CLASS_DATASET_ID;
-const gcsSourceUri = 'gs://prj-ucaip-tutorials-vcm/dataset/csv/all_data_sample.csv';
+const gcsSourceUri =
+  'gs://prj-ucaip-tutorials-vcm/dataset/csv/all_data_sample.csv';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
 describe('AI platform import data image classification', () => {
   it('should import image classification data to dataset', async () => {
     const stdout = execSync(
-        `node ./import-data-image-classification-single-label.js \
+      `node ./import-data-image-classification-single-label.js \
                                                     ${datasetId} \
                                                     ${gcsSourceUri} \
                                                     ${project} \
                                                     ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Import data image classification response/);
   });

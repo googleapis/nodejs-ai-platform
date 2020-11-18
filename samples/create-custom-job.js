@@ -17,10 +17,10 @@
 'use strict';
 
 async function main(
-    customJobDisplayName,
-    containerImageUri,
-    project,
-    location = 'us-central1',
+  customJobDisplayName,
+  containerImageUri,
+  project,
+  location = 'us-central1'
 ) {
   // [START aiplatform_create_custom_job]
   /**
@@ -75,14 +75,14 @@ async function main(
     // Create custom job request
     const [response] = await jobServiceClient.createCustomJob(request);
 
-    console.log(`Create custom job response`);
+    console.log('Create custom job response');
     console.log(`${JSON.stringify(response)}`);
   }
-  // [END aiplatform_create_custom_job]
   await createCustomJob();
+  // [END aiplatform_create_custom_job]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

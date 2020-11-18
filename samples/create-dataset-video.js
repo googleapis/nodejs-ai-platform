@@ -43,8 +43,9 @@ async function main(datasetDisplayName, project, location = 'us-central1') {
     const parent = `projects/${project}/locations/${location}`;
     // Configure the dataset resource
     const dataset = {
-      'displayName': datasetDisplayName,
-      'metadataSchemaUri': 'gs://google-cloud-aiplatform/schema/dataset/metadata/video_1.0.0.yaml',
+      displayName: datasetDisplayName,
+      metadataSchemaUri:
+        'gs://google-cloud-aiplatform/schema/dataset/metadata/video_1.0.0.yaml',
     };
     const request = {
       parent,
@@ -66,11 +67,11 @@ async function main(datasetDisplayName, project, location = 'us-central1') {
     console.log(`Metadata : ${JSON.stringify(result.metadata)}`);
     console.log(`Labels : ${JSON.stringify(result.labels)}`);
   }
-  // [END aiplatform_create_dataset_video]
   await createDatasetVideo();
+  // [END aiplatform_create_dataset_video]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

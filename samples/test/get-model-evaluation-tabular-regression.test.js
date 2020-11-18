@@ -18,25 +18,28 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const modelId = process.env.MODEL_EVALUATION_TABLES_REGRESSION_MODEL_ID;
-const evaluationId = process.env.MODEL_EVALUATION_TABLES_REGRESSION_EVALUATION_ID;
+const evaluationId =
+  process.env.MODEL_EVALUATION_TABLES_REGRESSION_EVALUATION_ID;
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
 describe('AI platform get tabular regression model evaluation', () => {
   it('should get the evaluation from the specified model', async () => {
     const stdout = execSync(
-        `node ./get-model-evaluation-tabular-regression.js ${modelId} \
+      `node ./get-model-evaluation-tabular-regression.js ${modelId} \
                                                           ${evaluationId} \
                                                           ${project} \
                                                           ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Get model evaluation tabular regression response/);
   });

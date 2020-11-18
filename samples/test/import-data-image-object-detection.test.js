@@ -18,25 +18,28 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const datasetId = process.env.IMAGE_OBJECT_DETECTION_DATASET_ID;
-const gcsSourceUri = 'gs://prj-ucaip-tutorials-resources/salads_oid_ml_use_public_unassigned.jsonl';
+const gcsSourceUri =
+  'gs://prj-ucaip-tutorials-resources/salads_oid_ml_use_public_unassigned.jsonl';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
 describe('AI platform import Data image object_detection', () => {
   it('should import image object detection data to dataset', async () => {
     const stdout = execSync(
-        `node ./import-data-image-object-detection.js ${datasetId} \
+      `node ./import-data-image-object-detection.js ${datasetId} \
                                                       ${gcsSourceUri} \
                                                       ${project} \
                                                       ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Import data image object detection response/);
   });

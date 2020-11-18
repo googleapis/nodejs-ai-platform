@@ -17,12 +17,12 @@
 'use strict';
 
 async function main(
-    batchPredictionDisplayName,
-    modelId,
-    gcsSourceUri,
-    gcsDestinationOutputUriPrefix,
-    project,
-    location = 'us-central1',
+  batchPredictionDisplayName,
+  modelId,
+  gcsSourceUri,
+  gcsDestinationOutputUriPrefix,
+  project,
+  location = 'us-central1'
 ) {
   // [START aiplatform_create_batch_prediction_job_video_object_tracking]
   /**
@@ -58,9 +58,9 @@ async function main(
     const modelParameters = {
       structValue: {
         fields: {
-          confidenceThreshold: {floatValue: 0.5}
-        }
-      }
+          confidenceThreshold: {floatValue: 0.5},
+        },
+      },
     };
     const inputConfig = {
       instancesFormat: 'jsonl',
@@ -85,7 +85,7 @@ async function main(
     // Create batch prediction job request
     const [response] = await jobServiceClient.createBatchPredictionJob(request);
 
-    console.log(`Create batch prediction job video object tracking response`);
+    console.log('Create batch prediction job video object tracking response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tDisplay name: ${response.displayName}`);
     console.log(`\tState : ${response.state}`);
@@ -96,151 +96,145 @@ async function main(
     console.log(`\tLabels : ${JSON.stringify(response.labels)}`);
 
     const inputConfiguration = response.inputConfig;
-    console.log(`\tInput config`);
+    console.log('\tInput config');
     console.log(`\t\tInstances format : ${inputConfiguration.instancesFormat}`);
 
     const gcsSource = inputConfiguration.gcsSource;
-    console.log(`\t\tGcs source`);
+    console.log('\t\tGcs source');
     console.log(`\t\t\tUris : ${gcsSource.uris}`);
 
     const bigquerySource = inputConfiguration.bigquerySource;
-    console.log(`\t\tBigQuery source`);
-    if (bigquerySource == null) {
-      console.log(`\t\t\tInput uri : {}`);
+    console.log('\t\tBigQuery source');
+    if (bigquerySource === null) {
+      console.log('\t\t\tInput uri : {}');
     } else {
       console.log(`\t\t\tInput uri : ${bigquerySource.inputUri}`);
     }
 
     const outputConfiguration = response.outputConfig;
-    console.log(`\t\tOutput config`);
+    console.log('\t\tOutput config');
     console.log(
-        `\t\tPredictions format : ${outputConfiguration.predictionsFormat}`,
+      `\t\tPredictions format : ${outputConfiguration.predictionsFormat}`
     );
 
     const gcsDestination = outputConfiguration.gcsDestination;
-    console.log(`\t\tGcs destination`);
-    console.log(
-        `\t\t\tOutput uri prefix : ${gcsDestination.outputUriPrefix}`,
-    );
+    console.log('\t\tGcs destination');
+    console.log(`\t\t\tOutput uri prefix : ${gcsDestination.outputUriPrefix}`);
 
     const bigqueryDestination = outputConfiguration.bigqueryDestination;
-    if (bigqueryDestination == null) {
-      console.log(`\t\tBigquery destination`);
-      console.log(`\t\t\tOutput uri : {}`);
+    if (bigqueryDestination === null) {
+      console.log('\t\tBigquery destination');
+      console.log('\t\t\tOutput uri : {}');
     } else {
-      console.log(`\t\tBigquery destination`);
+      console.log('\t\tBigquery destination');
       console.log(`\t\t\tOutput uri : ${bigqueryDestination.outputUri}`);
     }
 
     const dedicatedResource = response.dedicatedResource;
-    console.log(`\tDedicated resources`);
-    if (dedicatedResource == null) {
-      console.log(`\t\tStarting replica count : {}`);
-      console.log(`\t\tMax replica count : {}`);
+    console.log('\tDedicated resources');
+    if (dedicatedResource === null) {
+      console.log('\t\tStarting replica count : {}');
+      console.log('\t\tMax replica count : {}');
     } else {
       console.log(
-          `\ttStarting replica count : \
-          ${dedicatedResource.startingReplicaCount}`,
+        `\ttStarting replica count : \
+          ${dedicatedResource.startingReplicaCount}`
       );
       console.log(
-          `\ttMax replica count : ${dedicatedResource.maxReplicaCount}`,
+        `\ttMax replica count : ${dedicatedResource.maxReplicaCount}`
       );
 
       const machineSpec = dedicatedResource.machineSpec;
-      console.log(`\t\tMachine spec`);
-      if (machineSpec == null) {
-        console.log(`\t\t\tMachine type : {}`);
-        console.log(`\t\t\tAccelerator type : {}`);
-        console.log(`\t\t\tAccelerator count : {}`);
+      console.log('\t\tMachine spec');
+      if (machineSpec === null) {
+        console.log('\t\t\tMachine type : {}');
+        console.log('\t\t\tAccelerator type : {}');
+        console.log('\t\t\tAccelerator count : {}');
       } else {
         console.log(`\t\t\tMachine type : ${machineSpec.machineType}`);
         console.log(`\t\t\tAccelerator type : ${machineSpec.acceleratorType}`);
         console.log(
-            `\t\t\tAccelerator count : ${machineSpec.acceleratorCount}`,
+          `\t\t\tAccelerator count : ${machineSpec.acceleratorCount}`
         );
       }
     }
 
     const manualBatchTuningParameters = response.manualBatchTuningParameters;
-    console.log(`\tManual batch tuning parameters`);
-    if (manualBatchTuningParameters == null) {
-      console.log(`\t\tBatch size : {}`);
+    console.log('\tManual batch tuning parameters');
+    if (manualBatchTuningParameters === null) {
+      console.log('\t\tBatch size : {}');
     } else {
       console.log(`\t\tBatch size : ${manualBatchTuningParameters.batchSize}`);
     }
 
     const outputInfo = response.outputInfo;
-    if (outputInfo == null) {
-      console.log(`\tOutput info`);
-      console.log(`\t\tGcs output directory : {}`);
-      console.log(`\t\tBigquery output dataset : {}`);
+    if (outputInfo === null) {
+      console.log('\tOutput info');
+      console.log('\t\tGcs output directory : {}');
+      console.log('\t\tBigquery output dataset : {}');
     } else {
-      console.log(`\tOutput info`);
+      console.log('\tOutput info');
       console.log(
-          `\t\tGcs output directory : ${outputInfo.gcsOutputDirectory}`,
+        `\t\tGcs output directory : ${outputInfo.gcsOutputDirectory}`
       );
       console.log(`\t\tBigquery output dataset : 
             ${outputInfo.bigqueryOutputDataset}`);
     }
 
     const error = response.error;
-    if (error == null) {
-      console.log(`\tError`);
-      console.log(`\t\tCode : {}`);
-      console.log(`\t\tMessage : {}`);
+    if (error === null) {
+      console.log('\tError');
+      console.log('\t\tCode : {}');
+      console.log('\t\tMessage : {}');
     } else {
-      console.log(`\tError`);
+      console.log('\tError');
       console.log(`\t\tCode : ${error.code}`);
       console.log(`\t\tMessage : ${error.message}`);
 
       const details = error.details;
-      if (details == null) {
-        console.log(`\t\tDetails : {}`);
+      if (details === null) {
+        console.log('\t\tDetails : {}');
       } else {
         console.log(`\t\tDetails : ${details}`);
       }
     }
 
     const partialFailures = response.partialFailures;
-    if (partialFailures == null) {
-      console.log(`\tPartial failure`);
+    if (partialFailures === null) {
+      console.log('\tPartial failure');
     } else {
-      for (partialFailure of partialFailures) {
-        console.log(`\tPartial failure`);
+      for (const partialFailure of partialFailures) {
+        console.log('\tPartial failure');
         console.log(`\t\tCode : ${partialFailure.code}`);
         console.log(`\t\tMessage : ${partialFailure.message}`);
       }
     }
 
     const resourcesConsumed = response.resourcesConsumed;
-    console.log(`\tResource consumed`);
-    if (resourcesConsumed == null) {
-      console.log(`\t\tReplica hours: {}`);
+    console.log('\tResource consumed');
+    if (resourcesConsumed === null) {
+      console.log('\t\tReplica hours: {}');
     } else {
       console.log(`\t\tReplica hours: ${resourcesConsumed.replicaHours}`);
     }
 
     const completionStats = response.completionStats;
-    console.log(`\tCompletion status`);
-    if (completionStats == null) {
-      console.log(`\t\tSuccessful count: {}`);
-      console.log(`\t\tFailed count: {}`);
-      console.log(`\t\tIncomplete count: {}`);
+    console.log('\tCompletion status');
+    if (completionStats === null) {
+      console.log('\t\tSuccessful count: {}');
+      console.log('\t\tFailed count: {}');
+      console.log('\t\tIncomplete count: {}');
     } else {
-      console.log(
-          `\t\tSuccessful count: ${completionStats.successfulCount}`,
-      );
+      console.log(`\t\tSuccessful count: ${completionStats.successfulCount}`);
       console.log(`\t\tFailed count: ${completionStats.failedCount}`);
-      console.log(
-          `\t\tIncomplete count: ${completionStats.incompleteCount}`,
-      );
+      console.log(`\t\tIncomplete count: ${completionStats.incompleteCount}`);
     }
   }
-  // [END aiplatform_create_batch_prediction_job_video_object_tracking]
   await createBatchPredictionJobVideoObjectTracking();
+  // [END aiplatform_create_batch_prediction_job_video_object_tracking]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

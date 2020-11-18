@@ -86,16 +86,16 @@ async function main(filename, endpointId, project, location = 'us-central1') {
     console.log('Predict custom trained model response');
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
     const predictions = response.predictions;
-    console.log(`\tPredictions :`);
+    console.log('\tPredictions :');
     for (const prediction of predictions) {
       console.log(`\t\tPrediction : ${JSON.stringify(prediction)}`);
     }
   }
-  // [END aiplatform_predict_custom_trained_model]
   await predictCustomTrainedModel();
+  // [END aiplatform_predict_custom_trained_model]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

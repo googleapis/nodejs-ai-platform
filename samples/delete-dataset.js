@@ -40,13 +40,9 @@ async function main(datasetId, project, location = 'us-central1') {
 
   async function deleteDataset() {
     // Configure the resource
-    const name = datasetServiceClient.datasetPath(
-        project,
-        location,
-        datasetId,
-    );
+    const name = datasetServiceClient.datasetPath(project, location, datasetId);
     const request = {
-      'name': name,
+      name: name,
     };
 
     // Delete Dataset Request
@@ -57,14 +53,14 @@ async function main(datasetId, project, location = 'us-central1') {
     await response.promise();
     const result = response.result;
 
-    console.log(`Delete dataset response :`);
+    console.log('Delete dataset response :');
     console.log(`${result}`);
   }
-  // [END aiplatform_delete_dataset]
   await deleteDataset();
+  // [END aiplatform_delete_dataset]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

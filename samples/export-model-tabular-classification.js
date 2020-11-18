@@ -17,10 +17,10 @@
 'use strict';
 
 async function main(
-    gcsDestinationOutputUriPrefix,
-    modelId,
-    project,
-    location = 'us-central1',
+  gcsDestinationOutputUriPrefix,
+  modelId,
+  project,
+  location = 'us-central1'
 ) {
   // [START aiplatform_export_model_tabular_classification]
   /**
@@ -50,9 +50,9 @@ async function main(
     const name = `projects/${project}/locations/${location}/models/${modelId}`;
     // Configure the outputConfig resources
     const outputConfig = {
-      'exportFormatId': 'tf-saved-model',
-      'gcsDestination': {
-        'outputUriPrefix': gcsDestinationOutputUriPrefix,
+      exportFormatId: 'tf-saved-model',
+      gcsDestination: {
+        outputUriPrefix: gcsDestinationOutputUriPrefix,
       },
     };
     const request = {
@@ -68,11 +68,11 @@ async function main(
     await response.promise();
     console.log(`Export model response : ${JSON.stringify(response.result)}`);
   }
-  // [END aiplatform_export_model_tabular_classification]
   await exportModelTabularClassification();
+  // [END aiplatform_export_model_tabular_classification]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

@@ -46,15 +46,15 @@ async function main(dataLabelingJobId, project, location = 'us-central1') {
     };
 
     // Delete data labeling job request
-    const [response] = await jobServiceClient.deleteDataLabelingJob(request);
+    await jobServiceClient.deleteDataLabelingJob(request);
 
-    console.log(`Delete data labeling job response :`);
+    console.log('Delete data labeling job response :');
   }
-  // [END aiplatform_delete_data_labeling_job]
   setTimeout(deleteDataLabelingJob, 60000);
+  // [END aiplatform_delete_data_labeling_job]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });

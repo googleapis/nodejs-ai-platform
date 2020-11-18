@@ -42,7 +42,7 @@ async function main(endpointDisplayName, project, location = 'us-central1') {
     // Configure the parent resource
     const parent = `projects/${project}/locations/${location}`;
     const endpoint = {
-      'displayName': endpointDisplayName,
+      displayName: endpointDisplayName,
     };
     const request = {
       parent,
@@ -57,7 +57,7 @@ async function main(endpointDisplayName, project, location = 'us-central1') {
     await response.promise();
     const result = response.result;
 
-    console.log(`Create endpoint response`);
+    console.log('Create endpoint response');
     console.log(`\tName : ${result.name}`);
     console.log(`\tDisplay name : ${result.displayName}`);
     console.log(`\tDescription : ${result.description}`);
@@ -65,12 +65,11 @@ async function main(endpointDisplayName, project, location = 'us-central1') {
     console.log(`\tCreate time : ${JSON.stringify(result.createTime)}`);
     console.log(`\tUpdate time : ${JSON.stringify(result.updateTime)}`);
   }
-  // [END aiplatform_create_endpoint]
   await createEndpoint();
+  // [END aiplatform_create_endpoint]
 }
 
-main(...process.argv.slice(2)).catch((err) => {
+main(...process.argv.slice(2)).catch(err => {
   console.error(err);
   process.exitCode = 1;
 });
-

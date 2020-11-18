@@ -18,8 +18,10 @@
 
 const path = require('path');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
+
 const cp = require('child_process');
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const modelId = process.env.MODEL_EVALUATION_TEXT_CLASS_MODEL_ID;
@@ -30,13 +32,13 @@ const location = process.env.LOCATION;
 describe('AI platform get model evaluation text classification', () => {
   it('should get the evaluation from the specified model', async () => {
     const stdout = execSync(
-        `node ./get-model-evaluation-text-classification.js ${modelId} \
+      `node ./get-model-evaluation-text-classification.js ${modelId} \
                                                             ${evaluationId} \
                                                             ${project} \
                                                             ${location}`,
-        {
-          cwd,
-        },
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Get model evaluation text classification response/);
   });
