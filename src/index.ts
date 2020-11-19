@@ -33,27 +33,7 @@ const PredictionServiceClient = v1beta1.PredictionServiceClient;
 type PredictionServiceClient = v1beta1.PredictionServiceClient;
 const SpecialistPoolServiceClient = v1beta1.SpecialistPoolServiceClient;
 type SpecialistPoolServiceClient = v1beta1.SpecialistPoolServiceClient;
-export {
-  v1beta1,
-  DatasetServiceClient,
-  EndpointServiceClient,
-  JobServiceClient,
-  MigrationServiceClient,
-  ModelServiceClient,
-  PipelineServiceClient,
-  PredictionServiceClient,
-  SpecialistPoolServiceClient,
-};
-export default {
-  v1beta1,
-  DatasetServiceClient,
-  EndpointServiceClient,
-  JobServiceClient,
-  MigrationServiceClient,
-  ModelServiceClient,
-  PipelineServiceClient,
-  PredictionServiceClient,
-  SpecialistPoolServiceClient,
-};
+export {v1beta1, DatasetServiceClient, EndpointServiceClient, JobServiceClient, MigrationServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, SpecialistPoolServiceClient};
+export default {v1beta1, DatasetServiceClient, EndpointServiceClient, JobServiceClient, MigrationServiceClient, ModelServiceClient, PipelineServiceClient, PredictionServiceClient, SpecialistPoolServiceClient};
 import * as protos from '../protos/protos';
-export {protos};
+export {protos}

@@ -17,22 +17,19 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import * as path from 'path';
 
-import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
+import { Transform } from 'stream';
+import { RequestType } from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/model_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './model_service_client_config.json';
-import {operationsProtos} from 'google-gax';
+import { operationsProtos } from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -85,9 +82,9 @@ export class ModelServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     Follows the structure of `model_service_client_config.json`.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -96,13 +93,11 @@ export class ModelServiceClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof ModelServiceClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window.fetch !== 'undefined');
+    // eslint-disable-next-line no-undef
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window.fetch !== 'undefined');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -120,7 +115,7 @@ export class ModelServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -128,7 +123,10 @@ export class ModelServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -144,18 +142,12 @@ export class ModelServiceClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
+    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
+      opts.fallback ?
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        require("../../protos/protos.json") :
+        nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
@@ -213,83 +205,59 @@ export class ModelServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listModels: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'models'
-      ),
-      listModelEvaluations: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'modelEvaluations'
-      ),
-      listModelEvaluationSlices: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'modelEvaluationSlices'
-      ),
+      listModels:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'models'),
+      listModelEvaluations:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'modelEvaluations'),
+      listModelEvaluationSlices:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'modelEvaluationSlices')
     };
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    const protoFilesRoot = opts.fallback
-      ? this._gaxModule.protobuf.Root.fromJSON(
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        )
-      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
+    const protoFilesRoot = opts.fallback ?
+      this._gaxModule.protobuf.Root.fromJSON(
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        require("../../protos/protos.json")) :
+      this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = this._gaxModule
-      .lro({
-        auth: this.auth,
-        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
-      })
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro({
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+    }).operationsClient(opts);
     const uploadModelResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.UploadModelResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.UploadModelResponse') as gax.protobuf.Type;
     const uploadModelMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.UploadModelOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.UploadModelOperationMetadata') as gax.protobuf.Type;
     const deleteModelResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteModelMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata') as gax.protobuf.Type;
     const exportModelResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.ExportModelResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.ExportModelResponse') as gax.protobuf.Type;
     const exportModelMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.ExportModelOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.ExportModelOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       uploadModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         uploadModelResponse.decode.bind(uploadModelResponse),
-        uploadModelMetadata.decode.bind(uploadModelMetadata)
-      ),
+        uploadModelMetadata.decode.bind(uploadModelMetadata)),
       deleteModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteModelResponse.decode.bind(deleteModelResponse),
-        deleteModelMetadata.decode.bind(deleteModelMetadata)
-      ),
+        deleteModelMetadata.decode.bind(deleteModelMetadata)),
       exportModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         exportModelResponse.decode.bind(exportModelResponse),
-        exportModelMetadata.decode.bind(exportModelMetadata)
-      ),
+        exportModelMetadata.decode.bind(exportModelMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.aiplatform.v1beta1.ModelService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.aiplatform.v1beta1.ModelService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -317,29 +285,16 @@ export class ModelServiceClient {
     // Put together the "service stub" for
     // google.cloud.aiplatform.v1beta1.ModelService.
     this.modelServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.aiplatform.v1beta1.ModelService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.aiplatform.v1beta1.ModelService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.aiplatform.v1beta1.ModelService,
-      this._opts
-    ) as Promise<{[method: string]: Function}>;
+        this._opts) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const modelServiceStubMethods = [
-      'uploadModel',
-      'getModel',
-      'listModels',
-      'updateModel',
-      'deleteModel',
-      'exportModel',
-      'getModelEvaluation',
-      'listModelEvaluations',
-      'getModelEvaluationSlice',
-      'listModelEvaluationSlices',
-    ];
+    const modelServiceStubMethods =
+        ['uploadModel', 'getModel', 'listModels', 'updateModel', 'deleteModel', 'exportModel', 'getModelEvaluation', 'listModelEvaluations', 'getModelEvaluationSlice', 'listModelEvaluationSlices'];
     for (const methodName of modelServiceStubMethods) {
       const callPromise = this.modelServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -349,10 +304,9 @@ export class ModelServiceClient {
           const func = stub[methodName];
           return func.apply(stub, args);
         },
-        (err: Error | null | undefined) => () => {
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -401,7 +355,9 @@ export class ModelServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -410,9 +366,8 @@ export class ModelServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -424,86 +379,65 @@ export class ModelServiceClient {
   // -- Service calls --
   // -------------------
   getModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModel,
-      protos.google.cloud.aiplatform.v1beta1.IGetModelRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModel,
+        protos.google.cloud.aiplatform.v1beta1.IGetModelRequest|undefined, {}|undefined
+      ]>;
   getModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModel,
-      | protos.google.cloud.aiplatform.v1beta1.IGetModelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModel,
-      | protos.google.cloud.aiplatform.v1beta1.IGetModelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Gets a Model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Model resource.
-   *   Format: `projects/{project}/locations/{location}/models/{model}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Model]{@link google.cloud.aiplatform.v1beta1.Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getModel(request);
-   */
-  getModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IModel,
-          | protos.google.cloud.aiplatform.v1beta1.IGetModelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModel,
-      | protos.google.cloud.aiplatform.v1beta1.IGetModelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModel,
-      protos.google.cloud.aiplatform.v1beta1.IGetModelRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IGetModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  getModel(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModel,
+          protos.google.cloud.aiplatform.v1beta1.IGetModelRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Gets a Model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Model resource.
+ *   Format: `projects/{project}/locations/{location}/models/{model}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Model]{@link google.cloud.aiplatform.v1beta1.Model}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.getModel(request);
+ */
+  getModel(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModel,
+          protos.google.cloud.aiplatform.v1beta1.IGetModelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModel,
+          protos.google.cloud.aiplatform.v1beta1.IGetModelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModel,
+        protos.google.cloud.aiplatform.v1beta1.IGetModelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -511,98 +445,77 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      name: request.name || '',
+      'name': request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.getModel(request, options, callback);
   }
   updateModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModel,
-      protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModel,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest|undefined, {}|undefined
+      ]>;
   updateModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModel,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModel,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Updates a Model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.aiplatform.v1beta1.Model} request.model
-   *   Required. The Model which replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource.
-   *   For the `FieldMask` definition, see
-   *
-   *   [FieldMask](https:
-   *   //developers.google.com/protocol-buffers
-   *   // /docs/reference/google.protobuf#fieldmask).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Model]{@link google.cloud.aiplatform.v1beta1.Model}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateModel(request);
-   */
-  updateModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IModel,
-          | protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModel,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModel,
-      protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateModel(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModel,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Updates a Model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.aiplatform.v1beta1.Model} request.model
+ *   Required. The Model which replaces the resource on the server.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The update mask applies to the resource.
+ *   For the `FieldMask` definition, see
+ *
+ *   [FieldMask](https:
+ *   //developers.google.com/protocol-buffers
+ *   // /docs/reference/google.protobuf#fieldmask).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Model]{@link google.cloud.aiplatform.v1beta1.Model}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.updateModel(request);
+ */
+  updateModel(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModel,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModel,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModel,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateModelRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -616,94 +529,67 @@ export class ModelServiceClient {
     return this.innerApiCalls.updateModel(request, options, callback);
   }
   getModelEvaluation(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
+        protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest|undefined, {}|undefined
+      ]>;
   getModelEvaluation(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
-      | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getModelEvaluation(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
-      | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Gets a ModelEvaluation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the ModelEvaluation resource.
-   *   Format:
-   *
-   *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ModelEvaluation]{@link google.cloud.aiplatform.v1beta1.ModelEvaluation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getModelEvaluation(request);
-   */
-  getModelEvaluation(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
-          | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
-      | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest|null|undefined,
+          {}|null|undefined>): void;
+  getModelEvaluation(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
+          protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Gets a ModelEvaluation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the ModelEvaluation resource.
+ *   Format:
+ *
+ *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [ModelEvaluation]{@link google.cloud.aiplatform.v1beta1.ModelEvaluation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.getModelEvaluation(request);
+ */
+  getModelEvaluation(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
+          protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
+          protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModelEvaluation,
+        protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -711,100 +597,73 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      name: request.name || '',
+      'name': request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.getModelEvaluation(request, options, callback);
   }
   getModelEvaluationSlice(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
+        protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest|undefined, {}|undefined
+      ]>;
   getModelEvaluationSlice(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
-      | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getModelEvaluationSlice(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
-      | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Gets a ModelEvaluationSlice.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the ModelEvaluationSlice resource.
-   *   Format:
-   *
-   *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ModelEvaluationSlice]{@link google.cloud.aiplatform.v1beta1.ModelEvaluationSlice}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getModelEvaluationSlice(request);
-   */
-  getModelEvaluationSlice(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
-          | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
-      | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
-      (
-        | protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest|null|undefined,
+          {}|null|undefined>): void;
+  getModelEvaluationSlice(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
+          protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Gets a ModelEvaluationSlice.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the ModelEvaluationSlice resource.
+ *   Format:
+ *
+ *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [ModelEvaluationSlice]{@link google.cloud.aiplatform.v1beta1.ModelEvaluationSlice}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.getModelEvaluationSlice(request);
+ */
+  getModelEvaluationSlice(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
+          protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
+          protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice,
+        protos.google.cloud.aiplatform.v1beta1.IGetModelEvaluationSliceRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -812,112 +671,77 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      name: request.name || '',
+      'name': request.name || '',
     });
     this.initialize();
-    return this.innerApiCalls.getModelEvaluationSlice(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.getModelEvaluationSlice(request, options, callback);
   }
 
   uploadModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUploadModelRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IUploadModelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse, protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   uploadModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUploadModelRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IUploadModelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse, protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   uploadModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUploadModelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Uploads a Model artifact into AI Platform.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location into which to upload the Model.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.Model} request.model
-   *   Required. The Model to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.uploadModel(request);
-   * const [response] = await operation.promise();
-   */
+      request: protos.google.cloud.aiplatform.v1beta1.IUploadModelRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse, protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Uploads a Model artifact into AI Platform.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Location into which to upload the Model.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {google.cloud.aiplatform.v1beta1.Model} request.model
+ *   Required. The Model to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const [operation] = await client.uploadModel(request);
+ * const [response] = await operation.promise();
+ */
   uploadModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUploadModelRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse,
-            protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
+      request: protos.google.cloud.aiplatform.v1beta1.IUploadModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse, protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse, protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IUploadModelResponse, protos.google.cloud.aiplatform.v1beta1.IUploadModelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -925,144 +749,97 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.uploadModel(request, options, callback);
   }
-  /**
-   * Check the status of the long running operation returned by `uploadModel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUploadModelProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
-   */
-  async checkUploadModelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.UploadModelResponse,
-      protos.google.cloud.aiplatform.v1beta1.UploadModelOperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+/**
+ * Check the status of the long running operation returned by `uploadModel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const decodedOperation = await checkUploadModelProgress(name);
+ * console.log(decodedOperation.result);
+ * console.log(decodedOperation.done);
+ * console.log(decodedOperation.metadata);
+ */
+  async checkUploadModelProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.UploadModelResponse, protos.google.cloud.aiplatform.v1beta1.UploadModelOperationMetadata>>{
+    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.uploadModel,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.UploadModelResponse,
-      protos.google.cloud.aiplatform.v1beta1.UploadModelOperationMetadata
-    >;
+    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.uploadModel, gax.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.UploadModelResponse, protos.google.cloud.aiplatform.v1beta1.UploadModelOperationMetadata>;
   }
   deleteModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deletes a Model.
-   * Note: Model can only be deleted if there are no DeployedModels created
-   * from it.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Model resource to be deleted.
-   *   Format: `projects/{project}/locations/{location}/models/{model}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteModel(request);
-   * const [response] = await operation.promise();
-   */
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Deletes a Model.
+ * Note: Model can only be deleted if there are no DeployedModels created
+ * from it.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Model resource to be deleted.
+ *   Format: `projects/{project}/locations/{location}/models/{model}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const [operation] = await client.deleteModel(request);
+ * const [response] = await operation.promise();
+ */
   deleteModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1070,146 +847,99 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      name: request.name || '',
+      'name': request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.deleteModel(request, options, callback);
   }
-  /**
-   * Check the status of the long running operation returned by `deleteModel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteModelProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
-   */
-  async checkDeleteModelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+/**
+ * Check the status of the long running operation returned by `deleteModel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const decodedOperation = await checkDeleteModelProgress(name);
+ * console.log(decodedOperation.result);
+ * console.log(decodedOperation.done);
+ * console.log(decodedOperation.metadata);
+ */
+  async checkDeleteModelProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>>{
+    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.deleteModel,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >;
+    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.deleteModel, gax.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>;
   }
   exportModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IExportModelRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IExportModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IExportModelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IExportModelResponse, protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   exportModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IExportModelRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IExportModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IExportModelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IExportModelResponse, protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   exportModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IExportModelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IExportModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Exports a trained, exportable, Model to a location specified by the
-   * user. A Model is considered to be exportable if it has at least one
-   * {@link google.cloud.aiplatform.v1beta1.Model.supported_export_formats|supported export format}.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The resource name of the Model to export.
-   *   Format: `projects/{project}/locations/{location}/models/{model}`
-   * @param {google.cloud.aiplatform.v1beta1.ExportModelRequest.OutputConfig} request.outputConfig
-   *   Required. The desired output location and configuration.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.exportModel(request);
-   * const [response] = await operation.promise();
-   */
+      request: protos.google.cloud.aiplatform.v1beta1.IExportModelRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IExportModelResponse, protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Exports a trained, exportable, Model to a location specified by the
+ * user. A Model is considered to be exportable if it has at least one
+ * {@link google.cloud.aiplatform.v1beta1.Model.supported_export_formats|supported export format}.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The resource name of the Model to export.
+ *   Format: `projects/{project}/locations/{location}/models/{model}`
+ * @param {google.cloud.aiplatform.v1beta1.ExportModelRequest.OutputConfig} request.outputConfig
+ *   Required. The desired output location and configuration.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const [operation] = await client.exportModel(request);
+ * const [response] = await operation.promise();
+ */
   exportModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IExportModelRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IExportModelResponse,
-            protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IExportModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IExportModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
+      request: protos.google.cloud.aiplatform.v1beta1.IExportModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IExportModelResponse, protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IExportModelResponse, protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IExportModelResponse, protos.google.cloud.aiplatform.v1beta1.IExportModelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1217,143 +947,108 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      name: request.name || '',
+      'name': request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.exportModel(request, options, callback);
   }
-  /**
-   * Check the status of the long running operation returned by `exportModel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkExportModelProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
-   */
-  async checkExportModelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.ExportModelResponse,
-      protos.google.cloud.aiplatform.v1beta1.ExportModelOperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+/**
+ * Check the status of the long running operation returned by `exportModel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const decodedOperation = await checkExportModelProgress(name);
+ * console.log(decodedOperation.result);
+ * console.log(decodedOperation.done);
+ * console.log(decodedOperation.metadata);
+ */
+  async checkExportModelProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.ExportModelResponse, protos.google.cloud.aiplatform.v1beta1.ExportModelOperationMetadata>>{
+    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.exportModel,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.ExportModelResponse,
-      protos.google.cloud.aiplatform.v1beta1.ExportModelOperationMetadata
-    >;
+    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.exportModel, gax.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.ExportModelResponse, protos.google.cloud.aiplatform.v1beta1.ExportModelOperationMetadata>;
   }
   listModels(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModel[],
-      protos.google.cloud.aiplatform.v1beta1.IListModelsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListModelsResponse
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModel[],
+        protos.google.cloud.aiplatform.v1beta1.IListModelsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListModelsResponse
+      ]>;
   listModels(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
-    options: gax.CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListModelsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModel
-    >
-  ): void;
-  listModels(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListModelsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModel
-    >
-  ): void;
-  /**
-   * Lists Models in a Location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to list the Models from.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.filter
-   *   The standard list filter.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModels|ModelService.ListModels} call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Model]{@link google.cloud.aiplatform.v1beta1.Model}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listModelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listModels(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListModelsResponse
-          | null
-          | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IModel
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListModelsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModel
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModel[],
-      protos.google.cloud.aiplatform.v1beta1.IListModelsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListModelsResponse
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IListModelsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModel>): void;
+  listModels(
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModel>): void;
+/**
+ * Lists Models in a Location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Location to list the Models from.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModels|ModelService.ListModels} call.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of [Model]{@link google.cloud.aiplatform.v1beta1.Model}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listModelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
+  listModels(
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModel>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModel>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModel[],
+        protos.google.cloud.aiplatform.v1beta1.IListModelsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListModelsResponse
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1361,46 +1056,46 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.listModels(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to list the Models from.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.filter
-   *   The standard list filter.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModels|ModelService.ListModels} call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [Model]{@link google.cloud.aiplatform.v1beta1.Model} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listModelsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Location to list the Models from.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModels|ModelService.ListModels} call.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing [Model]{@link google.cloud.aiplatform.v1beta1.Model} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listModelsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listModelsStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
-    options?: gax.CallOptions
-  ): Transform {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1408,7 +1103,7 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
@@ -1419,46 +1114,46 @@ export class ModelServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listModels`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to list the Models from.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} request.filter
-   *   The standard list filter.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModels|ModelService.ListModels} call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [Model]{@link google.cloud.aiplatform.v1beta1.Model}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.listModelsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
+/**
+ * Equivalent to `listModels`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Location to list the Models from.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModels|ModelService.ListModels} call.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   [Model]{@link google.cloud.aiplatform.v1beta1.Model}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ * @example
+ * const iterable = client.listModelsAsync(request);
+ * for await (const response of iterable) {
+ *   // process response
+ * }
+ */
   listModelsAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModel> {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListModelsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModel>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1466,112 +1161,93 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listModels.asyncIterate(
       this.innerApiCalls['listModels'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModel>;
   }
   listModelEvaluations(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluation[],
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModelEvaluation[],
+        protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse
+      ]>;
   listModelEvaluations(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
-    options: gax.CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluation
-    >
-  ): void;
-  listModelEvaluations(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluation
-    >
-  ): void;
-  /**
-   * Lists ModelEvaluations in a Model.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Model to list the ModelEvaluations from.
-   *   Format: `projects/{project}/locations/{location}/models/{model}`
-   * @param {string} request.filter
-   *   The standard list filter.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations} call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ModelEvaluation]{@link google.cloud.aiplatform.v1beta1.ModelEvaluation}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listModelEvaluationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listModelEvaluations(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse
-          | null
-          | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IModelEvaluation
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluation
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluation[],
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluation>): void;
+  listModelEvaluations(
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluation>): void;
+/**
+ * Lists ModelEvaluations in a Model.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Model to list the ModelEvaluations from.
+ *   Format: `projects/{project}/locations/{location}/models/{model}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations} call.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of [ModelEvaluation]{@link google.cloud.aiplatform.v1beta1.ModelEvaluation}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listModelEvaluationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
+  listModelEvaluations(
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluation>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluation>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModelEvaluation[],
+        protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsResponse
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1579,46 +1255,46 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.listModelEvaluations(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Model to list the ModelEvaluations from.
-   *   Format: `projects/{project}/locations/{location}/models/{model}`
-   * @param {string} request.filter
-   *   The standard list filter.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations} call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [ModelEvaluation]{@link google.cloud.aiplatform.v1beta1.ModelEvaluation} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listModelEvaluationsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Model to list the ModelEvaluations from.
+ *   Format: `projects/{project}/locations/{location}/models/{model}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations} call.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing [ModelEvaluation]{@link google.cloud.aiplatform.v1beta1.ModelEvaluation} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listModelEvaluationsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listModelEvaluationsStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
-    options?: gax.CallOptions
-  ): Transform {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1626,7 +1302,7 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
@@ -1637,46 +1313,46 @@ export class ModelServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listModelEvaluations`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Model to list the ModelEvaluations from.
-   *   Format: `projects/{project}/locations/{location}/models/{model}`
-   * @param {string} request.filter
-   *   The standard list filter.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations} call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [ModelEvaluation]{@link google.cloud.aiplatform.v1beta1.ModelEvaluation}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.listModelEvaluationsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
+/**
+ * Equivalent to `listModelEvaluations`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Model to list the ModelEvaluations from.
+ *   Format: `projects/{project}/locations/{location}/models/{model}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations} call.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   [ModelEvaluation]{@link google.cloud.aiplatform.v1beta1.ModelEvaluation}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ * @example
+ * const iterable = client.listModelEvaluationsAsync(request);
+ * for await (const response of iterable) {
+ *   // process response
+ * }
+ */
   listModelEvaluationsAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelEvaluation> {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelEvaluation>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1684,116 +1360,97 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listModelEvaluations.asyncIterate(
       this.innerApiCalls['listModelEvaluations'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelEvaluation>;
   }
   listModelEvaluationSlices(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice[],
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice[],
+        protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse
+      ]>;
   listModelEvaluationSlices(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
-    options: gax.CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice
-    >
-  ): void;
-  listModelEvaluationSlices(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice
-    >
-  ): void;
-  /**
-   * Lists ModelEvaluationSlices in a ModelEvaluation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
-   *   from. Format:
-   *
-   *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
-   * @param {string} request.filter
-   *   The standard list filter.
-   *
-   *     * `slice.dimension` - for =.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices} call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [ModelEvaluationSlice]{@link google.cloud.aiplatform.v1beta1.ModelEvaluationSlice}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listModelEvaluationSlicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listModelEvaluationSlices(
-    request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse
-          | null
-          | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice[],
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice>): void;
+  listModelEvaluationSlices(
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice>): void;
+/**
+ * Lists ModelEvaluationSlices in a ModelEvaluation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
+ *   from. Format:
+ *
+ *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ *
+ *     * `slice.dimension` - for =.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices} call.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of [ModelEvaluationSlice]{@link google.cloud.aiplatform.v1beta1.ModelEvaluationSlice}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listModelEvaluationSlicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
+  listModelEvaluationSlices(
+      request: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice[],
+        protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesResponse
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1801,54 +1458,50 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     this.initialize();
-    return this.innerApiCalls.listModelEvaluationSlices(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.listModelEvaluationSlices(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
-   *   from. Format:
-   *
-   *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
-   * @param {string} request.filter
-   *   The standard list filter.
-   *
-   *     * `slice.dimension` - for =.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices} call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [ModelEvaluationSlice]{@link google.cloud.aiplatform.v1beta1.ModelEvaluationSlice} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listModelEvaluationSlicesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
+ *   from. Format:
+ *
+ *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ *
+ *     * `slice.dimension` - for =.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices} call.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing [ModelEvaluationSlice]{@link google.cloud.aiplatform.v1beta1.ModelEvaluationSlice} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listModelEvaluationSlicesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listModelEvaluationSlicesStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
-    options?: gax.CallOptions
-  ): Transform {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1856,7 +1509,7 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
@@ -1867,52 +1520,50 @@ export class ModelServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listModelEvaluationSlices`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
-   *   from. Format:
-   *
-   *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
-   * @param {string} request.filter
-   *   The standard list filter.
-   *
-   *     * `slice.dimension` - for =.
-   * @param {number} request.pageSize
-   *   The standard list page size.
-   * @param {string} request.pageToken
-   *   The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices} call.
-   * @param {google.protobuf.FieldMask} request.readMask
-   *   Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [ModelEvaluationSlice]{@link google.cloud.aiplatform.v1beta1.ModelEvaluationSlice}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.listModelEvaluationSlicesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
+/**
+ * Equivalent to `listModelEvaluationSlices`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
+ *   from. Format:
+ *
+ *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ *
+ *     * `slice.dimension` - for =.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices} call.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   [ModelEvaluationSlice]{@link google.cloud.aiplatform.v1beta1.ModelEvaluationSlice}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ * @example
+ * const iterable = client.listModelEvaluationSlicesAsync(request);
+ * for await (const response of iterable) {
+ *   // process response
+ * }
+ */
   listModelEvaluationSlicesAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice
-  > {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1920,18 +1571,16 @@ export class ModelServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listModelEvaluationSlices.asyncIterate(
       this.innerApiCalls['listModelEvaluationSlices'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice
-    >;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice>;
   }
   // --------------------
   // -- Path templates --
@@ -1947,13 +1596,7 @@ export class ModelServiceClient {
    * @param {string} annotation
    * @returns {string} Resource name string.
    */
-  annotationPath(
-    project: string,
-    location: string,
-    dataset: string,
-    dataItem: string,
-    annotation: string
-  ) {
+  annotationPath(project:string,location:string,dataset:string,dataItem:string,annotation:string) {
     return this.pathTemplates.annotationPathTemplate.render({
       project: project,
       location: location,
@@ -1971,8 +1614,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .project;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).project;
   }
 
   /**
@@ -1983,8 +1625,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .location;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).location;
   }
 
   /**
@@ -1995,8 +1636,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .dataset;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).dataset;
   }
 
   /**
@@ -2007,8 +1647,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .data_item;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).data_item;
   }
 
   /**
@@ -2019,8 +1658,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the annotation.
    */
   matchAnnotationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .annotation;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).annotation;
   }
 
   /**
@@ -2032,12 +1670,7 @@ export class ModelServiceClient {
    * @param {string} annotation_spec
    * @returns {string} Resource name string.
    */
-  annotationSpecPath(
-    project: string,
-    location: string,
-    dataset: string,
-    annotationSpec: string
-  ) {
+  annotationSpecPath(project:string,location:string,dataset:string,annotationSpec:string) {
     return this.pathTemplates.annotationSpecPathTemplate.render({
       project: project,
       location: location,
@@ -2054,9 +1687,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).project;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).project;
   }
 
   /**
@@ -2067,9 +1698,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).location;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).location;
   }
 
   /**
@@ -2080,9 +1709,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).dataset;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).dataset;
   }
 
   /**
@@ -2093,9 +1720,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the annotation_spec.
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).annotation_spec;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).annotation_spec;
   }
 
   /**
@@ -2106,11 +1731,7 @@ export class ModelServiceClient {
    * @param {string} batch_prediction_job
    * @returns {string} Resource name string.
    */
-  batchPredictionJobPath(
-    project: string,
-    location: string,
-    batchPredictionJob: string
-  ) {
+  batchPredictionJobPath(project:string,location:string,batchPredictionJob:string) {
     return this.pathTemplates.batchPredictionJobPathTemplate.render({
       project: project,
       location: location,
@@ -2126,9 +1747,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).project;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).project;
   }
 
   /**
@@ -2139,9 +1758,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).location;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).location;
   }
 
   /**
@@ -2151,12 +1768,8 @@ export class ModelServiceClient {
    *   A fully-qualified path representing BatchPredictionJob resource.
    * @returns {string} A string representing the batch_prediction_job.
    */
-  matchBatchPredictionJobFromBatchPredictionJobName(
-    batchPredictionJobName: string
-  ) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).batch_prediction_job;
+  matchBatchPredictionJobFromBatchPredictionJobName(batchPredictionJobName: string) {
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).batch_prediction_job;
   }
 
   /**
@@ -2167,7 +1780,7 @@ export class ModelServiceClient {
    * @param {string} custom_job
    * @returns {string} Resource name string.
    */
-  customJobPath(project: string, location: string, customJob: string) {
+  customJobPath(project:string,location:string,customJob:string) {
     return this.pathTemplates.customJobPathTemplate.render({
       project: project,
       location: location,
@@ -2183,8 +1796,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .project;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).project;
   }
 
   /**
@@ -2195,8 +1807,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .location;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).location;
   }
 
   /**
@@ -2207,8 +1818,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the custom_job.
    */
   matchCustomJobFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .custom_job;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).custom_job;
   }
 
   /**
@@ -2220,12 +1830,7 @@ export class ModelServiceClient {
    * @param {string} data_item
    * @returns {string} Resource name string.
    */
-  dataItemPath(
-    project: string,
-    location: string,
-    dataset: string,
-    dataItem: string
-  ) {
+  dataItemPath(project:string,location:string,dataset:string,dataItem:string) {
     return this.pathTemplates.dataItemPathTemplate.render({
       project: project,
       location: location,
@@ -2275,8 +1880,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromDataItemName(dataItemName: string) {
-    return this.pathTemplates.dataItemPathTemplate.match(dataItemName)
-      .data_item;
+    return this.pathTemplates.dataItemPathTemplate.match(dataItemName).data_item;
   }
 
   /**
@@ -2287,11 +1891,7 @@ export class ModelServiceClient {
    * @param {string} data_labeling_job
    * @returns {string} Resource name string.
    */
-  dataLabelingJobPath(
-    project: string,
-    location: string,
-    dataLabelingJob: string
-  ) {
+  dataLabelingJobPath(project:string,location:string,dataLabelingJob:string) {
     return this.pathTemplates.dataLabelingJobPathTemplate.render({
       project: project,
       location: location,
@@ -2307,9 +1907,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).project;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).project;
   }
 
   /**
@@ -2320,9 +1918,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).location;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).location;
   }
 
   /**
@@ -2333,9 +1929,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the data_labeling_job.
    */
   matchDataLabelingJobFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).data_labeling_job;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).data_labeling_job;
   }
 
   /**
@@ -2346,7 +1940,7 @@ export class ModelServiceClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project: string, location: string, dataset: string) {
+  datasetPath(project:string,location:string,dataset:string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       location: location,
@@ -2395,7 +1989,7 @@ export class ModelServiceClient {
    * @param {string} endpoint
    * @returns {string} Resource name string.
    */
-  endpointPath(project: string, location: string, endpoint: string) {
+  endpointPath(project:string,location:string,endpoint:string) {
     return this.pathTemplates.endpointPathTemplate.render({
       project: project,
       location: location,
@@ -2444,11 +2038,7 @@ export class ModelServiceClient {
    * @param {string} hyperparameter_tuning_job
    * @returns {string} Resource name string.
    */
-  hyperparameterTuningJobPath(
-    project: string,
-    location: string,
-    hyperparameterTuningJob: string
-  ) {
+  hyperparameterTuningJobPath(project:string,location:string,hyperparameterTuningJob:string) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -2463,12 +2053,8 @@ export class ModelServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).project;
+  matchProjectFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).project;
   }
 
   /**
@@ -2478,12 +2064,8 @@ export class ModelServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).location;
+  matchLocationFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).location;
   }
 
   /**
@@ -2493,12 +2075,8 @@ export class ModelServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the hyperparameter_tuning_job.
    */
-  matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).hyperparameter_tuning_job;
+  matchHyperparameterTuningJobFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).hyperparameter_tuning_job;
   }
 
   /**
@@ -2508,7 +2086,7 @@ export class ModelServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2545,7 +2123,7 @@ export class ModelServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, model: string) {
+  modelPath(project:string,location:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -2595,12 +2173,7 @@ export class ModelServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  modelEvaluationPath(
-    project: string,
-    location: string,
-    model: string,
-    evaluation: string
-  ) {
+  modelEvaluationPath(project:string,location:string,model:string,evaluation:string) {
     return this.pathTemplates.modelEvaluationPathTemplate.render({
       project: project,
       location: location,
@@ -2617,9 +2190,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).project;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).project;
   }
 
   /**
@@ -2630,9 +2201,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).location;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).location;
   }
 
   /**
@@ -2643,9 +2212,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).model;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).model;
   }
 
   /**
@@ -2656,9 +2223,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).evaluation;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).evaluation;
   }
 
   /**
@@ -2671,13 +2236,7 @@ export class ModelServiceClient {
    * @param {string} slice
    * @returns {string} Resource name string.
    */
-  modelEvaluationSlicePath(
-    project: string,
-    location: string,
-    model: string,
-    evaluation: string,
-    slice: string
-  ) {
+  modelEvaluationSlicePath(project:string,location:string,model:string,evaluation:string,slice:string) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.render({
       project: project,
       location: location,
@@ -2695,9 +2254,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).project;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).project;
   }
 
   /**
@@ -2708,9 +2265,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).location;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).location;
   }
 
   /**
@@ -2721,9 +2276,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).model;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).model;
   }
 
   /**
@@ -2733,12 +2286,8 @@ export class ModelServiceClient {
    *   A fully-qualified path representing ModelEvaluationSlice resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromModelEvaluationSliceName(
-    modelEvaluationSliceName: string
-  ) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).evaluation;
+  matchEvaluationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).evaluation;
   }
 
   /**
@@ -2749,9 +2298,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the slice.
    */
   matchSliceFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).slice;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).slice;
   }
 
   /**
@@ -2762,11 +2309,7 @@ export class ModelServiceClient {
    * @param {string} specialist_pool
    * @returns {string} Resource name string.
    */
-  specialistPoolPath(
-    project: string,
-    location: string,
-    specialistPool: string
-  ) {
+  specialistPoolPath(project:string,location:string,specialistPool:string) {
     return this.pathTemplates.specialistPoolPathTemplate.render({
       project: project,
       location: location,
@@ -2782,9 +2325,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).project;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).project;
   }
 
   /**
@@ -2795,9 +2336,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).location;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).location;
   }
 
   /**
@@ -2808,9 +2347,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the specialist_pool.
    */
   matchSpecialistPoolFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).specialist_pool;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).specialist_pool;
   }
 
   /**
@@ -2821,11 +2358,7 @@ export class ModelServiceClient {
    * @param {string} training_pipeline
    * @returns {string} Resource name string.
    */
-  trainingPipelinePath(
-    project: string,
-    location: string,
-    trainingPipeline: string
-  ) {
+  trainingPipelinePath(project:string,location:string,trainingPipeline:string) {
     return this.pathTemplates.trainingPipelinePathTemplate.render({
       project: project,
       location: location,
@@ -2841,9 +2374,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).project;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).project;
   }
 
   /**
@@ -2854,9 +2385,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).location;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).location;
   }
 
   /**
@@ -2867,9 +2396,7 @@ export class ModelServiceClient {
    * @returns {string} A string representing the training_pipeline.
    */
   matchTrainingPipelineFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).training_pipeline;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).training_pipeline;
   }
 
   /**

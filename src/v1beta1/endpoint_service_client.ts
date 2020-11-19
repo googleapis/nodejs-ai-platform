@@ -17,22 +17,19 @@
 // ** All changes to this file may be overwritten. **
 
 import * as gax from 'google-gax';
-import {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
 import * as path from 'path';
 
-import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
+import { Transform } from 'stream';
+import { RequestType } from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+/**
+ * Client JSON configuration object, loaded from
+ * `src/v1beta1/endpoint_service_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
 import * as gapicConfig from './endpoint_service_client_config.json';
-import {operationsProtos} from 'google-gax';
+import { operationsProtos } from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -84,9 +81,9 @@ export class EndpointServiceClient {
    *     your project ID will be detected automatically.
    * @param {string} [options.apiEndpoint] - The domain name of the
    *     API remote host.
-   * @param {gax.ClientConfig} [options.clientConfig] - client configuration override.
-   *     Follows the structure of `endpoint_service_client_config.json`.
-   * @param {boolean} fallback - Use HTTP fallback mode.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
    *     In fallback mode, a special browser-compatible transport implementation is used
    *     instead of gRPC transport. In browser context (if the `window` object is defined)
    *     the fallback mode is enabled automatically; set `options.fallback` to `false`
@@ -95,13 +92,11 @@ export class EndpointServiceClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof EndpointServiceClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window.fetch !== 'undefined');
+    // eslint-disable-next-line no-undef
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window.fetch !== 'undefined');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -119,7 +114,7 @@ export class EndpointServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -127,7 +122,10 @@ export class EndpointServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -143,18 +141,12 @@ export class EndpointServiceClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
+    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
+      opts.fallback ?
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        require("../../protos/protos.json") :
+        nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
@@ -212,84 +204,63 @@ export class EndpointServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEndpoints: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'endpoints'
-      ),
+      listEndpoints:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'endpoints')
     };
 
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    const protoFilesRoot = opts.fallback
-      ? this._gaxModule.protobuf.Root.fromJSON(
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        )
-      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
+    const protoFilesRoot = opts.fallback ?
+      this._gaxModule.protobuf.Root.fromJSON(
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        require("../../protos/protos.json")) :
+      this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
-    this.operationsClient = this._gaxModule
-      .lro({
-        auth: this.auth,
-        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
-      })
-      .operationsClient(opts);
+    this.operationsClient = this._gaxModule.lro({
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+    }).operationsClient(opts);
     const createEndpointResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.Endpoint'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.Endpoint') as gax.protobuf.Type;
     const createEndpointMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.CreateEndpointOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.CreateEndpointOperationMetadata') as gax.protobuf.Type;
     const deleteEndpointResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty'
-    ) as gax.protobuf.Type;
+      '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteEndpointMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata') as gax.protobuf.Type;
     const deployModelResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeployModelResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.DeployModelResponse') as gax.protobuf.Type;
     const deployModelMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.DeployModelOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.DeployModelOperationMetadata') as gax.protobuf.Type;
     const undeployModelResponse = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.UndeployModelResponse'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.UndeployModelResponse') as gax.protobuf.Type;
     const undeployModelMetadata = protoFilesRoot.lookup(
-      '.google.cloud.aiplatform.v1beta1.UndeployModelOperationMetadata'
-    ) as gax.protobuf.Type;
+      '.google.cloud.aiplatform.v1beta1.UndeployModelOperationMetadata') as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEndpoint: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createEndpointResponse.decode.bind(createEndpointResponse),
-        createEndpointMetadata.decode.bind(createEndpointMetadata)
-      ),
+        createEndpointMetadata.decode.bind(createEndpointMetadata)),
       deleteEndpoint: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteEndpointResponse.decode.bind(deleteEndpointResponse),
-        deleteEndpointMetadata.decode.bind(deleteEndpointMetadata)
-      ),
+        deleteEndpointMetadata.decode.bind(deleteEndpointMetadata)),
       deployModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deployModelResponse.decode.bind(deployModelResponse),
-        deployModelMetadata.decode.bind(deployModelMetadata)
-      ),
+        deployModelMetadata.decode.bind(deployModelMetadata)),
       undeployModel: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         undeployModelResponse.decode.bind(undeployModelResponse),
-        undeployModelMetadata.decode.bind(undeployModelMetadata)
-      ),
+        undeployModelMetadata.decode.bind(undeployModelMetadata))
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.aiplatform.v1beta1.EndpointService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.aiplatform.v1beta1.EndpointService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -317,26 +288,16 @@ export class EndpointServiceClient {
     // Put together the "service stub" for
     // google.cloud.aiplatform.v1beta1.EndpointService.
     this.endpointServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.aiplatform.v1beta1.EndpointService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.aiplatform.v1beta1.EndpointService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.aiplatform.v1beta1.EndpointService,
-      this._opts
-    ) as Promise<{[method: string]: Function}>;
+        this._opts) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const endpointServiceStubMethods = [
-      'createEndpoint',
-      'getEndpoint',
-      'listEndpoints',
-      'updateEndpoint',
-      'deleteEndpoint',
-      'deployModel',
-      'undeployModel',
-    ];
+    const endpointServiceStubMethods =
+        ['createEndpoint', 'getEndpoint', 'listEndpoints', 'updateEndpoint', 'deleteEndpoint', 'deployModel', 'undeployModel'];
     for (const methodName of endpointServiceStubMethods) {
       const callPromise = this.endpointServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -346,10 +307,9 @@ export class EndpointServiceClient {
           const func = stub[methodName];
           return func.apply(stub, args);
         },
-        (err: Error | null | undefined) => () => {
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -398,7 +358,9 @@ export class EndpointServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return ['https://www.googleapis.com/auth/cloud-platform'];
+    return [
+      'https://www.googleapis.com/auth/cloud-platform'
+    ];
   }
 
   getProjectId(): Promise<string>;
@@ -407,9 +369,8 @@ export class EndpointServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -421,87 +382,66 @@ export class EndpointServiceClient {
   // -- Service calls --
   // -------------------
   getEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-      protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest|undefined, {}|undefined
+      ]>;
   getEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-      | protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-      | protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Gets an Endpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Endpoint resource.
-   *   Format:
-   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Endpoint]{@link google.cloud.aiplatform.v1beta1.Endpoint}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getEndpoint(request);
-   */
-  getEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-          | protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-      | protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-      protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+  getEndpoint(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+          protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Gets an Endpoint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Endpoint resource.
+ *   Format:
+ *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Endpoint]{@link google.cloud.aiplatform.v1beta1.Endpoint}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.getEndpoint(request);
+ */
+  getEndpoint(
+      request: protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+          protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+          protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -509,93 +449,72 @@ export class EndpointServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      name: request.name || '',
+      'name': request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.getEndpoint(request, options, callback);
   }
   updateEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-      protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest|undefined, {}|undefined
+      ]>;
   updateEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Updates an Endpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.aiplatform.v1beta1.Endpoint} request.endpoint
-   *   Required. The Endpoint which replaces the resource on the server.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Endpoint]{@link google.cloud.aiplatform.v1beta1.Endpoint}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateEndpoint(request);
-   */
-  updateEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-          | protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-      | protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-      protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+  updateEndpoint(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest,
+      callback: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Updates an Endpoint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.aiplatform.v1beta1.Endpoint} request.endpoint
+ *   Required. The Endpoint which replaces the resource on the server.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   Required. The update mask applies to the resource.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Endpoint]{@link google.cloud.aiplatform.v1beta1.Endpoint}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.updateEndpoint(request);
+ */
+  updateEndpoint(
+      request: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+          protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
+        protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -610,101 +529,70 @@ export class EndpointServiceClient {
   }
 
   createEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateEndpointRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-        protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateEndpointRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IEndpoint, protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   createEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateEndpointRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-        protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateEndpointRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IEndpoint, protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   createEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateEndpointRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-        protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates an Endpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location to create the Endpoint in.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {google.cloud.aiplatform.v1beta1.Endpoint} request.endpoint
-   *   Required. The Endpoint to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.createEndpoint(request);
-   * const [response] = await operation.promise();
-   */
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateEndpointRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IEndpoint, protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Creates an Endpoint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Location to create the Endpoint in.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {google.cloud.aiplatform.v1beta1.Endpoint} request.endpoint
+ *   Required. The Endpoint to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const [operation] = await client.createEndpoint(request);
+ * const [response] = await operation.promise();
+ */
   createEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateEndpointRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-            protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-        protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IEndpoint,
-        protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
+      request: protos.google.cloud.aiplatform.v1beta1.ICreateEndpointRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IEndpoint, protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IEndpoint, protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IEndpoint, protos.google.cloud.aiplatform.v1beta1.ICreateEndpointOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -712,143 +600,96 @@ export class EndpointServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.createEndpoint(request, options, callback);
   }
-  /**
-   * Check the status of the long running operation returned by `createEndpoint()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkCreateEndpointProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
-   */
-  async checkCreateEndpointProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.Endpoint,
-      protos.google.cloud.aiplatform.v1beta1.CreateEndpointOperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+/**
+ * Check the status of the long running operation returned by `createEndpoint()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const decodedOperation = await checkCreateEndpointProgress(name);
+ * console.log(decodedOperation.result);
+ * console.log(decodedOperation.done);
+ * console.log(decodedOperation.metadata);
+ */
+  async checkCreateEndpointProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.Endpoint, protos.google.cloud.aiplatform.v1beta1.CreateEndpointOperationMetadata>>{
+    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.createEndpoint,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.Endpoint,
-      protos.google.cloud.aiplatform.v1beta1.CreateEndpointOperationMetadata
-    >;
+    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.createEndpoint, gax.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.Endpoint, protos.google.cloud.aiplatform.v1beta1.CreateEndpointOperationMetadata>;
   }
   deleteEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteEndpointRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteEndpointRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deleteEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteEndpointRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteEndpointRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deleteEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteEndpointRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deletes an Endpoint.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the Endpoint resource to be deleted.
-   *   Format:
-   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deleteEndpoint(request);
-   * const [response] = await operation.promise();
-   */
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteEndpointRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Deletes an Endpoint.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the Endpoint resource to be deleted.
+ *   Format:
+ *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const [operation] = await client.deleteEndpoint(request);
+ * const [response] = await operation.promise();
+ */
   deleteEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteEndpointRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.protobuf.IEmpty,
-            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.protobuf.IEmpty,
-        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
+      request: protos.google.cloud.aiplatform.v1beta1.IDeleteEndpointRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -856,160 +697,113 @@ export class EndpointServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      name: request.name || '',
+      'name': request.name || '',
     });
     this.initialize();
     return this.innerApiCalls.deleteEndpoint(request, options, callback);
   }
-  /**
-   * Check the status of the long running operation returned by `deleteEndpoint()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeleteEndpointProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
-   */
-  async checkDeleteEndpointProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+/**
+ * Check the status of the long running operation returned by `deleteEndpoint()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const decodedOperation = await checkDeleteEndpointProgress(name);
+ * console.log(decodedOperation.result);
+ * console.log(decodedOperation.done);
+ * console.log(decodedOperation.metadata);
+ */
+  async checkDeleteEndpointProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>>{
+    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.deleteEndpoint,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.protobuf.Empty,
-      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
-    >;
+    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.deleteEndpoint, gax.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata>;
   }
   deployModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeployModelRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeployModelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   deployModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeployModelRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IDeployModelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   deployModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeployModelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deploys a Model into this Endpoint, creating a DeployedModel within it.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.endpoint
-   *   Required. The name of the Endpoint resource into which to deploy a Model.
-   *   Format:
-   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
-   * @param {google.cloud.aiplatform.v1beta1.DeployedModel} request.deployedModel
-   *   Required. The DeployedModel to be created within the Endpoint. Note that
-   *   {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|Endpoint.traffic_split} must be updated for the DeployedModel to start
-   *   receiving traffic, either as part of this call, or via
-   *   {@link google.cloud.aiplatform.v1beta1.EndpointService.UpdateEndpoint|EndpointService.UpdateEndpoint}.
-   * @param {number[]} request.trafficSplit
-   *   A map from a DeployedModel's ID to the percentage of this Endpoint's
-   *   traffic that should be forwarded to that DeployedModel.
-   *
-   *   If this field is non-empty, then the Endpoint's
-   *   {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|traffic_split} will be overwritten with it.
-   *   To refer to the ID of the just being deployed Model, a "0" should be used,
-   *   and the actual ID of the new DeployedModel will be filled in its place by
-   *   this method. The traffic percentage values must add up to 100.
-   *
-   *   If this field is empty, then the Endpoint's
-   *   {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|traffic_split} is not updated.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deployModel(request);
-   * const [response] = await operation.promise();
-   */
+      request: protos.google.cloud.aiplatform.v1beta1.IDeployModelRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Deploys a Model into this Endpoint, creating a DeployedModel within it.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.endpoint
+ *   Required. The name of the Endpoint resource into which to deploy a Model.
+ *   Format:
+ *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+ * @param {google.cloud.aiplatform.v1beta1.DeployedModel} request.deployedModel
+ *   Required. The DeployedModel to be created within the Endpoint. Note that
+ *   {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|Endpoint.traffic_split} must be updated for the DeployedModel to start
+ *   receiving traffic, either as part of this call, or via
+ *   {@link google.cloud.aiplatform.v1beta1.EndpointService.UpdateEndpoint|EndpointService.UpdateEndpoint}.
+ * @param {number[]} request.trafficSplit
+ *   A map from a DeployedModel's ID to the percentage of this Endpoint's
+ *   traffic that should be forwarded to that DeployedModel.
+ *
+ *   If this field is non-empty, then the Endpoint's
+ *   {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|traffic_split} will be overwritten with it.
+ *   To refer to the ID of the just being deployed Model, a "0" should be used,
+ *   and the actual ID of the new DeployedModel will be filled in its place by
+ *   this method. The traffic percentage values must add up to 100.
+ *
+ *   If this field is empty, then the Endpoint's
+ *   {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|traffic_split} is not updated.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const [operation] = await client.deployModel(request);
+ * const [response] = await operation.promise();
+ */
   deployModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeployModelRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse,
-            protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
+      request: protos.google.cloud.aiplatform.v1beta1.IDeployModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IDeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IDeployModelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1017,154 +811,107 @@ export class EndpointServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      endpoint: request.endpoint || '',
+      'endpoint': request.endpoint || '',
     });
     this.initialize();
     return this.innerApiCalls.deployModel(request, options, callback);
   }
-  /**
-   * Check the status of the long running operation returned by `deployModel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeployModelProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
-   */
-  async checkDeployModelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.DeployModelResponse,
-      protos.google.cloud.aiplatform.v1beta1.DeployModelOperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+/**
+ * Check the status of the long running operation returned by `deployModel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const decodedOperation = await checkDeployModelProgress(name);
+ * console.log(decodedOperation.result);
+ * console.log(decodedOperation.done);
+ * console.log(decodedOperation.metadata);
+ */
+  async checkDeployModelProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.DeployModelResponse, protos.google.cloud.aiplatform.v1beta1.DeployModelOperationMetadata>>{
+    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.deployModel,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.DeployModelResponse,
-      protos.google.cloud.aiplatform.v1beta1.DeployModelOperationMetadata
-    >;
+    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.deployModel, gax.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.DeployModelResponse, protos.google.cloud.aiplatform.v1beta1.DeployModelOperationMetadata>;
   }
   undeployModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUndeployModelRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IUndeployModelRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
   undeployModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUndeployModelRequest,
-    options: gax.CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
+      request: protos.google.cloud.aiplatform.v1beta1.IUndeployModelRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
   undeployModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUndeployModelRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Undeploys a Model from an Endpoint, removing a DeployedModel from it, and
-   * freeing all resources it's using.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.endpoint
-   *   Required. The name of the Endpoint resource from which to undeploy a Model.
-   *   Format:
-   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
-   * @param {string} request.deployedModelId
-   *   Required. The ID of the DeployedModel to be undeployed from the Endpoint.
-   * @param {number[]} request.trafficSplit
-   *   If this field is provided, then the Endpoint's
-   *   {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|traffic_split} will be overwritten with it. If
-   *   last DeployedModel is being undeployed from the Endpoint, the
-   *   [Endpoint.traffic_split] will always end up empty when this call returns.
-   *   A DeployedModel will be successfully undeployed only if it doesn't have
-   *   any traffic assigned to it when this method executes, or if this field
-   *   unassigns any traffic to it.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.undeployModel(request);
-   * const [response] = await operation.promise();
-   */
+      request: protos.google.cloud.aiplatform.v1beta1.IUndeployModelRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Undeploys a Model from an Endpoint, removing a DeployedModel from it, and
+ * freeing all resources it's using.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.endpoint
+ *   Required. The name of the Endpoint resource from which to undeploy a Model.
+ *   Format:
+ *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+ * @param {string} request.deployedModelId
+ *   Required. The ID of the DeployedModel to be undeployed from the Endpoint.
+ * @param {number[]} request.trafficSplit
+ *   If this field is provided, then the Endpoint's
+ *   {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|traffic_split} will be overwritten with it. If
+ *   last DeployedModel is being undeployed from the Endpoint, the
+ *   [Endpoint.traffic_split] will always end up empty when this call returns.
+ *   A DeployedModel will be successfully undeployed only if it doesn't have
+ *   any traffic assigned to it when this method executes, or if this field
+ *   unassigns any traffic to it.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const [operation] = await client.undeployModel(request);
+ * const [response] = await operation.promise();
+ */
   undeployModel(
-    request: protos.google.cloud.aiplatform.v1beta1.IUndeployModelRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse,
-            protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse,
-        protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
+      request: protos.google.cloud.aiplatform.v1beta1.IUndeployModelRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.aiplatform.v1beta1.IUndeployModelResponse, protos.google.cloud.aiplatform.v1beta1.IUndeployModelOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1172,159 +919,124 @@ export class EndpointServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      endpoint: request.endpoint || '',
+      'endpoint': request.endpoint || '',
     });
     this.initialize();
     return this.innerApiCalls.undeployModel(request, options, callback);
   }
-  /**
-   * Check the status of the long running operation returned by `undeployModel()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkUndeployModelProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
-   */
-  async checkUndeployModelProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.aiplatform.v1beta1.UndeployModelResponse,
-      protos.google.cloud.aiplatform.v1beta1.UndeployModelOperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+/**
+ * Check the status of the long running operation returned by `undeployModel()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+ *   for more details and examples.
+ * @example
+ * const decodedOperation = await checkUndeployModelProgress(name);
+ * console.log(decodedOperation.result);
+ * console.log(decodedOperation.done);
+ * console.log(decodedOperation.metadata);
+ */
+  async checkUndeployModelProgress(name: string): Promise<LROperation<protos.google.cloud.aiplatform.v1beta1.UndeployModelResponse, protos.google.cloud.aiplatform.v1beta1.UndeployModelOperationMetadata>>{
+    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.undeployModel,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.aiplatform.v1beta1.UndeployModelResponse,
-      protos.google.cloud.aiplatform.v1beta1.UndeployModelOperationMetadata
-    >;
+    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.undeployModel, gax.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.aiplatform.v1beta1.UndeployModelResponse, protos.google.cloud.aiplatform.v1beta1.UndeployModelOperationMetadata>;
   }
   listEndpoints(
-    request: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
-    options?: gax.CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint[],
-      protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse
-    ]
-  >;
+      request: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint[],
+        protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse
+      ]>;
   listEndpoints(
-    request: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
-    options: gax.CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint
-    >
-  ): void;
-  listEndpoints(
-    request: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint
-    >
-  ): void;
-  /**
-   * Lists Endpoints in a Location.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the Endpoints.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field names
-   *   both snake_case and camelCase are supported.
-   *
-   *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
-   *       ie. the last segment of the Endpoint's {@link google.cloud.aiplatform.v1beta1.Endpoint.name|resource name}.
-   *     * `display_name` supports =, != and regex()
-   *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
-   *     * `labels` supports general map functions that is:
-   *               `labels.key=value` - key:value equality
-   *               `labels.key:* or labels:key - key existence
-   *                A key including a space must be quoted. `labels."a key"`.
-   *
-   *   Some examples:
-   *     * `endpoint=1`
-   *     * `displayName="myDisplayName"`
-   *     * `regex(display_name, "^A") -> The display name starts with an A.
-   *     * `labels.myKey="myValue"`
-   * @param {number} [request.pageSize]
-   *   Optional. The standard list page size.
-   * @param {string} [request.pageToken]
-   *   Optional. The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.EndpointService.ListEndpoints|EndpointService.ListEndpoints} call.
-   * @param {google.protobuf.FieldMask} [request.readMask]
-   *   Optional. Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Endpoint]{@link google.cloud.aiplatform.v1beta1.Endpoint}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listEndpointsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listEndpoints(
-    request: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
-    optionsOrCallback?:
-      | gax.CallOptions
-      | PaginationCallback<
+      request: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
           protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
-          | protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse
-          | null
-          | undefined,
-          protos.google.cloud.aiplatform.v1beta1.IEndpoint
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
-      | protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse
-      | null
-      | undefined,
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IEndpoint[],
-      protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest | null,
-      protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse
-    ]
-  > | void {
+          protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IEndpoint>): void;
+  listEndpoints(
+      request: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IEndpoint>): void;
+/**
+ * Lists Endpoints in a Location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Location from which to list the Endpoints.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. For field names
+ *   both snake_case and camelCase are supported.
+ *
+ *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
+ *       ie. the last segment of the Endpoint's {@link google.cloud.aiplatform.v1beta1.Endpoint.name|resource name}.
+ *     * `display_name` supports =, != and regex()
+ *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
+ *     * `labels` supports general map functions that is:
+ *               `labels.key=value` - key:value equality
+ *               `labels.key:* or labels:key - key existence
+ *                A key including a space must be quoted. `labels."a key"`.
+ *
+ *   Some examples:
+ *     * `endpoint=1`
+ *     * `displayName="myDisplayName"`
+ *     * `regex(display_name, "^A") -> The display name starts with an A.
+ *     * `labels.myKey="myValue"`
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.EndpointService.ListEndpoints|EndpointService.ListEndpoints} call.
+ * @param {google.protobuf.FieldMask} [request.readMask]
+ *   Optional. Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of [Endpoint]{@link google.cloud.aiplatform.v1beta1.Endpoint}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listEndpointsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
+  listEndpoints(
+      request: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IEndpoint>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
+          protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1beta1.IEndpoint>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1beta1.IEndpoint[],
+        protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest|null,
+        protos.google.cloud.aiplatform.v1beta1.IListEndpointsResponse
+      ]>|void {
     request = request || {};
-    let options: gax.CallOptions;
+    let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
-      options = optionsOrCallback as gax.CallOptions;
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1332,62 +1044,62 @@ export class EndpointServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     this.initialize();
     return this.innerApiCalls.listEndpoints(request, options, callback);
   }
 
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the Endpoints.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field names
-   *   both snake_case and camelCase are supported.
-   *
-   *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
-   *       ie. the last segment of the Endpoint's {@link google.cloud.aiplatform.v1beta1.Endpoint.name|resource name}.
-   *     * `display_name` supports =, != and regex()
-   *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
-   *     * `labels` supports general map functions that is:
-   *               `labels.key=value` - key:value equality
-   *               `labels.key:* or labels:key - key existence
-   *                A key including a space must be quoted. `labels."a key"`.
-   *
-   *   Some examples:
-   *     * `endpoint=1`
-   *     * `displayName="myDisplayName"`
-   *     * `regex(display_name, "^A") -> The display name starts with an A.
-   *     * `labels.myKey="myValue"`
-   * @param {number} [request.pageSize]
-   *   Optional. The standard list page size.
-   * @param {string} [request.pageToken]
-   *   Optional. The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.EndpointService.ListEndpoints|EndpointService.ListEndpoints} call.
-   * @param {google.protobuf.FieldMask} [request.readMask]
-   *   Optional. Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [Endpoint]{@link google.cloud.aiplatform.v1beta1.Endpoint} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listEndpointsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Location from which to list the Endpoints.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. For field names
+ *   both snake_case and camelCase are supported.
+ *
+ *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
+ *       ie. the last segment of the Endpoint's {@link google.cloud.aiplatform.v1beta1.Endpoint.name|resource name}.
+ *     * `display_name` supports =, != and regex()
+ *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
+ *     * `labels` supports general map functions that is:
+ *               `labels.key=value` - key:value equality
+ *               `labels.key:* or labels:key - key existence
+ *                A key including a space must be quoted. `labels."a key"`.
+ *
+ *   Some examples:
+ *     * `endpoint=1`
+ *     * `displayName="myDisplayName"`
+ *     * `regex(display_name, "^A") -> The display name starts with an A.
+ *     * `labels.myKey="myValue"`
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.EndpointService.ListEndpoints|EndpointService.ListEndpoints} call.
+ * @param {google.protobuf.FieldMask} [request.readMask]
+ *   Optional. Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing [Endpoint]{@link google.cloud.aiplatform.v1beta1.Endpoint} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listEndpointsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
   listEndpointsStream(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
-    options?: gax.CallOptions
-  ): Transform {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
+      options?: CallOptions):
+    Transform{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1395,7 +1107,7 @@ export class EndpointServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
@@ -1406,62 +1118,62 @@ export class EndpointServiceClient {
     );
   }
 
-  /**
-   * Equivalent to `listEndpoints`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   Required. The resource name of the Location from which to list the Endpoints.
-   *   Format: `projects/{project}/locations/{location}`
-   * @param {string} [request.filter]
-   *   Optional. An expression for filtering the results of the request. For field names
-   *   both snake_case and camelCase are supported.
-   *
-   *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
-   *       ie. the last segment of the Endpoint's {@link google.cloud.aiplatform.v1beta1.Endpoint.name|resource name}.
-   *     * `display_name` supports =, != and regex()
-   *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
-   *     * `labels` supports general map functions that is:
-   *               `labels.key=value` - key:value equality
-   *               `labels.key:* or labels:key - key existence
-   *                A key including a space must be quoted. `labels."a key"`.
-   *
-   *   Some examples:
-   *     * `endpoint=1`
-   *     * `displayName="myDisplayName"`
-   *     * `regex(display_name, "^A") -> The display name starts with an A.
-   *     * `labels.myKey="myValue"`
-   * @param {number} [request.pageSize]
-   *   Optional. The standard list page size.
-   * @param {string} [request.pageToken]
-   *   Optional. The standard list page token.
-   *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.EndpointService.ListEndpoints|EndpointService.ListEndpoints} call.
-   * @param {google.protobuf.FieldMask} [request.readMask]
-   *   Optional. Mask specifying which fields to read.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [Endpoint]{@link google.cloud.aiplatform.v1beta1.Endpoint}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.listEndpointsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
+/**
+ * Equivalent to `listEndpoints`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Location from which to list the Endpoints.
+ *   Format: `projects/{project}/locations/{location}`
+ * @param {string} [request.filter]
+ *   Optional. An expression for filtering the results of the request. For field names
+ *   both snake_case and camelCase are supported.
+ *
+ *     * `endpoint` supports = and !=. `endpoint` represents the Endpoint ID,
+ *       ie. the last segment of the Endpoint's {@link google.cloud.aiplatform.v1beta1.Endpoint.name|resource name}.
+ *     * `display_name` supports =, != and regex()
+ *               (uses [re2](https://github.com/google/re2/wiki/Syntax) syntax)
+ *     * `labels` supports general map functions that is:
+ *               `labels.key=value` - key:value equality
+ *               `labels.key:* or labels:key - key existence
+ *                A key including a space must be quoted. `labels."a key"`.
+ *
+ *   Some examples:
+ *     * `endpoint=1`
+ *     * `displayName="myDisplayName"`
+ *     * `regex(display_name, "^A") -> The display name starts with an A.
+ *     * `labels.myKey="myValue"`
+ * @param {number} [request.pageSize]
+ *   Optional. The standard list page size.
+ * @param {string} [request.pageToken]
+ *   Optional. The standard list page token.
+ *   Typically obtained via
+ *   {@link google.cloud.aiplatform.v1beta1.ListEndpointsResponse.next_page_token|ListEndpointsResponse.next_page_token} of the previous
+ *   {@link google.cloud.aiplatform.v1beta1.EndpointService.ListEndpoints|EndpointService.ListEndpoints} call.
+ * @param {google.protobuf.FieldMask} [request.readMask]
+ *   Optional. Mask specifying which fields to read.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   [Endpoint]{@link google.cloud.aiplatform.v1beta1.Endpoint}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ * @example
+ * const iterable = client.listEndpointsAsync(request);
+ * for await (const response of iterable) {
+ *   // process response
+ * }
+ */
   listEndpointsAsync(
-    request?: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
-    options?: gax.CallOptions
-  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IEndpoint> {
+      request?: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IEndpoint>{
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1469,14 +1181,14 @@ export class EndpointServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
+      'parent': request.parent || '',
     });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listEndpoints.asyncIterate(
       this.innerApiCalls['listEndpoints'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IEndpoint>;
   }
@@ -1494,13 +1206,7 @@ export class EndpointServiceClient {
    * @param {string} annotation
    * @returns {string} Resource name string.
    */
-  annotationPath(
-    project: string,
-    location: string,
-    dataset: string,
-    dataItem: string,
-    annotation: string
-  ) {
+  annotationPath(project:string,location:string,dataset:string,dataItem:string,annotation:string) {
     return this.pathTemplates.annotationPathTemplate.render({
       project: project,
       location: location,
@@ -1518,8 +1224,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .project;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).project;
   }
 
   /**
@@ -1530,8 +1235,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .location;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).location;
   }
 
   /**
@@ -1542,8 +1246,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .dataset;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).dataset;
   }
 
   /**
@@ -1554,8 +1257,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .data_item;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).data_item;
   }
 
   /**
@@ -1566,8 +1268,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the annotation.
    */
   matchAnnotationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName)
-      .annotation;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName).annotation;
   }
 
   /**
@@ -1579,12 +1280,7 @@ export class EndpointServiceClient {
    * @param {string} annotation_spec
    * @returns {string} Resource name string.
    */
-  annotationSpecPath(
-    project: string,
-    location: string,
-    dataset: string,
-    annotationSpec: string
-  ) {
+  annotationSpecPath(project:string,location:string,dataset:string,annotationSpec:string) {
     return this.pathTemplates.annotationSpecPathTemplate.render({
       project: project,
       location: location,
@@ -1601,9 +1297,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).project;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).project;
   }
 
   /**
@@ -1614,9 +1308,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).location;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).location;
   }
 
   /**
@@ -1627,9 +1319,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).dataset;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).dataset;
   }
 
   /**
@@ -1640,9 +1330,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the annotation_spec.
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(
-      annotationSpecName
-    ).annotation_spec;
+    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).annotation_spec;
   }
 
   /**
@@ -1653,11 +1341,7 @@ export class EndpointServiceClient {
    * @param {string} batch_prediction_job
    * @returns {string} Resource name string.
    */
-  batchPredictionJobPath(
-    project: string,
-    location: string,
-    batchPredictionJob: string
-  ) {
+  batchPredictionJobPath(project:string,location:string,batchPredictionJob:string) {
     return this.pathTemplates.batchPredictionJobPathTemplate.render({
       project: project,
       location: location,
@@ -1673,9 +1357,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).project;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).project;
   }
 
   /**
@@ -1686,9 +1368,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).location;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).location;
   }
 
   /**
@@ -1698,12 +1378,8 @@ export class EndpointServiceClient {
    *   A fully-qualified path representing BatchPredictionJob resource.
    * @returns {string} A string representing the batch_prediction_job.
    */
-  matchBatchPredictionJobFromBatchPredictionJobName(
-    batchPredictionJobName: string
-  ) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(
-      batchPredictionJobName
-    ).batch_prediction_job;
+  matchBatchPredictionJobFromBatchPredictionJobName(batchPredictionJobName: string) {
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).batch_prediction_job;
   }
 
   /**
@@ -1714,7 +1390,7 @@ export class EndpointServiceClient {
    * @param {string} custom_job
    * @returns {string} Resource name string.
    */
-  customJobPath(project: string, location: string, customJob: string) {
+  customJobPath(project:string,location:string,customJob:string) {
     return this.pathTemplates.customJobPathTemplate.render({
       project: project,
       location: location,
@@ -1730,8 +1406,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .project;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).project;
   }
 
   /**
@@ -1742,8 +1417,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .location;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).location;
   }
 
   /**
@@ -1754,8 +1428,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the custom_job.
    */
   matchCustomJobFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName)
-      .custom_job;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName).custom_job;
   }
 
   /**
@@ -1767,12 +1440,7 @@ export class EndpointServiceClient {
    * @param {string} data_item
    * @returns {string} Resource name string.
    */
-  dataItemPath(
-    project: string,
-    location: string,
-    dataset: string,
-    dataItem: string
-  ) {
+  dataItemPath(project:string,location:string,dataset:string,dataItem:string) {
     return this.pathTemplates.dataItemPathTemplate.render({
       project: project,
       location: location,
@@ -1822,8 +1490,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromDataItemName(dataItemName: string) {
-    return this.pathTemplates.dataItemPathTemplate.match(dataItemName)
-      .data_item;
+    return this.pathTemplates.dataItemPathTemplate.match(dataItemName).data_item;
   }
 
   /**
@@ -1834,11 +1501,7 @@ export class EndpointServiceClient {
    * @param {string} data_labeling_job
    * @returns {string} Resource name string.
    */
-  dataLabelingJobPath(
-    project: string,
-    location: string,
-    dataLabelingJob: string
-  ) {
+  dataLabelingJobPath(project:string,location:string,dataLabelingJob:string) {
     return this.pathTemplates.dataLabelingJobPathTemplate.render({
       project: project,
       location: location,
@@ -1854,9 +1517,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).project;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).project;
   }
 
   /**
@@ -1867,9 +1528,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).location;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).location;
   }
 
   /**
@@ -1880,9 +1539,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the data_labeling_job.
    */
   matchDataLabelingJobFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(
-      dataLabelingJobName
-    ).data_labeling_job;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).data_labeling_job;
   }
 
   /**
@@ -1893,7 +1550,7 @@ export class EndpointServiceClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project: string, location: string, dataset: string) {
+  datasetPath(project:string,location:string,dataset:string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       location: location,
@@ -1942,7 +1599,7 @@ export class EndpointServiceClient {
    * @param {string} endpoint
    * @returns {string} Resource name string.
    */
-  endpointPath(project: string, location: string, endpoint: string) {
+  endpointPath(project:string,location:string,endpoint:string) {
     return this.pathTemplates.endpointPathTemplate.render({
       project: project,
       location: location,
@@ -1991,11 +1648,7 @@ export class EndpointServiceClient {
    * @param {string} hyperparameter_tuning_job
    * @returns {string} Resource name string.
    */
-  hyperparameterTuningJobPath(
-    project: string,
-    location: string,
-    hyperparameterTuningJob: string
-  ) {
+  hyperparameterTuningJobPath(project:string,location:string,hyperparameterTuningJob:string) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -2010,12 +1663,8 @@ export class EndpointServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).project;
+  matchProjectFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).project;
   }
 
   /**
@@ -2025,12 +1674,8 @@ export class EndpointServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).location;
+  matchLocationFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).location;
   }
 
   /**
@@ -2040,12 +1685,8 @@ export class EndpointServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the hyperparameter_tuning_job.
    */
-  matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-    hyperparameterTuningJobName: string
-  ) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
-      hyperparameterTuningJobName
-    ).hyperparameter_tuning_job;
+  matchHyperparameterTuningJobFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).hyperparameter_tuning_job;
   }
 
   /**
@@ -2055,7 +1696,7 @@ export class EndpointServiceClient {
    * @param {string} location
    * @returns {string} Resource name string.
    */
-  locationPath(project: string, location: string) {
+  locationPath(project:string,location:string) {
     return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
@@ -2092,7 +1733,7 @@ export class EndpointServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project: string, location: string, model: string) {
+  modelPath(project:string,location:string,model:string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -2142,12 +1783,7 @@ export class EndpointServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  modelEvaluationPath(
-    project: string,
-    location: string,
-    model: string,
-    evaluation: string
-  ) {
+  modelEvaluationPath(project:string,location:string,model:string,evaluation:string) {
     return this.pathTemplates.modelEvaluationPathTemplate.render({
       project: project,
       location: location,
@@ -2164,9 +1800,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).project;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).project;
   }
 
   /**
@@ -2177,9 +1811,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).location;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).location;
   }
 
   /**
@@ -2190,9 +1822,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).model;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).model;
   }
 
   /**
@@ -2203,9 +1833,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(
-      modelEvaluationName
-    ).evaluation;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).evaluation;
   }
 
   /**
@@ -2218,13 +1846,7 @@ export class EndpointServiceClient {
    * @param {string} slice
    * @returns {string} Resource name string.
    */
-  modelEvaluationSlicePath(
-    project: string,
-    location: string,
-    model: string,
-    evaluation: string,
-    slice: string
-  ) {
+  modelEvaluationSlicePath(project:string,location:string,model:string,evaluation:string,slice:string) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.render({
       project: project,
       location: location,
@@ -2242,9 +1864,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).project;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).project;
   }
 
   /**
@@ -2255,9 +1875,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).location;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).location;
   }
 
   /**
@@ -2268,9 +1886,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).model;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).model;
   }
 
   /**
@@ -2280,12 +1896,8 @@ export class EndpointServiceClient {
    *   A fully-qualified path representing ModelEvaluationSlice resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromModelEvaluationSliceName(
-    modelEvaluationSliceName: string
-  ) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).evaluation;
+  matchEvaluationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).evaluation;
   }
 
   /**
@@ -2296,9 +1908,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the slice.
    */
   matchSliceFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
-      modelEvaluationSliceName
-    ).slice;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).slice;
   }
 
   /**
@@ -2309,11 +1919,7 @@ export class EndpointServiceClient {
    * @param {string} specialist_pool
    * @returns {string} Resource name string.
    */
-  specialistPoolPath(
-    project: string,
-    location: string,
-    specialistPool: string
-  ) {
+  specialistPoolPath(project:string,location:string,specialistPool:string) {
     return this.pathTemplates.specialistPoolPathTemplate.render({
       project: project,
       location: location,
@@ -2329,9 +1935,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).project;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).project;
   }
 
   /**
@@ -2342,9 +1946,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).location;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).location;
   }
 
   /**
@@ -2355,9 +1957,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the specialist_pool.
    */
   matchSpecialistPoolFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(
-      specialistPoolName
-    ).specialist_pool;
+    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).specialist_pool;
   }
 
   /**
@@ -2368,11 +1968,7 @@ export class EndpointServiceClient {
    * @param {string} training_pipeline
    * @returns {string} Resource name string.
    */
-  trainingPipelinePath(
-    project: string,
-    location: string,
-    trainingPipeline: string
-  ) {
+  trainingPipelinePath(project:string,location:string,trainingPipeline:string) {
     return this.pathTemplates.trainingPipelinePathTemplate.render({
       project: project,
       location: location,
@@ -2388,9 +1984,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).project;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).project;
   }
 
   /**
@@ -2401,9 +1995,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).location;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).location;
   }
 
   /**
@@ -2414,9 +2006,7 @@ export class EndpointServiceClient {
    * @returns {string} A string representing the training_pipeline.
    */
   matchTrainingPipelineFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(
-      trainingPipelineName
-    ).training_pipeline;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).training_pipeline;
   }
 
   /**
