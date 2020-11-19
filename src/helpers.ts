@@ -1,6 +1,3 @@
-import * as protoTypes from '../protos/protos';
-import * as gax from 'google-gax';
-
 interface ToValueFunction {
   toValue(): object | undefined;
 }
@@ -40,9 +37,7 @@ function googleProtobufValueFromObject(
     });
   }
   if (Array.isArray(object)) {
-    var array = object.map(function (element) {
-      return googleProtobufValueFromObject(element, create);
-    });
+    const array = object.map(element => googleProtobufValueFromObject(element, create));
     return create({
       kind: 'listValue',
       listValue: {
@@ -51,7 +46,7 @@ function googleProtobufValueFromObject(
     });
   }
   if (typeof object === 'object') {
-    var fields: any = {},
+    const fields: any = {},
       names = Object.keys(object),
       i = 0;
     for (; i < names.length; ++i) {
@@ -92,7 +87,7 @@ function googleProtobufValueToObject(message: any): object | null | undefined {
     if (!message.structValue.fields) {
       return {};
     }
-    var names = Object.keys(message.structValue.fields),
+    const names = Object.keys(message.structValue.fields),
       i = 0,
       struct: any = {};
     for (; i < names.length; ++i) {
@@ -119,8 +114,8 @@ export function addFromValue() {
   const methods: FromValueFunction = ({} as object) as FromValueFunction;
 
   methods.fromValue = function (value: object): object | undefined {
-    let obj: any = new this();
-    let message = fromValue(value);
+    const obj: any = new this();
+    const message = fromValue(value);
     if (message !== undefined) {
       Object.assign(obj, message);
       return obj;
@@ -135,7 +130,7 @@ export function toValue(obj: any): object | undefined {
     return undefined;
   }
 
-  var value = googleProtobufValueFromObject(obj, function (val: any) {
+  let value = googleProtobufValueFromObject(obj, (val: any) => {
     return val;
   });
   if (typeof value !== 'undefined') {
