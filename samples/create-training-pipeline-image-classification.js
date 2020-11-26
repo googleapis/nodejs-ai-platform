@@ -19,10 +19,10 @@
 const uuid = require('uuid');
 
 async function main(
-  datasetId = '1084241610289446912',
-  modelDisplayName = `ENCL-icn-model-${uuid.v4()}`,
-  trainingPipelineDisplayName = `ENCL_icn_pipeline_${uuid.v4()}`,
-  project = 'ucaip-sample-tests',
+  datasetId,
+  modelDisplayName,
+  trainingPipelineDisplayName,
+  project,
   location = 'us-central1'
 ) {
   // [START aiplatform_create_training_pipeline_image_classification]
