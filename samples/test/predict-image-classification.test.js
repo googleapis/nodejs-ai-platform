@@ -24,7 +24,10 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const filename = 'resources/daisy.jpg';
+const filename = 'daisy.jpg';
+const local_file = path.resolve(
+  path.join(__dirname, `../resources/${filename}`)
+);
 const endpointId = process.env.PREDICT_IMAGE_CLASS_ENDPOINT_ID;
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
@@ -32,7 +35,7 @@ const location = process.env.LOCATION;
 describe('AI platform predict image classification', () => {
   it('should make predictions using the image classification model', async () => {
     const stdout = execSync(
-      `node ./predict-image-classification.js ${filename} \
+      `node ./predict-image-classification.js ${local_file} \
                                                 ${endpointId} \
                                                 ${project} \
                                                 ${location}`,
