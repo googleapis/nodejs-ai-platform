@@ -46,7 +46,7 @@ export function googleProtobufValueFromObject(
     });
   }
   if (Array.isArray(object)) {
-    const array = object.map((element) => {
+    const array = object.map(element => {
       return googleProtobufValueFromObject(element, create);
     });
     return create({
@@ -57,10 +57,9 @@ export function googleProtobufValueFromObject(
     });
   }
   if (typeof object === 'object') {
-    let fields: any = {},
-      names = Object.keys(object),
-      i = 0;
-    for (; i < names.length; ++i) {
+    const fields: any = {},
+      names = Object.keys(object);
+    for (let i = 0; i < names.length; ++i) {
       fields[names[i]] = googleProtobufValueFromObject(
         object[names[i]],
         create
@@ -100,10 +99,9 @@ export function googleProtobufValueToObject(
     if (!message.structValue.fields) {
       return {};
     }
-    var names = Object.keys(message.structValue.fields),
-      i = 0,
+    const names = Object.keys(message.structValue.fields),
       struct: any = {};
-    for (; i < names.length; ++i) {
+    for (let i = 0; i < names.length; ++i) {
       struct[names[i]] = googleProtobufValueToObject(
         message.structValue['fields'][names[i]]
       );
