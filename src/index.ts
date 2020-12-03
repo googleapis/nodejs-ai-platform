@@ -64,7 +64,10 @@ const enhancedTypesJson = require('./enhanced-types.json');
 const schemaRoot = enhancedTypesJson['schema'];
 
 // Walk the tree of nested namespaces contained within the enhanced-types.json file
-function walkNamespaces(jsonNode: Record<string, string>, rootNamespace?: Record<string, any>): void {
+function walkNamespaces(
+  jsonNode: Record<string, string>,
+  rootNamespace?: Record<string, any>
+): void {
   for (const namespaceName in jsonNode) {
     if (jsonNode.hasOwnProperty(namespaceName)) {
       // Get the proto representation of the namespace
