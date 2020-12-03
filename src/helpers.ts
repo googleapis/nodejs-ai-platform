@@ -59,7 +59,7 @@ export function toValue(obj: any): object | undefined {
     return undefined;
   }
 
-  const value = googleProtobufValueFromObject(obj, (val : any) => {
+  const value = googleProtobufValueFromObject(obj, (val: any) => {
     return val;
   });
   if (typeof value !== 'undefined') {
