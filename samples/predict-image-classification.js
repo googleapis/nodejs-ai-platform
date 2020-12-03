@@ -75,7 +75,7 @@ async function main(filename, endpointId, project, location = 'us-central1') {
     console.log('Predict image classification response');
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
     const predictions = response.predictions;
-    console.log(`\tPredictions :`);
+    console.log('\tPredictions :');
     for (const predictionValue of predictions) {
       const predictionResultObj = prediction.ClassificationPredictionResult.fromValue(
         predictionValue

@@ -18,9 +18,9 @@
 
 // TODO(): Remove this file once https://github.com/protobufjs/protobuf.js/pull/1495 is submitted.
 export function googleProtobufValueFromObject(
-    object: any,
-    create: any
-  ): object | undefined {
+  object: any,
+  create: any
+): object | undefined {
   if (object === null) {
     return create({
       kind: 'nullValue',
@@ -46,7 +46,7 @@ export function googleProtobufValueFromObject(
     });
   }
   if (Array.isArray(object)) {
-    var array = object.map(function (element) {
+    const array = object.map((element) => {
       return googleProtobufValueFromObject(element, create);
     });
     return create({
@@ -57,7 +57,7 @@ export function googleProtobufValueFromObject(
     });
   }
   if (typeof object === 'object') {
-    var fields: any = {},
+    const fields: any = {},
       names = Object.keys(object),
       i = 0;
     for (; i < names.length; ++i) {
@@ -75,9 +75,11 @@ export function googleProtobufValueFromObject(
   }
   return undefined;
 }
-  
+
 // recursive google.protobuf.Value to plain JS object
-export function googleProtobufValueToObject(message: any): object | null | undefined {
+export function googleProtobufValueToObject(
+  message: any
+): object | null | undefined {
   if (message.kind === 'boolValue') {
     return message.boolValue;
   }

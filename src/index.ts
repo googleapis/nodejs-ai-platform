@@ -64,8 +64,8 @@ const enhancedTypesJson = require('./enhanced-types.json');
 const schemaRoot = enhancedTypesJson['schema'];
 
 // Walk the tree of nested namespaces contained within the enhanced-types.json file
-function walkNamespaces(jsonNode: any, rootNamespace?: any): void {
-  for (let namespaceName in jsonNode) {
+function walkNamespaces(jsonNode: Record<string, string>, rootNamespace?: Record<string, any>): void {
+  for (const namespaceName in jsonNode) {
     if (jsonNode.hasOwnProperty(namespaceName)) {
       // Get the proto representation of the namespace
       // If namespace is undefined, use base namespace
@@ -73,13 +73,13 @@ function walkNamespaces(jsonNode: any, rootNamespace?: any): void {
         rootNamespace = protos.google.cloud.aiplatform.v1beta1.schema;
       }
 
-      let namespace =
+      const namespace =
         namespaceName in rootNamespace
           ? rootNamespace[namespaceName]
           : undefined;
 
       // Get the namespace object from JSON
-      let namespaceJsonObject =
+      const namespaceJsonObject =
         namespaceName in jsonNode ? jsonNode[namespaceName] : undefined;
 
       // Verify that this is an array node.
@@ -108,7 +108,7 @@ function walkNamespaces(jsonNode: any, rootNamespace?: any): void {
 function assignMethodsToMessages(namespace: any, messages: string[]): void {
   for (const message of messages) {
     if (message in namespace) {
-      let enhancedMessage = namespace[message];
+      const enhancedMessage = namespace[message];
       if (enhancedMessage) {
         Object.assign(enhancedMessage.prototype, _helpers.addToValue());
         Object.assign(enhancedMessage, _helpers.addFromValue());

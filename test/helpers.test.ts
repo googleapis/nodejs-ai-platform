@@ -20,11 +20,6 @@ import * as assert from 'assert';
 const aiplatform = require('../src');
 
 describe('AI Platform helper methods', () => {
-  const CREDENTIALS = {
-    credentials: {client_email: 'bogus', private_key: 'bogus'},
-    projectId: 'bogus',
-  };
-
   const dataTypeObject = {
     myBool: true,
     myInt: 4,
@@ -167,7 +162,7 @@ describe('AI Platform helper methods', () => {
       const malformedProtobufObject = {something: 'malformed'};
 
       assert.throws(() => {
-        aiplatform.fromValue(malformedProtobufObject);
+        helpers.fromValue(malformedProtobufObject);
       });
     });
 

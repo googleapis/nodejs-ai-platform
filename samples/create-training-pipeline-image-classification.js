@@ -16,8 +16,6 @@
 
 'use strict';
 
-const uuid = require('uuid');
-
 async function main(
   datasetId,
   modelDisplayName,
@@ -60,7 +58,7 @@ async function main(
     const parent = `projects/${project}/locations/${location}`;
 
     // Values should match the input expected by your model.
-    let trainingTaskInputsMessage = new definition.AutoMlImageClassificationInputs(
+    const trainingTaskInputsMessage = new definition.AutoMlImageClassificationInputs(
       {
         multiLabel: true,
         modelType: ModelType.CLOUD,
@@ -69,9 +67,9 @@ async function main(
       }
     );
 
-    let trainingTaskInputs = trainingTaskInputsMessage.toValue();
+    const trainingTaskInputs = trainingTaskInputsMessage.toValue();
 
-    let trainingTaskDefinition =
+    const trainingTaskDefinition =
       'gs://google-cloud-aiplatform/schema/trainingjob/definition/automl_image_classification_1.0.0.yaml';
 
     const modelToUpload = {displayName: modelDisplayName};
@@ -117,10 +115,10 @@ async function main(
     console.log(`\tLabels : ${JSON.stringify(response.labels)}`);
 
     const error = response.error;
-    console.log(`\tError`);
-    if (error == null) {
-      console.log(`\t\tCode : {}`);
-      console.log(`\t\tMessage : {}`);
+    console.log('\tError');
+    if (error === null) {
+      console.log('\t\tCode : {}');
+      console.log('\t\tMessage : {}');
     } else {
       console.log(`\t\tCode : ${error.code}`);
       console.log(`\t\tMessage : ${error.message}`);

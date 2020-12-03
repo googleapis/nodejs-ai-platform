@@ -35,7 +35,7 @@ describe('AI Platform enhanced types', () => {
     prediction,
   } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
 
-  function testNamespaceAgainstArray(namespace: any, arr: string[]) {
+  function testNamespaceAgainstArray(namespace: Record<string, string>, arr: string[]) {
     for (const name of arr) {
       assert.ok(name in namespace);
     }
