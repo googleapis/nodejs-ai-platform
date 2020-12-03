@@ -57,7 +57,7 @@ export function googleProtobufValueFromObject(
     });
   }
   if (typeof object === 'object') {
-    const fields: any = {},
+    let fields: any = {},
       names = Object.keys(object),
       i = 0;
     for (; i < names.length; ++i) {
