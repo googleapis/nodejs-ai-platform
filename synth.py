@@ -29,10 +29,18 @@ for version in versions:
   library = gapic.node_library(name, version)
   s.copy(library, excludes=["package.json", "README.md"])
 
+# Expose helper module
+index_file = 'src/index.ts'
+s.replace(index_file, '\Z', """
+import {fromValue, toValue} from './helpers';\n
+const helpers = {toValue, fromValue};\n
+export {helpers};\n
+""")
+
 # Adds enhancements for library
-s.replace('src/index.ts', '\Z', 'import {_enhance} from \'./decorator\'\n;')
+s.replace(index_file, '\Z', 'import {_enhance} from \'./decorator\'\n;')
 for version in versions:
-  s.replace('src/index.ts', '\Z', f'_enhance({version});')
+  s.replace(index_file, '\Z', f'_enhance({version});')
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()
