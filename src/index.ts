@@ -53,5 +53,5 @@ export {protos};
 import {fromValue, toValue} from './helpers';
 const helpers = {toValue, fromValue};
 export {helpers};
-import {_enhance} from './decorator'
+import {_enhance} from './decorator';
 _enhance('v1beta1');

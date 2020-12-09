@@ -26,7 +26,8 @@ function walkNamespaces(
 ): void {
   for (const namespaceName in jsonNode) {
     if (Object.hasOwnProperty.call(jsonNode, namespaceName)) {
-      const namespace = namespaceName in rootNamespace
+      const namespace =
+        namespaceName in rootNamespace
           ? rootNamespace[namespaceName]
           : undefined;
 
@@ -58,7 +59,10 @@ function walkNamespaces(
 
 // Assign the toValue() and fromValue() helper methods to the enhanced message objects.
 // tslint:disable-next-line no-any
-function assignMethodsToMessages(namespace: Record<string, any>, messages: string[]): void {
+function assignMethodsToMessages(
+  namespace: Record<string, any>,
+  messages: string[]
+): void {
   for (const message of messages) {
     if (message in namespace) {
       const enhancedMessage = namespace[message];
@@ -74,7 +78,9 @@ function assignMethodsToMessages(namespace: Record<string, any>, messages: strin
 export function _enhance(apiVersion: string): void {
   const schemaRoot = enhancedTypesJson['schema'];
   // tslint:disable-next-line no-any
-  const namespaceRoot = (protos.google.cloud.aiplatform as Record<string, any>)[apiVersion];
+  const namespaceRoot = (protos.google.cloud.aiplatform as Record<string, any>)[
+    apiVersion
+  ];
   const namespaceSchemaRoot = namespaceRoot['schema'];
   walkNamespaces(schemaRoot, namespaceSchemaRoot);
 }
