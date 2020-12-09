@@ -53,7 +53,7 @@ async function main(
     clientOptions
   );
 
-  async function createTrainingPipelineTextSentimentAnalysis() {
+  async function createTrainingPipelineImageClassification() {
     // Configure the parent resource
     const parent = `projects/${project}/locations/${location}`;
 
@@ -125,7 +125,7 @@ async function main(
     }
   }
   // [END aiplatform_create_training_pipeline_image_classification]
-  await createTrainingPipelineTextSentimentAnalysis();
+  await createTrainingPipelineImageClassification();
 }
 
 main(...process.argv.slice(2)).catch(err => {

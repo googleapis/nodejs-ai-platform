@@ -29,6 +29,11 @@ for version in versions:
   library = gapic.node_library(name, version)
   s.copy(library, excludes=["package.json", "README.md"])
 
+# Adds enhancements for library
+s.replace('src/index.ts', '\Z', 'import {_enhance} from \'./decorator\'\n;')
+for version in versions:
+  s.replace('src/index.ts', '\Z', f'_enhance({version});')
+
 # Copy common templates
 common_templates = gcp.CommonTemplates()
 templates = common_templates.node_library(

@@ -48,78 +48,10 @@ export default {
   SpecialistPoolServiceClient,
 };
 import * as protos from '../protos/protos';
+export {protos};
 
-import * as _helpers from './helpers';
-
-// Export the toValue and fromValue functions for converting
-// JS objects to and from protobuf.Value objects.
-const toValue = _helpers.toValue;
-const fromValue = _helpers.fromValue;
+import {fromValue, toValue} from './helpers';
 const helpers = {toValue, fromValue};
 export {helpers};
-
-const enhancedTypesJson = require('./enhanced-types.json');
-
-// Get the list of enhanced types
-const schemaRoot = enhancedTypesJson['schema'];
-
-// Walk the tree of nested namespaces contained within the enhanced-types.json file
-function walkNamespaces(
-  jsonNode: Record<string, string>,
-  rootNamespace?: Record<string, any>
-): void {
-  for (const namespaceName in jsonNode) {
-    if (jsonNode.hasOwnProperty(namespaceName)) {
-      // Get the proto representation of the namespace
-      // If namespace is undefined, use base namespace
-      if (!rootNamespace) {
-        rootNamespace = protos.google.cloud.aiplatform.v1beta1.schema;
-      }
-
-      const namespace =
-        namespaceName in rootNamespace
-          ? rootNamespace[namespaceName]
-          : undefined;
-
-      // Get the namespace object from JSON
-      const namespaceJsonObject =
-        namespaceName in jsonNode ? jsonNode[namespaceName] : undefined;
-
-      // Verify that this is an array node.
-      if (
-        namespace &&
-        namespaceJsonObject &&
-        Array.isArray(namespaceJsonObject)
-      ) {
-        // Assign the methods to this list of types.
-        assignMethodsToMessages(namespace, namespaceJsonObject);
-
-        // Check if this is another node.
-      } else if (
-        namespace &&
-        namespaceJsonObject &&
-        typeof namespaceJsonObject === 'object'
-      ) {
-        // Iterate over the next level of namespaces
-        walkNamespaces(namespaceJsonObject, namespace);
-      }
-    }
-  }
-}
-
-// Assign the toValue() and fromValue() helper methods to the enhanced message objects.
-function assignMethodsToMessages(namespace: any, messages: string[]): void {
-  for (const message of messages) {
-    if (message in namespace) {
-      const enhancedMessage = namespace[message];
-      if (enhancedMessage) {
-        Object.assign(enhancedMessage.prototype, _helpers.addToValue());
-        Object.assign(enhancedMessage, _helpers.addFromValue());
-      }
-    }
-  }
-}
-
-walkNamespaces(schemaRoot);
-
-export {protos};
+import {_enhance} from './decorator'
+_enhance('v1beta1');
