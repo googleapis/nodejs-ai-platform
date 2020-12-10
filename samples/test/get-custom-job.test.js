@@ -24,7 +24,7 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const customJobId = process.env.CUSTOM_JOB_ID;
+const customJobId = '7980906305281851392';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 

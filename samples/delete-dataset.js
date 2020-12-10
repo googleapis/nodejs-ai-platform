@@ -41,9 +41,7 @@ async function main(datasetId, project, location = 'us-central1') {
   async function deleteDataset() {
     // Configure the resource
     const name = datasetServiceClient.datasetPath(project, location, datasetId);
-    const request = {
-      name: name,
-    };
+    const request = {name};
 
     // Delete Dataset Request
     const [response] = await datasetServiceClient.deleteDataset(request);

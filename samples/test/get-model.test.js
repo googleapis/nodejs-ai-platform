@@ -24,7 +24,7 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const modelId = process.env.MODEL_ID;
+const modelId = '3512561418744365056';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 

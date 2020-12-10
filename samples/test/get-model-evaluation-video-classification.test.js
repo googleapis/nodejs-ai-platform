@@ -24,8 +24,8 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const modelId = process.env.VIDEO_CLASS_MODEL_ID;
-const evaluationId = process.env.VIDEO_CLASS_EVALUATION_ID;
+const modelId = '8596984660557299712';
+const evaluationId = '7092045712224944128';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 

@@ -45,6 +45,7 @@ describe('AI platform create dataset tabular gcs', () => {
     assert.match(stdout, /Create dataset tabular gcs response/);
     datasetId = stdout
       .split('/locations/us-central1/datasets/')[1]
+      .split('/')[0]
       .split('/')[0];
   });
   after('should delete created dataset', async () => {

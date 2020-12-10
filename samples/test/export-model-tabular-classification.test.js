@@ -24,9 +24,8 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const gcsDestinationOutputUriPrefix =
-  'gs://prj-ucaip-tutorials-vcm/dataset/tables';
-const modelId = process.env.EXPORT_MODEL_TABLES_CLASSIFICATION_MODEL_ID;
+const gcsDestinationOutputUriPrefix = 'gs://ucaip-samples-test-output';
+const modelId = '6036688272397172736';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 

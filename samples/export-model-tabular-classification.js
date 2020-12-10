@@ -51,7 +51,7 @@ async function main(
     // Configure the outputConfig resources
     const outputConfig = {
       exportFormatId: 'tf-saved-model',
-      gcsDestination: {
+      artifactDestination: {
         outputUriPrefix: gcsDestinationOutputUriPrefix,
       },
     };

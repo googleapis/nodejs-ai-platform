@@ -70,7 +70,7 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
 
     const bigquerySource = inputConfig.bigquerySource;
     console.log('\t\tBigQuery Source');
-    if (bigquerySource === null) {
+    if (!bigquerySource) {
       console.log('\t\t\tInput Uri : {}');
     } else {
       console.log(`\t\t\tInput Uri : ${bigquerySource.inputUri}`);
@@ -85,7 +85,7 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
     console.log(`\t\t\tOutput uri prefix : ${gcsDestination.outputUriPrefix}`);
 
     const bigqueryDestination = outputConfig.bigqueryDestination;
-    if (bigqueryDestination === null) {
+    if (!bigqueryDestination) {
       console.log('\t\tBigquery Destination');
       console.log('\t\t\tOutput uri : {}');
     } else {
@@ -94,7 +94,7 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
     }
 
     const outputInfo = response.outputInfo;
-    if (outputInfo === null) {
+    if (!outputInfo) {
       console.log('\tOutput info');
       console.log('\t\tGcs output directory : {}');
       console.log('\t\tBigquery_output_dataset : {}');
@@ -121,7 +121,7 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
 
     const resourcesConsumed = response.resourcesConsumed;
     console.log('\tResource consumed');
-    if (resourcesConsumed === null) {
+    if (!resourcesConsumed) {
       console.log('\t\tReplica Hours: {}');
     } else {
       console.log(`\t\tReplica Hours: ${resourcesConsumed.replicaHours}`);
@@ -129,7 +129,7 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
 
     const completionStats = response.completionStats;
     console.log('\tCompletion status');
-    if (completionStats === null) {
+    if (!completionStats) {
       console.log('\t\tSuccessful count: {}');
       console.log('\t\tFailed count: {}');
       console.log('\t\tIncomplete count: {}');

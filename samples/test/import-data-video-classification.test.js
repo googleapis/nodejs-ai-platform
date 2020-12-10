@@ -24,9 +24,9 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const datasetId = process.env.VIDEO_CLASS_DATASET_ID;
+const datasetId = '3757409464110546944';
 const gcsSourceUri =
-  'gs://automl-video-demo-data/traffic_videos/traffic_videos_train.csv';
+  'gs://ucaip-sample-resources/hmdb_split1_5classes_train.jsonl';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
