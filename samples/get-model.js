@@ -87,7 +87,7 @@ async function main(modelId, project, location = 'us-central1') {
 
     const containerSpec = response.containerSpec;
     console.log('\tContainer Spec');
-    if (containerSpec === null) {
+    if (!containerSpec) {
       console.log(`\t\t${JSON.stringify(containerSpec)}`);
       console.log('\t\tImage uri : {}');
       console.log('\t\tCommand : {}');

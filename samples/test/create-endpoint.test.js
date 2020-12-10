@@ -42,7 +42,8 @@ describe('AI platform create endpoint', () => {
     assert.match(stdout, /Create endpoint response/);
     endpointId = stdout
       .split('/locations/us-central1/endpoints/')[1]
-      .split('\n')[0];
+      .split('\n')[0]
+      .split('/')[0];
   });
   after('delete created endpoint', async () => {
     execSync(`node ./delete-endpoint.js ${endpointId} ${project} ${location}`, {

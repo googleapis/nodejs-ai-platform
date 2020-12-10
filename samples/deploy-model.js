@@ -79,7 +79,7 @@ async function main(
     console.log('Deploy model response');
     const modelDeployed = result.deployedModel;
     console.log('\tDeployed model');
-    if (modelDeployed === null) {
+    if (!modelDeployed) {
       console.log('\t\tId : {}');
       console.log('\t\tModel : {}');
       console.log('\t\tDisplay name : {}');
@@ -103,7 +103,7 @@ async function main(
 
       const dedicatedResources = modelDeployed.dedicatedResources;
       console.log('\t\tDedicated resources');
-      if (dedicatedResources === null) {
+      if (!dedicatedResources) {
         console.log('\t\t\tMin replica count : {}');
         console.log('\t\t\tMachine spec {}');
         console.log('\t\t\t\tMachine type : {}');
@@ -127,7 +127,7 @@ async function main(
 
       const automaticResources = modelDeployed.automaticResources;
       console.log('\t\tAutomatic resources');
-      if (automaticResources === null) {
+      if (!automaticResources) {
         console.log('\t\t\tMin replica count : {}');
         console.log('\t\t\tMax replica count : {}');
       } else {

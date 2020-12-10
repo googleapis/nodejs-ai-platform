@@ -46,11 +46,15 @@ describe('AI platform create dataset tabular bigquery', () => {
     assert.match(stdout, /Create dataset tabular bigquery response/);
     datasetId = stdout
       .split('/locations/us-central1/datasets/')[1]
+      .split('/')[0]
       .split('/')[0];
   });
   after('should delete created dataset', async () => {
-    execSync(`node ./delete-dataset.js ${datasetId} ${project} ${location}`, {
-      cwd,
-    });
+    execSync(
+      `node ./delete-dataset.js ${datasetId} ${project} ${location}`,
+      {
+        cwd,
+      },
+    );
   });
 });

@@ -12,7 +12,7 @@
   "scripts": {
     "fix": "gts fix",
     "lint": "gts check",
-    "test": "mocha --timeout 600000 test/*.js"
+    "test": "mocha --timeout 6000000 test/*.js"
   },
   "dependencies": {
     "@google-cloud/aiplatform": "^1.0.0",

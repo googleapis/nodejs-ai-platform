@@ -27,7 +27,7 @@ const cwd = path.join(__dirname, '..');
 
 const endpointDisplayName = `temp_create_endpoint_test_${uuid()}`;
 
-const modelId = process.env.DEPLOY_MODEL_ID;
+const modelId = '4190810559500779520';
 const deployedModelDisplayName = `temp_deploy_model_test_${uuid()}`;
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
@@ -45,8 +45,8 @@ describe('AI platform deploy model', () => {
     );
     endpointId = endOut
       .split('/locations/us-central1/endpoints/')[1]
-      .split('\n')[0];
-    console.log(endpointId);
+      .split('\n')[0]
+      .split('/')[0];
     const stdout = execSync(
       `node ./deploy-model.js ${modelId} ${deployedModelDisplayName} \
                                 ${endpointId} \
@@ -58,6 +58,7 @@ describe('AI platform deploy model', () => {
     assert.match(stdout, /Deploy model response/);
     deployedModelId = stdout.split('Id : ')[1].split('\n')[0];
   });
+
   after('should undeploy the deployed model', async () => {
     execSync(
       `node ./undeploy-model.js ${deployedModelId} ${endpointId} ${project} \

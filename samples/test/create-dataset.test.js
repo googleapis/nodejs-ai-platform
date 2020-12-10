@@ -45,7 +45,8 @@ describe('AI platform create dataset', () => {
     assert.match(stdout, /Create dataset response/);
     datasetId = stdout
       .split('/locations/us-central1/datasets/')[1]
-      .split('\n')[0];
+      .split('\n')[0]
+      .split('/')[0];
   });
   after('should delete created dataset', async () => {
     execSync(`node ./delete-dataset.js ${datasetId} ${project} ${location}`, {

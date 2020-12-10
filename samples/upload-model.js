@@ -18,7 +18,6 @@
 
 async function main(
   modelDisplayName,
-  metadataSchemaUri,
   imageUri,
   artifactUri,
   project,
@@ -54,14 +53,14 @@ async function main(
     // Configure the model resources
     const model = {
       displayName: modelDisplayName,
-      metadataSchemaUri: metadataSchemaUri,
+      metadataSchemaUri: '',
       artifactUri: artifactUri,
       containerSpec: {
         imageUri: imageUri,
         command: [],
         args: [],
-        env: [{name: 'envName', value: 'envValue'}],
-        ports: [{containerPort: 8000}],
+        env: [],
+        ports: [],
         predictRoute: '',
         healthRoute: '',
       },
@@ -71,6 +70,8 @@ async function main(
       model,
     };
 
+    console.log('PARENT AND MODEL');
+    console.log(parent, model);
     // Upload Model request
     const [response] = await modelServiceClient.uploadModel(request);
     console.log(`Long running operation : ${response.name}`);

@@ -44,7 +44,8 @@ describe('AI platform create custom job', () => {
     assert.match(stdout, /Create custom job response/);
     customJobId = stdout
       .split('/locations/us-central1/customJobs/')[1]
-      .split('\n')[0];
+      .split('\n')[0]
+      .slice(0, 19);
   });
 
   after('should cancel the customJob and delete it', async () => {
