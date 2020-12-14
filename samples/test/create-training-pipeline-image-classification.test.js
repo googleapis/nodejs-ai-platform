@@ -45,10 +45,7 @@ let trainingPipelineId;
 describe('AI platform create training pipeline image classification', () => {
   it('should create a new image classification training pipeline', async () => {
     const stdout = execSync(
-      `node ./create-training-pipeline-image-classification.js ${datasetId} \
-                                            ${modelDisplayName} \
-                                            ${trainingPipelineDisplayName} \
-                                            ${project} ${location}`,
+      `node ./create-training-pipeline-image-classification.js ${datasetId} ${modelDisplayName} ${trainingPipelineDisplayName} ${project} ${location}`,
       {
         cwd,
       }
