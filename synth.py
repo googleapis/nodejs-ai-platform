@@ -40,7 +40,7 @@ export {helpers};\n
 # Adds enhancements for library
 s.replace(index_file, '\Z', 'import {_enhance} from \'./decorator\'\n;')
 for version in versions:
-  s.replace(index_file, '\Z', f'_enhance({version});')
+  s.replace(index_file, '\Z', f'_enhance("{version}");')
 
 # Copy common templates
 common_templates = gcp.CommonTemplates()

@@ -18,13 +18,21 @@
 
 import * as v1beta1 from './v1beta1';
 const DatasetServiceClient = v1beta1.DatasetServiceClient;
+type DatasetServiceClient = v1beta1.DatasetServiceClient;
 const EndpointServiceClient = v1beta1.EndpointServiceClient;
+type EndpointServiceClient = v1beta1.EndpointServiceClient;
 const JobServiceClient = v1beta1.JobServiceClient;
+type JobServiceClient = v1beta1.JobServiceClient;
 const MigrationServiceClient = v1beta1.MigrationServiceClient;
+type MigrationServiceClient = v1beta1.MigrationServiceClient;
 const ModelServiceClient = v1beta1.ModelServiceClient;
+type ModelServiceClient = v1beta1.ModelServiceClient;
 const PipelineServiceClient = v1beta1.PipelineServiceClient;
+type PipelineServiceClient = v1beta1.PipelineServiceClient;
 const PredictionServiceClient = v1beta1.PredictionServiceClient;
+type PredictionServiceClient = v1beta1.PredictionServiceClient;
 const SpecialistPoolServiceClient = v1beta1.SpecialistPoolServiceClient;
+type SpecialistPoolServiceClient = v1beta1.SpecialistPoolServiceClient;
 export {
   v1beta1,
   DatasetServiceClient,
@@ -51,7 +59,10 @@ import * as protos from '../protos/protos';
 export {protos};
 
 import {fromValue, toValue} from './helpers';
+
 const helpers = {toValue, fromValue};
+
 export {helpers};
+
 import {_enhance} from './decorator';
 _enhance('v1beta1');
