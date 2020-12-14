@@ -67,8 +67,9 @@ function assignMethodsToMessages(
     if (message in namespace) {
       const enhancedMessage = namespace[message];
       if (enhancedMessage) {
-        // Look into using .bind() to simplify closure / lexical scoping
         Object.assign(enhancedMessage.prototype, _helpers.addToValue());
+
+        // Capture reference to `enhancedMessage` class in closure below.
         const _addFromValue = {
           fromValue: (value: object): object | undefined => {
             const obj = new enhancedMessage();
@@ -78,9 +79,9 @@ function assignMethodsToMessages(
               return obj;
             }
             return undefined;
-          }
-        }
-        Object.assign(enhancedMessage, _addFromValue)
+          },
+        };
+        Object.assign(enhancedMessage, _addFromValue);
       }
     }
   }
