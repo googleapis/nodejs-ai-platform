@@ -21,11 +21,6 @@ interface ToValueFunction {
   toValue(): object | undefined;
 }
 
-interface FromValueFunction {
-  new (): FromValueFunction;
-  fromValue(value: object): object | undefined;
-}
-
 export function addToValue() {
   const methods: ToValueFunction = ({} as unknown) as ToValueFunction;
 
@@ -33,21 +28,6 @@ export function addToValue() {
     return toValue(this);
   };
 
-  return methods;
-}
-
-export function addFromValue() {
-  const methods: FromValueFunction = ({} as object) as FromValueFunction;
-
-  methods.fromValue = function (value: object): object | undefined {
-    const obj = new this();
-    const message = fromValue(value);
-    if (message !== undefined) {
-      Object.assign(obj, message);
-      return obj;
-    }
-    return undefined;
-  };
   return methods;
 }
 

@@ -69,7 +69,18 @@ function assignMethodsToMessages(
       if (enhancedMessage) {
         // Look into using .bind() to simplify closure / lexical scoping
         Object.assign(enhancedMessage.prototype, _helpers.addToValue());
-        Object.assign(enhancedMessage, _helpers.addFromValue());
+        const _addFromValue = {
+          fromValue: (value: object): object | undefined => {
+            const obj = new enhancedMessage();
+            const message = _helpers.fromValue(value);
+            if (message !== undefined) {
+              Object.assign(obj, message);
+              return obj;
+            }
+            return undefined;
+          }
+        }
+        Object.assign(enhancedMessage, _addFromValue)
       }
     }
   }
