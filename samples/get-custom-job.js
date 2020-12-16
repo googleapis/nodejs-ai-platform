@@ -20,7 +20,6 @@ async function main(customJobId, project, location = 'us-central1') {
   // [START aiplatform_get_custom_job]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
-   * (Not necessary if passing values as arguments)
    */
 
   // const customJobId = 'YOUR_CUSTOM_JOB_ID';

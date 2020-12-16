@@ -25,7 +25,6 @@ async function main(
   // [START aiplatform_import_data_video_object_tracking]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
-   * (Not necessary if passing values as arguments)
    */
 
   // const datasetId = 'YOUR_DATASET_ID';

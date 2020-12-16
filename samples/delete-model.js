@@ -20,7 +20,6 @@ async function main(modelId, project, location = 'us-central1') {
   // [START aiplatform_delete_model]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
-   * (Not necessary if passing values as arguments)
    */
 
   // const modelId = 'YOUR_MODEL_ID';

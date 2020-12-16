@@ -20,7 +20,6 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
   // [START aiplatform_get_model_evaluation_image_object_detection]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
-   * (Not necessary if passing values as arguments)
    */
 
   // const modelId = 'YOUR_MODEL_ID';

@@ -25,7 +25,6 @@ async function main(
   // [START aiplatform_import_data_text_sentiment_analysis]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
-   * (Not necessary if passing values as arguments)
    */
 
   // const datasetId = "YOUR_DATASET_ID";
@@ -67,7 +66,7 @@ async function main(
 
     console.log(
       `Import data text sentiment analysis response  : \
-        ${JSON.stringify(importDataResponse.result)}`
+        ${JSON.stringify(importDataResponse.result, null, 2)}`
     );
   }
   await importDataTextSentimentAnalysis();
