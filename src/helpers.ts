@@ -21,6 +21,7 @@ interface ToValueFunction {
   toValue(): object | undefined;
 }
 
+// Assigns the toValue() function as a member of an enhanced class.
 export function addToValue() {
   const methods: ToValueFunction = ({} as unknown) as ToValueFunction;
 
@@ -31,18 +32,28 @@ export function addToValue() {
   return methods;
 }
 
+/**
+ * Converts a protobuf.Message to a protobuf.Value object.
+ * @param message Message to convert
+ * @returns a Value-formatted object
+ */
 // tslint:disable-next-line no-any
-export function toValue(obj: any): object | undefined {
-  if (obj === undefined) {
+export function toValue(message: any): object | undefined {
+  if (message === undefined) {
     return undefined;
   }
 
-  const value = googleProtobufValueFromObject(obj, (val: any) => {
+  const value = googleProtobufValueFromObject(message, (val: any) => {
     return val;
   });
   return value;
 }
 
+/**
+ * Creates instance of class from a protobuf.Value object.
+ * @param value Value to convert
+ * @returns a Message
+ */
 // tslint:disable-next-line no-any
 export function fromValue(value: any): object | null | undefined {
   if (!value) {
