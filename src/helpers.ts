@@ -31,6 +31,7 @@ export function addToValue() {
   return methods;
 }
 
+// tslint:disable-next-line no-any
 export function toValue(obj: any): object | undefined {
   if (obj === undefined) {
     return undefined;
@@ -39,12 +40,10 @@ export function toValue(obj: any): object | undefined {
   const value = googleProtobufValueFromObject(obj, (val: any) => {
     return val;
   });
-  if (typeof value !== 'undefined') {
-    return value;
-  }
-  return undefined;
+  return value;
 }
 
+// tslint:disable-next-line no-any
 export function fromValue(value: any): object | null | undefined {
   if (!value) {
     return undefined;

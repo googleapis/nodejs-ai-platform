@@ -15,7 +15,9 @@
 
 // TODO(): Remove this file once https://github.com/protobufjs/protobuf.js/pull/1495 is submitted.
 export function googleProtobufValueFromObject(
+  // tslint:disable-next-line no-any
   object: any,
+  // tslint:disable-next-line no-any
   create: any
 ): object | undefined {
   if (object === null) {
@@ -54,6 +56,7 @@ export function googleProtobufValueFromObject(
     });
   }
   if (typeof object === 'object') {
+    // tslint:disable-next-line no-any
     const fields: any = {},
       names = Object.keys(object);
     for (let i = 0; i < names.length; ++i) {

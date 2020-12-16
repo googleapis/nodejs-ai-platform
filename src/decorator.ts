@@ -26,14 +26,10 @@ function walkNamespaces(
 ): void {
   for (const namespaceName in jsonNode) {
     if (Object.hasOwnProperty.call(jsonNode, namespaceName)) {
-      const namespace =
-        namespaceName in rootNamespace
-          ? rootNamespace[namespaceName]
-          : undefined;
+      const namespace = rootNamespace[namespaceName];
 
       // Get the namespace object from JSON
-      const namespaceJsonObject =
-        namespaceName in jsonNode ? jsonNode[namespaceName] : undefined;
+      const namespaceJsonObject = jsonNode[namespaceName];
 
       // Verify that this is an array node.
       if (
@@ -58,8 +54,8 @@ function walkNamespaces(
 }
 
 // Assign the toValue() and fromValue() helper methods to the enhanced message objects.
-// tslint:disable-next-line no-any
 function assignMethodsToMessages(
+  // tslint:disable-next-line no-any
   namespace: Record<string, any>,
   messages: string[]
 ): void {

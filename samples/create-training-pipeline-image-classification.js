@@ -86,8 +86,6 @@ async function main(
       trainingPipeline,
     };
 
-    console.log(request);
-
     // Create training pipeline request
     const [response] = await pipelineServiceClient.createTrainingPipeline(
       request
