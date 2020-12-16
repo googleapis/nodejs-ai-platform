@@ -26,7 +26,6 @@ async function main(
   // [START aiplatform_upload_model]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
-   * (Not necessary if passing values as arguments)
    */
 
   // const modelDisplayName = 'YOUR_MODEL_DISPLAY_NAME';

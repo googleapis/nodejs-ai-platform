@@ -28,6 +28,7 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
 
+  const fs = require('fs');
   // Imports the Google Cloud Prediction Service Client library
   const {PredictionServiceClient} = require('@google-cloud/aiplatform');
 
@@ -47,7 +48,6 @@ async function main(filename, endpointId, project, location = 'us-central1') {
         fields: {},
       },
     };
-    const fs = require('fs');
     const instanceDict = fs.readFileSync(filename, 'utf8');
     const instanceValue = JSON.parse(instanceDict);
     const instance = {
