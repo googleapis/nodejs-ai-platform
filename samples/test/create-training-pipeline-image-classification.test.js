@@ -45,15 +45,9 @@ let trainingPipelineId;
 describe('AI platform create training pipeline image classification', () => {
   it('should create a new image classification training pipeline', async () => {
     const stdout = execSync(
-      `node ./create-training-pipeline-image-classification.js ${datasetId} ${modelDisplayName} ${trainingPipelineDisplayName} ${project} ${location}`,
-      {
-        cwd,
-      }
+      `node ./create-training-pipeline-image-classification.js ${datasetId} ${modelDisplayName} ${trainingPipelineDisplayName} ${project} ${location}`
     );
-    assert.match(
-      stdout,
-      /Create training pipeline image classification response/
-    );
+    assert.match(stdout, /\/locations\/us-central1\/trainingPipelines\//);
     trainingPipelineId = stdout
       .split('/locations/us-central1/trainingPipelines/')[1]
       .split('\n')[0];

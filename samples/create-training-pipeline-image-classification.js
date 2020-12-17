@@ -16,7 +16,7 @@
 
 'use strict';
 
-async function main(
+function main(
   datasetId,
   modelDisplayName,
   trainingPipelineDisplayName,
@@ -25,7 +25,7 @@ async function main(
 ) {
   // [START aiplatform_create_training_pipeline_image_classification]
   /**
-   * TODO(developer): Uncomment these variables before running the sample.\
+   * TODO(developer): Uncomment these variables before running the sample.
    * (Not necessary if passing values as arguments)
    */
   /*
@@ -122,8 +122,9 @@ async function main(
       console.log(`\t\tMessage : ${error.message}`);
     }
   }
+  
+  createTrainingPipelineImageClassification();
   // [END aiplatform_create_training_pipeline_image_classification]
-  await createTrainingPipelineImageClassification();
 }
 
 main(...process.argv.slice(2)).catch(err => {

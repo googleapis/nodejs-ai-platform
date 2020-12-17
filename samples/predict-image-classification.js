@@ -16,7 +16,7 @@
 
 'use strict';
 
-async function main(filename, endpointId, project, location = 'us-central1') {
+function main(filename, endpointId, project, location = 'us-central1') {
   // [START aiplatform_predict_image_classification]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -87,8 +87,8 @@ async function main(filename, endpointId, project, location = 'us-central1') {
       }
     }
   }
+  predictImageClassification();
   // [END aiplatform_predict_image_classification]
-  await predictImageClassification();
 }
 
 main(...process.argv.slice(2)).catch(err => {

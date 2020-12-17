@@ -35,10 +35,7 @@ const location = process.env.LOCATION;
 describe('AI platform predict image classification', () => {
   it('should make predictions using the image classification model', async () => {
     const stdout = execSync(
-      `node ./predict-image-classification.js ${local_file} ${endpointId} ${project} ${location}`,
-      {
-        cwd,
-      }
+      `node ./predict-image-classification.js ${local_file} ${endpointId} ${project} ${location}`
     );
     assert.match(stdout, /Predict image classification response/);
   });
