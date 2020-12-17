@@ -22,7 +22,6 @@ const {describe, it} = require('mocha');
 
 const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-const cwd = path.join(__dirname, '..');
 
 const filename = 'daisy.jpg';
 const local_file = path.resolve(
