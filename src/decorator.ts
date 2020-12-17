@@ -15,14 +15,25 @@
 import * as _helpers from './helpers';
 import * as protos from '../protos/protos';
 
+const protobuf = require('protobuf.js');
 const enhancedTypesJson = require('./enhanced-types.json');
+
+interface JsonNode {
+  [index: string]: string[] | JsonNode | JsonNode[];
+}
+
+interface PrototypedObject {
+  prototype: Function;
+}
+
+interface NestedNamespace {
+  [index: string]: PrototypedObject | NestedNamespace;
+}
 
 // Walk the tree of nested namespaces contained within the enhanced-types.json file
 function walkNamespaces(
-  // tslint:disable-next-line no-any
-  jsonNode: Record<string, any>,
-  // tslint:disable-next-line no-any
-  rootNamespace: Record<string, any>
+  jsonNode: JsonNode,
+  rootNamespace: NestedNamespace
 ): void {
   for (const namespaceName in jsonNode) {
     if (Object.hasOwnProperty.call(jsonNode, namespaceName)) {
@@ -38,16 +49,20 @@ function walkNamespaces(
         Array.isArray(namespaceJsonObject)
       ) {
         // Assign the methods to this list of types.
-        assignMethodsToMessages(namespace, namespaceJsonObject);
+        assignMethodsToMessages(
+          namespace as NestedNamespace,
+          namespaceJsonObject as string[]
+        );
 
         // Check if this is another node.
       } else if (
         namespace &&
         namespaceJsonObject &&
-        typeof namespaceJsonObject === 'object'
+        typeof namespaceJsonObject === 'object' &&
+        !Array.isArray(namespaceJsonObject)
       ) {
         // Iterate over the next level of namespaces
-        walkNamespaces(namespaceJsonObject, namespace);
+        walkNamespaces(namespaceJsonObject, namespace as NestedNamespace);
       }
     }
   }
@@ -56,23 +71,26 @@ function walkNamespaces(
 // Assign the toValue() and fromValue() helper methods to the enhanced message objects.
 function assignMethodsToMessages(
   // tslint:disable-next-line no-any
-  namespace: Record<string, any>,
+  namespace: NestedNamespace,
   messages: string[]
 ): void {
   for (const message of messages) {
     if (message in namespace) {
-      const enhancedMessage = namespace[message];
+      const enhancedMessage: PrototypedObject = namespace[
+        message
+      ] as PrototypedObject;
       if (enhancedMessage) {
         Object.assign(enhancedMessage.prototype, _helpers.addToValue());
 
         // Capture reference to `enhancedMessage` class in closure below.
         const _addFromValue = {
           fromValue: (value: object): object | undefined => {
-            const obj = new enhancedMessage();
-            const message = _helpers.fromValue(value);
-            if (message !== undefined) {
-              Object.assign(obj, message);
-              return obj;
+            const messageType = (enhancedMessage as unknown) as protobuf.Type;
+            const message = messageType.create();
+            const convertedValue = _helpers.fromValue(value);
+            if (convertedValue !== undefined) {
+              Object.assign(message, convertedValue);
+              return message;
             }
             return undefined;
           },
@@ -85,10 +103,8 @@ function assignMethodsToMessages(
 
 export function _enhance(apiVersion: string): void {
   const schemaRoot = enhancedTypesJson['schema'];
-  // tslint:disable-next-line no-any
-  const namespaceRoot = (protos.google.cloud.aiplatform as Record<string, any>)[
-    apiVersion
-  ];
+  const namespaceRoot = ((protos.google.cloud
+    .aiplatform as unknown) as NestedNamespace)[apiVersion] as NestedNamespace;
   const namespaceSchemaRoot = namespaceRoot['schema'];
-  walkNamespaces(schemaRoot, namespaceSchemaRoot);
+  walkNamespaces(schemaRoot, namespaceSchemaRoot as NestedNamespace);
 }

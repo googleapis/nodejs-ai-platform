@@ -15,10 +15,14 @@
 import {
   googleProtobufValueFromObject,
   googleProtobufValueToObject,
+  ValueType,
 } from './value-converter';
+const protobuf = require('protobuf.js');
 
 interface ToValueFunction {
-  toValue(): object | undefined;
+  toValue(): null | object | undefined;
+  $type: unknown;
+  toJson(): string;
 }
 
 // Assigns the toValue() function as a member of an enhanced class.
@@ -26,7 +30,7 @@ export function addToValue() {
   const methods: ToValueFunction = ({} as unknown) as ToValueFunction;
 
   methods.toValue = function () {
-    return toValue(this);
+    return toValue((this as unknown) as protobuf.Message);
   };
 
   return methods;
@@ -37,15 +41,19 @@ export function addToValue() {
  * @param message Message to convert
  * @returns a Value-formatted object
  */
-// tslint:disable-next-line no-any
-export function toValue(message: any): object | undefined {
+export function toValue(
+  message: protobuf.Message
+): null | object | undefined | protobuf.common.IValue {
   if (message === undefined) {
     return undefined;
   }
 
-  const value = googleProtobufValueFromObject(message, (val: any) => {
-    return val;
-  });
+  const value = googleProtobufValueFromObject(
+    (message as unknown) as ValueType,
+    (val: object) => {
+      return val;
+    }
+  );
   return value;
 }
 
@@ -54,13 +62,14 @@ export function toValue(message: any): object | undefined {
  * @param value Value to convert
  * @returns a Message
  */
-// tslint:disable-next-line no-any
-export function fromValue(value: any): object | null | undefined {
+export function fromValue(
+  value: protobuf.common.IValue
+): object | null | undefined | string | number | ValueType | boolean {
   if (!value) {
     return undefined;
   }
 
-  if (!('structValue' in value) || !('fields' in value.structValue)) {
+  if (!value.structValue || !value.structValue.fields) {
     throw new Error(
       'ERROR: fromValue() was provided a malformed protobuf object'
     );

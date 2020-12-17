@@ -12,14 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+const protobuf = require('protobuf.js');
 
 // TODO(): Remove this file once https://github.com/protobufjs/protobuf.js/pull/1495 is submitted.
+export interface ValueType {
+  [index: string]:
+    | null
+    | boolean
+    | string
+    | number
+    | ValueType
+    | Array<string | number | ValueType>;
+}
+
+// INTERNAL ONLY. This function is not exposed to external callers.
 export function googleProtobufValueFromObject(
-  // tslint:disable-next-line no-any
-  object: any,
-  // tslint:disable-next-line no-any
-  create: any
-): object | undefined {
+  object: ValueType,
+  create: (result: object) => object
+): object | null | ValueType | protobuf.common.IValue {
   if (object === null) {
     return create({
       kind: 'nullValue',
@@ -58,10 +68,11 @@ export function googleProtobufValueFromObject(
   if (typeof object === 'object') {
     // tslint:disable-next-line no-any
     const fields: any = {},
-      names = Object.keys(object);
+      names: string[] = Object.keys(object);
     for (let i = 0; i < names.length; ++i) {
-      fields[names[i]] = googleProtobufValueFromObject(
-        object[names[i]],
+      const fieldName = names[i];
+      fields[fieldName] = googleProtobufValueFromObject(
+        object[fieldName] as ValueType,
         create
       );
     }
@@ -72,17 +83,17 @@ export function googleProtobufValueFromObject(
       },
     });
   }
-  return undefined;
+  return null;
 }
 
+// INTERNAL ONLY. This function not exposed to external callers.
 // recursive google.protobuf.Value to plain JS object
 export function googleProtobufValueToObject(
-  message: any
-): object | null | undefined {
+  message: protobuf.common.IValue
+): object | null | undefined | boolean | number | string {
   if (message.kind === 'boolValue') {
     return message.boolValue;
   }
-
   if (message.kind === 'nullValue') {
     return null;
   }
@@ -93,13 +104,14 @@ export function googleProtobufValueToObject(
     return message.stringValue;
   }
   if (message.kind === 'listValue') {
-    return message.listValue.values.map(googleProtobufValueToObject);
+    return message.listValue?.values?.map(googleProtobufValueToObject);
   }
   if (message.kind === 'structValue') {
-    if (!message.structValue.fields) {
+    if (!message.structValue?.fields) {
       return {};
     }
     const names = Object.keys(message.structValue.fields),
+      // tslint:disable-next-line no-any
       struct: any = {};
     for (let i = 0; i < names.length; ++i) {
       struct[names[i]] = googleProtobufValueToObject(
