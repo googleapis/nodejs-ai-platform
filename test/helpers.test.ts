@@ -24,6 +24,7 @@ describe('AI Platform helper methods', () => {
     myBool: true,
     myInt: 4,
     myString: 'hello',
+    myNull: 0,
     myList: ['one', 'two'],
     myObj: {
       nested: 'obj',
@@ -44,6 +45,10 @@ describe('AI Platform helper methods', () => {
         myString: {
           kind: 'stringValue',
           stringValue: 'hello',
+        },
+        myNull: {
+          kind: 'nullValue',
+          nullValue: 0,
         },
         myList: {
           kind: 'listValue',
@@ -105,6 +110,11 @@ describe('AI Platform helper methods', () => {
       assert.ok(actualStringType);
       assert.ok('stringValue' in actualStringType);
       assert.strictEqual(actualStringType.stringValue, dataTypeObject.myString);
+
+      const actualNullType = actualInnerFields.myNull;
+      assert.ok(actualNullType);
+      assert.ok('nullValue' in actualNullType);
+      assert.strictEqual(actualNumberType.nullValue, dataTypeObject.myNull);
 
       const actualListType = actualInnerFields.myList;
       assert.ok(actualListType);
