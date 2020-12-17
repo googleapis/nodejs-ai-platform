@@ -20,6 +20,7 @@ import {
 
 interface ToValueFunction {
   toValue(): null | object | undefined;
+  // Add these two members so that we can convert to Message objects more easily.
   $type: unknown;
   toJson(): string;
 }
