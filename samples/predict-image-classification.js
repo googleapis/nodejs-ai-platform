@@ -91,7 +91,7 @@ function main(filename, endpointId, project, location = 'us-central1') {
   // [END aiplatform_predict_image_classification]
 }
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', err => {
   console.error(err.message);
   process.exitCode = 1;
 });

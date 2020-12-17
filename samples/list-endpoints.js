@@ -50,7 +50,7 @@ function main(projectId, location = 'us-central1') {
       }
     }
   }
-  
+
   listEndpoints();
   // [END aiplatform_list_endpoints]
 }

@@ -122,14 +122,14 @@ function main(
       console.log(`\t\tMessage : ${error.message}`);
     }
   }
-  
+
   createTrainingPipelineImageClassification();
   // [END aiplatform_create_training_pipeline_image_classification]
 }
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', err => {
   console.error(err.message);
   process.exitCode = 1;
 });
 
-main(...process.argv.slice(2));;
+main(...process.argv.slice(2));
