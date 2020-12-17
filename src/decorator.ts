@@ -15,7 +15,6 @@
 import * as _helpers from './helpers';
 import * as protos from '../protos/protos';
 
-const protobuf = require('protobuf.js');
 const enhancedTypesJson = require('./enhanced-types.json');
 
 interface JsonNode {

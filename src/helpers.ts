@@ -17,7 +17,6 @@ import {
   googleProtobufValueToObject,
   ValueType,
 } from './value-converter';
-const protobuf = require('protobuf.js');
 
 interface ToValueFunction {
   toValue(): null | object | undefined;

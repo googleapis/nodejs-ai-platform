@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-const protobuf = require('protobuf.js');
 
 // TODO(): Remove this file once https://github.com/protobufjs/protobuf.js/pull/1495 is submitted.
 export interface ValueType {
@@ -66,7 +65,7 @@ export function googleProtobufValueFromObject(
     });
   }
   if (typeof object === 'object') {
-    // tslint:disable-next-line no-any
+    // tslint:disable-next-line no-explicit-any
     const fields: any = {},
       names: string[] = Object.keys(object);
     for (let i = 0; i < names.length; ++i) {
@@ -111,7 +110,7 @@ export function googleProtobufValueToObject(
       return {};
     }
     const names = Object.keys(message.structValue.fields),
-      // tslint:disable-next-line no-any
+      // tslint:disable-next-line no-explicit-any
       struct: any = {};
     for (let i = 0; i < names.length; ++i) {
       struct[names[i]] = googleProtobufValueToObject(
