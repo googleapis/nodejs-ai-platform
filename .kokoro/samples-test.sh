@@ -15,11 +15,12 @@
 # limitations under the License.
 
 set -eo pipefail
+
 export NPM_CONFIG_PREFIX=${HOME}/.npm-global
 
 # Setup service account credentials.
 export GOOGLE_APPLICATION_CREDENTIALS=${KOKORO_GFILE_DIR}/service-account.json
-export GCLOUD_PROJECT=ucaip-sample-tests
+export GCLOUD_PROJECT=long-door-651
 
 cd $(dirname $0)/..
 
