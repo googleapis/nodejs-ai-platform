@@ -90,11 +90,13 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
       }
     }
   }
-  await getModelEvaluationImageObjectDetection();
+  getModelEvaluationImageObjectDetection();
   // [END aiplatform_get_model_evaluation_image_object_detection]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

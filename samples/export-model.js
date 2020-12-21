@@ -72,11 +72,13 @@ async function main(
 
     console.log(`Export model response : ${JSON.stringify(result)}`);
   }
-  await exportModel();
+  exportModel();
   // [END aiplatform_export_model]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

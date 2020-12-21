@@ -55,11 +55,13 @@ async function main(endpointId, project, location = 'us-central1') {
     console.log('Delete endpoint response :');
     console.log(`${result}`);
   }
-  await deleteEndpoint();
+  deleteEndpoint();
   // [END aiplatform_delete_endpoint]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

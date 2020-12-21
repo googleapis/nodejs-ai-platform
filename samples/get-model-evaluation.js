@@ -55,11 +55,13 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
     console.log(`\tCreate time : ${JSON.stringify(response.createTime)}`);
     console.log(`\tSlice dimensions : ${response.sliceDimensions}`);
   }
-  await getModelEvaluation();
+  getModelEvaluation();
   // [END aiplatform_get_model_evaluation]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

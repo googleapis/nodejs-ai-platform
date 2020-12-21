@@ -67,11 +67,13 @@ async function main(datasetDisplayName, project, location = 'us-central1') {
     console.log(`Metadata : ${JSON.stringify(result.metadata)}`);
     console.log(`Labels : ${JSON.stringify(result.labels)}`);
   }
-  await createDatasetVideo();
+  createDatasetVideo();
   // [END aiplatform_create_dataset_video]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

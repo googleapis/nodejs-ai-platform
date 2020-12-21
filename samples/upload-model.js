@@ -82,11 +82,13 @@ async function main(
     console.log('Upload model response ');
     console.log(`\tModel : ${result.model}`);
   }
-  await uploadModel();
+  uploadModel();
   // [END aiplatform_upload_model]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

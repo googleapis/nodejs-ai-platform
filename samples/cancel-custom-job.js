@@ -50,11 +50,13 @@ async function main(customJobId, project, location = 'us-central1') {
     console.log('Cancel custom job response');
     console.log(`${response}`);
   }
-  await cancelCustomJob();
+  cancelCustomJob();
   // [END aiplatform_cancel_custom_job]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

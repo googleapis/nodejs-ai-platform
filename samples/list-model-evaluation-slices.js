@@ -53,11 +53,13 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
     console.log('List model evaluation response', response);
     console.log(response);
   }
-  await listModelEvaluationSlices();
+  listModelEvaluationSlices();
   // [END aiplatform_list_model_evaluation_slices]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

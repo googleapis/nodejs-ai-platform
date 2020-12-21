@@ -69,11 +69,13 @@ async function main(
         ${JSON.stringify(importDataResponse.result, null, 2)}`
     );
   }
-  await importDataTextSentimentAnalysis();
+  importDataTextSentimentAnalysis();
   // [END aiplatform_import_data_text_sentiment_analysis]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

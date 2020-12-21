@@ -70,11 +70,13 @@ async function main(
         ${JSON.stringify(response.result)}`
     );
   }
-  await importDataVideoClassification();
+  importDataVideoClassification();
   // [END aiplatform_import_data_video_classification]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

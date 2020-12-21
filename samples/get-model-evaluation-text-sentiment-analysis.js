@@ -90,11 +90,13 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
       }
     }
   }
-  await getModelEvaluationTextSentimentAnalysis();
+  getModelEvaluationTextSentimentAnalysis();
   // [END aiplatform_get_model_evaluation_text_sentiment_analysis]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

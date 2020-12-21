@@ -81,7 +81,7 @@ function main(
       inputDataConfig,
       modelToUpload,
     };
-    const request = { parent, trainingPipeline };
+    const request = {parent, trainingPipeline};
 
     // Create training pipeline request
     const [response] = await pipelineServiceClient.createTrainingPipeline(

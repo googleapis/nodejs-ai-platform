@@ -69,11 +69,13 @@ async function main(
         ${JSON.stringify(importDataResponse)}`
     );
   }
-  await importDataVideoObjectTracking();
+  importDataVideoObjectTracking();
   // [END aiplatform_import_data_video_object_tracking]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

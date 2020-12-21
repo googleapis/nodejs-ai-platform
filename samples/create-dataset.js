@@ -77,11 +77,13 @@ async function main(
     console.log(`\tUpdate time : ${createDatasetResponse.updateTime}`);
     console.log(`\tLabels : ${JSON.stringify(createDatasetResponse.labels)}`);
   }
-  await createDataset();
+  createDataset();
   // [END aiplatform_create_dataset]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

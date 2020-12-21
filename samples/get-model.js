@@ -117,11 +117,13 @@ async function main(modelId, project, location = 'us-central1') {
     console.log('\tDeployed models');
     console.log('\t\t', deployedModels);
   }
-  await getModel();
+  getModel();
   // [END aiplatform_get_model]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

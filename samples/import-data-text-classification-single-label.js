@@ -70,11 +70,13 @@ async function main(
         ${JSON.stringify(importDataResponse.result)}`
     );
   }
-  await importDataTextClassificationSingleLabel();
+  importDataTextClassificationSingleLabel();
   // [END aiplatform_import_data_text_classification_single_label]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

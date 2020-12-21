@@ -54,11 +54,13 @@ async function main(datasetId, project, location = 'us-central1') {
     console.log('Delete dataset response :');
     console.log(`${result}`);
   }
-  await deleteDataset();
+  deleteDataset();
   // [END aiplatform_delete_dataset]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

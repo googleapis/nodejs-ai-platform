@@ -65,11 +65,13 @@ async function main(endpointDisplayName, project, location = 'us-central1') {
     console.log(`\tCreate time : ${JSON.stringify(result.createTime)}`);
     console.log(`\tUpdate time : ${JSON.stringify(result.updateTime)}`);
   }
-  await createEndpoint();
+  createEndpoint();
   // [END aiplatform_create_endpoint]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));
