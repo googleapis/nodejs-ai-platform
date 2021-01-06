@@ -15,7 +15,7 @@
 /**
  * This module contains utility functions for removing unneeded, stale, or
  * orphaned resources from test project.
- * 
+ *
  * Removes:
  * - Datasets
  * - Training pipelines
@@ -30,7 +30,7 @@ const LOCATION = 'us-central1';
 
 // All AI Platform resources need to specify a hostname.
 const clientOptions = {
-    apiEndpoint: 'us-central1-aiplatform.googleapis.com',
+  apiEndpoint: 'us-central1-aiplatform.googleapis.com',
 };
 
 /**
@@ -41,19 +41,19 @@ const clientOptions = {
  * @returns {bool}
  */
 function checkDeletionStatus(displayName, createTime) {
-    const NOW = new Date();
-    // Check whether this dataset is a temporary resource
-    if (displayName.indexOf(TEMP_RESOURCE_PREFIX) == -1) {
-        return false;
-    }
+  const NOW = new Date();
+  // Check whether this dataset is a temporary resource
+  if (displayName.indexOf(TEMP_RESOURCE_PREFIX) == -1) {
+    return false;
+  }
 
-    // Check how old the dataset is
-    const ageOfResource = new Date(createTime.seconds * 1000);
-    if (NOW - ageOfResource < MAXIMUM_AGE) {
-        return false;
-    }
+  // Check how old the dataset is
+  const ageOfResource = new Date(createTime.seconds * 1000);
+  if (NOW - ageOfResource < MAXIMUM_AGE) {
+    return false;
+  }
 
-    return true;
+  return true;
 }
 
 /**
@@ -62,30 +62,30 @@ function checkDeletionStatus(displayName, createTime) {
  * @returns {Promise}
  */
 async function cleanDatasets(projectId) {
-    const {DatasetServiceClient} = require("@google-cloud/aiplatform");
-    const datasetServiceClient = new DatasetServiceClient(clientOptions);
+  const {DatasetServiceClient} = require('@google-cloud/aiplatform');
+  const datasetServiceClient = new DatasetServiceClient(clientOptions);
 
-    const [datasets] = await datasetServiceClient.listDatasets({
-        parent: `projects/${projectId}/locations/${LOCATION}`
-    });
+  const [datasets] = await datasetServiceClient.listDatasets({
+    parent: `projects/${projectId}/locations/${LOCATION}`,
+  });
 
-    const datasetDeletionOperations = [];
-    for (const dataset of datasets) {
-        const {displayName, createTime, name} = dataset;
+  const datasetDeletionOperations = [];
+  for (const dataset of datasets) {
+    const {displayName, createTime, name} = dataset;
 
-        if (checkDeletionStatus(displayName, createTime)) {
-            const deletionOp = datasetServiceClient.deleteDataset({
-                name
-            })
-            datasetDeletionOperations.push(deletionOp);
-        }
-
-        if (datasetDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
-            break;
-        }
+    if (checkDeletionStatus(displayName, createTime)) {
+      const deletionOp = datasetServiceClient.deleteDataset({
+        name,
+      });
+      datasetDeletionOperations.push(deletionOp);
     }
 
-    return Promise.all(datasetDeletionOperations);  
+    if (datasetDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
+      break;
+    }
+  }
+
+  return Promise.all(datasetDeletionOperations);
 }
 
 /**
@@ -94,29 +94,29 @@ async function cleanDatasets(projectId) {
  * @returns {Promise}
  */
 async function cleanTrainingPipelines(projectId) {
-    const {PipelineServiceClient} = require("@google-cloud/aiplatform");
-    const pipelineServiceClient = new PipelineServiceClient(clientOptions);
+  const {PipelineServiceClient} = require('@google-cloud/aiplatform');
+  const pipelineServiceClient = new PipelineServiceClient(clientOptions);
 
-    const [pipelines] = await pipelineServiceClient.listTrainingPipelines({
-        parent: `projects/${projectId}/locations/${LOCATION}`
-    });
+  const [pipelines] = await pipelineServiceClient.listTrainingPipelines({
+    parent: `projects/${projectId}/locations/${LOCATION}`,
+  });
 
-    const pipelineDeletionOperations = [];
-    for (const pipeline of pipelines) {
-        const {displayName, createTime, name} = pipeline;
+  const pipelineDeletionOperations = [];
+  for (const pipeline of pipelines) {
+    const {displayName, createTime, name} = pipeline;
 
-        if (checkDeletionStatus(displayName, createTime)) {
-            const deletionOp = pipelineServiceClient.deleteTrainingPipeline({
-                name
-            })
-            pipelineDeletionOperations.push(deletionOp);
-        }
-
-        if (pipelineDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
-            break;
-        }
+    if (checkDeletionStatus(displayName, createTime)) {
+      const deletionOp = pipelineServiceClient.deleteTrainingPipeline({
+        name,
+      });
+      pipelineDeletionOperations.push(deletionOp);
     }
-    return Promise.all(pipelineDeletionOperations);
+
+    if (pipelineDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
+      break;
+    }
+  }
+  return Promise.all(pipelineDeletionOperations);
 }
 
 /**
@@ -125,41 +125,44 @@ async function cleanTrainingPipelines(projectId) {
  * @returns {Promise}
  */
 async function cleanModels(projectId) {
-    const {ModelServiceClient, EndpointServiceClient} = require("@google-cloud/aiplatform");
-    const modelServiceClient = new ModelServiceClient(clientOptions);
+  const {
+    ModelServiceClient,
+    EndpointServiceClient,
+  } = require('@google-cloud/aiplatform');
+  const modelServiceClient = new ModelServiceClient(clientOptions);
 
-    const [models] = await modelServiceClient.listModels({
-        parent: `projects/${projectId}/locations/${LOCATION}`
-    });
+  const [models] = await modelServiceClient.listModels({
+    parent: `projects/${projectId}/locations/${LOCATION}`,
+  });
 
-    const modelDeletionOperations = [];
-    for (const model of models) {
-        const {displayName, createTime, deployedModels, name} = model;
+  const modelDeletionOperations = [];
+  for (const model of models) {
+    const {displayName, createTime, deployedModels, name} = model;
 
-        if (checkDeletionStatus(displayName, createTime)) {
-            // Need to check if model is deployed to an endpoint
-            // Undeploy the model everywhere it is deployed
-            for (const deployedModel of deployedModels) {
-                const {endpoint, deployedModelId} = deployedModel;
+    if (checkDeletionStatus(displayName, createTime)) {
+      // Need to check if model is deployed to an endpoint
+      // Undeploy the model everywhere it is deployed
+      for (const deployedModel of deployedModels) {
+        const {endpoint, deployedModelId} = deployedModel;
 
-                const endpointServiceClient = new EndpointServiceClient(clientOptions);
-                await endpointServiceClient.undeployModel({
-                    endpoint,
-                    deployedModelId
-                });
-            }
+        const endpointServiceClient = new EndpointServiceClient(clientOptions);
+        await endpointServiceClient.undeployModel({
+          endpoint,
+          deployedModelId,
+        });
+      }
 
-            const deletionOp = modelServiceClient.deleteModel({
-                name
-            });
-            modelDeletionOperations.push(deletionOp);
-        }
-
-        if (modelDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
-            break;
-        }
+      const deletionOp = modelServiceClient.deleteModel({
+        name,
+      });
+      modelDeletionOperations.push(deletionOp);
     }
-    return Promise.all(modelDeletionOperations);
+
+    if (modelDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
+      break;
+    }
+  }
+  return Promise.all(modelDeletionOperations);
 }
 
 /**
@@ -168,29 +171,29 @@ async function cleanModels(projectId) {
  * @returns {Promise}
  */
 async function cleanEndpoints(projectId) {
-    const {EndpointServiceClient} = require("@google-cloud/aiplatform");
-    const endpointServiceClient = new EndpointServiceClient(clientOptions);
+  const {EndpointServiceClient} = require('@google-cloud/aiplatform');
+  const endpointServiceClient = new EndpointServiceClient(clientOptions);
 
-    const [endpoints] = await endpointServiceClient.listEndpoints({
-        parent: `projects/${projectId}/locations/${LOCATION}`
-    });
+  const [endpoints] = await endpointServiceClient.listEndpoints({
+    parent: `projects/${projectId}/locations/${LOCATION}`,
+  });
 
-    const endpointDeletionOperations = [];
-    for (const endpoint of endpoints) {
-        const {displayName, createTime, name} = endpoint;
+  const endpointDeletionOperations = [];
+  for (const endpoint of endpoints) {
+    const {displayName, createTime, name} = endpoint;
 
-        if (checkDeletionStatus(displayName, createTime)) {
-            const deletionOp = endpointServiceClient.deleteEndpoint({
-                name
-            });
-            endpointDeletionOperations.push(deletionOp);
-        }
-
-        if (endpointDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
-            break;
-        }
+    if (checkDeletionStatus(displayName, createTime)) {
+      const deletionOp = endpointServiceClient.deleteEndpoint({
+        name,
+      });
+      endpointDeletionOperations.push(deletionOp);
     }
-    return Promise.all(endpointDeletionOperations);
+
+    if (endpointDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
+      break;
+    }
+  }
+  return Promise.all(endpointDeletionOperations);
 }
 
 /**
@@ -199,28 +202,28 @@ async function cleanEndpoints(projectId) {
  * @returns {Promise}
  */
 async function cleanBatchPredictionJobs(projectId) {
-    const {JobServiceClient} = require("@google-cloud/aiplatform");
-    const jobServiceClient = new JobServiceClient(clientOptions);
+  const {JobServiceClient} = require('@google-cloud/aiplatform');
+  const jobServiceClient = new JobServiceClient(clientOptions);
 
-    const [batchPredictionJobs] = await jobServiceClient.listBatchPredictionJobs({
-        parent: `projects/${projectId}/locations/${LOCATION}`
-    });
+  const [batchPredictionJobs] = await jobServiceClient.listBatchPredictionJobs({
+    parent: `projects/${projectId}/locations/${LOCATION}`,
+  });
 
-    const predictionJobDeletionOperations = [];
-    for (const job of batchPredictionJobs) {
-        const {displayName, createTime, name} = job;
-        if (checkDeletionStatus(displayName, createTime)) {
-            const deletionOp = jobServiceClient.deleteBatchPredictionJob({
-                name
-            });
-            predictionJobDeletionOperations.push(deletionOp);
-        }
-
-        if (predictionJobDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
-            break;
-        }
+  const predictionJobDeletionOperations = [];
+  for (const job of batchPredictionJobs) {
+    const {displayName, createTime, name} = job;
+    if (checkDeletionStatus(displayName, createTime)) {
+      const deletionOp = jobServiceClient.deleteBatchPredictionJob({
+        name,
+      });
+      predictionJobDeletionOperations.push(deletionOp);
     }
-    return Promise.all(predictionJobDeletionOperations);
+
+    if (predictionJobDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
+      break;
+    }
+  }
+  return Promise.all(predictionJobDeletionOperations);
 }
 
 /**
@@ -229,18 +232,18 @@ async function cleanBatchPredictionJobs(projectId) {
  * @returns {Promise}
  */
 async function cleanAll(projectId) {
-    await cleanDatasets(projectId);
-    await cleanTrainingPipelines(projectId);
-    await cleanModels(projectId);
-    await cleanEndpoints(projectId);
-    await cleanBatchPredictionJobs(projectId);
+  await cleanDatasets(projectId);
+  await cleanTrainingPipelines(projectId);
+  await cleanModels(projectId);
+  await cleanEndpoints(projectId);
+  await cleanBatchPredictionJobs(projectId);
 }
 
 module.exports = {
-    cleanAll: cleanAll,
-    cleanDatasets: cleanDatasets,
-    cleanTrainingPipelines: cleanTrainingPipelines,
-    cleanModels: cleanModels,
-    cleanEndpoints: cleanEndpoints,
-    cleanBatchPredictionJobs: cleanBatchPredictionJobs
+  cleanAll: cleanAll,
+  cleanDatasets: cleanDatasets,
+  cleanTrainingPipelines: cleanTrainingPipelines,
+  cleanModels: cleanModels,
+  cleanEndpoints: cleanEndpoints,
+  cleanBatchPredictionJobs: cleanBatchPredictionJobs,
 };

@@ -18,7 +18,7 @@
 
 const {assert} = require('chai');
 const {after, before, describe, it} = require('mocha');
-const clean = require("./clean");
+const clean = require('./clean');
 
 const uuid = require('uuid').v4;
 const cp = require('child_process');
@@ -42,7 +42,6 @@ const location = process.env.LOCATION;
 let trainingPipelineId;
 
 describe('AI platform create training pipeline image classification', () => {
-
   before('should delete any old and/or orphaned resources', async () => {
     await clean.cleanTrainingPipelines(project);
   });
