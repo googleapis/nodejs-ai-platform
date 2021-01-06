@@ -42,12 +42,12 @@ const clientOptions = {
  */
 function checkDeletionStatus(displayName, createTime) {
   const NOW = new Date();
-  // Check whether this dataset is a temporary resource
+  // Check whether this resources is a temporary resource
   if (displayName.indexOf(TEMP_RESOURCE_PREFIX) == -1) {
     return false;
   }
 
-  // Check how old the dataset is
+  // Check how old the resource is
   const ageOfResource = new Date(createTime.seconds * 1000);
   if (NOW - ageOfResource < MAXIMUM_AGE) {
     return false;
