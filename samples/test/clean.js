@@ -43,7 +43,7 @@ const clientOptions = {
 function checkDeletionStatus(displayName, createTime) {
   const NOW = new Date();
   // Check whether this resources is a temporary resource
-  if (displayName.indexOf(TEMP_RESOURCE_PREFIX) == -1) {
+  if (displayName.indexOf(TEMP_RESOURCE_PREFIX) === -1) {
     return false;
   }
 
