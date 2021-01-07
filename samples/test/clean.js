@@ -69,23 +69,15 @@ async function cleanDatasets(projectId) {
     parent: `projects/${projectId}/locations/${LOCATION}`,
   });
 
-  const datasetDeletionOperations = [];
   for (const dataset of datasets) {
     const {displayName, createTime, name} = dataset;
 
     if (checkDeletionStatus(displayName, createTime)) {
-      const deletionOp = datasetServiceClient.deleteDataset({
+      await datasetServiceClient.deleteDataset({
         name,
       });
-      datasetDeletionOperations.push(deletionOp);
-    }
-
-    if (datasetDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
-      break;
     }
   }
-
-  return Promise.all(datasetDeletionOperations);
 }
 
 /**
@@ -101,22 +93,15 @@ async function cleanTrainingPipelines(projectId) {
     parent: `projects/${projectId}/locations/${LOCATION}`,
   });
 
-  const pipelineDeletionOperations = [];
   for (const pipeline of pipelines) {
     const {displayName, createTime, name} = pipeline;
 
     if (checkDeletionStatus(displayName, createTime)) {
-      const deletionOp = pipelineServiceClient.deleteTrainingPipeline({
+      await pipelineServiceClient.deleteTrainingPipeline({
         name,
       });
-      pipelineDeletionOperations.push(deletionOp);
-    }
-
-    if (pipelineDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
-      break;
     }
   }
-  return Promise.all(pipelineDeletionOperations);
 }
 
 /**
@@ -135,7 +120,6 @@ async function cleanModels(projectId) {
     parent: `projects/${projectId}/locations/${LOCATION}`,
   });
 
-  const modelDeletionOperations = [];
   for (const model of models) {
     const {displayName, createTime, deployedModels, name} = model;
 
@@ -152,17 +136,11 @@ async function cleanModels(projectId) {
         });
       }
 
-      const deletionOp = modelServiceClient.deleteModel({
+      await modelServiceClient.deleteModel({
         name,
       });
-      modelDeletionOperations.push(deletionOp);
-    }
-
-    if (modelDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
-      break;
     }
   }
-  return Promise.all(modelDeletionOperations);
 }
 
 /**
@@ -178,22 +156,15 @@ async function cleanEndpoints(projectId) {
     parent: `projects/${projectId}/locations/${LOCATION}`,
   });
 
-  const endpointDeletionOperations = [];
   for (const endpoint of endpoints) {
     const {displayName, createTime, name} = endpoint;
 
     if (checkDeletionStatus(displayName, createTime)) {
-      const deletionOp = endpointServiceClient.deleteEndpoint({
+      await endpointServiceClient.deleteEndpoint({
         name,
       });
-      endpointDeletionOperations.push(deletionOp);
-    }
-
-    if (endpointDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
-      break;
     }
   }
-  return Promise.all(endpointDeletionOperations);
 }
 
 /**
@@ -209,21 +180,14 @@ async function cleanBatchPredictionJobs(projectId) {
     parent: `projects/${projectId}/locations/${LOCATION}`,
   });
 
-  const predictionJobDeletionOperations = [];
   for (const job of batchPredictionJobs) {
     const {displayName, createTime, name} = job;
     if (checkDeletionStatus(displayName, createTime)) {
-      const deletionOp = jobServiceClient.deleteBatchPredictionJob({
+      await jobServiceClient.deleteBatchPredictionJob({
         name,
       });
-      predictionJobDeletionOperations.push(deletionOp);
-    }
-
-    if (predictionJobDeletionOperations.length > MAXIMUM_NUMBER_OF_DELETIONS) {
-      break;
     }
   }
-  return Promise.all(predictionJobDeletionOperations);
 }
 
 /**
