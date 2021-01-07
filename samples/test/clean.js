@@ -24,7 +24,6 @@
  * - Batch prediction jobs
  */
 const MAXIMUM_AGE = 3600000 * 24 * 2; // 2 days in milliseconds
-const MAXIMUM_NUMBER_OF_DELETIONS = 10; // Avoid hitting LRO quota
 const TEMP_RESOURCE_PREFIX = 'temp';
 const LOCATION = 'us-central1';
 
