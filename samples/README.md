@@ -9,9 +9,12 @@
 
 ## Table of Contents
 
-- [Before you begin](#before-you-begin)
-- [Samples](#samples)
-  - [Quickstart](#quickstart)
+* [Before you begin](#before-you-begin)
+* [Samples](#samples)
+  * [Create-training-pipeline-image-classification](#create-training-pipeline-image-classification)
+  * [List-endpoints](#list-endpoints)
+  * [Predict-image-classification](#predict-image-classification)
+  * [Quickstart](#quickstart)
 
 ## Before you begin
 
@@ -26,6 +29,62 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ## Samples
 
+<<<<<<< HEAD
+=======
+
+
+### Create-training-pipeline-image-classification
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-image-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-image-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-training-pipeline-image-classification.js`
+
+
+-----
+
+
+
+
+### List-endpoints
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/list-endpoints.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-endpoints.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-endpoints.js`
+
+
+-----
+
+
+
+
+### Predict-image-classification
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-image-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/predict-image-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/predict-image-classification.js`
+
+
+-----
+
+
+
+
+>>>>>>> master
 ### Quickstart
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/quickstart.js).

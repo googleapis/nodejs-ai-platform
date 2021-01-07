@@ -15,7 +15,7 @@
 
 'use strict';
 
-async function main(projectId, location = 'us-central1') {
+function main(projectId, location = 'us-central1') {
   // [START aiplatform_list_endpoints]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
@@ -50,8 +50,9 @@ async function main(projectId, location = 'us-central1') {
       }
     }
   }
+
+  listEndpoints();
   // [END aiplatform_list_endpoints]
-  await listEndpoints();
 }
 
 main(...process.argv.slice(2)).catch(err => {

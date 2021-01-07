@@ -120,3 +120,12 @@ function assignMethodsToMessages(namespace: any, messages: string[]): void {
 walkNamespaces(schemaRoot);
 
 export {protos};
+
+import {fromValue, toValue} from './helpers';
+
+const helpers = {toValue, fromValue};
+
+export {helpers};
+
+import {_enhance} from './decorator';
+_enhance('v1beta1');

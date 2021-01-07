@@ -16,18 +16,16 @@
 
 'use strict';
 
-const uuid = require('uuid');
-
-async function main(
-  datasetId = '1084241610289446912',
-  modelDisplayName = `ENCL-icn-model-${uuid.v4()}`,
-  trainingPipelineDisplayName = `ENCL_icn_pipeline_${uuid.v4()}`,
-  project = 'ucaip-sample-tests',
+function main(
+  datasetId,
+  modelDisplayName,
+  trainingPipelineDisplayName,
+  project,
   location = 'us-central1'
 ) {
   // [START aiplatform_create_training_pipeline_image_classification]
   /**
-   * TODO(developer): Uncomment these variables before running the sample.\
+   * TODO(developer): Uncomment these variables before running the sample.
    * (Not necessary if passing values as arguments)
    */
   /*
@@ -55,12 +53,12 @@ async function main(
     clientOptions
   );
 
-  async function createTrainingPipelineTextSentimentAnalysis() {
+  async function createTrainingPipelineImageClassification() {
     // Configure the parent resource
     const parent = `projects/${project}/locations/${location}`;
 
     // Values should match the input expected by your model.
-    let trainingTaskInputsMessage = new definition.AutoMlImageClassificationInputs(
+    const trainingTaskInputsMessage = new definition.AutoMlImageClassificationInputs(
       {
         multiLabel: true,
         modelType: ModelType.CLOUD,
@@ -69,9 +67,9 @@ async function main(
       }
     );
 
-    let trainingTaskInputs = trainingTaskInputsMessage.toValue();
+    const trainingTaskInputs = trainingTaskInputsMessage.toValue();
 
-    let trainingTaskDefinition =
+    const trainingTaskDefinition =
       'gs://google-cloud-aiplatform/schema/trainingjob/definition/automl_image_classification_1.0.0.yaml';
 
     const modelToUpload = {displayName: modelDisplayName};
@@ -88,14 +86,12 @@ async function main(
       trainingPipeline,
     };
 
-    console.log(request);
-
     // Create training pipeline request
     const [response] = await pipelineServiceClient.createTrainingPipeline(
       request
     );
 
-    console.log(`Create training pipeline text sentiment analysis response :`);
+    console.log('Create training pipeline image classification response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tDisplay Name : ${response.displayName}`);
     console.log(
@@ -117,20 +113,23 @@ async function main(
     console.log(`\tLabels : ${JSON.stringify(response.labels)}`);
 
     const error = response.error;
-    console.log(`\tError`);
-    if (error == null) {
-      console.log(`\t\tCode : {}`);
-      console.log(`\t\tMessage : {}`);
+    console.log('\tError');
+    if (error === null) {
+      console.log('\t\tCode : {}');
+      console.log('\t\tMessage : {}');
     } else {
       console.log(`\t\tCode : ${error.code}`);
       console.log(`\t\tMessage : ${error.message}`);
     }
   }
+
+  createTrainingPipelineImageClassification();
   // [END aiplatform_create_training_pipeline_image_classification]
-  await createTrainingPipelineTextSentimentAnalysis();
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));
