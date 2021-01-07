@@ -12,7 +12,6 @@
   "include": [
     "src/*.ts",
     "src/**/*.ts",
-    "src/enhanced-types.json",
     "test/*.ts",
     "test/**/*.ts",
     "system-test/*.ts",

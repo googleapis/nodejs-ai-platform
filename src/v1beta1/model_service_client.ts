@@ -1916,13 +1916,7 @@ export class ModelServiceClient {
   listModelEvaluationSlicesAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
     options?: CallOptions
-<<<<<<< HEAD
-  ): AsyncIterable<
-    protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice
-  > {
-=======
   ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice> {
->>>>>>> master
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};

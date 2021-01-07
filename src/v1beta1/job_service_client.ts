@@ -3102,13 +3102,7 @@ export class JobServiceClient {
   listHyperparameterTuningJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
     options?: CallOptions
-<<<<<<< HEAD
-  ): AsyncIterable<
-    protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob
-  > {
-=======
   ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob> {
->>>>>>> master
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
