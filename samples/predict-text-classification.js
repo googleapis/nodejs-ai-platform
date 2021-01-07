@@ -48,10 +48,10 @@ async function main(text, endpointId, project, location) {
     // Configure the resources
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
 
-    let predictionInstance = new instance.TextClassificationPredictionInstance({
+    const predictionInstance = new instance.TextClassificationPredictionInstance({
       content: text,
     });
-    let instanceValue = predictionInstance.toValue();
+    const instanceValue = predictionInstance.toValue();
 
     const instances = [instanceValue];
     const request = {
@@ -60,13 +60,13 @@ async function main(text, endpointId, project, location) {
     };
 
     const [response] = await predictionServiceClient.predict(request);
-    console.log(`Predict text classification response`);
+    console.log('Predict text classification response');
     console.log(`\tDeployed model id : ${response.deployedModelId}\n\n`);
 
-    console.log(`Prediction results:`);
+    console.log('Prediction results:');
 
     for (const predictionResultValue of response.predictions) {
-      let predictionResult = prediction.ClassificationPredictionResult.fromValue(
+      const predictionResult = prediction.ClassificationPredictionResult.fromValue(
         predictionResultValue
       );
 

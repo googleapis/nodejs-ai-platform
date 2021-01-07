@@ -84,11 +84,10 @@ async function main(endpointId, project, location = 'us-central1') {
     // Predict request
     const [response] = await predictionServiceClient.predict(request);
 
-    console.log(`Predict tables regression response`);
+    console.log('Predict tables regression response');
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
     const predictions = response.predictions;
-    console.log(`\tPredictions :`);
-    console.log(`Predictions :`);
+    console.log('\tPredictions :');
     for (const predictionResultVal of predictions) {
       const predictionResultObj = prediction.TabularRegressionPredictionResult.fromValue(
         predictionResultVal

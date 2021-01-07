@@ -62,12 +62,12 @@ async function main(text, endpointId, project, location = 'us-central1') {
     // Predict request
     const [response] = await predictionServiceClient.predict(request);
 
-    console.log(`Predict text entity extraction response :`);
+    console.log('Predict text entity extraction response :');
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
 
-    console.log(`\nPredictions :`);
+    console.log('\nPredictions :');
     for (const predictionResultValue of response.predictions) {
-      let predictionResult = prediction.TextExtractionPredictionResult.fromValue(
+      const predictionResult = prediction.TextExtractionPredictionResult.fromValue(
         predictionResultValue
       );
 

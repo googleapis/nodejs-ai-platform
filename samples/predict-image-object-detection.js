@@ -72,10 +72,10 @@ async function main(filename, endpointId, project, location = 'us-central1') {
     // Predict request
     const [response] = await predictionServiceClient.predict(request);
 
-    console.log(`Predict image object detection response`);
+    console.log('Predict image object detection response');
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
     const predictions = response.predictions;
-    console.log(`Predictions :`);
+    console.log('Predictions :');
     for (const predictionResultVal of predictions) {
       const predictionResultObj = prediction.ImageObjectDetectionPredictionResult.fromValue(
         predictionResultVal
