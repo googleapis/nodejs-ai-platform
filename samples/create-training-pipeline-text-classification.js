@@ -54,7 +54,7 @@ async function main(
     // Configure the parent resource
     const parent = `projects/${project}/locations/${location}`;
 
-    let trainingTaskInputObj = new definition.AutoMlTextClassificationInputs({
+    const trainingTaskInputObj = new definition.AutoMlTextClassificationInputs({
       multiLabel: false,
     });
     const trainingTaskInputs = trainingTaskInputObj.toValue();
@@ -110,7 +110,7 @@ async function main(
 
     const fractionSplit = inputDataConfiguration.fractionSplit;
     console.log(`\t\tFraction split`);
-    if (fractionSplit == null) {
+    if (fractionSplit === null) {
       console.log(`\t\t\tTraining fraction : {}`);
       console.log(`\t\t\tValidation fraction : {}`);
       console.log(`\t\t\tTest fraction : {}`);
@@ -126,7 +126,7 @@ async function main(
 
     const filterSplit = inputDataConfiguration.filterSplit;
     console.log(`\t\tFilter split `);
-    if (filterSplit == null) {
+    if (filterSplit === null) {
       console.log(`\t\t\tTraining filter : {}`);
       console.log(`\t\t\tValidation filter : {}`);
       console.log(`\t\t\tTest filter : {}`);
@@ -138,7 +138,7 @@ async function main(
 
     const predefinedSplit = inputDataConfiguration.predefinedSplit;
     console.log(`\t\tPredefined split`);
-    if (predefinedSplit == null) {
+    if (predefinedSplit === null) {
       console.log(`\t\t\tkey : {}`);
     } else {
       console.log(`\t\t\tkey : ${predefinedSplit.key}`);
@@ -146,7 +146,7 @@ async function main(
 
     const timestampSplit = inputDataConfiguration.timestampSplit;
     console.log(`\t\tTimestamp split`);
-    if (timestampSplit == null) {
+    if (timestampSplit === null) {
       console.log(`\t\t\tTraining fraction : {}`);
       console.log(`\t\t\tValidation fraction : {}`);
       console.log(`\t\t\tTest fraction : {}`);
@@ -193,7 +193,7 @@ async function main(
     console.log(`\t\tLabels : ${modelToBeUploaded.labels}`);
 
     const predictSchemata = modelToBeUploaded.predictSchemata;
-    if (predictSchemata == null) {
+    if (predictSchemata === null) {
       console.log(`\t\tPredict schemata`);
       console.log(`\t\t\tInstance schema uri : {}`);
       console.log(`\t\t\tParameters schema uri : {}`);
@@ -216,10 +216,10 @@ async function main(
 
     const [supportedExportFormats] = modelToBeUploaded.supportedExportFormats;
     console.log(`\t\tSupported export formats`);
-    if (supportedExportFormats == null) {
+    if (supportedExportFormats === null) {
       console.log(`\t\tSupported export format`);
     } else {
-      for (supportedExportFormat of supportedExportFormats) {
+      for (const supportedExportFormat of supportedExportFormats) {
         console.log(`\t\tSupported export format`);
         console.log(`\t\t\tid : ${supportedExportFormat.id}`);
       }
@@ -227,7 +227,7 @@ async function main(
 
     const containerSpec = modelToBeUploaded.containerSpec;
     console.log(`\t\tContainer Spec`);
-    if (containerSpec == null) {
+    if (containerSpec === null) {
       console.log(`\t\t\t${JSON.stringify(containerSpec)}`);
       console.log(`\t\t\tImage uri : {}`);
       console.log(`\t\t\tCommand : {}`);
@@ -247,10 +247,10 @@ async function main(
       console.log(`\t\t\tHealth route : ${containerSpec.healthRoute}`);
 
       const envs = containerSpec.env;
-      if (env == null) {
+      if (envs === null) {
         console.log(`\t\t\tEnv`);
       } else {
-        for (env of envs) {
+        for (const env of envs) {
           console.log(`\t\t\tEnv`);
           console.log(`\t\t\tName : ${env.name}`);
           console.log(`\t\t\tValue : ${env.value}`);
@@ -258,10 +258,10 @@ async function main(
       }
 
       const ports = containerSpec.ports;
-      if (ports == null) {
+      if (ports === null) {
         console.log(`\t\t\tPort`);
       } else {
-        for (port of ports) {
+        for (const port of ports) {
           console.log(`\t\t\tPort`);
           console.log(`\t\t\tContainer port : ${port.containerPort}`);
         }
@@ -269,10 +269,10 @@ async function main(
     }
 
     const [deployedModels] = modelToBeUploaded.deployedModels;
-    if (deployedModels == null) {
+    if (deployedModels === null) {
       console.log(`\t\tDeployed model`);
     } else {
-      for (deployedModel of deployedModels) {
+      for (const deployedModel of deployedModels) {
         console.log(`\t\tDeployed model`);
         console.log(`\t\t\tEndpoint : ${deployedModel.endpoint}`);
         console.log(
@@ -284,7 +284,7 @@ async function main(
     const explanationSpec = modelToBeUploaded.explanationSpec;
     console.log(`\t\tExplanation spec`);
     console.log(`\t\t\tParameters`);
-    if (explanationSpec == null) {
+    if (explanationSpec === null) {
       console.log(`\t\t\t\tSampled shapley attribution`);
       console.log(`\t\t\t\t\tPath count : {}`);
     } else {
@@ -298,7 +298,7 @@ async function main(
     }
 
     console.log(`\t\t\tMetadata`);
-    if (explanationSpec == null) {
+    if (explanationSpec === null) {
       console.log(`\t\t\t\tInputs : {}`);
       console.log(`\t\t\t\tOutputs : {}`);
       console.log(`\t\t\t\tFeature attributions schema uri : {}`);
@@ -314,7 +314,7 @@ async function main(
 
     const error = response.error;
     console.log(`\tError`);
-    if (error == null) {
+    if (error === null) {
       console.log(`\t\tCode : {}`);
       console.log(`\t\tMessage : {}`);
     } else {

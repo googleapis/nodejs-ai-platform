@@ -58,7 +58,7 @@ async function main(
     const parent = `projects/${project}/locations/${location}`;
     const modelName = `projects/${project}/locations/${location}/models/${modelId}`;
 
-    let modelParamsObj = new params.VideoObjectTrackingPredictionParams({
+    const modelParamsObj = new params.VideoObjectTrackingPredictionParams({
       confidenceThreshold: 0.5,
     });
 
@@ -110,7 +110,7 @@ async function main(
 
     const bigquerySource = inputConfiguration.bigquerySource;
     console.log(`\t\tBigQuery source`);
-    if (bigquerySource == null) {
+    if (bigquerySource === null) {
       console.log(`\t\t\tInput uri : {}`);
     } else {
       console.log(`\t\t\tInput uri : ${bigquerySource.inputUri}`);
@@ -127,7 +127,7 @@ async function main(
     console.log(`\t\t\tOutput uri prefix : ${gcsDestination.outputUriPrefix}`);
 
     const bigqueryDestination = outputConfiguration.bigqueryDestination;
-    if (bigqueryDestination == null) {
+    if (bigqueryDestination === null) {
       console.log(`\t\tBigquery destination`);
       console.log(`\t\t\tOutput uri : {}`);
     } else {
@@ -137,7 +137,7 @@ async function main(
 
     const dedicatedResource = response.dedicatedResource;
     console.log(`\tDedicated resources`);
-    if (dedicatedResource == null) {
+    if (dedicatedResource === null) {
       console.log(`\t\tStarting replica count : {}`);
       console.log(`\t\tMax replica count : {}`);
     } else {
@@ -151,7 +151,7 @@ async function main(
 
       const machineSpec = dedicatedResource.machineSpec;
       console.log(`\t\tMachine spec`);
-      if (machineSpec == null) {
+      if (machineSpec === null) {
         console.log(`\t\t\tMachine type : {}`);
         console.log(`\t\t\tAccelerator type : {}`);
         console.log(`\t\t\tAccelerator count : {}`);
@@ -166,14 +166,14 @@ async function main(
 
     const manualBatchTuningParameters = response.manualBatchTuningParameters;
     console.log(`\tManual batch tuning parameters`);
-    if (manualBatchTuningParameters == null) {
+    if (manualBatchTuningParameters === null) {
       console.log(`\t\tBatch size : {}`);
     } else {
       console.log(`\t\tBatch size : ${manualBatchTuningParameters.batchSize}`);
     }
 
     const outputInfo = response.outputInfo;
-    if (outputInfo == null) {
+    if (outputInfo === null) {
       console.log(`\tOutput info`);
       console.log(`\t\tGcs output directory : {}`);
       console.log(`\t\tBigquery output dataset : {}`);
@@ -187,7 +187,7 @@ async function main(
     }
 
     const error = response.error;
-    if (error == null) {
+    if (error === null) {
       console.log(`\tError`);
       console.log(`\t\tCode : {}`);
       console.log(`\t\tMessage : {}`);
@@ -197,7 +197,7 @@ async function main(
       console.log(`\t\tMessage : ${error.message}`);
 
       const details = error.details;
-      if (details == null) {
+      if (details === null) {
         console.log(`\t\tDetails : {}`);
       } else {
         console.log(`\t\tDetails : ${details}`);
@@ -205,7 +205,7 @@ async function main(
     }
 
     const partialFailures = response.partialFailures;
-    if (partialFailures == null) {
+    if (partialFailures === null) {
       console.log(`\tPartial failure`);
     } else {
       for (partialFailure of partialFailures) {
@@ -217,7 +217,7 @@ async function main(
 
     const resourcesConsumed = response.resourcesConsumed;
     console.log(`\tResource consumed`);
-    if (resourcesConsumed == null) {
+    if (resourcesConsumed === null) {
       console.log(`\t\tReplica hours: {}`);
     } else {
       console.log(`\t\tReplica hours: ${resourcesConsumed.replicaHours}`);
@@ -225,7 +225,7 @@ async function main(
 
     const completionStats = response.completionStats;
     console.log(`\tCompletion status`);
-    if (completionStats == null) {
+    if (completionStats === null) {
       console.log(`\t\tSuccessful count: {}`);
       console.log(`\t\tFailed count: {}`);
       console.log(`\t\tIncomplete count: {}`);
