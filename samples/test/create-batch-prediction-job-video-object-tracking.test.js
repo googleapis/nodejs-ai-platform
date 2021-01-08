@@ -23,6 +23,7 @@ const uuid = require('uuid').v4;
 const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
+const clean = require('./clean');
 
 const aiplatform = require('@google-cloud/aiplatform');
 const clientOptions = {
