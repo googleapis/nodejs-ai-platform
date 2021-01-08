@@ -36,7 +36,7 @@ const pipelineServiceClient = new aiplatform.PipelineServiceClient(
 const datasetId = process.env.TRAINING_PIPELINE_IMAGE_CLASS_DATASET_ID;
 const modelDisplayName = `temp_create_training_pipeline_image_classification_model_test${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_image_classification_test_${uuid()}`;
-const project = process.env.CAIP_PROJECT_ID;
+const project = process.env.UCAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
 let trainingPipelineId;

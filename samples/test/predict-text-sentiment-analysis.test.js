@@ -25,8 +25,8 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const filename = 'resources/textSentiment.txt';
-const endpointId = process.env.PREDICT_TEXT_SENTIMENT_ENDPOINT_ID;
-const project = process.env.CAIP_PROJECT_ID;
+const endpointId = process.env.TEXT_SENTI_ENDPOINT_ID;
+const project = process.env.UCAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
 describe('AI platform predict text sentiment analysis', () => {
