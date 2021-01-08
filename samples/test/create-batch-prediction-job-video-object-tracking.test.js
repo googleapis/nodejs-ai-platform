@@ -56,19 +56,23 @@ describe('AI platform create batch prediction job video object tracking', () => 
       .split('\n')[0];
   });
   after('should cancel delete the batch prediction job', async () => {
-    execSync(
-      `node ./cancel-batch-prediction-job.js ${batchPredictionJobId} \
-                                               ${project} ${location}`,
-      {
-        cwd,
-      }
+    const name = jobServiceClient.batchPredictionJobPath(
+      project,
+      location,
+      batchPredictionJobId
     );
-    execSync(
-      `node ./delete-batch-prediction-job.js ${batchPredictionJobId} \
-                                               ${project} ${location}`,
-      {
-        cwd,
-      }
-    );
+
+    const cancelRequest = {
+      name
+    };
+
+    await jobServiceClient.cancelBatchPredictionJob(cancelRequest).then(()=>{
+
+      const deleteRequest = {
+        name
+      };
+
+      return await jobServiceClient.deleteBatchPredictionJob(deleteRequest);
+    });
   });
 });
