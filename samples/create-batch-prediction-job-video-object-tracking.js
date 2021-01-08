@@ -208,7 +208,7 @@ async function main(
     if (partialFailures === null) {
       console.log(`\tPartial failure`);
     } else {
-      for (partialFailure of partialFailures) {
+      for (const partialFailure of partialFailures) {
         console.log(`\tPartial failure`);
         console.log(`\t\tCode : ${partialFailure.code}`);
         console.log(`\t\tMessage : ${partialFailure.message}`);
