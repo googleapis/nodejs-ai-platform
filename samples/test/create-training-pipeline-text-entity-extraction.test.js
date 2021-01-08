@@ -25,6 +25,15 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
+const aiplatform = require('@google-cloud/aiplatform');
+const clientOptions = {
+  apiEndpoint: 'us-central1-aiplatform.googleapis.com',
+};
+
+const pipelineServiceClient = new aiplatform.PipelineServiceClient(
+  clientOptions
+);
+
 const datasetId = process.env.TRAINING_PIPELINE_TEXT_EXTRACTION_DATASET_ID;
 const modelDisplayName = `temp_create_training_pipeline_entity_extraction_model_test${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_entity_extraction_test_${uuid()}`;
@@ -54,19 +63,22 @@ describe('AI platform create training pipeline text entity extraction', () => {
       .split('\n')[0];
   });
   after('should cancel the training pipeline and delete it', async () => {
-    execSync(
-      `node ./cancel-training-pipeline.js ${trainingPipelineId} ${project} \
-                                            ${location}`,
-      {
-        cwd,
-      }
+    const name = pipelineServiceClient.trainingPipelinePath(
+      project,
+      location,
+      trainingPipelineId
     );
-    execSync(
-      `node ./delete-training-pipeline.js ${trainingPipelineId} ${project} \
-                                            ${location}`,
-      {
-        cwd,
-      }
-    );
+
+    const cancelRequest = {
+      name,
+    };
+
+    pipelineServiceClient.cancelTrainingPipeline(cancelRequest).then(() => {
+      const deleteRequest = {
+        name,
+      };
+
+      return pipelineServiceClient.deleteTrainingPipeline(deleteRequest);
+    });
   });
 });
