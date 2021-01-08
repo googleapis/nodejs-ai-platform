@@ -24,6 +24,13 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
+const aiplatform = require('@google-cloud/aiplatform');
+const clientOptions = {
+  apiEndpoint: 'us-central1-aiplatform.googleapis.com',
+};
+
+const jobServiceClient = new aiplatform.JobServiceClient(clientOptions);
+
 const batchPredictionDisplayName = `temp_create_batch_prediction_video_object_tracking_test${uuid()}`;
 const modelId = process.env.BATCH_PREDICTION_VIDEO_OBJECT_MODEL_ID;
 const gcsSourceUri =
