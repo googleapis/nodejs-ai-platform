@@ -48,9 +48,11 @@ async function main(text, endpointId, project, location) {
     // Configure the resources
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
 
-    const predictionInstance = new instance.TextClassificationPredictionInstance({
-      content: text,
-    });
+    const predictionInstance = new instance.TextClassificationPredictionInstance(
+      {
+        content: text,
+      }
+    );
     const instanceValue = predictionInstance.toValue();
 
     const instances = [instanceValue];
