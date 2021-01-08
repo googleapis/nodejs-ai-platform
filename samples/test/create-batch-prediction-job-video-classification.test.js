@@ -29,9 +29,7 @@ const clientOptions = {
   apiEndpoint: 'us-central1-aiplatform.googleapis.com',
 };
 
-const jobServiceClient = new aiplatform.JobServiceClient(
-  clientOptions
-);
+const jobServiceClient = new aiplatform.JobServiceClient(clientOptions);
 
 const batchPredictionDisplayName = `temp_create_batch_prediction_video_classification_test${uuid()}`;
 const modelId = process.env.BATCH_PREDICTION_VIDEO_CLASS_MODEL_ID;
@@ -72,16 +70,15 @@ describe('AI platform create batch prediction job video classification', () => {
     );
 
     const cancelRequest = {
-      name
+      name,
     };
 
-    await jobServiceClient.cancelBatchPredictionJob(cancelRequest).then(()=>{
-
+    await jobServiceClient.cancelBatchPredictionJob(cancelRequest).then(() => {
       const deleteRequest = {
-        name
+        name,
       };
 
-      return await jobServiceClient.deleteBatchPredictionJob(deleteRequest);
+      return jobServiceClient.deleteBatchPredictionJob(deleteRequest);
     });
   });
 });

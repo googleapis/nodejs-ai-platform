@@ -63,16 +63,15 @@ describe('AI platform create batch prediction job video object tracking', () => 
     );
 
     const cancelRequest = {
-      name
+      name,
     };
 
-    await jobServiceClient.cancelBatchPredictionJob(cancelRequest).then(()=>{
-
+    await jobServiceClient.cancelBatchPredictionJob(cancelRequest).then(() => {
       const deleteRequest = {
-        name
+        name,
       };
 
-      return await jobServiceClient.deleteBatchPredictionJob(deleteRequest);
+      return jobServiceClient.deleteBatchPredictionJob(deleteRequest);
     });
   });
 });
