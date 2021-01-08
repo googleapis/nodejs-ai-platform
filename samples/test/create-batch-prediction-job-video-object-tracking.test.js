@@ -18,7 +18,7 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {after, describe, it} = require('mocha');
+const {after, before, describe, it} = require('mocha');
 const uuid = require('uuid').v4;
 const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
@@ -43,6 +43,10 @@ const location = process.env.LOCATION;
 let batchPredictionJobId;
 
 describe('AI platform create batch prediction job video object tracking', () => {
+  before('should clean up any orphaned resources', async () => {
+    await clean.cleanBatchPredictionJobs();
+  });
+
   it('should create a video object tracking batch prediction job', async () => {
     const stdout = execSync(
       `node ./create-batch-prediction-job-video-object-tracking.js \
