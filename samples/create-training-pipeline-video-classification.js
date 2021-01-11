@@ -107,7 +107,7 @@ async function main(
 
     const fractionSplit = inputDataConfiguration.fractionSplit;
     console.log(`\t\tFraction split`);
-    if (fractionSplit === null) {
+    if (!fractionSplit) {
       console.log(`\t\t\tTraining fraction : {}`);
       console.log(`\t\t\tValidation fraction : {}`);
       console.log(`\t\t\tTest fraction : {}`);
@@ -123,7 +123,7 @@ async function main(
 
     const filterSplit = inputDataConfiguration.filterSplit;
     console.log(`\t\tFilter split `);
-    if (filterSplit === null) {
+    if (!filterSplit) {
       console.log(`\t\t\tTraining filter : {}`);
       console.log(`\t\t\tValidation filter : {}`);
       console.log(`\t\t\tTest filter : {}`);
@@ -135,7 +135,7 @@ async function main(
 
     const predefinedSplit = inputDataConfiguration.predefinedSplit;
     console.log(`\t\tPredefined split`);
-    if (predefinedSplit === null) {
+    if (!predefinedSplit) {
       console.log(`\t\t\tKey : {}`);
     } else {
       console.log(`\t\t\tKey : ${predefinedSplit.key}`);
@@ -143,7 +143,7 @@ async function main(
 
     const timestampSplit = inputDataConfiguration.timestampSplit;
     console.log(`\t\tTimestamp split`);
-    if (timestampSplit === null) {
+    if (!timestampSplit) {
       console.log(`\t\t\tTraining fraction : {}`);
       console.log(`\t\t\tValidation fraction : {}`);
       console.log(`\t\t\tTest fraction : {}`);
@@ -191,7 +191,7 @@ async function main(
 
     const error = response.error;
     console.log(`\tError`);
-    if (error === null) {
+    if (!error) {
       console.log(`\t\tCode : {}`);
       console.log(`\t\tMessage : {}`);
     } else {

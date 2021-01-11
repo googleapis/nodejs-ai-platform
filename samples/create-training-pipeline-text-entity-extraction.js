@@ -108,7 +108,7 @@ async function main(
 
     const fractionSplit = inputDataConfiguration.fractionSplit;
     console.log(`\t\tFraction split`);
-    if (fractionSplit === null) {
+    if (!fractionSplit) {
       console.log(`\t\t\tTraining fraction : {}`);
       console.log(`\t\t\tValidation fraction : {}`);
       console.log(`\t\t\tTest fraction : {}`);
@@ -124,7 +124,7 @@ async function main(
 
     const filterSplit = inputDataConfiguration.filterSplit;
     console.log(`\t\tFilter split `);
-    if (filterSplit === null) {
+    if (!filterSplit) {
       console.log(`\t\t\tTraining filter : {}`);
       console.log(`\t\t\tValidation filter : {}`);
       console.log(`\t\t\tTest filter : {}`);
@@ -136,7 +136,7 @@ async function main(
 
     const predefinedSplit = inputDataConfiguration.predefinedSplit;
     console.log(`\t\tPredefined split`);
-    if (predefinedSplit === null) {
+    if (!predefinedSplit) {
       console.log(`\t\t\tkey : {}`);
     } else {
       console.log(`\t\t\tkey : ${predefinedSplit.key}`);
@@ -144,7 +144,7 @@ async function main(
 
     const timestampSplit = inputDataConfiguration.timestampSplit;
     console.log(`\t\tTimestamp split`);
-    if (timestampSplit === null) {
+    if (!timestampSplit) {
       console.log(`\t\t\tTraining fraction : {}`);
       console.log(`\t\t\tValidation fraction : {}`);
       console.log(`\t\t\tTest fraction : {}`);
@@ -191,7 +191,7 @@ async function main(
     console.log(`\t\tLabels : ${modelToBeUploaded.labels}`);
 
     const predictSchemata = modelToBeUploaded.predictSchemata;
-    if (predictSchemata === null) {
+    if (!predictSchemata) {
       console.log(`\t\tPredict schemata`);
       console.log(`\t\t\tInstance schema uri : {}`);
       console.log(`\t\t\tParameters schema uri : {}`);
@@ -214,7 +214,7 @@ async function main(
 
     const [supportedExportFormats] = modelToBeUploaded.supportedExportFormats;
     console.log(`\t\tSupported export formats`);
-    if (supportedExportFormats === null) {
+    if (!supportedExportFormats) {
       console.log(`\t\tSupported export format`);
     } else {
       for (const supportedExportFormat of supportedExportFormats) {
@@ -225,7 +225,7 @@ async function main(
 
     const containerSpec = modelToBeUploaded.containerSpec;
     console.log(`\t\tContainer Spec`);
-    if (containerSpec === null) {
+    if (!containerSpec) {
       console.log(`\t\t\t${JSON.stringify(containerSpec)}`);
       console.log(`\t\t\tImage uri : {}`);
       console.log(`\t\t\tCommand : {}`);
@@ -245,7 +245,7 @@ async function main(
       console.log(`\t\t\tHealth route : ${containerSpec.healthRoute}`);
 
       const envs = containerSpec.env;
-      if (envs === null) {
+      if (!envs) {
         console.log(`\t\t\tEnv`);
       } else {
         for (const env of envs) {
@@ -256,7 +256,7 @@ async function main(
       }
 
       const ports = containerSpec.ports;
-      if (ports === null) {
+      if (!ports) {
         console.log(`\t\t\tPort`);
       } else {
         for (const port of ports) {
@@ -267,7 +267,7 @@ async function main(
     }
 
     const [deployedModels] = modelToBeUploaded.deployedModels;
-    if (deployedModels === null) {
+    if (!deployedModels) {
       console.log(`\t\tDeployed model`);
     } else {
       for (const deployedModel of deployedModels) {
@@ -282,7 +282,7 @@ async function main(
     const explanationSpec = modelToBeUploaded.explanationSpec;
     console.log(`\t\tExplanation spec`);
     console.log(`\t\t\tParameters`);
-    if (explanationSpec === null) {
+    if (!explanationSpec) {
       console.log(`\t\t\t\tSampled shapley attribution`);
       console.log(`\t\t\t\t\tPath count : {}`);
     } else {
@@ -296,7 +296,7 @@ async function main(
     }
 
     console.log(`\t\t\tMetadata`);
-    if (explanationSpec === null) {
+    if (!explanationSpec) {
       console.log(`\t\t\t\tInputs : {}`);
       console.log(`\t\t\t\tOutputs : {}`);
       console.log(`\t\t\t\tFeature attributions schema uri : {}`);
@@ -312,7 +312,7 @@ async function main(
 
     const error = response.error;
     console.log(`\tError`);
-    if (error === null) {
+    if (!error) {
       console.log(`\t\tCode : {}`);
       console.log(`\t\tMessage : {}`);
     } else {

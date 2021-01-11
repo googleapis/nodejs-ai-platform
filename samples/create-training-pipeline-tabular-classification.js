@@ -277,7 +277,7 @@ async function main(
       }
 
       const ports = containerSpec.ports;
-      if (!port) {
+      if (!ports) {
         console.log(`\t\t\tPort`);
       } else {
         for (const port of ports) {

@@ -18,7 +18,8 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {after, describe, it} = require('mocha');
+const {after, before, describe, it} = require('mocha');
+const clean = require('./clean');
 
 const uuid = require('uuid').v4;
 const cp = require('child_process');
@@ -34,15 +35,23 @@ const pipelineServiceClient = new aiplatform.PipelineServiceClient(
   clientOptions
 );
 
-const datasetId = process.env.TRAINING_PIPELINE_VIDEO_CLASS_DATASET_ID;
+const datasetId = '3757409464110546944';
 const modelDisplayName = `temp_create_training_pipeline_video_classification_model_test${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_video_classification_test_${uuid()}`;
-const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
+const location = 'us-central1';
 
+let project;
 let trainingPipelineId;
 
 describe('AI platform create training pipeline video classification', () => {
+  before(
+    'should get the project ID and clean up orphaned resources',
+    async () => {
+      project = await pipelineServiceClient.getProjectId();
+      await clean.cleanTrainingPipelines(project);
+    }
+  );
+
   it('should create a new video classification training pipeline', async () => {
     const stdout = execSync(
       `node ./create-training-pipeline-video-classification.js ${datasetId} \

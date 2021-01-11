@@ -18,7 +18,8 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {after, describe, it} = require('mocha');
+const {after, before, describe, it} = require('mocha');
+const clean = require('./clean');
 
 const uuid = require('uuid').v4;
 const cp = require('child_process');
@@ -34,15 +35,23 @@ const pipelineServiceClient = new aiplatform.PipelineServiceClient(
   clientOptions
 );
 
-const datasetId = process.env.TRAINING_PIPELINE_VIDEO_OBJECT_DETECT_DATASET_ID;
+const datasetId = '1138566280794603520';
 const modelDisplayName = `temp_create_training_pipeline_video_object_tracking_model_test${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_video_object_tracking_test_${uuid()}`;
-const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
+const location = 'us-central1';
 
+let project;
 let trainingPipelineId;
 
 describe('AI platform create training pipeline object tracking', () => {
+  before(
+    'should get the project ID and clean up orphaned resources',
+    async () => {
+      project = await pipelineServiceClient.getProjectId();
+      await clean.cleanTrainingPipelines(project);
+    }
+  );
+
   it('should create a new object tracking training pipeline', async () => {
     const stdout = execSync(
       `node ./create-training-pipeline-video-object-tracking.js \
