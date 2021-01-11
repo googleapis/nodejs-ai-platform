@@ -20,12 +20,6 @@ const {assert} = require('chai');
 const {before, describe, it} = require('mocha');
 const clean = require('./clean');
 
-const {EndpointServiceClient} = require('@google-cloud/aiplatform');
-const clientOptions = {
-  apiEndpoint: 'us-central1-aiplatform.googleapis.com',
-};
-const endpointServiceClient = new EndpointServiceClient(clientOptions);
-
 const cp = require('child_process');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
