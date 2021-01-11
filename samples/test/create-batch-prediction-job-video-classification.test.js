@@ -33,19 +33,19 @@ const clientOptions = {
 const jobServiceClient = new aiplatform.JobServiceClient(clientOptions);
 
 const batchPredictionDisplayName = `temp_create_batch_prediction_video_classification_test${uuid()}`;
-const modelId = process.env.BATCH_PREDICTION_VIDEO_CLASS_MODEL_ID;
+const modelId = '8596984660557299712';
 const gcsSourceUri =
-  'gs://prj-ucaip-tutorials-vcm/dataset/automl-video-demo-data/traffic_predict.jsonl';
-const gcsDestinationOutputUriPrefix =
-  'gs://prj-ucaip-tutorials-vcm/batchprediction/Video/';
-const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
+  'gs://ucaip-samples-test-output/inputs/vcn_40_batch_prediction_input.jsonl';
+const gcsDestinationOutputUriPrefix = 'gs://ucaip-samples-test-output/';
+const location = 'us-central1';
 
+let project;
 let batchPredictionJobId;
 
 describe('AI platform create batch prediction job video classification', () => {
   before('should clean up any orphaned resources', async () => {
-    await clean.cleanBatchPredictionJobs();
+    project = await jobServiceClient.getProjectId();
+    await clean.cleanBatchPredictionJobs(project);
   });
 
   it('should create a video classification batch prediction job', async () => {
@@ -78,7 +78,7 @@ describe('AI platform create batch prediction job video classification', () => {
       name,
     };
 
-    await jobServiceClient.cancelBatchPredictionJob(cancelRequest).then(() => {
+    jobServiceClient.cancelBatchPredictionJob(cancelRequest).then(() => {
       const deleteRequest = {
         name,
       };

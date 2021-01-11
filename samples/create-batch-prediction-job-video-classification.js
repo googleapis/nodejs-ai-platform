@@ -91,7 +91,7 @@ async function main(
     // Create batch prediction job request
     const [response] = await jobServiceClient.createBatchPredictionJob(request);
 
-    console.log(`Create batch prediction job video classification response`);
+    console.log('Create batch prediction job video classification response');
     console.log(`\tName : ${response.name}`);
     console.log(`\tDisplay name: ${response.displayName}`);
     console.log(`\tModel : ${response.model}`);
@@ -105,45 +105,45 @@ async function main(
     console.log(`\tLabels : ${JSON.stringify(response.labels)}`);
 
     const inputConfiguration = response.inputConfig;
-    console.log(`\tInput config`);
+    console.log('\tInput config');
     console.log(`\t\tInstances format : ${inputConfiguration.instancesFormat}`);
 
     const gcsSource = inputConfiguration.gcsSource;
-    console.log(`\t\tGcs source`);
+    console.log('\t\tGcs source');
     console.log(`\t\t\tUris : ${gcsSource.uris}`);
 
     const bigquerySource = inputConfiguration.bigquerySource;
     console.log(`\t\tBigQuery source`);
-    if (bigquerySource === null) {
-      console.log(`\t\t\tInput uri : {}`);
+    if (!bigquerySource) {
+      console.log('\t\t\tInput uri : {}');
     } else {
       console.log(`\t\t\tInput uri : ${bigquerySource.inputUri}`);
     }
 
     const outputConfiguration = response.outputConfig;
-    console.log(`\t\tOutput config`);
+    console.log('\t\tOutput config');
     console.log(
       `\t\tPredictions format : ${outputConfiguration.predictionsFormat}`
     );
 
     const gcsDestination = outputConfiguration.gcsDestination;
-    console.log(`\t\tGcs destination`);
+    console.log('\t\tGcs destination');
     console.log(`\t\t\tOutput uri prefix : ${gcsDestination.outputUriPrefix}`);
 
     const bigqueryDestination = outputConfiguration.bigqueryDestination;
-    if (bigqueryDestination === null) {
-      console.log(`\t\tBigquery destination`);
-      console.log(`\t\t\tOutput uri : {}`);
+    if (!bigqueryDestination) {
+      console.log('\t\tBigquery destination');
+      console.log('\t\t\tOutput uri : {}');
     } else {
-      console.log(`\t\tBigquery destination`);
+      console.log('\t\tBigquery destination');
       console.log(`\t\t\tOutput uri : ${bigqueryDestination.outputUri}`);
     }
 
     const dedicatedResource = response.dedicatedResource;
-    console.log(`\tDedicated resources`);
-    if (dedicatedResource === null) {
-      console.log(`\t\tStarting replica count : {}`);
-      console.log(`\t\tMax replica count : {}`);
+    console.log('\tDedicated resources');
+    if (!dedicatedResource) {
+      console.log('\t\tStarting replica count : {}`]');
+      console.log('\t\tMax replica count : {}');
     } else {
       console.log(
         `\ttStarting replica count : \
@@ -154,11 +154,11 @@ async function main(
       );
 
       const machineSpec = dedicatedResource.machineSpec;
-      console.log(`\t\tMachine spec`);
-      if (machineSpec === null) {
-        console.log(`\t\t\tMachine type : {}`);
-        console.log(`\t\t\tAccelerator type : {}`);
-        console.log(`\t\t\tAccelerator count : {}`);
+      console.log('\t\tMachine spec');
+      if (!machineSpec) {
+        console.log('\t\t\tMachine type : {}');
+        console.log('\t\t\tAccelerator type : {}');
+        console.log('\t\t\tAccelerator count : {}');
       } else {
         console.log(`\t\t\tMachine type : ${machineSpec.machineType}`);
         console.log(`\t\t\tAccelerator type : ${machineSpec.acceleratorType}`);
