@@ -39,15 +39,14 @@ const datasetId = '1138566280794603520';
 const modelDisplayName = `temp_create_training_pipeline_video_object_tracking_model_test${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_video_object_tracking_test_${uuid()}`;
 const location = 'us-central1';
+const project = process.env.CAIP_PROJECT_ID;
 
-let project;
 let trainingPipelineId;
 
 describe('AI platform create training pipeline object tracking', () => {
   before(
     'should get the project ID and clean up orphaned resources',
     async () => {
-      project = await pipelineServiceClient.getProjectId();
       await clean.cleanTrainingPipelines(project);
     }
   );

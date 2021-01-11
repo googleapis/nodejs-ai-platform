@@ -39,13 +39,12 @@ const datasetId = '7051300010322821120';
 const modelDisplayName = `temp_create_training_pipeline_text_classification_model_test${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_text_classification_test_${uuid()}`;
 const location = 'us-central1';
+const project = process.env.CAIP_PROJECT_ID;
 
-let project;
 let trainingPipelineId;
 
 describe('AI platform create training pipeline text classification', () => {
   before('should get the project ID and clean orphaned resources', async () => {
-    project = await pipelineServiceClient.getProjectId();
     await clean.cleanTrainingPipelines(project);
   });
   it('should create a new text classification training pipeline', async () => {

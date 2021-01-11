@@ -40,15 +40,14 @@ const modelDisplayName = `temp_create_training_pipeline_tables_classification_mo
 const trainingPipelineDisplayName = `temp_create_training_pipeline_tables_classification_test_${uuid()}`;
 const targetColumn = 'species';
 const location = 'us-central1';
+const project = process.env.CAIP_PROJECT_ID;
 
-let project;
 let trainingPipelineId;
 
 describe('AI platform create training pipeline tables classification', () => {
   before(
     'should get the project ID and clean up orphaned resources',
     async () => {
-      project = await pipelineServiceClient.getProjectId();
       await clean.cleanTrainingPipelines(project);
     }
   );

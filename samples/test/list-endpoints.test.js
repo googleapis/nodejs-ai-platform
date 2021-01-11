@@ -32,14 +32,12 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
 const LOCATION = 'us-central1';
-
-let project;
+const project = process.env.CAIP_PROJECT_ID;
 
 describe('AI platform list endpoints', () => {
   before(
     'should get the project ID and clean up orphaned resources',
     async () => {
-      project = await endpointServiceClient.getProjectId();
       await clean.cleanEndpoints(project);
     }
   );

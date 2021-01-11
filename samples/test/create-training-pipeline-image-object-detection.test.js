@@ -39,15 +39,14 @@ const datasetId = '3555732643297361920';
 const modelDisplayName = `temp_create_training_pipeline_image_object_detection_model_test${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_image_object_detection_test_${uuid()}`;
 const location = 'us-central1';
+const project = process.env.CAIP_PROJECT_ID;
 
-let project;
 let trainingPipelineId;
 
 describe('AI platform create training pipeline image object detection', () => {
   before(
     'should get the current project ID and clean up orphaned resources',
     async () => {
-      project = await pipelineServiceClient.getProjectId();
       await clean.cleanTrainingPipelines(project);
     }
   );

@@ -38,13 +38,12 @@ const gcsSourceUri =
   'gs://ucaip-samples-test-output/inputs/vot_batch_prediction_input.jsonl';
 const gcsDestinationOutputUriPrefix = 'gs://ucaip-samples-test-output/';
 const location = 'us-central1';
+const project = process.env.CAIP_PROJECT_ID;
 
-let project;
 let batchPredictionJobId;
 
 describe('AI platform create batch prediction job video object tracking', () => {
   before('should clean up any orphaned resources', async () => {
-    project = await jobServiceClient.getProjectId();
     await clean.cleanBatchPredictionJobs(project);
   });
 

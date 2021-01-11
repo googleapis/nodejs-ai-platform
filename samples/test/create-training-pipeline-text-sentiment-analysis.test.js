@@ -39,15 +39,14 @@ const datasetId = '5148529167758786560';
 const modelDisplayName = `temp_create_training_pipeline_sentiment_analysis_model_test${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_sentiment_analysis_test_${uuid()}`;
 const location = 'us-central1';
+const project = process.env.CAIP_PROJECT_ID;
 
-let project;
 let trainingPipelineId;
 
 describe('AI platform create training pipeline text sentiment analysis', () => {
   before(
     'should get the project ID and clean up orphaned resources',
     async () => {
-      project = await pipelineServiceClient.getProjectId();
       await clean.cleanTrainingPipelines(project);
     }
   );
