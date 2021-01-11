@@ -24,7 +24,9 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const filename = 'resources/textSentiment.txt';
+const textInput =
+  "I'm very worried about the state of my 401(k)." +
+  " I dislike how the stock market's fluctuations affect my retirement.";
 const endpointId = process.env.TEXT_SENTI_ENDPOINT_ID;
 const project = process.env.UCAIP_PROJECT_ID;
 const location = process.env.LOCATION;
@@ -32,7 +34,7 @@ const location = process.env.LOCATION;
 describe('AI platform predict text sentiment analysis', () => {
   it('should make predictions using the text sentiment model', async () => {
     const stdout = execSync(
-      `node ./predict-text-sentiment-analysis.js ${filename} \
+      `node ./predict-text-sentiment-analysis.js ${textInput} \
                                                    ${endpointId} \
                                                    ${project} \
                                                    ${location}`,

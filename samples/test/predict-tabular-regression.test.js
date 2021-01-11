@@ -32,8 +32,7 @@ const location = process.env.LOCATION;
 describe('AI platform predict tabular regression', () => {
   it('should make predictions using the tabular regression model', async () => {
     const stdout = execSync(
-      `node ./predict-tabular-regression.js ${filename} \
-                                             ${endpointId} \
+      `node ./predict-tabular-regression.js  ${endpointId} \
                                              ${project} \
                                              ${location}`,
       {
