@@ -33,10 +33,7 @@ const location = 'us-central1';
 describe('AI platform predict text entity extraction', () => {
   it('should make predictions using the text extraction model', async () => {
     const stdout = execSync(
-      `node ./predict-text-entity-extraction.js ${textInput} \
-                                                  ${endpointId} \
-                                                  ${project} \
-                                                  ${location}`,
+      `node ./predict-text-entity-extraction.js "${textInput}" ${endpointId} ${project} ${location}`,
       {
         cwd,
       }

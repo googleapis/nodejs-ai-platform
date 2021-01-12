@@ -62,7 +62,7 @@ async function main(text, endpointId, project, location = 'us-central1') {
     // Predict request
     const [response] = await predictionServiceClient.predict(request);
 
-    console.log('Predict text entity extraction response :');
+    console.log('Predict text sentiment analysis response:');
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
 
     console.log('\nPredictions :');

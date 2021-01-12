@@ -34,10 +34,7 @@ const location = 'us-central1';
 describe('AI platform predict text classification', () => {
   it('should make predictions using the text classification model', async () => {
     const stdout = execSync(
-      `node ./predict-text-classification.js ${textInput} \
-                                               ${endpointId} \
-                                               ${project} \
-                                               ${location}`,
+      `node ./predict-text-classification.js "${textInput}" ${endpointId} ${project} ${location}`,
       {
         cwd,
       }

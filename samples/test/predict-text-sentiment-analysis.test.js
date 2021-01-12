@@ -25,7 +25,7 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const textInput =
-  "I'm very worried about the state of my 401(k)." +
+  'Economic downturns can be very scary for normal workers.' +
   " I dislike how the stock market's fluctuations affect my retirement.";
 const endpointId = '7811563922418302976';
 const project = process.env.CAIP_PROJECT_ID;
@@ -34,10 +34,7 @@ const location = 'us-central1';
 describe('AI platform predict text sentiment analysis', () => {
   it('should make predictions using the text sentiment model', async () => {
     const stdout = execSync(
-      `node ./predict-text-sentiment-analysis.js ${textInput} \
-                                                   ${endpointId} \
-                                                   ${project} \
-                                                   ${location}`,
+      `node ./predict-text-sentiment-analysis.js "${textInput}" ${endpointId} ${project} ${location}`,
       {
         cwd,
       }
