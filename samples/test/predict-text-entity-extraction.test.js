@@ -26,9 +26,9 @@ const cwd = path.join(__dirname, '..');
 
 const textInput =
   'Bipolar depression and anxiety are often hereditary diseases.';
-const endpointId = process.env.PREDICT_TEXT_EXTRACTION_ENDPOINT_ID;
+const endpointId = '6207156555167563776';
 const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
+const location = 'us-central1';
 
 describe('AI platform predict text entity extraction', () => {
   it('should make predictions using the text extraction model', async () => {

@@ -24,10 +24,9 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const filename = 'resources/tablesReg.txt';
-const endpointId = process.env.PREDICT_TABLES_REGRESSION_ENDPOINT_ID;
+const endpointId = '1014154341088493568';
 const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
+const location = 'us-central1';
 
 describe('AI platform predict tabular regression', () => {
   it('should make predictions using the tabular regression model', async () => {

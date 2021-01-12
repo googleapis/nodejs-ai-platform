@@ -27,9 +27,9 @@ const cwd = path.join(__dirname, '..');
 const textInput =
   "I'm very worried about the state of my 401(k)." +
   " I dislike how the stock market's fluctuations affect my retirement.";
-const endpointId = process.env.TEXT_SENTI_ENDPOINT_ID;
-const project = process.env.UCAIP_PROJECT_ID;
-const location = process.env.LOCATION;
+const endpointId = '7811563922418302976';
+const project = process.env.CAIP_PROJECT_ID;
+const location = 'us-central1';
 
 describe('AI platform predict text sentiment analysis', () => {
   it('should make predictions using the text sentiment model', async () => {
