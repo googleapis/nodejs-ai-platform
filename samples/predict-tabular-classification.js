@@ -64,7 +64,7 @@ async function main(endpointId, project, location = 'us-central1') {
     // Predict request
     const [response] = await predictionServiceClient.predict(request);
 
-    console.log('Predict tables classification response');
+    console.log('Predict tabular classification response');
     console.log(`\tDeployed model id : ${response.deployedModelId}\n`);
     const predictions = response.predictions;
     console.log('Predictions :');
