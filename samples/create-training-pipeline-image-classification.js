@@ -94,7 +94,7 @@ function main(
     console.log('Create training pipeline image classification response');
     console.log(`Name : ${response.name}`);
     console.log('Raw response:');
-    console.log(response);
+    console.log(JSON.stringify(response, null, 2));
   }
 
   createTrainingPipelineImageClassification();

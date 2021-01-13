@@ -86,8 +86,8 @@ async function main(text, endpointId, project, location = 'us-central1') {
       }
     }
   }
+  predictTextEntityExtraction();
   // [END aiplatform_predict_text_entity_extraction]
-  await predictTextEntityExtraction();
 }
 
 main(...process.argv.slice(2)).catch(err => {

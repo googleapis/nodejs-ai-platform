@@ -88,10 +88,10 @@ async function main(
     console.log('Create training pipeline image object detection response');
     console.log(`Name : ${response.name}`);
     console.log('Raw response:');
-    console.log(response);
+    console.log(JSON.stringify(response, null, 2));
   }
+  createTrainingPipelineImageObjectDetection();
   // [END aiplatform_create_training_pipeline_image_object_detection]
-  await createTrainingPipelineImageObjectDetection();
 }
 
 main(...process.argv.slice(2)).catch(err => {

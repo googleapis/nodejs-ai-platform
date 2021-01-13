@@ -101,10 +101,10 @@ async function main(
     console.log('Create training pipeline tabular classification response');
     console.log(`Name : ${response.name}`);
     console.log('Raw response:');
-    console.log(response);
+    console.log(JSON.stringify(response, null, 2));
   }
+  createTrainingPipelineTablesClassification();
   // [END aiplatform_create_training_pipeline_tables_classification]
-  await createTrainingPipelineTablesClassification();
 }
 
 main(...process.argv.slice(2)).catch(err => {

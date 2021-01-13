@@ -78,8 +78,8 @@ async function main(endpointId, project, location = 'us-central1') {
       }
     }
   }
+  predictTablesClassification();
   // [END aiplatform_predict_tabular_classification_sample]
-  await predictTablesClassification();
 }
 
 main(...process.argv.slice(2)).catch(err => {

@@ -85,10 +85,10 @@ async function main(
     console.log('Create training pipeline video object tracking response');
     console.log(`Name : ${response.name}`);
     console.log('Raw response:');
-    console.log(response);
+    console.log(JSON.stringify(response, null, 2));
   }
+  createTrainingPipelineVideoObjectTracking();
   // [END aiplatform_create_training_pipeline_video_object_tracking]
-  await createTrainingPipelineVideoObjectTracking();
 }
 
 main(...process.argv.slice(2)).catch(err => {

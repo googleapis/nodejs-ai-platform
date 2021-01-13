@@ -88,8 +88,8 @@ async function main(filename, endpointId, project, location = 'us-central1') {
       }
     }
   }
+  predictImageObjectDetection();
   // [END aiplatform_predict_image_object_detection]
-  await predictImageObjectDetection();
 }
 
 main(...process.argv.slice(2)).catch(err => {

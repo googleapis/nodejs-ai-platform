@@ -79,8 +79,8 @@ async function main(text, endpointId, project, location) {
       }
     }
   }
+  predictTextClassification();
   // [END aiplatform_predict_text_classification]
-  await predictTextClassification();
 }
 
 main(...process.argv.slice(2)).catch(err => {

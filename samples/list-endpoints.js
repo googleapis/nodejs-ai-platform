@@ -50,8 +50,7 @@ async function main(projectId, location = 'us-central1') {
       }
     }
   }
-
-  await listEndpoints();
+  listEndpoints();
   // [END aiplatform_list_endpoints]
 }
 

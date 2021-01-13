@@ -82,10 +82,10 @@ async function main(
     console.log('Create training pipeline text classification response :');
     console.log(`Name : ${response.name}`);
     console.log('Raw response:');
-    console.log(response);
+    console.log(JSON.stringify(response, null, 2));
   }
+  createTrainingPipelineTextClassification();
   // [END aiplatform_create_training_pipeline_text_classification]
-  await createTrainingPipelineTextClassification();
 }
 
 main(...process.argv.slice(2)).catch(err => {

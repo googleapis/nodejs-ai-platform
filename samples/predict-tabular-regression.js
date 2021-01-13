@@ -97,8 +97,8 @@ async function main(endpointId, project, location = 'us-central1') {
       console.log(`\tLower bound: ${predictionResultObj.value}`);
     }
   }
+  predictTablesRegression();
   // [END aiplatform_predict_tabular_regression_sample]
-  await predictTablesRegression();
 }
 
 main(...process.argv.slice(2)).catch(err => {

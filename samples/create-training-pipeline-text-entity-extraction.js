@@ -80,10 +80,10 @@ async function main(
     console.log('Create training pipeline text entity extraction response :');
     console.log(`Name : ${response.name}`);
     console.log('Raw response:');
-    console.log(response);
+    console.log(JSON.stringify(response, null, 2));
   }
+  createTrainingPipelineTextEntityExtraction();
   // [END aiplatform_create_training_pipeline_text_entity_extraction]
-  await createTrainingPipelineTextEntityExtraction();
 }
 
 main(...process.argv.slice(2)).catch(err => {

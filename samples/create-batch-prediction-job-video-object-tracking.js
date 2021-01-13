@@ -92,10 +92,10 @@ async function main(
     console.log('Create batch prediction job video object tracking response');
     console.log(`Name : ${response.name}`);
     console.log('Raw response:');
-    console.log(response);
+    console.log(JSON.stringify(response, null, 2));
   }
+  createBatchPredictionJobVideoObjectTracking();
   // [END aiplatform_create_batch_prediction_job_video_object_tracking]
-  await createBatchPredictionJobVideoObjectTracking();
 }
 
 main(...process.argv.slice(2)).catch(err => {

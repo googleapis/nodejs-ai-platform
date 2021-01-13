@@ -73,8 +73,8 @@ async function main(text, endpointId, project, location = 'us-central1') {
       console.log(`\tSentiment measure: ${predictionResult.sentiment}`);
     }
   }
+  predictTextEntityExtraction();
   // [END aiplatform_predict_text_entity_extraction]
-  await predictTextEntityExtraction();
 }
 
 main(...process.argv.slice(2)).catch(err => {
