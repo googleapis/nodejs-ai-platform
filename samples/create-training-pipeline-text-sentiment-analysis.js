@@ -79,7 +79,7 @@ async function main(
       request
     );
 
-    console.log(`Create training pipeline text sentiment analysis response :`);
+    console.log('Create training pipeline text sentiment analysis response :');
     console.log(`Name : ${response.name}`);
     console.log('Raw response:');
     console.log(JSON.stringify(response, null, 2));
