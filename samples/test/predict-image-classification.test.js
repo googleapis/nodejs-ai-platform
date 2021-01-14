@@ -24,7 +24,7 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 const filename = 'resources/daisy.jpg';
-const endpointId = process.env.PREDICT_IMAGE_CLASS_ENDPOINT_ID;
+const endpointId = '71213169107795968';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
