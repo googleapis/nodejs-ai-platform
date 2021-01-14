@@ -17,7 +17,7 @@
 'use strict';
 
 const {assert} = require('chai');
-const {after, before, describe, it} = require('mocha');
+const {after, describe, it} = require('mocha');
 
 const uuid = require('uuid').v4;
 const cp = require('child_process');
