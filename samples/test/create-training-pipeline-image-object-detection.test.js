@@ -26,7 +26,6 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const aiplatform = require('@google-cloud/aiplatform');
-const { createThis } = require('typescript');
 const clientOptions = {
   apiEndpoint: 'us-central1-aiplatform.googleapis.com',
 };
