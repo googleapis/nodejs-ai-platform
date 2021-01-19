@@ -31,7 +31,8 @@ const endpointId = '65372563341049856';
 const project = process.env.CAIP_PROJECT_ID;
 const location = 'us-central1';
 
-describe('AI platform predict text classification', () => {
+describe('AI platform predict text classification', async function () {
+  this.retries(2);
   it('should make predictions using the text classification model', async () => {
     const stdout = execSync(
       `node ./predict-text-classification.js "${textInput}" ${endpointId} ${project} ${location}`,

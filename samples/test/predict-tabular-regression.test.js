@@ -28,7 +28,8 @@ const endpointId = '1014154341088493568';
 const project = process.env.CAIP_PROJECT_ID;
 const location = 'us-central1';
 
-describe('AI platform predict tabular regression', () => {
+describe('AI platform predict tabular regression', async function () {
+  this.retries(2);
   it('should make predictions using the tabular regression model', async () => {
     const stdout = execSync(
       `node ./predict-tabular-regression.js ${endpointId} ${project} ${location}`,

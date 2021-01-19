@@ -22,7 +22,8 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 describe('quickstart', () => {
-  it('should have functional quickstart', async () => {
+  it('should have functional quickstart', async function () {
+    this.retries(2);
     const stdout = execSync('node quickstart.js');
     assert(stdout.match(/DatasetServiceClient/));
   });

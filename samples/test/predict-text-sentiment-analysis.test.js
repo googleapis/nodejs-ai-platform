@@ -31,7 +31,8 @@ const endpointId = '7811563922418302976';
 const project = process.env.CAIP_PROJECT_ID;
 const location = 'us-central1';
 
-describe('AI platform predict text sentiment analysis', () => {
+describe('AI platform predict text sentiment analysis', async function () {
+  this.retries(2);
   it('should make predictions using the text sentiment model', async () => {
     const stdout = execSync(
       `node ./predict-text-sentiment-analysis.js "${textInput}" ${endpointId} ${project} ${location}`,

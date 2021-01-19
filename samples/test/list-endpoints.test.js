@@ -27,7 +27,8 @@ const cwd = path.join(__dirname, '..');
 const LOCATION = 'us-central1';
 const project = process.env.CAIP_PROJECT_ID;
 
-describe('AI platform list endpoints', () => {
+describe('AI platform list endpoints', async function () {
+  this.retries(2);
   it('should list all endpoints in a parent resource', async () => {
     const stdout = execSync(`node ./list-endpoints.js ${project} ${LOCATION}`, {
       cwd,

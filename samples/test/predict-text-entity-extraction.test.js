@@ -30,7 +30,8 @@ const endpointId = '6207156555167563776';
 const project = process.env.CAIP_PROJECT_ID;
 const location = 'us-central1';
 
-describe('AI platform predict text entity extraction', () => {
+describe('AI platform predict text entity extraction', async function () {
+  this.retries(2);
   it('should make predictions using the text extraction model', async () => {
     const stdout = execSync(
       `node ./predict-text-entity-extraction.js "${textInput}" ${endpointId} ${project} ${location}`,

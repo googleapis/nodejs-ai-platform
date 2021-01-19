@@ -41,7 +41,8 @@ const project = process.env.CAIP_PROJECT_ID;
 
 let batchPredictionJobId;
 
-describe('AI platform create batch prediction job video object tracking', () => {
+describe('AI platform create batch prediction job video object tracking', async function () {
+  this.retries(2);
   it('should create a video object tracking batch prediction job', async () => {
     const stdout = execSync(
       `node ./create-batch-prediction-job-video-object-tracking.js \

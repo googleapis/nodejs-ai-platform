@@ -28,7 +28,8 @@ const endpointId = '4966625964059525120';
 const project = process.env.CAIP_PROJECT_ID;
 const location = 'us-central1';
 
-describe('AI platform predict tabular classification', () => {
+describe('AI platform predict tabular classification', async function () {
+  this.retries(2);
   it('should make predictions using the tabular classification model', async () => {
     const stdout = execSync(
       `node ./predict-tabular-classification.js  ${endpointId} \
