@@ -31,7 +31,7 @@ const endpointId = '71213169107795968';
 const project = process.env.CAIP_PROJECT_ID;
 const location = 'us-central1';
 
-describe.only('AI platform predict image classification', async function() {
+describe.only('AI platform predict image classification', function() {
  this.retries(1);
   it('should make predictions using the image classification model', async () => {
     const stdout = execSync(
