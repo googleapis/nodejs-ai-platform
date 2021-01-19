@@ -26,6 +26,7 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const aiplatform = require('@google-cloud/aiplatform');
+const { createThis } = require('typescript');
 const clientOptions = {
   apiEndpoint: 'us-central1-aiplatform.googleapis.com',
 };
@@ -42,7 +43,8 @@ const project = process.env.CAIP_PROJECT_ID;
 
 let trainingPipelineId;
 
-describe('AI platform create training pipeline image object detection', () => {
+describe('AI platform create training pipeline image object detection', async function () {
+  this.retries(2);
   it('should create a new image object detection training pipeline', async () => {
     const stdout = execSync(
       `node ./create-training-pipeline-image-object-detection.js \
