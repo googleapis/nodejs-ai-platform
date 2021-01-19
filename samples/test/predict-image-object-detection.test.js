@@ -29,7 +29,7 @@ const endpointId = '2791387344039575552';
 const project = process.env.CAIP_PROJECT_ID;
 const location = 'us-central1';
 
-describe('AI platform predict image object detection', async function (){
+describe('AI platform predict image object detection', async function () {
   this.retries(2);
   it('should make predictions using the image object detection model', async () => {
     const stdout = execSync(

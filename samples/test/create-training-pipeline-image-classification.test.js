@@ -40,7 +40,7 @@ const project = process.env.CAIP_PROJECT_ID;
 
 let trainingPipelineId;
 
-describe('AI platform create training pipeline image classification', async function() {
+describe('AI platform create training pipeline image classification', async function () {
   this.retries(2);
   it('should create a new image classification training pipeline', async () => {
     const stdout = execSync(
