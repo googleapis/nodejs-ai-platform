@@ -24,14 +24,20 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
+const aiplatform = require('@google-cloud/aiplatform');
+const clientOptions = {
+  apiEndpoint: 'us-central1-aiplatform.googleapis.com',
+};
+
+const jobServiceClient = new aiplatform.JobServiceClient(clientOptions);
+
 const batchPredictionDisplayName = `temp_create_batch_prediction_video_object_tracking_test${uuid()}`;
-const modelId = process.env.BATCH_PREDICTION_VIDEO_OBJECT_MODEL_ID;
+const modelId = '8609932509485989888';
 const gcsSourceUri =
-  'gs://prj-ucaip-tutorials-vcm/dataset/automl-video-demo-data/traffic_predict.jsonl';
-const gcsDestinationOutputUriPrefix =
-  'gs://prj-ucaip-tutorials-vcm/batchprediction/Video/batchprediction-video_object_tracking_training';
+  'gs://ucaip-samples-test-output/inputs/vot_batch_prediction_input.jsonl';
+const gcsDestinationOutputUriPrefix = 'gs://ucaip-samples-test-output/';
+const location = 'us-central1';
 const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
 
 let batchPredictionJobId;
 
@@ -56,19 +62,22 @@ describe('AI platform create batch prediction job video object tracking', () => 
       .split('\n')[0];
   });
   after('should cancel delete the batch prediction job', async () => {
-    execSync(
-      `node ./cancel-batch-prediction-job.js ${batchPredictionJobId} \
-                                               ${project} ${location}`,
-      {
-        cwd,
-      }
+    const name = jobServiceClient.batchPredictionJobPath(
+      project,
+      location,
+      batchPredictionJobId
     );
-    execSync(
-      `node ./delete-batch-prediction-job.js ${batchPredictionJobId} \
-                                               ${project} ${location}`,
-      {
-        cwd,
-      }
-    );
+
+    const cancelRequest = {
+      name,
+    };
+
+    jobServiceClient.cancelBatchPredictionJob(cancelRequest).then(() => {
+      const deleteRequest = {
+        name,
+      };
+
+      return jobServiceClient.deleteBatchPredictionJob(deleteRequest);
+    });
   });
 });

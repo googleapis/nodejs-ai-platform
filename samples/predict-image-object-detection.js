@@ -27,9 +27,15 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   // const endpointId = "YOUR_ENDPOINT_ID";
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
+  const aiplatform = require('@google-cloud/aiplatform');
+  const {
+    instance,
+    params,
+    prediction,
+  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
 
   // Imports the Google Cloud Prediction Service Client library
-  const {PredictionServiceClient} = require('@google-cloud/aiplatform');
+  const {PredictionServiceClient} = aiplatform;
 
   // Specifies the location of the api endpoint
   const clientOptions = {
@@ -42,28 +48,21 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   async function predictImageObjectDetection() {
     // Configure the endpoint resource
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
-    const parameters = {
-      structValue: {
-        fields: {
-          confidenceThreshold: {numberValue: 0.5},
-          maxPredictions: {numberValue: 5},
-        },
-      },
-    };
+
+    const parametersObj = new params.ImageObjectDetectionPredictionParams({
+      confidenceThreshold: 0.5,
+      maxPredictions: 5,
+    });
+    const parameters = parametersObj.toValue();
 
     const fs = require('fs');
     const image = fs.readFileSync(filename, 'base64');
-    const instance = {
-      structValue: {
-        fields: {
-          content: {
-            stringValue: image,
-          },
-        },
-      },
-    };
+    const instanceObj = new instance.ImageObjectDetectionPredictionInstance({
+      content: image,
+    });
 
-    const instances = [instance];
+    const instanceVal = instanceObj.toValue();
+    const instances = [instanceVal];
     const request = {
       endpoint,
       instances,
@@ -76,16 +75,26 @@ async function main(filename, endpointId, project, location = 'us-central1') {
     console.log('Predict image object detection response');
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
     const predictions = response.predictions;
-    console.log('\tPredictions :');
-    for (const prediction of predictions) {
-      console.log(`\t\tPrediction : ${JSON.stringify(prediction)}`);
+    console.log('Predictions :');
+    for (const predictionResultVal of predictions) {
+      const predictionResultObj = prediction.ImageObjectDetectionPredictionResult.fromValue(
+        predictionResultVal
+      );
+      for (const [i, label] of predictionResultObj.displayNames.entries()) {
+        console.log(`\tDisplay name: ${label}`);
+        console.log(`\tConfidences: ${predictionResultObj.confidences[i]}`);
+        console.log(`\tIDs: ${predictionResultObj.ids[i]}`);
+        console.log(`\tBounding boxes: ${predictionResultObj.bboxes[i]}\n\n`);
+      }
     }
   }
-  await predictImageObjectDetection();
+  predictImageObjectDetection();
   // [END aiplatform_predict_image_object_detection]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

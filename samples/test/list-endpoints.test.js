@@ -24,17 +24,14 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const cwd = path.join(__dirname, '..');
-const projectId = process.env.GCLOUD_PROJECT;
 const LOCATION = 'us-central1';
+const project = process.env.CAIP_PROJECT_ID;
 
 describe('AI platform list endpoints', () => {
   it('should list all endpoints in a parent resource', async () => {
-    const stdout = execSync(
-      `node ./list-endpoints.js ${projectId} ${LOCATION}`,
-      {
-        cwd,
-      }
-    );
+    const stdout = execSync(`node ./list-endpoints.js ${project} ${LOCATION}`, {
+      cwd,
+    });
     assert.match(stdout, /Endpoint/);
   });
 });

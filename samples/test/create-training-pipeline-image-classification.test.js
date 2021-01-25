@@ -16,57 +16,59 @@
 
 'use strict';
 
-const path = require('path');
 const {assert} = require('chai');
 const {after, describe, it} = require('mocha');
 
 const uuid = require('uuid').v4;
 const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-const cwd = path.join(__dirname, '..');
 
-const datasetId = process.env.TRAINING_PIPELINE_IMAGE_CLASS_DATASET_ID;
+const aiplatform = require('@google-cloud/aiplatform');
+const clientOptions = {
+  apiEndpoint: 'us-central1-aiplatform.googleapis.com',
+};
+
+const pipelineServiceClient = new aiplatform.PipelineServiceClient(
+  clientOptions
+);
+
+const datasetId = '1084241610289446912';
 const modelDisplayName = `temp_create_training_pipeline_image_classification_model_test${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_image_classification_test_${uuid()}`;
+const location = 'us-central1';
 const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
 
 let trainingPipelineId;
 
-describe('AI platform create training pipeline image classification', () => {
+describe('AI platform create training pipeline image classification', async function () {
+  this.retries(2);
   it('should create a new image classification training pipeline', async () => {
     const stdout = execSync(
-      `node ./create-training-pipeline-image-classification.js ${datasetId} \
-                                            ${modelDisplayName} \
-                                            ${trainingPipelineDisplayName} \
-                                            ${project} ${location}`,
-      {
-        cwd,
-      }
+      `node ./create-training-pipeline-image-classification.js ${datasetId} ${modelDisplayName} ${trainingPipelineDisplayName} ${project} ${location}`
     );
-    assert.match(
-      stdout,
-      /Create training pipeline image classification response/
-    );
+    assert.match(stdout, /\/locations\/us-central1\/trainingPipelines\//);
     trainingPipelineId = stdout
       .split('/locations/us-central1/trainingPipelines/')[1]
       .split('\n')[0];
   });
 
   after('should cancel the training pipeline and delete it', async () => {
-    execSync(
-      `node ./cancel-training-pipeline.js ${trainingPipelineId} ${project} \
-                                            ${location}`,
-      {
-        cwd,
-      }
+    const name = pipelineServiceClient.trainingPipelinePath(
+      project,
+      location,
+      trainingPipelineId
     );
-    execSync(
-      `node ./delete-training-pipeline.js ${trainingPipelineId} ${project} \
-                                            ${location}`,
-      {
-        cwd,
-      }
-    );
+
+    const cancelRequest = {
+      name,
+    };
+
+    pipelineServiceClient.cancelTrainingPipeline(cancelRequest).then(() => {
+      const deleteRequest = {
+        name,
+      };
+
+      return pipelineServiceClient.deleteTrainingPipeline(deleteRequest);
+    });
   });
 });

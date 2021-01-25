@@ -25,17 +25,26 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const datasetId =
-  process.env.TRAINING_PIPELINE_TABLES_CLASSIFICATION_DATASET_ID;
+const aiplatform = require('@google-cloud/aiplatform');
+const clientOptions = {
+  apiEndpoint: 'us-central1-aiplatform.googleapis.com',
+};
+
+const pipelineServiceClient = new aiplatform.PipelineServiceClient(
+  clientOptions
+);
+
+const datasetId = '2438839935709478912';
 const modelDisplayName = `temp_create_training_pipeline_tables_classification_model_test${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_tables_classification_test_${uuid()}`;
-const targetColumn = 'TripType';
+const targetColumn = 'species';
+const location = 'us-central1';
 const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
 
 let trainingPipelineId;
 
-describe('AI platform create training pipeline tables classification', () => {
+describe('AI platform create training pipeline tables classification', async function () {
+  this.retries(2);
   it('should create a new tables classification training pipeline', async () => {
     const stdout = execSync(
       `node ./create-training-pipeline-tabular-classification.js \
@@ -58,19 +67,22 @@ describe('AI platform create training pipeline tables classification', () => {
   });
 
   after('should cancel the training pipeline and delete it', async () => {
-    execSync(
-      `node ./cancel-training-pipeline.js ${trainingPipelineId} ${project} \
-                                            ${location}`,
-      {
-        cwd,
-      }
+    const name = pipelineServiceClient.trainingPipelinePath(
+      project,
+      location,
+      trainingPipelineId
     );
-    execSync(
-      `node ./delete-training-pipeline.js ${trainingPipelineId} ${project} \
-                                            ${location}`,
-      {
-        cwd,
-      }
-    );
+
+    const cancelRequest = {
+      name,
+    };
+
+    pipelineServiceClient.cancelTrainingPipeline(cancelRequest).then(() => {
+      const deleteRequest = {
+        name,
+      };
+
+      return pipelineServiceClient.deleteTrainingPipeline(deleteRequest);
+    });
   });
 });

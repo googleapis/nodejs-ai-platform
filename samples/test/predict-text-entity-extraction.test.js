@@ -24,18 +24,16 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const filename = 'resources/textExtract.txt';
-const endpointId = process.env.PREDICT_TEXT_EXTRACTION_ENDPOINT_ID;
+const textInput =
+  'Bipolar depression and anxiety are often hereditary diseases.';
+const endpointId = '6207156555167563776';
 const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
+const location = 'us-central1';
 
 describe('AI platform predict text entity extraction', () => {
   it('should make predictions using the text extraction model', async () => {
     const stdout = execSync(
-      `node ./predict-text-entity-extraction.js ${filename} \
-                                                  ${endpointId} \
-                                                  ${project} \
-                                                  ${location}`,
+      `node ./predict-text-entity-extraction.js "${textInput}" ${endpointId} ${project} ${location}`,
       {
         cwd,
       }

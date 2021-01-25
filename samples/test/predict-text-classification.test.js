@@ -24,18 +24,17 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const filename = 'resources/textClass.txt';
-const endpointId = process.env.PREDICT_TEXT_CLASS_ENDPOINT_ID;
+const textInput =
+  'My local greasy-spoon diner took way too long' +
+  'to get my food. It also costs too much. Good food though.';
+const endpointId = '65372563341049856';
 const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
+const location = 'us-central1';
 
 describe('AI platform predict text classification', () => {
   it('should make predictions using the text classification model', async () => {
     const stdout = execSync(
-      `node ./predict-text-classification.js ${filename} \
-                                               ${endpointId} \
-                                               ${project} \
-                                               ${location}`,
+      `node ./predict-text-classification.js "${textInput}" ${endpointId} ${project} ${location}`,
       {
         cwd,
       }

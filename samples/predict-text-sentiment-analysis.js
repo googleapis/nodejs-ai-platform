@@ -16,20 +16,25 @@
 
 'use strict';
 
-async function main(filename, endpointId, project, location = 'us-central1') {
-  // [START aiplatform_predict_text_sentiment_analysis]
+async function main(text, endpointId, project, location = 'us-central1') {
+  // [START aiplatform_predict_text_entity_extraction]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
    */
 
-  // const filename = "YOUR_PREDICTION_FILE_NAME";
+  // const text = "YOUR_PREDICTION_TEXT";
   // const endpointId = "YOUR_ENDPOINT_ID";
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
+  const aiplatform = require('@google-cloud/aiplatform');
+  const {
+    instance,
+    prediction,
+  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
 
-  // Imports the Google Cloud Prediction Service Client library
-  const {PredictionServiceClient} = require('@google-cloud/aiplatform');
+  // Imports the Google Cloud Model Service Client library
+  const {PredictionServiceClient} = aiplatform;
 
   // Specifies the location of the api endpoint
   const clientOptions = {
@@ -39,53 +44,42 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   // Instantiates a client
   const predictionServiceClient = new PredictionServiceClient(clientOptions);
 
-  async function predictTextSentimentAnalysis() {
+  async function predictTextEntityExtraction() {
     // Configure the endpoint resource
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
-    const parameters = {
-      structValue: {
-        fields: {
-          confidenceThreshold: {numberValue: 0.5},
-          maxPredictions: {numberValue: 5},
-        },
-      },
-    };
 
-    const fs = require('fs');
-    const text = fs.readFileSync(filename, 'utf8');
-    const instance = {
-      structValue: {
-        fields: {
-          content: {
-            stringValue: text,
-          },
-        },
-      },
-    };
+    const instanceObj = new instance.TextSentimentPredictionInstance({
+      content: text,
+    });
+    const instanceVal = instanceObj.toValue();
 
-    const instances = [instance];
+    const instances = [instanceVal];
     const request = {
       endpoint,
       instances,
-      parameters,
     };
 
     // Predict request
     const [response] = await predictionServiceClient.predict(request);
 
-    console.log('Predict text sentiment analysis response :');
+    console.log('Predict text sentiment analysis response:');
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
-    const predictions = response.predictions;
-    console.log('\tPredictions :');
-    for (const prediction of predictions) {
-      console.log(`\t\tPrediction : ${JSON.stringify(prediction)}`);
+
+    console.log('\nPredictions :');
+    for (const predictionResultValue of response.predictions) {
+      const predictionResult = prediction.TextSentimentPredictionResult.fromValue(
+        predictionResultValue
+      );
+      console.log(`\tSentiment measure: ${predictionResult.sentiment}`);
     }
   }
-  await predictTextSentimentAnalysis();
-  // [END aiplatform_predict_text_sentiment_analysis]
+  predictTextEntityExtraction();
+  // [END aiplatform_predict_text_entity_extraction]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

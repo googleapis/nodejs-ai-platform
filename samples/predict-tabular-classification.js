@@ -16,20 +16,23 @@
 
 'use strict';
 
-async function main(filename, endpointId, project, location = 'us-central1') {
-  // [START aiplatform_predict_tabular_classification]
+async function main(endpointId, project, location = 'us-central1') {
+  // [START aiplatform_predict_tabular_classification_sample]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
    */
 
-  // const filename = "YOUR_PREDICTION_FILE_NAME";
   // const endpointId = 'YOUR_ENDPOINT_ID';
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
+  const aiplatform = require('@google-cloud/aiplatform');
+  const {
+    prediction,
+  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
 
   // Imports the Google Cloud Prediction Service Client library
-  const {PredictionServiceClient} = require('@google-cloud/aiplatform');
+  const {PredictionServiceClient, helpers} = aiplatform;
 
   // Specifies the location of the api endpoint
   const clientOptions = {
@@ -39,39 +42,17 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   // Instantiates a client
   const predictionServiceClient = new PredictionServiceClient(clientOptions);
 
-  async function predictTabularClassification() {
+  async function predictTablesClassification() {
     // Configure the endpoint resource
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
-    const parameters = {
-      structValue: {
-        fields: {},
-      },
-    };
-    const fs = require('fs');
-    const instanceDict = fs.readFileSync(filename, 'utf8');
-    const instanceValue = JSON.parse(instanceDict);
-    const instance = {
-      structValue: {
-        fields: {
-          Age: {stringValue: instanceValue['Age']},
-          Balance: {stringValue: instanceValue['Balance']},
-          Campaign: {stringValue: instanceValue['Campaign']},
-          Contact: {stringValue: instanceValue['Contact']},
-          Day: {stringValue: instanceValue['Day']},
-          Default: {stringValue: instanceValue['Default']},
-          Deposit: {stringValue: instanceValue['Deposit']},
-          Duration: {stringValue: instanceValue['Duration']},
-          Housing: {stringValue: instanceValue['Housing']},
-          Job: {stringValue: instanceValue['Job']},
-          Loan: {stringValue: instanceValue['Loan']},
-          MaritalStatus: {stringValue: instanceValue['MaritalStatus']},
-          Month: {stringValue: instanceValue['Month']},
-          PDays: {stringValue: instanceValue['PDays']},
-          POutcome: {stringValue: instanceValue['POutcome']},
-          Previous: {stringValue: instanceValue['Previous']},
-        },
-      },
-    };
+    const parameters = helpers.toValue({});
+
+    const instance = helpers.toValue({
+      petal_length: '1.4',
+      petal_width: '1.3',
+      sepal_length: '5.1',
+      sepal_width: '2.8',
+    });
 
     const instances = [instance];
     const request = {
@@ -84,18 +65,26 @@ async function main(filename, endpointId, project, location = 'us-central1') {
     const [response] = await predictionServiceClient.predict(request);
 
     console.log('Predict tabular classification response');
-    console.log(`\tDeployed model id : ${response.deployedModelId}`);
+    console.log(`\tDeployed model id : ${response.deployedModelId}\n`);
     const predictions = response.predictions;
-    console.log('\tPredictions :');
-    for (const prediction of predictions) {
-      console.log(`\t\tPrediction : ${JSON.stringify(prediction)}`);
+    console.log('Predictions :');
+    for (const predictionResultVal of predictions) {
+      const predictionResultObj = prediction.TabularClassificationPredictionResult.fromValue(
+        predictionResultVal
+      );
+      for (const [i, class_] of predictionResultObj.classes.entries()) {
+        console.log(`\tClass: ${class_}`);
+        console.log(`\tScore: ${predictionResultObj.scores[i]}\n\n`);
+      }
     }
   }
-  await predictTabularClassification();
-  // [END aiplatform_predict_tabular_classification]
+  predictTablesClassification();
+  // [END aiplatform_predict_tabular_classification_sample]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

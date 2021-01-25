@@ -34,9 +34,14 @@ async function main(
   // const trainingPipelineDisplayName = 'YOUR_TRAINING_PIPELINE_DISPLAY_NAME';
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
+  const aiplatform = require('@google-cloud/aiplatform');
+  const {
+    definition,
+  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.trainingjob;
+  const ModelType = definition.AutoMlVideoObjectTrackingInputs.ModelType;
 
   // Imports the Google Cloud Pipeline Service Client library
-  const {PipelineServiceClient} = require('@google-cloud/aiplatform');
+  const {PipelineServiceClient} = aiplatform;
 
   // Specifies the location of the api endpoint
   const clientOptions = {
@@ -49,24 +54,23 @@ async function main(
   async function createTrainingPipelineVideoObjectTracking() {
     // Configure the parent resource
     const parent = `projects/${project}/locations/${location}`;
-    // Values should match the input expected by your model.
-    // modelType(string)
-    const trainingTaskInputs = {
-      structValue: {
-        fields: {
-          modelType: {stringValue: 'CLOUD'},
-        },
-      },
-    };
+
+    const trainingTaskInputsObj = new definition.AutoMlVideoObjectTrackingInputs(
+      {
+        modelType: ModelType.CLOUD,
+      }
+    );
+    const trainingTaskInputs = trainingTaskInputsObj.toValue();
+
     const modelToUpload = {displayName: modelDisplayName};
     const inputDataConfig = {datasetId: datasetId};
     const trainingPipeline = {
       displayName: trainingPipelineDisplayName,
       trainingTaskDefinition:
         'gs://google-cloud-aiplatform/schema/trainingjob/definition/automl_video_object_tracking_1.0.0.yaml',
-      trainingTaskInputs: trainingTaskInputs,
-      inputDataConfig: inputDataConfig,
-      modelToUpload: modelToUpload,
+      trainingTaskInputs,
+      inputDataConfig,
+      modelToUpload,
     };
     const request = {
       parent,
@@ -79,130 +83,17 @@ async function main(
     );
 
     console.log('Create training pipeline video object tracking response');
-    console.log(`\tName : ${response.name}`);
-    console.log(`\tDisplay name: ${response.displayName}`);
-    console.log(
-      `\tTraining task definition : ${response.trainingTaskDefinition}`
-    );
-    console.log(
-      `\tTraining task inputs : \
-        ${JSON.stringify(response.trainingTaskInputs)}`
-    );
-    console.log(`\tTraining task metadata : ${response.trainingTaskMetadata}`);
-    console.log(`\tState : ${response.state}`);
-    console.log(`\tCreate time : ${JSON.stringify(response.createTime)}`);
-    console.log(`\tStart time : ${JSON.stringify(response.startTime)}`);
-    console.log(`\tEnd time : ${JSON.stringify(response.endTime)}`);
-    console.log(`\tUpdate time : ${JSON.stringify(response.updateTime)}`);
-    console.log(`\tLabels : ${JSON.stringify(response.labels)}`);
-
-    const inputDataConfiguration = response.inputDataConfig;
-    console.log('\tInput data config');
-    console.log(`\t\tDataset id : ${inputDataConfiguration.datasetId}`);
-    console.log(
-      `\t\tAnnotations filter : \
-        ${inputDataConfiguration.annotationsFilter}`
-    );
-
-    const fractionSplit = inputDataConfiguration.fractionSplit;
-    console.log('\t\tFraction split');
-    if (fractionSplit === null) {
-      console.log('\t\t\tTraining fraction : {}');
-      console.log('\t\t\tValidation fraction : {}');
-      console.log('\t\t\tTest fraction : {}');
-    } else {
-      console.log(
-        `\t\t\tTraining fraction : ${fractionSplit.trainingFraction}`
-      );
-      console.log(
-        `\t\t\tValidation fraction : ${fractionSplit.validationFraction}`
-      );
-      console.log(`\t\t\tTest fraction : ${fractionSplit.testFraction}`);
-    }
-
-    const filterSplit = inputDataConfiguration.filterSplit;
-    console.log('\t\tFilter split ');
-    if (filterSplit === null) {
-      console.log('\t\t\tTraining filter : {}');
-      console.log('\t\t\tValidation filter : {}');
-      console.log('\t\t\tTest filter : {}');
-    } else {
-      console.log(`\t\t\tTraining filter : ${filterSplit.trainingFilter}`);
-      console.log(`\t\t\tValidation filter : ${filterSplit.validationFilter}`);
-      console.log(`\t\t\tTest filter : ${filterSplit.testFilter}`);
-    }
-
-    const predefinedSplit = inputDataConfiguration.predefinedSplit;
-    console.log('\t\tPredefined split');
-    if (predefinedSplit === null) {
-      console.log('\t\t\tKey : {}');
-    } else {
-      console.log(`\t\t\tKey : ${predefinedSplit.key}`);
-    }
-
-    const timestampSplit = inputDataConfiguration.timestampSplit;
-    console.log('\t\tTimestamp split');
-    if (timestampSplit === null) {
-      console.log('\t\t\tTraining fraction : {}');
-      console.log('\t\t\tValidation fraction : {}');
-      console.log('\t\t\tTest fraction : {}');
-      console.log('\t\t\tKey : {}');
-    } else {
-      console.log(
-        `\t\t\tTraining fraction : ${timestampSplit.trainingFraction}`
-      );
-      console.log(
-        `\t\t\tValidation fraction : \
-          ${timestampSplit.validationFraction}`
-      );
-      console.log(`\t\t\tTest fraction : ${timestampSplit.testFraction}`);
-      console.log(`\t\t\tKey : ${timestampSplit.key}`);
-    }
-
-    const modelToBeUploaded = response.modelToUpload;
-    console.log('\tModel to upload');
-    console.log(`\t\tName : ${modelToBeUploaded.name}`);
-    console.log(`\t\tDisplay name : ${modelToBeUploaded.displayName}`);
-    console.log(`\t\tDescription : ${modelToBeUploaded.description}`);
-    console.log(
-      `\t\tMetadata schema uri : ${modelToBeUploaded.metadataSchemaUri}`
-    );
-    console.log(`\t\tMetadata : ${JSON.stringify(modelToBeUploaded.metadata)}`);
-    console.log(
-      `\t\tTraining pipeline : ${modelToBeUploaded.trainingPipeline}`
-    );
-    console.log(`\t\tArtifact uri : ${modelToBeUploaded.artifactUri}`);
-    console.log(
-      `\t\tSupported deployment resource types : \
-        ${modelToBeUploaded.supportedDeploymentResourceTypes}`
-    );
-    console.log(
-      `\t\tSupported input storage formats : \
-        ${modelToBeUploaded.supportedInputStorageFormats}`
-    );
-    console.log(
-      `\t\tSupported output storage formats : \
-        ${modelToBeUploaded.supportedOutputStorageFormats}`
-    );
-    console.log(`\t\tCreate time : ${modelToBeUploaded.createTime}`);
-    console.log(`\t\tUpdate time : ${modelToBeUploaded.updateTime}`);
-    console.log(`\t\tLabels : ${modelToBeUploaded.labels}`);
-
-    const error = response.error;
-    console.log('\tError');
-    if (error === null) {
-      console.log('\t\tCode : {}');
-      console.log('\t\tMessage : {}');
-    } else {
-      console.log(`\t\tCode : ${error.code}`);
-      console.log(`\t\tMessage : ${error.message}`);
-    }
+    console.log(`Name : ${response.name}`);
+    console.log('Raw response:');
+    console.log(JSON.stringify(response, null, 2));
   }
-  await createTrainingPipelineVideoObjectTracking();
+  createTrainingPipelineVideoObjectTracking();
   // [END aiplatform_create_training_pipeline_video_object_tracking]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

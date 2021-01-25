@@ -16,20 +16,23 @@
 
 'use strict';
 
-async function main(filename, endpointId, project, location = 'us-central1') {
-  // [START aiplatform_predict_tabular_regresssion]
+async function main(endpointId, project, location = 'us-central1') {
+  // [START aiplatform_predict_tabular_regression_sample]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
    */
 
-  // const filename = "YOUR_PREDICTION_FILE_NAME";
   // const endpointId = 'YOUR_ENDPOINT_ID';
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
+  const aiplatform = require('@google-cloud/aiplatform');
+  const {
+    prediction,
+  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
 
   // Imports the Google Cloud Prediction Service Client library
-  const {PredictionServiceClient} = require('@google-cloud/aiplatform');
+  const {PredictionServiceClient, helpers} = aiplatform;
 
   // Specifies the location of the api endpoint
   const clientOptions = {
@@ -39,40 +42,37 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   // Instantiates a client
   const predictionServiceClient = new PredictionServiceClient(clientOptions);
 
-  async function predictTabularRegression() {
+  async function predictTablesRegression() {
     // Configure the endpoint resource
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
-    const parameters = {
-      structValue: {
-        fields: {},
+    const parameters = helpers.toValue({});
+
+    // TODO (erschmid): Make this less painful
+    const instance = helpers.toValue({
+      BOOLEAN_2unique_NULLABLE: false,
+      DATETIME_1unique_NULLABLE: '2019-01-01 00:00:00',
+      DATE_1unique_NULLABLE: '2019-01-01',
+      FLOAT_5000unique_NULLABLE: 1611,
+      FLOAT_5000unique_REPEATED: [2320, 1192],
+      INTEGER_5000unique_NULLABLE: '8',
+      NUMERIC_5000unique_NULLABLE: 16,
+      STRING_5000unique_NULLABLE: 'str-2',
+      STRUCT_NULLABLE: {
+        BOOLEAN_2unique_NULLABLE: false,
+        DATE_1unique_NULLABLE: '2019-01-01',
+        DATETIME_1unique_NULLABLE: '2019-01-01 00:00:00',
+        FLOAT_5000unique_NULLABLE: 1308,
+        FLOAT_5000unique_REPEATED: [2323, 1178],
+        FLOAT_5000unique_REQUIRED: 3089,
+        INTEGER_5000unique_NULLABLE: '1777',
+        NUMERIC_5000unique_NULLABLE: 3323,
+        TIME_1unique_NULLABLE: '23:59:59.999999',
+        STRING_5000unique_NULLABLE: 'str-49',
+        TIMESTAMP_1unique_NULLABLE: '1546387199999999',
       },
-    };
-    const fs = require('fs');
-    const instanceDict = fs.readFileSync(filename, 'utf8');
-    const instanceValue = JSON.parse(instanceDict);
-    const instance = {
-      structValue: {
-        fields: {
-          Age: {stringValue: instanceValue['Age']},
-          Balance: {stringValue: instanceValue['Balance']},
-          Campaign: {stringValue: instanceValue['Campaign']},
-          Contact: {stringValue: instanceValue['Contact']},
-          Day: {stringValue: instanceValue['Day']},
-          Default: {stringValue: instanceValue['Default']},
-          Deposit: {stringValue: instanceValue['Deposit']},
-          Duration: {stringValue: instanceValue['Duration']},
-          Housing: {stringValue: instanceValue['Housing']},
-          Job: {stringValue: instanceValue['Job']},
-          Loan: {stringValue: instanceValue['Loan']},
-          MaritalStatus: {stringValue: instanceValue['MaritalStatus']},
-          Month: {stringValue: instanceValue['Month']},
-          PDays: {stringValue: instanceValue['PDays']},
-          POutcome: {stringValue: instanceValue['POutcome']},
-          Previous: {stringValue: instanceValue['Previous']},
-          Education: {stringValue: instanceValue['Education']},
-        },
-      },
-    };
+      TIMESTAMP_1unique_NULLABLE: '1546387199999999',
+      TIME_1unique_NULLABLE: '23:59:59.999999',
+    });
 
     const instances = [instance];
     const request = {
@@ -88,15 +88,22 @@ async function main(filename, endpointId, project, location = 'us-central1') {
     console.log(`\tDeployed model id : ${response.deployedModelId}`);
     const predictions = response.predictions;
     console.log('\tPredictions :');
-    for (const prediction of predictions) {
-      console.log(`\t\tPrediction : ${JSON.stringify(prediction)}`);
+    for (const predictionResultVal of predictions) {
+      const predictionResultObj = prediction.TabularRegressionPredictionResult.fromValue(
+        predictionResultVal
+      );
+      console.log(`\tUpper bound: ${predictionResultObj.upper_bound}`);
+      console.log(`\tLower bound: ${predictionResultObj.lower_bound}`);
+      console.log(`\tLower bound: ${predictionResultObj.value}`);
     }
   }
-  await predictTabularRegression();
-  // [END aiplatform_predict_tabular_regresssion]
+  predictTablesRegression();
+  // [END aiplatform_predict_tabular_regression_sample]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));

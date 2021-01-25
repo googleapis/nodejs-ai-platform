@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.2.0...v1.3.0) (2021-01-14)
+
+
+### Features
+
+* **samples:** adds samples for enhanced version of library ([#16](https://www.github.com/googleapis/nodejs-ai-platform/issues/16)) ([aef443c](https://www.github.com/googleapis/nodejs-ai-platform/commit/aef443c41b8a9a2199e0c5b100a5ab91444b0dfe))
+
+## [1.2.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.1.0...v1.2.0) (2021-01-09)
+
+
+### Features
+
+* adds cleaner utility for orphaned resources ([#34](https://www.github.com/googleapis/nodejs-ai-platform/issues/34)) ([7c09258](https://www.github.com/googleapis/nodejs-ai-platform/commit/7c09258eb99d9c40ba7bf28b6d84434d6bb8a5b9))
+* adds style enumeration ([#37](https://www.github.com/googleapis/nodejs-ai-platform/issues/37)) ([81c1515](https://www.github.com/googleapis/nodejs-ai-platform/commit/81c15150f55c4ef20359c1e48530f2c9bcd0f64b))
+
+## [1.1.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.0.0...v1.1.0) (2021-01-07)
+
+
+### Features
+
+* adds enhancements to library ([#22](https://www.github.com/googleapis/nodejs-ai-platform/issues/22)) ([b697a38](https://www.github.com/googleapis/nodejs-ai-platform/commit/b697a38f696ab14b3a7ce9563f2ed5449eeeab4f))
+
 ## 1.0.0 (2020-11-10)
 
 

@@ -24,16 +24,14 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const filename = 'resources/tablesClass.txt';
-const endpointId = process.env.PREDICT_TABLES_CLASSIFICATION_ENDPOINT_ID;
+const endpointId = '4966625964059525120';
 const project = process.env.CAIP_PROJECT_ID;
-const location = process.env.LOCATION;
+const location = 'us-central1';
 
 describe('AI platform predict tabular classification', () => {
   it('should make predictions using the tabular classification model', async () => {
     const stdout = execSync(
-      `node ./predict-tabular-classification.js ${filename} \
-                                                 ${endpointId} \
+      `node ./predict-tabular-classification.js  ${endpointId} \
                                                  ${project} \
                                                  ${location}`,
       {

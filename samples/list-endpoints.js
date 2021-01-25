@@ -27,7 +27,7 @@ async function main(projectId, location = 'us-central1') {
 
   // Specifies the location of the api endpoint
   const clientOptions = {
-    apiEndpoint: 'us-central1-autopush-aiplatform.sandbox.googleapis.com',
+    apiEndpoint: 'us-central1-aiplatform.googleapis.com',
   };
   const client = new EndpointServiceClient(clientOptions);
 
@@ -50,11 +50,13 @@ async function main(projectId, location = 'us-central1') {
       }
     }
   }
-  await listEndpoints();
+  listEndpoints();
   // [END aiplatform_list_endpoints]
 }
 
-main(...process.argv.slice(2)).catch(err => {
-  console.error(err);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
   process.exitCode = 1;
 });
+
+main(...process.argv.slice(2));
