@@ -67,10 +67,7 @@ async function main(
         ],
       },
     };
-    const request = {
-      parent,
-      customJob,
-    };
+    const request = {parent, customJob};
 
     // Create custom job request
     const [response] = await jobServiceClient.createCustomJob(request);

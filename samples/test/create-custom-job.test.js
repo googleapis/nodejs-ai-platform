@@ -29,6 +29,17 @@ const containerImageUri = 'gcr.io/ucaip-test/ucaip-training-test:latest';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
+function parseResponse(stdout) {
+  let res = {};
+  for (let i = 0; i < stdout.length; i++) {
+    if (stdout[i] === '{') {
+      res = JSON.parse(stdout.substr(i));
+      break;
+    }
+  }
+  return res;
+}
+
 let customJobId;
 
 describe('AI platform create custom job', () => {
@@ -42,10 +53,7 @@ describe('AI platform create custom job', () => {
       }
     );
     assert.match(stdout, /Create custom job response/);
-    customJobId = stdout
-      .split('/locations/us-central1/customJobs/')[1]
-      .split('\n')[0]
-      .slice(0, 19);
+    customJobId = parseResponse(stdout).name.split('/').pop();
   });
 
   after('should cancel the customJob and delete it', async () => {
