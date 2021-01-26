@@ -49,6 +49,7 @@ async function main(batchPredictionJobId, project, location = 'us-central1') {
     await jobServiceClient.cancelBatchPredictionJob(request);
     console.log('Cancel batch prediction job response :');
   }
+
   cancelBatchPredictionJob();
   // [END aiplatform_cancel_batch_prediction_job]
 }
