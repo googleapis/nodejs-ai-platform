@@ -48,7 +48,7 @@ async function main(filename, endpointId, project, location = 'us-central1') {
         fields: {},
       },
     };
-    const instanceDict = fs.readFileSync(filename, 'utf8');
+    const instanceDict = await fs.promises.readFile(filename, 'utf8');
     const instanceValue = JSON.parse(instanceDict);
     const instance = {
       structValue: {
