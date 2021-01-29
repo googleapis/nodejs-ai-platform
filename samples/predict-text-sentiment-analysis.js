@@ -17,7 +17,7 @@
 'use strict';
 
 async function main(text, endpointId, project, location = 'us-central1') {
-  // [START aiplatform_predict_text_entity_extraction]
+  // [START aiplatform_predict_text_sentiment_analysis]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
@@ -74,7 +74,7 @@ async function main(text, endpointId, project, location = 'us-central1') {
     }
   }
   predictTextEntityExtraction();
-  // [END aiplatform_predict_text_entity_extraction]
+  // [END aiplatform_predict_text_sentiment_analysis]
 }
 
 process.on('unhandledRejection', err => {
