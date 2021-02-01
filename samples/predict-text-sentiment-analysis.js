@@ -44,7 +44,7 @@ async function main(text, endpointId, project, location = 'us-central1') {
   // Instantiates a client
   const predictionServiceClient = new PredictionServiceClient(clientOptions);
 
-  async function predictTextEntityExtraction() {
+  async function predictTextSentimentAnalysis() {
     // Configure the endpoint resource
     const endpoint = `projects/${project}/locations/${location}/endpoints/${endpointId}`;
 
@@ -73,7 +73,7 @@ async function main(text, endpointId, project, location = 'us-central1') {
       console.log(`\tSentiment measure: ${predictionResult.sentiment}`);
     }
   }
-  predictTextEntityExtraction();
+  predictTextSentimentAnalysis();
   // [END aiplatform_predict_text_sentiment_analysis]
 }
 
