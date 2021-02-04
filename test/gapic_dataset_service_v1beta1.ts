@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -3344,6 +3344,82 @@ describe('v1beta1.DatasetServiceClient', () => {
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('trial', () => {
+      const fakePath = '/rendered/path/trial';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        study: 'studyValue',
+        trial: 'trialValue',
+      };
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.trialPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.trialPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('trialPath', () => {
+        const result = client.trialPath(
+          'projectValue',
+          'locationValue',
+          'studyValue',
+          'trialValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.trialPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTrialName', () => {
+        const result = client.matchProjectFromTrialName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTrialName', () => {
+        const result = client.matchLocationFromTrialName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchStudyFromTrialName', () => {
+        const result = client.matchStudyFromTrialName(fakePath);
+        assert.strictEqual(result, 'studyValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTrialFromTrialName', () => {
+        const result = client.matchTrialFromTrialName(fakePath);
+        assert.strictEqual(result, 'trialValue');
+        assert(
+          (client.pathTemplates.trialPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
