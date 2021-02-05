@@ -91,10 +91,13 @@ export class PredictionServiceClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PredictionServiceClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -112,7 +115,7 @@ export class PredictionServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -120,10 +123,7 @@ export class PredictionServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -139,12 +139,18 @@ export class PredictionServiceClient {
     // For Node.js, pass the path to JSON proto file.
     // For browsers, pass the JSON content.
 
-    const nodejsProtoPath = path.join(__dirname, '..', '..', 'protos', 'protos.json');
+    const nodejsProtoPath = path.join(
+      __dirname,
+      '..',
+      '..',
+      'protos',
+      'protos.json'
+    );
     this._protos = this._gaxGrpc.loadProto(
-      opts.fallback ?
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require("../../protos/protos.json") :
-        nodejsProtoPath
+      opts.fallback
+        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('../../protos/protos.json')
+        : nodejsProtoPath
     );
 
     // This API contains "path templates"; forward-slash-separated
@@ -200,8 +206,11 @@ export class PredictionServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.aiplatform.v1.PredictionService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.aiplatform.v1.PredictionService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -229,16 +238,18 @@ export class PredictionServiceClient {
     // Put together the "service stub" for
     // google.cloud.aiplatform.v1.PredictionService.
     this.predictionServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.aiplatform.v1.PredictionService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.aiplatform.v1.PredictionService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.aiplatform.v1.PredictionService,
-        this._opts) as Promise<{[method: string]: Function}>;
+      this._opts
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const predictionServiceStubMethods =
-        ['predict'];
+    const predictionServiceStubMethods = ['predict'];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -248,12 +259,12 @@ export class PredictionServiceClient {
           const func = stub[methodName];
           return func.apply(stub, args);
         },
-        (err: Error|null|undefined) => () => {
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -297,9 +308,7 @@ export class PredictionServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -308,8 +317,9 @@ export class PredictionServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -321,80 +331,93 @@ export class PredictionServiceClient {
   // -- Service calls --
   // -------------------
   predict(
-      request: protos.google.cloud.aiplatform.v1.IPredictRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IPredictResponse,
-        protos.google.cloud.aiplatform.v1.IPredictRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.aiplatform.v1.IPredictRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IPredictResponse,
+      protos.google.cloud.aiplatform.v1.IPredictRequest | undefined,
+      {} | undefined
+    ]
+  >;
   predict(
-      request: protos.google.cloud.aiplatform.v1.IPredictRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IPredictResponse,
-          protos.google.cloud.aiplatform.v1.IPredictRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.aiplatform.v1.IPredictRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IPredictResponse,
+      protos.google.cloud.aiplatform.v1.IPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   predict(
-      request: protos.google.cloud.aiplatform.v1.IPredictRequest,
-      callback: Callback<
-          protos.google.cloud.aiplatform.v1.IPredictResponse,
-          protos.google.cloud.aiplatform.v1.IPredictRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Perform an online prediction.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.endpoint
- *   Required. The name of the Endpoint requested to serve the prediction.
- *   Format:
- *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
- * @param {number[]} request.instances
- *   Required. The instances that are the input to the prediction call.
- *   A DeployedModel may have an upper limit on the number of instances it
- *   supports per request, and when it is exceeded the prediction call errors
- *   in case of AutoML Models, or, in case of customer created Models, the
- *   behaviour is as documented by that Model.
- *   The schema of any single instance may be specified via Endpoint's
- *   DeployedModels' {@link google.cloud.aiplatform.v1.DeployedModel.model|Model's}
- *   {@link google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
- *   {@link google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
- * @param {google.protobuf.Value} request.parameters
- *   The parameters that govern the prediction. The schema of the parameters may
- *   be specified via Endpoint's DeployedModels' {@link google.cloud.aiplatform.v1.DeployedModel.model|Model's }
- *   {@link google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
- *   {@link google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [PredictResponse]{@link google.cloud.aiplatform.v1.PredictResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.predict(request);
- */
+    request: protos.google.cloud.aiplatform.v1.IPredictRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IPredictResponse,
+      protos.google.cloud.aiplatform.v1.IPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Perform an online prediction.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.endpoint
+   *   Required. The name of the Endpoint requested to serve the prediction.
+   *   Format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   * @param {number[]} request.instances
+   *   Required. The instances that are the input to the prediction call.
+   *   A DeployedModel may have an upper limit on the number of instances it
+   *   supports per request, and when it is exceeded the prediction call errors
+   *   in case of AutoML Models, or, in case of customer created Models, the
+   *   behaviour is as documented by that Model.
+   *   The schema of any single instance may be specified via Endpoint's
+   *   DeployedModels' {@link google.cloud.aiplatform.v1.DeployedModel.model|Model's}
+   *   {@link google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
+   *   {@link google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
+   * @param {google.protobuf.Value} request.parameters
+   *   The parameters that govern the prediction. The schema of the parameters may
+   *   be specified via Endpoint's DeployedModels' {@link google.cloud.aiplatform.v1.DeployedModel.model|Model's }
+   *   {@link google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
+   *   {@link google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PredictResponse]{@link google.cloud.aiplatform.v1.PredictResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.predict(request);
+   */
   predict(
-      request: protos.google.cloud.aiplatform.v1.IPredictRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request: protos.google.cloud.aiplatform.v1.IPredictRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.aiplatform.v1.IPredictResponse,
-          protos.google.cloud.aiplatform.v1.IPredictRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.aiplatform.v1.IPredictResponse,
-          protos.google.cloud.aiplatform.v1.IPredictRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.aiplatform.v1.IPredictResponse,
-        protos.google.cloud.aiplatform.v1.IPredictRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.aiplatform.v1.IPredictRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IPredictResponse,
+      protos.google.cloud.aiplatform.v1.IPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IPredictResponse,
+      protos.google.cloud.aiplatform.v1.IPredictRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -403,7 +426,7 @@ export class PredictionServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = gax.routingHeader.fromParams({
-      'endpoint': request.endpoint || '',
+      endpoint: request.endpoint || '',
     });
     this.initialize();
     return this.innerApiCalls.predict(request, options, callback);
@@ -423,7 +446,13 @@ export class PredictionServiceClient {
    * @param {string} annotation
    * @returns {string} Resource name string.
    */
-  annotationPath(project:string,location:string,dataset:string,dataItem:string,annotation:string) {
+  annotationPath(
+    project: string,
+    location: string,
+    dataset: string,
+    dataItem: string,
+    annotation: string
+  ) {
     return this.pathTemplates.annotationPathTemplate.render({
       project: project,
       location: location,
@@ -441,7 +470,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).project;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .project;
   }
 
   /**
@@ -452,7 +482,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).location;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .location;
   }
 
   /**
@@ -463,7 +494,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).dataset;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .dataset;
   }
 
   /**
@@ -474,7 +506,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).data_item;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .data_item;
   }
 
   /**
@@ -485,7 +518,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the annotation.
    */
   matchAnnotationFromAnnotationName(annotationName: string) {
-    return this.pathTemplates.annotationPathTemplate.match(annotationName).annotation;
+    return this.pathTemplates.annotationPathTemplate.match(annotationName)
+      .annotation;
   }
 
   /**
@@ -497,7 +531,12 @@ export class PredictionServiceClient {
    * @param {string} annotation_spec
    * @returns {string} Resource name string.
    */
-  annotationSpecPath(project:string,location:string,dataset:string,annotationSpec:string) {
+  annotationSpecPath(
+    project: string,
+    location: string,
+    dataset: string,
+    annotationSpec: string
+  ) {
     return this.pathTemplates.annotationSpecPathTemplate.render({
       project: project,
       location: location,
@@ -514,7 +553,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).project;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).project;
   }
 
   /**
@@ -525,7 +566,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).location;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).location;
   }
 
   /**
@@ -536,7 +579,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the dataset.
    */
   matchDatasetFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).dataset;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).dataset;
   }
 
   /**
@@ -547,7 +592,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the annotation_spec.
    */
   matchAnnotationSpecFromAnnotationSpecName(annotationSpecName: string) {
-    return this.pathTemplates.annotationSpecPathTemplate.match(annotationSpecName).annotation_spec;
+    return this.pathTemplates.annotationSpecPathTemplate.match(
+      annotationSpecName
+    ).annotation_spec;
   }
 
   /**
@@ -558,7 +605,11 @@ export class PredictionServiceClient {
    * @param {string} batch_prediction_job
    * @returns {string} Resource name string.
    */
-  batchPredictionJobPath(project:string,location:string,batchPredictionJob:string) {
+  batchPredictionJobPath(
+    project: string,
+    location: string,
+    batchPredictionJob: string
+  ) {
     return this.pathTemplates.batchPredictionJobPathTemplate.render({
       project: project,
       location: location,
@@ -574,7 +625,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).project;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(
+      batchPredictionJobName
+    ).project;
   }
 
   /**
@@ -585,7 +638,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).location;
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(
+      batchPredictionJobName
+    ).location;
   }
 
   /**
@@ -595,8 +650,12 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing BatchPredictionJob resource.
    * @returns {string} A string representing the batch_prediction_job.
    */
-  matchBatchPredictionJobFromBatchPredictionJobName(batchPredictionJobName: string) {
-    return this.pathTemplates.batchPredictionJobPathTemplate.match(batchPredictionJobName).batch_prediction_job;
+  matchBatchPredictionJobFromBatchPredictionJobName(
+    batchPredictionJobName: string
+  ) {
+    return this.pathTemplates.batchPredictionJobPathTemplate.match(
+      batchPredictionJobName
+    ).batch_prediction_job;
   }
 
   /**
@@ -607,7 +666,7 @@ export class PredictionServiceClient {
    * @param {string} custom_job
    * @returns {string} Resource name string.
    */
-  customJobPath(project:string,location:string,customJob:string) {
+  customJobPath(project: string, location: string, customJob: string) {
     return this.pathTemplates.customJobPathTemplate.render({
       project: project,
       location: location,
@@ -623,7 +682,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName).project;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName)
+      .project;
   }
 
   /**
@@ -634,7 +694,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName).location;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName)
+      .location;
   }
 
   /**
@@ -645,7 +706,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the custom_job.
    */
   matchCustomJobFromCustomJobName(customJobName: string) {
-    return this.pathTemplates.customJobPathTemplate.match(customJobName).custom_job;
+    return this.pathTemplates.customJobPathTemplate.match(customJobName)
+      .custom_job;
   }
 
   /**
@@ -657,7 +719,12 @@ export class PredictionServiceClient {
    * @param {string} data_item
    * @returns {string} Resource name string.
    */
-  dataItemPath(project:string,location:string,dataset:string,dataItem:string) {
+  dataItemPath(
+    project: string,
+    location: string,
+    dataset: string,
+    dataItem: string
+  ) {
     return this.pathTemplates.dataItemPathTemplate.render({
       project: project,
       location: location,
@@ -707,7 +774,8 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the data_item.
    */
   matchDataItemFromDataItemName(dataItemName: string) {
-    return this.pathTemplates.dataItemPathTemplate.match(dataItemName).data_item;
+    return this.pathTemplates.dataItemPathTemplate.match(dataItemName)
+      .data_item;
   }
 
   /**
@@ -718,7 +786,11 @@ export class PredictionServiceClient {
    * @param {string} data_labeling_job
    * @returns {string} Resource name string.
    */
-  dataLabelingJobPath(project:string,location:string,dataLabelingJob:string) {
+  dataLabelingJobPath(
+    project: string,
+    location: string,
+    dataLabelingJob: string
+  ) {
     return this.pathTemplates.dataLabelingJobPathTemplate.render({
       project: project,
       location: location,
@@ -734,7 +806,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).project;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(
+      dataLabelingJobName
+    ).project;
   }
 
   /**
@@ -745,7 +819,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).location;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(
+      dataLabelingJobName
+    ).location;
   }
 
   /**
@@ -756,7 +832,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the data_labeling_job.
    */
   matchDataLabelingJobFromDataLabelingJobName(dataLabelingJobName: string) {
-    return this.pathTemplates.dataLabelingJobPathTemplate.match(dataLabelingJobName).data_labeling_job;
+    return this.pathTemplates.dataLabelingJobPathTemplate.match(
+      dataLabelingJobName
+    ).data_labeling_job;
   }
 
   /**
@@ -767,7 +845,7 @@ export class PredictionServiceClient {
    * @param {string} dataset
    * @returns {string} Resource name string.
    */
-  datasetPath(project:string,location:string,dataset:string) {
+  datasetPath(project: string, location: string, dataset: string) {
     return this.pathTemplates.datasetPathTemplate.render({
       project: project,
       location: location,
@@ -816,7 +894,7 @@ export class PredictionServiceClient {
    * @param {string} endpoint
    * @returns {string} Resource name string.
    */
-  endpointPath(project:string,location:string,endpoint:string) {
+  endpointPath(project: string, location: string, endpoint: string) {
     return this.pathTemplates.endpointPathTemplate.render({
       project: project,
       location: location,
@@ -865,7 +943,11 @@ export class PredictionServiceClient {
    * @param {string} hyperparameter_tuning_job
    * @returns {string} Resource name string.
    */
-  hyperparameterTuningJobPath(project:string,location:string,hyperparameterTuningJob:string) {
+  hyperparameterTuningJobPath(
+    project: string,
+    location: string,
+    hyperparameterTuningJob: string
+  ) {
     return this.pathTemplates.hyperparameterTuningJobPathTemplate.render({
       project: project,
       location: location,
@@ -880,8 +962,12 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).project;
+  matchProjectFromHyperparameterTuningJobName(
+    hyperparameterTuningJobName: string
+  ) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
+      hyperparameterTuningJobName
+    ).project;
   }
 
   /**
@@ -891,8 +977,12 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).location;
+  matchLocationFromHyperparameterTuningJobName(
+    hyperparameterTuningJobName: string
+  ) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
+      hyperparameterTuningJobName
+    ).location;
   }
 
   /**
@@ -902,8 +992,12 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing HyperparameterTuningJob resource.
    * @returns {string} A string representing the hyperparameter_tuning_job.
    */
-  matchHyperparameterTuningJobFromHyperparameterTuningJobName(hyperparameterTuningJobName: string) {
-    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(hyperparameterTuningJobName).hyperparameter_tuning_job;
+  matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+    hyperparameterTuningJobName: string
+  ) {
+    return this.pathTemplates.hyperparameterTuningJobPathTemplate.match(
+      hyperparameterTuningJobName
+    ).hyperparameter_tuning_job;
   }
 
   /**
@@ -914,7 +1008,7 @@ export class PredictionServiceClient {
    * @param {string} model
    * @returns {string} Resource name string.
    */
-  modelPath(project:string,location:string,model:string) {
+  modelPath(project: string, location: string, model: string) {
     return this.pathTemplates.modelPathTemplate.render({
       project: project,
       location: location,
@@ -964,7 +1058,12 @@ export class PredictionServiceClient {
    * @param {string} evaluation
    * @returns {string} Resource name string.
    */
-  modelEvaluationPath(project:string,location:string,model:string,evaluation:string) {
+  modelEvaluationPath(
+    project: string,
+    location: string,
+    model: string,
+    evaluation: string
+  ) {
     return this.pathTemplates.modelEvaluationPathTemplate.render({
       project: project,
       location: location,
@@ -981,7 +1080,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).project;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).project;
   }
 
   /**
@@ -992,7 +1093,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).location;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).location;
   }
 
   /**
@@ -1003,7 +1106,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).model;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).model;
   }
 
   /**
@@ -1014,7 +1119,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the evaluation.
    */
   matchEvaluationFromModelEvaluationName(modelEvaluationName: string) {
-    return this.pathTemplates.modelEvaluationPathTemplate.match(modelEvaluationName).evaluation;
+    return this.pathTemplates.modelEvaluationPathTemplate.match(
+      modelEvaluationName
+    ).evaluation;
   }
 
   /**
@@ -1027,7 +1134,13 @@ export class PredictionServiceClient {
    * @param {string} slice
    * @returns {string} Resource name string.
    */
-  modelEvaluationSlicePath(project:string,location:string,model:string,evaluation:string,slice:string) {
+  modelEvaluationSlicePath(
+    project: string,
+    location: string,
+    model: string,
+    evaluation: string,
+    slice: string
+  ) {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.render({
       project: project,
       location: location,
@@ -1045,7 +1158,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).project;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).project;
   }
 
   /**
@@ -1056,7 +1171,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).location;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).location;
   }
 
   /**
@@ -1067,7 +1184,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the model.
    */
   matchModelFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).model;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).model;
   }
 
   /**
@@ -1077,8 +1196,12 @@ export class PredictionServiceClient {
    *   A fully-qualified path representing ModelEvaluationSlice resource.
    * @returns {string} A string representing the evaluation.
    */
-  matchEvaluationFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).evaluation;
+  matchEvaluationFromModelEvaluationSliceName(
+    modelEvaluationSliceName: string
+  ) {
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).evaluation;
   }
 
   /**
@@ -1089,7 +1212,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the slice.
    */
   matchSliceFromModelEvaluationSliceName(modelEvaluationSliceName: string) {
-    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(modelEvaluationSliceName).slice;
+    return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
+      modelEvaluationSliceName
+    ).slice;
   }
 
   /**
@@ -1100,7 +1225,11 @@ export class PredictionServiceClient {
    * @param {string} specialist_pool
    * @returns {string} Resource name string.
    */
-  specialistPoolPath(project:string,location:string,specialistPool:string) {
+  specialistPoolPath(
+    project: string,
+    location: string,
+    specialistPool: string
+  ) {
     return this.pathTemplates.specialistPoolPathTemplate.render({
       project: project,
       location: location,
@@ -1116,7 +1245,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).project;
+    return this.pathTemplates.specialistPoolPathTemplate.match(
+      specialistPoolName
+    ).project;
   }
 
   /**
@@ -1127,7 +1258,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).location;
+    return this.pathTemplates.specialistPoolPathTemplate.match(
+      specialistPoolName
+    ).location;
   }
 
   /**
@@ -1138,7 +1271,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the specialist_pool.
    */
   matchSpecialistPoolFromSpecialistPoolName(specialistPoolName: string) {
-    return this.pathTemplates.specialistPoolPathTemplate.match(specialistPoolName).specialist_pool;
+    return this.pathTemplates.specialistPoolPathTemplate.match(
+      specialistPoolName
+    ).specialist_pool;
   }
 
   /**
@@ -1149,7 +1284,11 @@ export class PredictionServiceClient {
    * @param {string} training_pipeline
    * @returns {string} Resource name string.
    */
-  trainingPipelinePath(project:string,location:string,trainingPipeline:string) {
+  trainingPipelinePath(
+    project: string,
+    location: string,
+    trainingPipeline: string
+  ) {
     return this.pathTemplates.trainingPipelinePathTemplate.render({
       project: project,
       location: location,
@@ -1165,7 +1304,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).project;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(
+      trainingPipelineName
+    ).project;
   }
 
   /**
@@ -1176,7 +1317,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).location;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(
+      trainingPipelineName
+    ).location;
   }
 
   /**
@@ -1187,7 +1330,9 @@ export class PredictionServiceClient {
    * @returns {string} A string representing the training_pipeline.
    */
   matchTrainingPipelineFromTrainingPipelineName(trainingPipelineName: string) {
-    return this.pathTemplates.trainingPipelinePathTemplate.match(trainingPipelineName).training_pipeline;
+    return this.pathTemplates.trainingPipelinePathTemplate.match(
+      trainingPipelineName
+    ).training_pipeline;
   }
 
   /**
@@ -1199,7 +1344,7 @@ export class PredictionServiceClient {
    * @param {string} trial
    * @returns {string} Resource name string.
    */
-  trialPath(project:string,location:string,study:string,trial:string) {
+  trialPath(project: string, location: string, study: string, trial: string) {
     return this.pathTemplates.trialPathTemplate.render({
       project: project,
       location: location,
