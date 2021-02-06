@@ -3105,9 +3105,7 @@ export class JobServiceClient {
   listHyperparameterTuningJobsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListHyperparameterTuningJobsRequest,
     options?: CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob
-  > {
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -3124,9 +3122,7 @@ export class JobServiceClient {
       this.innerApiCalls['listHyperparameterTuningJobs'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob
-    >;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob>;
   }
   listBatchPredictionJobs(
     request: protos.google.cloud.aiplatform.v1beta1.IListBatchPredictionJobsRequest,
@@ -3396,9 +3392,7 @@ export class JobServiceClient {
       this.innerApiCalls['listBatchPredictionJobs'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob
-    >;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob>;
   }
   // --------------------
   // -- Path templates --
