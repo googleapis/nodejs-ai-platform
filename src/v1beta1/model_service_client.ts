@@ -1958,9 +1958,7 @@ export class ModelServiceClient {
   listModelEvaluationSlicesAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListModelEvaluationSlicesRequest,
     options?: CallOptions
-  ): AsyncIterable<
-    protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice
-  > {
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1977,9 +1975,7 @@ export class ModelServiceClient {
       this.innerApiCalls['listModelEvaluationSlices'] as GaxCall,
       (request as unknown) as RequestType,
       callSettings
-    ) as AsyncIterable<
-      protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice
-    >;
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelEvaluationSlice>;
   }
   // --------------------
   // -- Path templates --
