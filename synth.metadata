@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-ai-platform.git",
-        "sha": "c3256aae40e39c113dfdf6be9f28f0cb09a7b600"
+        "sha": "5a7f5db965a232a98f1bcf18f4f769db5ba3644c"
       }
     },
     {
