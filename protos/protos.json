@@ -5521,6 +5521,1037 @@
                         }
                       }
                     },
+                    "schema": {
+                      "nested": {
+                        "predict": {
+                          "nested": {
+                            "instance": {
+                              "options": {
+                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/instance;instance",
+                                "java_multiple_files": true,
+                                "java_outer_classname": "VideoObjectTrackingPredictionInstanceProto",
+                                "java_package": "com.google.cloud.aiplatform.v1.schema.predict.instance"
+                              },
+                              "nested": {
+                                "ImageClassificationPredictionInstance": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "ImageObjectDetectionPredictionInstance": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "ImageSegmentationPredictionInstance": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "TextClassificationPredictionInstance": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "TextExtractionPredictionInstance": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "key": {
+                                      "type": "string",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "TextSentimentPredictionInstance": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "VideoActionRecognitionPredictionInstance": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "timeSegmentStart": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "timeSegmentEnd": {
+                                      "type": "string",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "VideoClassificationPredictionInstance": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "timeSegmentStart": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "timeSegmentEnd": {
+                                      "type": "string",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "VideoObjectTrackingPredictionInstance": {
+                                  "fields": {
+                                    "content": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "mimeType": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "timeSegmentStart": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "timeSegmentEnd": {
+                                      "type": "string",
+                                      "id": 4
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "params": {
+                              "options": {
+                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/params;params",
+                                "java_multiple_files": true,
+                                "java_outer_classname": "VideoObjectTrackingPredictionParamsProto",
+                                "java_package": "com.google.cloud.aiplatform.v1.schema.predict.params"
+                              },
+                              "nested": {
+                                "ImageClassificationPredictionParams": {
+                                  "fields": {
+                                    "confidenceThreshold": {
+                                      "type": "float",
+                                      "id": 1
+                                    },
+                                    "maxPredictions": {
+                                      "type": "int32",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "ImageObjectDetectionPredictionParams": {
+                                  "fields": {
+                                    "confidenceThreshold": {
+                                      "type": "float",
+                                      "id": 1
+                                    },
+                                    "maxPredictions": {
+                                      "type": "int32",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "ImageSegmentationPredictionParams": {
+                                  "fields": {
+                                    "confidenceThreshold": {
+                                      "type": "float",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "VideoActionRecognitionPredictionParams": {
+                                  "fields": {
+                                    "confidenceThreshold": {
+                                      "type": "float",
+                                      "id": 1
+                                    },
+                                    "maxPredictions": {
+                                      "type": "int32",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "VideoClassificationPredictionParams": {
+                                  "fields": {
+                                    "confidenceThreshold": {
+                                      "type": "float",
+                                      "id": 1
+                                    },
+                                    "maxPredictions": {
+                                      "type": "int32",
+                                      "id": 2
+                                    },
+                                    "segmentClassification": {
+                                      "type": "bool",
+                                      "id": 3
+                                    },
+                                    "shotClassification": {
+                                      "type": "bool",
+                                      "id": 4
+                                    },
+                                    "oneSecIntervalClassification": {
+                                      "type": "bool",
+                                      "id": 5
+                                    }
+                                  }
+                                },
+                                "VideoObjectTrackingPredictionParams": {
+                                  "fields": {
+                                    "confidenceThreshold": {
+                                      "type": "float",
+                                      "id": 1
+                                    },
+                                    "maxPredictions": {
+                                      "type": "int32",
+                                      "id": 2
+                                    },
+                                    "minBoundingBoxSize": {
+                                      "type": "float",
+                                      "id": 3
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "prediction": {
+                              "options": {
+                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/prediction;prediction",
+                                "java_multiple_files": true,
+                                "java_outer_classname": "VideoObjectTrackingPredictionResultProto",
+                                "java_package": "com.google.cloud.aiplatform.v1.schema.predict.prediction"
+                              },
+                              "nested": {
+                                "ClassificationPredictionResult": {
+                                  "fields": {
+                                    "ids": {
+                                      "rule": "repeated",
+                                      "type": "int64",
+                                      "id": 1
+                                    },
+                                    "displayNames": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "confidences": {
+                                      "rule": "repeated",
+                                      "type": "float",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "ImageObjectDetectionPredictionResult": {
+                                  "fields": {
+                                    "ids": {
+                                      "rule": "repeated",
+                                      "type": "int64",
+                                      "id": 1
+                                    },
+                                    "displayNames": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "confidences": {
+                                      "rule": "repeated",
+                                      "type": "float",
+                                      "id": 3
+                                    },
+                                    "bboxes": {
+                                      "rule": "repeated",
+                                      "type": "google.protobuf.ListValue",
+                                      "id": 4
+                                    }
+                                  }
+                                },
+                                "ImageSegmentationPredictionResult": {
+                                  "fields": {
+                                    "categoryMask": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "confidenceMask": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "TabularClassificationPredictionResult": {
+                                  "fields": {
+                                    "classes": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "scores": {
+                                      "rule": "repeated",
+                                      "type": "float",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "TabularRegressionPredictionResult": {
+                                  "fields": {
+                                    "value": {
+                                      "type": "float",
+                                      "id": 1
+                                    },
+                                    "lowerBound": {
+                                      "type": "float",
+                                      "id": 2
+                                    },
+                                    "upperBound": {
+                                      "type": "float",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "TextExtractionPredictionResult": {
+                                  "fields": {
+                                    "ids": {
+                                      "rule": "repeated",
+                                      "type": "int64",
+                                      "id": 1
+                                    },
+                                    "displayNames": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "textSegmentStartOffsets": {
+                                      "rule": "repeated",
+                                      "type": "int64",
+                                      "id": 3
+                                    },
+                                    "textSegmentEndOffsets": {
+                                      "rule": "repeated",
+                                      "type": "int64",
+                                      "id": 4
+                                    },
+                                    "confidences": {
+                                      "rule": "repeated",
+                                      "type": "float",
+                                      "id": 5
+                                    }
+                                  }
+                                },
+                                "TextSentimentPredictionResult": {
+                                  "fields": {
+                                    "sentiment": {
+                                      "type": "int32",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "VideoActionRecognitionPredictionResult": {
+                                  "fields": {
+                                    "id": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "timeSegmentStart": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 4
+                                    },
+                                    "timeSegmentEnd": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 5
+                                    },
+                                    "confidence": {
+                                      "type": "google.protobuf.FloatValue",
+                                      "id": 6
+                                    }
+                                  }
+                                },
+                                "VideoClassificationPredictionResult": {
+                                  "fields": {
+                                    "id": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "type": {
+                                      "type": "string",
+                                      "id": 3
+                                    },
+                                    "timeSegmentStart": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 4
+                                    },
+                                    "timeSegmentEnd": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 5
+                                    },
+                                    "confidence": {
+                                      "type": "google.protobuf.FloatValue",
+                                      "id": 6
+                                    }
+                                  }
+                                },
+                                "VideoObjectTrackingPredictionResult": {
+                                  "fields": {
+                                    "id": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "timeSegmentStart": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 3
+                                    },
+                                    "timeSegmentEnd": {
+                                      "type": "google.protobuf.Duration",
+                                      "id": 4
+                                    },
+                                    "confidence": {
+                                      "type": "google.protobuf.FloatValue",
+                                      "id": 5
+                                    },
+                                    "frames": {
+                                      "rule": "repeated",
+                                      "type": "Frame",
+                                      "id": 6
+                                    }
+                                  },
+                                  "nested": {
+                                    "Frame": {
+                                      "fields": {
+                                        "timeOffset": {
+                                          "type": "google.protobuf.Duration",
+                                          "id": 1
+                                        },
+                                        "xMin": {
+                                          "type": "google.protobuf.FloatValue",
+                                          "id": 2
+                                        },
+                                        "xMax": {
+                                          "type": "google.protobuf.FloatValue",
+                                          "id": 3
+                                        },
+                                        "yMin": {
+                                          "type": "google.protobuf.FloatValue",
+                                          "id": 4
+                                        },
+                                        "yMax": {
+                                          "type": "google.protobuf.FloatValue",
+                                          "id": 5
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "trainingjob": {
+                          "nested": {
+                            "definition": {
+                              "options": {
+                                "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/trainingjob/definition;definition",
+                                "java_multiple_files": true,
+                                "java_outer_classname": "AutoMLVideoObjectTrackingProto",
+                                "java_package": "com.google.cloud.aiplatform.v1.schema.trainingjob.definition"
+                              },
+                              "nested": {
+                                "AutoMlImageClassification": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlImageClassificationInputs",
+                                      "id": 1
+                                    },
+                                    "metadata": {
+                                      "type": "AutoMlImageClassificationMetadata",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "AutoMlImageClassificationInputs": {
+                                  "fields": {
+                                    "modelType": {
+                                      "type": "ModelType",
+                                      "id": 1
+                                    },
+                                    "baseModelId": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "budgetMilliNodeHours": {
+                                      "type": "int64",
+                                      "id": 3
+                                    },
+                                    "disableEarlyStopping": {
+                                      "type": "bool",
+                                      "id": 4
+                                    },
+                                    "multiLabel": {
+                                      "type": "bool",
+                                      "id": 5
+                                    }
+                                  },
+                                  "nested": {
+                                    "ModelType": {
+                                      "values": {
+                                        "MODEL_TYPE_UNSPECIFIED": 0,
+                                        "CLOUD": 1,
+                                        "MOBILE_TF_LOW_LATENCY_1": 2,
+                                        "MOBILE_TF_VERSATILE_1": 3,
+                                        "MOBILE_TF_HIGH_ACCURACY_1": 4
+                                      }
+                                    }
+                                  }
+                                },
+                                "AutoMlImageClassificationMetadata": {
+                                  "fields": {
+                                    "costMilliNodeHours": {
+                                      "type": "int64",
+                                      "id": 1
+                                    },
+                                    "successfulStopReason": {
+                                      "type": "SuccessfulStopReason",
+                                      "id": 2
+                                    }
+                                  },
+                                  "nested": {
+                                    "SuccessfulStopReason": {
+                                      "values": {
+                                        "SUCCESSFUL_STOP_REASON_UNSPECIFIED": 0,
+                                        "BUDGET_REACHED": 1,
+                                        "MODEL_CONVERGED": 2
+                                      }
+                                    }
+                                  }
+                                },
+                                "AutoMlImageObjectDetection": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlImageObjectDetectionInputs",
+                                      "id": 1
+                                    },
+                                    "metadata": {
+                                      "type": "AutoMlImageObjectDetectionMetadata",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "AutoMlImageObjectDetectionInputs": {
+                                  "fields": {
+                                    "modelType": {
+                                      "type": "ModelType",
+                                      "id": 1
+                                    },
+                                    "budgetMilliNodeHours": {
+                                      "type": "int64",
+                                      "id": 2
+                                    },
+                                    "disableEarlyStopping": {
+                                      "type": "bool",
+                                      "id": 3
+                                    }
+                                  },
+                                  "nested": {
+                                    "ModelType": {
+                                      "values": {
+                                        "MODEL_TYPE_UNSPECIFIED": 0,
+                                        "CLOUD_HIGH_ACCURACY_1": 1,
+                                        "CLOUD_LOW_LATENCY_1": 2,
+                                        "MOBILE_TF_LOW_LATENCY_1": 3,
+                                        "MOBILE_TF_VERSATILE_1": 4,
+                                        "MOBILE_TF_HIGH_ACCURACY_1": 5
+                                      }
+                                    }
+                                  }
+                                },
+                                "AutoMlImageObjectDetectionMetadata": {
+                                  "fields": {
+                                    "costMilliNodeHours": {
+                                      "type": "int64",
+                                      "id": 1
+                                    },
+                                    "successfulStopReason": {
+                                      "type": "SuccessfulStopReason",
+                                      "id": 2
+                                    }
+                                  },
+                                  "nested": {
+                                    "SuccessfulStopReason": {
+                                      "values": {
+                                        "SUCCESSFUL_STOP_REASON_UNSPECIFIED": 0,
+                                        "BUDGET_REACHED": 1,
+                                        "MODEL_CONVERGED": 2
+                                      }
+                                    }
+                                  }
+                                },
+                                "AutoMlImageSegmentation": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlImageSegmentationInputs",
+                                      "id": 1
+                                    },
+                                    "metadata": {
+                                      "type": "AutoMlImageSegmentationMetadata",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "AutoMlImageSegmentationInputs": {
+                                  "fields": {
+                                    "modelType": {
+                                      "type": "ModelType",
+                                      "id": 1
+                                    },
+                                    "budgetMilliNodeHours": {
+                                      "type": "int64",
+                                      "id": 2
+                                    },
+                                    "baseModelId": {
+                                      "type": "string",
+                                      "id": 3
+                                    }
+                                  },
+                                  "nested": {
+                                    "ModelType": {
+                                      "values": {
+                                        "MODEL_TYPE_UNSPECIFIED": 0,
+                                        "CLOUD_HIGH_ACCURACY_1": 1,
+                                        "CLOUD_LOW_ACCURACY_1": 2,
+                                        "MOBILE_TF_LOW_LATENCY_1": 3
+                                      }
+                                    }
+                                  }
+                                },
+                                "AutoMlImageSegmentationMetadata": {
+                                  "fields": {
+                                    "costMilliNodeHours": {
+                                      "type": "int64",
+                                      "id": 1
+                                    },
+                                    "successfulStopReason": {
+                                      "type": "SuccessfulStopReason",
+                                      "id": 2
+                                    }
+                                  },
+                                  "nested": {
+                                    "SuccessfulStopReason": {
+                                      "values": {
+                                        "SUCCESSFUL_STOP_REASON_UNSPECIFIED": 0,
+                                        "BUDGET_REACHED": 1,
+                                        "MODEL_CONVERGED": 2
+                                      }
+                                    }
+                                  }
+                                },
+                                "AutoMlTables": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlTablesInputs",
+                                      "id": 1
+                                    },
+                                    "metadata": {
+                                      "type": "AutoMlTablesMetadata",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "AutoMlTablesInputs": {
+                                  "oneofs": {
+                                    "additionalOptimizationObjectiveConfig": {
+                                      "oneof": [
+                                        "optimizationObjectiveRecallValue",
+                                        "optimizationObjectivePrecisionValue"
+                                      ]
+                                    }
+                                  },
+                                  "fields": {
+                                    "optimizationObjectiveRecallValue": {
+                                      "type": "float",
+                                      "id": 5
+                                    },
+                                    "optimizationObjectivePrecisionValue": {
+                                      "type": "float",
+                                      "id": 6
+                                    },
+                                    "predictionType": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "targetColumn": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "transformations": {
+                                      "rule": "repeated",
+                                      "type": "Transformation",
+                                      "id": 3
+                                    },
+                                    "optimizationObjective": {
+                                      "type": "string",
+                                      "id": 4
+                                    },
+                                    "trainBudgetMilliNodeHours": {
+                                      "type": "int64",
+                                      "id": 7
+                                    },
+                                    "disableEarlyStopping": {
+                                      "type": "bool",
+                                      "id": 8
+                                    },
+                                    "weightColumnName": {
+                                      "type": "string",
+                                      "id": 9
+                                    },
+                                    "exportEvaluatedDataItemsConfig": {
+                                      "type": "ExportEvaluatedDataItemsConfig",
+                                      "id": 10
+                                    }
+                                  },
+                                  "nested": {
+                                    "Transformation": {
+                                      "oneofs": {
+                                        "transformationDetail": {
+                                          "oneof": [
+                                            "auto",
+                                            "numeric",
+                                            "categorical",
+                                            "timestamp",
+                                            "text",
+                                            "repeatedNumeric",
+                                            "repeatedCategorical",
+                                            "repeatedText"
+                                          ]
+                                        }
+                                      },
+                                      "fields": {
+                                        "auto": {
+                                          "type": "AutoTransformation",
+                                          "id": 1
+                                        },
+                                        "numeric": {
+                                          "type": "NumericTransformation",
+                                          "id": 2
+                                        },
+                                        "categorical": {
+                                          "type": "CategoricalTransformation",
+                                          "id": 3
+                                        },
+                                        "timestamp": {
+                                          "type": "TimestampTransformation",
+                                          "id": 4
+                                        },
+                                        "text": {
+                                          "type": "TextTransformation",
+                                          "id": 5
+                                        },
+                                        "repeatedNumeric": {
+                                          "type": "NumericArrayTransformation",
+                                          "id": 6
+                                        },
+                                        "repeatedCategorical": {
+                                          "type": "CategoricalArrayTransformation",
+                                          "id": 7
+                                        },
+                                        "repeatedText": {
+                                          "type": "TextArrayTransformation",
+                                          "id": 8
+                                        }
+                                      },
+                                      "nested": {
+                                        "AutoTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            }
+                                          }
+                                        },
+                                        "NumericTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            },
+                                            "invalidValuesAllowed": {
+                                              "type": "bool",
+                                              "id": 2
+                                            }
+                                          }
+                                        },
+                                        "CategoricalTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            }
+                                          }
+                                        },
+                                        "TimestampTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            },
+                                            "timeFormat": {
+                                              "type": "string",
+                                              "id": 2
+                                            },
+                                            "invalidValuesAllowed": {
+                                              "type": "bool",
+                                              "id": 3
+                                            }
+                                          }
+                                        },
+                                        "TextTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            }
+                                          }
+                                        },
+                                        "NumericArrayTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            },
+                                            "invalidValuesAllowed": {
+                                              "type": "bool",
+                                              "id": 2
+                                            }
+                                          }
+                                        },
+                                        "CategoricalArrayTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            }
+                                          }
+                                        },
+                                        "TextArrayTransformation": {
+                                          "fields": {
+                                            "columnName": {
+                                              "type": "string",
+                                              "id": 1
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "AutoMlTablesMetadata": {
+                                  "fields": {
+                                    "trainCostMilliNodeHours": {
+                                      "type": "int64",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "ExportEvaluatedDataItemsConfig": {
+                                  "fields": {
+                                    "destinationBigqueryUri": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "overrideExistingTable": {
+                                      "type": "bool",
+                                      "id": 2
+                                    }
+                                  }
+                                },
+                                "AutoMlTextClassification": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlTextClassificationInputs",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "AutoMlTextClassificationInputs": {
+                                  "fields": {
+                                    "multiLabel": {
+                                      "type": "bool",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "AutoMlTextExtraction": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlTextExtractionInputs",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "AutoMlTextExtractionInputs": {
+                                  "fields": {}
+                                },
+                                "AutoMlTextSentiment": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlTextSentimentInputs",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "AutoMlTextSentimentInputs": {
+                                  "fields": {
+                                    "sentimentMax": {
+                                      "type": "int32",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "AutoMlVideoActionRecognition": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlVideoActionRecognitionInputs",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "AutoMlVideoActionRecognitionInputs": {
+                                  "fields": {
+                                    "modelType": {
+                                      "type": "ModelType",
+                                      "id": 1
+                                    }
+                                  },
+                                  "nested": {
+                                    "ModelType": {
+                                      "values": {
+                                        "MODEL_TYPE_UNSPECIFIED": 0,
+                                        "CLOUD": 1,
+                                        "MOBILE_VERSATILE_1": 2
+                                      }
+                                    }
+                                  }
+                                },
+                                "AutoMlVideoClassification": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlVideoClassificationInputs",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "AutoMlVideoClassificationInputs": {
+                                  "fields": {
+                                    "modelType": {
+                                      "type": "ModelType",
+                                      "id": 1
+                                    }
+                                  },
+                                  "nested": {
+                                    "ModelType": {
+                                      "values": {
+                                        "MODEL_TYPE_UNSPECIFIED": 0,
+                                        "CLOUD": 1,
+                                        "MOBILE_VERSATILE_1": 2,
+                                        "MOBILE_JETSON_VERSATILE_1": 3
+                                      }
+                                    }
+                                  }
+                                },
+                                "AutoMlVideoObjectTracking": {
+                                  "fields": {
+                                    "inputs": {
+                                      "type": "AutoMlVideoObjectTrackingInputs",
+                                      "id": 1
+                                    }
+                                  }
+                                },
+                                "AutoMlVideoObjectTrackingInputs": {
+                                  "fields": {
+                                    "modelType": {
+                                      "type": "ModelType",
+                                      "id": 1
+                                    }
+                                  },
+                                  "nested": {
+                                    "ModelType": {
+                                      "values": {
+                                        "MODEL_TYPE_UNSPECIFIED": 0,
+                                        "CLOUD": 1,
+                                        "MOBILE_VERSATILE_1": 2,
+                                        "MOBILE_CORAL_VERSATILE_1": 3,
+                                        "MOBILE_CORAL_LOW_LATENCY_1": 4,
+                                        "MOBILE_JETSON_VERSATILE_1": 5,
+                                        "MOBILE_JETSON_LOW_LATENCY_1": 6
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "SpecialistPoolService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
