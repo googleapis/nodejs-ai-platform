@@ -31,10 +31,13 @@ describe('AI Platform enhanced types', () => {
   }
 
   describe('v1beta1', () => {
-    const definitionTypeNames = enhancedTypes.v1beta1.schema.trainingjob.definition;
-    const predictInstanceTypeNames = enhancedTypes.v1beta1.schema.predict.instance;
+    const definitionTypeNames =
+      enhancedTypes.v1beta1.schema.trainingjob.definition;
+    const predictInstanceTypeNames =
+      enhancedTypes.v1beta1.schema.predict.instance;
     const predictParamsTypeNames = enhancedTypes.v1beta1.schema.predict.params;
-    const predictResultTypeNames = enhancedTypes.v1beta1.schema.predict.prediction;
+    const predictResultTypeNames =
+      enhancedTypes.v1beta1.schema.predict.prediction;
 
     const {
       definition,
@@ -92,5 +95,5 @@ describe('AI Platform enhanced types', () => {
     it('adds prediction result types', () => {
       testNamespaceAgainstArray(prediction, predictResultTypeNames);
     });
-  })
+  });
 });
