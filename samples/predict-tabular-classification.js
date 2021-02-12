@@ -31,8 +31,11 @@ async function main(endpointId, project, location = 'us-central1') {
     prediction,
   } = aiplatform.protos.google.cloud.aiplatform.v1.schema.predict;
 
-  // Imports the Google Cloud Prediction Service Client library
-  const {PredictionServiceClient, helpers} = aiplatform.v1;
+  // Imports the Google Cloud Prediction service client
+  const {PredictionServiceClient} = aiplatform.v1;
+
+  // Import the helper module for converting arbitrary protobuf.Value objects.
+  const {helpers} = aiplatform;
 
   // Specifies the location of the api endpoint
   const clientOptions = {
