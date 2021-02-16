@@ -63,12 +63,12 @@ export default {
 import * as protos from '../protos/protos';
 export {protos};
 
-import {fromValue, toValue} from './helpers';	
+import {fromValue, toValue} from './helpers';
 
-const helpers = {toValue, fromValue};	
+const helpers = {toValue, fromValue};
 
-export {helpers};	
+export {helpers};
 
-import {_enhance} from './decorator';	
-_enhance('v1beta1');	
+import {_enhance} from './decorator';
+_enhance('v1beta1');
 _enhance('v1');
