@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-ai-platform.git",
-        "sha": "5a7f5db965a232a98f1bcf18f4f769db5ba3644c"
+        "sha": "5a1b765c03efdb5cbe82b1a34ccf70b86ebd8137"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d99d5d592f3d1d5526511c90120b1e9ab3ce6e17",
-        "internalRef": "354148500"
+        "sha": "adfc95eb0c926db42afcfe63357bb1c8eea2196a",
+        "internalRef": "355637902"
       }
     },
     {
@@ -29,6 +29,15 @@
         "source": "googleapis",
         "apiName": "aiplatform",
         "apiVersion": "v1beta1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "aiplatform",
+        "apiVersion": "v1",
         "language": "nodejs",
         "generator": "bazel"
       }
