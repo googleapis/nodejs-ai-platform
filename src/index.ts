@@ -60,5 +60,16 @@ export default {
   PredictionServiceClient,
   SpecialistPoolServiceClient,
 };
+
 import * as protos from '../protos/protos';
 export {protos};
+
+import {fromValue, toValue} from './helpers';
+
+const helpers = {toValue, fromValue};
+
+export {helpers};
+
+import {_enhance} from './decorator';
+_enhance('v1beta1');
+_enhance('v1');
