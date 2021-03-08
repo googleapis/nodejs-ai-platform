@@ -31,14 +31,14 @@ async function main(text, endpointId, project, location) {
   const {
     instance,
     prediction,
-  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.predict;
+  } = aiplatform.protos.google.cloud.aiplatform.v1.schema.predict;
 
   // Imports the Google Cloud Model Service Client library
-  const {PredictionServiceClient} = aiplatform;
+  const {PredictionServiceClient} = aiplatform.v1;
 
   // Specifies the location of the api endpoint
   const clientOptions = {
-    apiEndpoint: 'us-central1-prediction-aiplatform.googleapis.com',
+    apiEndpoint: 'us-central1-aiplatform.googleapis.com',
   };
 
   // Instantiates a client

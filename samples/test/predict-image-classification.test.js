@@ -22,11 +22,8 @@ const {describe, it} = require('mocha');
 
 const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-
-const filename = 'daisy.jpg';
-const local_file = path.resolve(
-  path.join(__dirname, `../resources/${filename}`)
-);
+const cwd = path.join(__dirname, '..');
+const filename = 'resources/daisy.jpg';
 const endpointId = '71213169107795968';
 const project = process.env.CAIP_PROJECT_ID;
 const location = 'us-central1';
@@ -35,7 +32,13 @@ describe('AI platform predict image classification', async function () {
   this.retries(2);
   it('should make predictions using the image classification model', async () => {
     const stdout = execSync(
-      `node ./predict-image-classification.js ${local_file} ${endpointId} ${project} ${location}`
+      `node ./predict-image-classification.js ${filename} \
+                                                ${endpointId} \
+                                                ${project} \
+                                                ${location}`,
+      {
+        cwd,
+      }
     );
     assert.match(stdout, /Predict image classification response/);
   });

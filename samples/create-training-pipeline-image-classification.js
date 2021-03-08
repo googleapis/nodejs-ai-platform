@@ -40,7 +40,7 @@ function main(
 
   const {
     definition,
-  } = aiplatform.protos.google.cloud.aiplatform.v1beta1.schema.trainingjob;
+  } = aiplatform.protos.google.cloud.aiplatform.v1.schema.trainingjob;
   const ModelType = definition.AutoMlImageClassificationInputs.ModelType;
 
   // Specifies the location of the api endpoint
@@ -49,9 +49,8 @@ function main(
   };
 
   // Instantiates a client
-  const pipelineServiceClient = new aiplatform.PipelineServiceClient(
-    clientOptions
-  );
+  const {PipelineServiceClient} = aiplatform.v1;
+  const pipelineServiceClient = new PipelineServiceClient(clientOptions);
 
   async function createTrainingPipelineImageClassification() {
     // Configure the parent resource
@@ -73,18 +72,15 @@ function main(
       'gs://google-cloud-aiplatform/schema/trainingjob/definition/automl_image_classification_1.0.0.yaml';
 
     const modelToUpload = {displayName: modelDisplayName};
-    const inputDataConfig = {datasetId: datasetId};
+    const inputDataConfig = {datasetId};
     const trainingPipeline = {
       displayName: trainingPipelineDisplayName,
       trainingTaskDefinition,
       trainingTaskInputs,
-      inputDataConfig: inputDataConfig,
-      modelToUpload: modelToUpload,
+      inputDataConfig,
+      modelToUpload,
     };
-    const request = {
-      parent,
-      trainingPipeline,
-    };
+    const request = {parent, trainingPipeline};
 
     // Create training pipeline request
     const [response] = await pipelineServiceClient.createTrainingPipeline(

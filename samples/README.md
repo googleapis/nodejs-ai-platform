@@ -12,8 +12,18 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Cancel-batch-prediction-job](#cancel-batch-prediction-job)
+  * [Cancel-custom-job](#cancel-custom-job)
   * [Create-batch-prediction-job-video-classification](#create-batch-prediction-job-video-classification)
   * [Create-batch-prediction-job-video-object-tracking](#create-batch-prediction-job-video-object-tracking)
+  * [Create-custom-job](#create-custom-job)
+  * [Create-dataset-image](#create-dataset-image)
+  * [Create-dataset-tabular-bigquery](#create-dataset-tabular-bigquery)
+  * [Create-dataset-tabular-gcs](#create-dataset-tabular-gcs)
+  * [Create-dataset-text](#create-dataset-text)
+  * [Create-dataset-video](#create-dataset-video)
+  * [Create-dataset](#create-dataset)
+  * [Create-endpoint](#create-endpoint)
   * [Create-training-pipeline-image-classification](#create-training-pipeline-image-classification)
   * [Create-training-pipeline-image-object-detection](#create-training-pipeline-image-object-detection)
   * [Create-training-pipeline-tabular-classification](#create-training-pipeline-tabular-classification)
@@ -23,7 +33,40 @@
   * [Create-training-pipeline-text-sentiment-analysis](#create-training-pipeline-text-sentiment-analysis)
   * [Create-training-pipeline-video-classification](#create-training-pipeline-video-classification)
   * [Create-training-pipeline-video-object-tracking](#create-training-pipeline-video-object-tracking)
+  * [Delete-batch-prediction-job](#delete-batch-prediction-job)
+  * [Delete-custom-job](#delete-custom-job)
+  * [Delete-dataset](#delete-dataset)
+  * [Delete-endpoint](#delete-endpoint)
+  * [Delete-export-model](#delete-export-model)
+  * [Delete-model](#delete-model)
+  * [Deploy-model](#deploy-model)
+  * [Export-model-tabular-classification](#export-model-tabular-classification)
+  * [Export-model](#export-model)
+  * [Get-batch-prediction-job](#get-batch-prediction-job)
+  * [Get-custom-job](#get-custom-job)
+  * [Get-model-evaluation-image-classification](#get-model-evaluation-image-classification)
+  * [Get-model-evaluation-image-object-detection](#get-model-evaluation-image-object-detection)
+  * [Get-model-evaluation-slice](#get-model-evaluation-slice)
+  * [Get-model-evaluation-tabular-classification](#get-model-evaluation-tabular-classification)
+  * [Get-model-evaluation-tabular-regression](#get-model-evaluation-tabular-regression)
+  * [Get-model-evaluation-text-classification](#get-model-evaluation-text-classification)
+  * [Get-model-evaluation-text-entity-extraction](#get-model-evaluation-text-entity-extraction)
+  * [Get-model-evaluation-text-sentiment-analysis](#get-model-evaluation-text-sentiment-analysis)
+  * [Get-model-evaluation-video-classification](#get-model-evaluation-video-classification)
+  * [Get-model-evaluation-video-object-tracking](#get-model-evaluation-video-object-tracking)
+  * [Get-model-evaluation](#get-model-evaluation)
+  * [Get-model](#get-model)
+  * [Import-data-image-classification](#import-data-image-classification)
+  * [Import-data-image-object-detection](#import-data-image-object-detection)
+  * [Import-data-text-classification-single-label](#import-data-text-classification-single-label)
+  * [Import-data-text-entity-extraction](#import-data-text-entity-extraction)
+  * [Import-data-text-sentiment-analysis](#import-data-text-sentiment-analysis)
+  * [Import-data-video-classification](#import-data-video-classification)
+  * [Import-data-video-object-tracking](#import-data-video-object-tracking)
+  * [Import-data](#import-data)
   * [List-endpoints](#list-endpoints)
+  * [List-model-evaluation-slices](#list-model-evaluation-slices)
+  * [Predict-custom-trained-model](#predict-custom-trained-model)
   * [Predict-image-classification](#predict-image-classification)
   * [Predict-image-object-detection](#predict-image-object-detection)
   * [Predict-tabular-classification](#predict-tabular-classification)
@@ -32,6 +75,8 @@
   * [Predict-text-entity-extraction](#predict-text-entity-extraction)
   * [Predict-text-sentiment-analysis](#predict-text-sentiment-analysis)
   * [Quickstart](#quickstart)
+  * [Undeploy-model](#undeploy-model)
+  * [Upload-model](#upload-model)
 
 ## Before you begin
 
@@ -45,6 +90,40 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Cancel-batch-prediction-job
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/cancel-batch-prediction-job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/cancel-batch-prediction-job.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/cancel-batch-prediction-job.js`
+
+
+-----
+
+
+
+
+### Cancel-custom-job
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/cancel-custom-job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/cancel-custom-job.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/cancel-custom-job.js`
+
+
+-----
+
 
 
 
@@ -75,6 +154,142 @@ __Usage:__
 
 
 `node samples/create-batch-prediction-job-video-object-tracking.js`
+
+
+-----
+
+
+
+
+### Create-custom-job
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-custom-job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-custom-job.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-custom-job.js`
+
+
+-----
+
+
+
+
+### Create-dataset-image
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset-image.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset-image.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-dataset-image.js`
+
+
+-----
+
+
+
+
+### Create-dataset-tabular-bigquery
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset-tabular-bigquery.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset-tabular-bigquery.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-dataset-tabular-bigquery.js`
+
+
+-----
+
+
+
+
+### Create-dataset-tabular-gcs
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset-tabular-gcs.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset-tabular-gcs.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-dataset-tabular-gcs.js`
+
+
+-----
+
+
+
+
+### Create-dataset-text
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset-text.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset-text.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-dataset-text.js`
+
+
+-----
+
+
+
+
+### Create-dataset-video
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset-video.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset-video.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-dataset-video.js`
+
+
+-----
+
+
+
+
+### Create-dataset
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-dataset.js`
+
+
+-----
+
+
+
+
+### Create-endpoint
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-endpoint.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-endpoint.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-endpoint.js`
 
 
 -----
@@ -235,6 +450,533 @@ __Usage:__
 
 
 
+### Delete-batch-prediction-job
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-batch-prediction-job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-batch-prediction-job.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-batch-prediction-job.js`
+
+
+-----
+
+
+
+
+### Delete-custom-job
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-custom-job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-custom-job.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-custom-job.js`
+
+
+-----
+
+
+
+
+### Delete-dataset
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-dataset.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-dataset.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-dataset.js`
+
+
+-----
+
+
+
+
+### Delete-endpoint
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-endpoint.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-endpoint.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-endpoint.js`
+
+
+-----
+
+
+
+
+### Delete-export-model
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-export-model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-export-model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-export-model.js`
+
+
+-----
+
+
+
+
+### Delete-model
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-model.js`
+
+
+-----
+
+
+
+
+### Deploy-model
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/deploy-model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/deploy-model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/deploy-model.js`
+
+
+-----
+
+
+
+
+### Export-model-tabular-classification
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/export-model-tabular-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/export-model-tabular-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/export-model-tabular-classification.js`
+
+
+-----
+
+
+
+
+### Export-model
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/export-model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/export-model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/export-model.js`
+
+
+-----
+
+
+
+
+### Get-batch-prediction-job
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-batch-prediction-job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-batch-prediction-job.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-batch-prediction-job.js`
+
+
+-----
+
+
+
+
+### Get-custom-job
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-custom-job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-custom-job.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-custom-job.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation-image-classification
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-image-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-image-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-image-classification.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation-image-object-detection
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-image-object-detection.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-image-object-detection.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-image-object-detection.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation-slice
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-slice.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-slice.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-slice.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation-tabular-classification
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-tabular-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-tabular-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-tabular-classification.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation-tabular-regression
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-tabular-regression.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-tabular-regression.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-tabular-regression.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation-text-classification
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-text-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-text-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-text-classification.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation-text-entity-extraction
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-text-entity-extraction.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-text-entity-extraction.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-text-entity-extraction.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation-text-sentiment-analysis
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-text-sentiment-analysis.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-text-sentiment-analysis.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-text-sentiment-analysis.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation-video-classification
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-video-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-video-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-video-classification.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation-video-object-tracking
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-video-object-tracking.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-video-object-tracking.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-video-object-tracking.js`
+
+
+-----
+
+
+
+
+### Get-model-evaluation
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation.js`
+
+
+-----
+
+
+
+
+### Get-model
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model.js`
+
+
+-----
+
+
+
+
+### Import-data-image-classification
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-image-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-image-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-data-image-classification.js`
+
+
+-----
+
+
+
+
+### Import-data-image-object-detection
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-image-object-detection.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-image-object-detection.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-data-image-object-detection.js`
+
+
+-----
+
+
+
+
+### Import-data-text-classification-single-label
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-text-classification-single-label.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-text-classification-single-label.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-data-text-classification-single-label.js`
+
+
+-----
+
+
+
+
+### Import-data-text-entity-extraction
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-text-entity-extraction.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-text-entity-extraction.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-data-text-entity-extraction.js`
+
+
+-----
+
+
+
+
+### Import-data-text-sentiment-analysis
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-text-sentiment-analysis.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-text-sentiment-analysis.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-data-text-sentiment-analysis.js`
+
+
+-----
+
+
+
+
+### Import-data-video-classification
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-video-classification.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-video-classification.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-data-video-classification.js`
+
+
+-----
+
+
+
+
+### Import-data-video-object-tracking
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-video-object-tracking.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-video-object-tracking.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-data-video-object-tracking.js`
+
+
+-----
+
+
+
+
+### Import-data
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-data.js`
+
+
+-----
+
+
+
+
 ### List-endpoints
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/list-endpoints.js).
@@ -245,6 +987,40 @@ __Usage:__
 
 
 `node samples/list-endpoints.js`
+
+
+-----
+
+
+
+
+### List-model-evaluation-slices
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/list-model-evaluation-slices.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-model-evaluation-slices.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-model-evaluation-slices.js`
+
+
+-----
+
+
+
+
+### Predict-custom-trained-model
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-custom-trained-model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/predict-custom-trained-model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/predict-custom-trained-model.js`
 
 
 -----
@@ -381,6 +1157,40 @@ __Usage:__
 
 
 `node samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Undeploy-model
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/undeploy-model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/undeploy-model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/undeploy-model.js`
+
+
+-----
+
+
+
+
+### Upload-model
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/upload-model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/upload-model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/upload-model.js`
 
 
 
