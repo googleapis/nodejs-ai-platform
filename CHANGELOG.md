@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.6.0...v2.0.0) (2021-04-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* BREAKING CHANGE: remove unsupported accelerator types feat: add aiplatform API Vizier service (#92)
+
+### Features
+
+* BREAKING CHANGE: remove unsupported accelerator types feat: add aiplatform API Vizier service ([#92](https://www.github.com/googleapis/nodejs-ai-platform/issues/92)) ([23f184d](https://www.github.com/googleapis/nodejs-ai-platform/commit/23f184dffb8482fc032234ae652e75999eb93203))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.5.0...v1.6.0) (2021-03-11)
 
 
