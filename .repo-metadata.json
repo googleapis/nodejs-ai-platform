@@ -1,14 +1,15 @@
 {
-  "name": "aiplatform",
-  "name_pretty": "AI Platform",
-  "product_documentation": "https://cloud.google.com/ai-platform/docs",
-  "client_documentation": "https://googleapis.dev/nodejs/aiplatform/latest",
+  "default_version": "v1",
   "issue_tracker": "https://github.com/googleapis/nodejs-ai-platform/issues",
   "release_level": "beta",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-ai-platform",
+  "client_documentation": "https://googleapis.dev/nodejs/aiplatform/latest",
   "distribution_name": "@google-cloud/aiplatform",
-  "api_id": "aiplatform.googleapis.com",
   "requires_billing": true,
+  "name_pretty": "AI Platform",
+  "repo": "googleapis/nodejs-ai-platform",
+  "language": "nodejs",
+  "api_id": "aiplatform.googleapis.com",
+  "product_documentation": "https://cloud.google.com/ai-platform/docs",
+  "name": "aiplatform",
   "codeowner_team": "@googleapis/ml-apis"
 }
