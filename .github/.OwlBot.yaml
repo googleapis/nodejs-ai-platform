@@ -22,5 +22,5 @@ deep-copy-regex:
   - source: /google/cloud/aiplatform/(v.*)/.*-nodejs/(.*)
     dest: /owl-bot-staging/$1/$2
 
-begin-after-commit-hash: 298d075b25f90307b1e3b56eb256b66304dd329c
+begin-after-commit-hash: 674a41e0de2869f44f45eb7b1a605852a5394bba
 
