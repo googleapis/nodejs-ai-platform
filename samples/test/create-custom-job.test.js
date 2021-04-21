@@ -26,6 +26,7 @@ const cwd = path.join(__dirname, '..');
 
 const customJobDisplayName = `temp_create_custom_job_test${uuid()}`;
 const containerImageUri = 'gcr.io/ucaip-sample-tests/ucaip-training-test:latest';
+
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
