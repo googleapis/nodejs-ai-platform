@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/aiplatform",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Aiplatform client for Node.js",
   "repository": "googleapis/nodejs-ai-platform",
   "license": "Apache-2.0",
@@ -62,7 +62,7 @@
     "mocha": "^8.2.1",
     "null-loader": "^4.0.1",
     "pack-n-play": "^1.0.0-2",
-    "sinon": "^9.2.1",
+    "sinon": "^10.0.0",
     "ts-loader": "^8.0.9",
     "typescript": "^4.0.5",
     "webpack": "^5.4.0",
