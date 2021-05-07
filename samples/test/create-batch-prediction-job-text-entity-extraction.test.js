@@ -16,7 +16,6 @@
 
 'use strict';
 
-const path = require('path');
 const {assert} = require('chai');
 const {after, describe, it} = require('mocha');
 const uuid = require('uuid').v4;
