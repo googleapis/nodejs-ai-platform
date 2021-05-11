@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Study()
       );
-      client.innerApiCalls.createStudy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createStudy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createStudy(
           request,
@@ -393,9 +391,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Study()
       );
-      client.innerApiCalls.getStudy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getStudy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getStudy(
           request,
@@ -502,9 +499,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteStudy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteStudy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteStudy(
           request,
@@ -614,9 +610,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Study()
       );
-      client.innerApiCalls.lookupStudy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.lookupStudy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.lookupStudy(
           request,
@@ -726,9 +721,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Trial()
       );
-      client.innerApiCalls.createTrial = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTrial =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTrial(
           request,
@@ -838,9 +832,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Trial()
       );
-      client.innerApiCalls.getTrial = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTrial =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTrial(
           request,
@@ -916,9 +909,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Trial()
       );
-      client.innerApiCalls.addTrialMeasurement = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.addTrialMeasurement =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.addTrialMeasurement(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -949,9 +941,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Trial()
       );
-      client.innerApiCalls.addTrialMeasurement = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addTrialMeasurement =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addTrialMeasurement(
           request,
@@ -1061,9 +1052,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Trial()
       );
-      client.innerApiCalls.completeTrial = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.completeTrial =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.completeTrial(
           request,
@@ -1173,9 +1163,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteTrial = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTrial =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTrial(
           request,
@@ -1285,9 +1274,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Trial()
       );
-      client.innerApiCalls.stopTrial = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.stopTrial =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.stopTrial(
           request,
@@ -1394,9 +1382,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListOptimalTrialsResponse()
       );
-      client.innerApiCalls.listOptimalTrials = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listOptimalTrials =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listOptimalTrials(
           request,
@@ -1475,9 +1462,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.suggestTrials = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.suggestTrials =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.suggestTrials(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1509,9 +1495,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.suggestTrials = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.suggestTrials =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.suggestTrials(
           request,
@@ -1671,9 +1656,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.checkTrialEarlyStoppingState = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.checkTrialEarlyStoppingState =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.checkTrialEarlyStoppingState(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1705,9 +1689,8 @@ describe('v1beta1.VizierServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.checkTrialEarlyStoppingState = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.checkTrialEarlyStoppingState =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.checkTrialEarlyStoppingState(
           request,
@@ -1820,9 +1803,10 @@ describe('v1beta1.VizierServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCheckTrialEarlyStoppingStateProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkCheckTrialEarlyStoppingStateProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1917,9 +1901,8 @@ describe('v1beta1.VizierServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Study()
         ),
       ];
-      client.innerApiCalls.listStudies = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listStudies =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listStudies(
           request,
@@ -1997,9 +1980,8 @@ describe('v1beta1.VizierServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Study()
         ),
       ];
-      client.descriptors.page.listStudies.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listStudies.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listStudiesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1beta1.Study[] = [];
@@ -2099,9 +2081,8 @@ describe('v1beta1.VizierServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Study()
         ),
       ];
-      client.descriptors.page.listStudies.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listStudies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.aiplatform.v1beta1.IStudy[] = [];
       const iterable = client.listStudiesAsync(request);
       for await (const resource of iterable) {
@@ -2229,9 +2210,8 @@ describe('v1beta1.VizierServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Trial()
         ),
       ];
-      client.innerApiCalls.listTrials = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTrials =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTrials(
           request,
@@ -2309,9 +2289,8 @@ describe('v1beta1.VizierServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Trial()
         ),
       ];
-      client.descriptors.page.listTrials.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTrials.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTrialsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1beta1.Trial[] = [];
@@ -2411,9 +2390,8 @@ describe('v1beta1.VizierServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Trial()
         ),
       ];
-      client.descriptors.page.listTrials.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTrials.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.aiplatform.v1beta1.ITrial[] = [];
       const iterable = client.listTrialsAsync(request);
       for await (const resource of iterable) {
@@ -2627,12 +2605,87 @@ describe('v1beta1.VizierServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('artifact', () => {
+      const fakePath = '/rendered/path/artifact';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        artifact: 'artifactValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.artifactPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.artifactPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('artifactPath', () => {
+        const result = client.artifactPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'artifactValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.artifactPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromArtifactName', () => {
+        const result = client.matchProjectFromArtifactName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromArtifactName', () => {
+        const result = client.matchLocationFromArtifactName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromArtifactName', () => {
+        const result = client.matchMetadataStoreFromArtifactName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchArtifactFromArtifactName', () => {
+        const result = client.matchArtifactFromArtifactName(fakePath);
+        assert.strictEqual(result, 'artifactValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2666,8 +2719,10 @@ describe('v1beta1.VizierServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2677,8 +2732,10 @@ describe('v1beta1.VizierServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2688,21 +2745,100 @@ describe('v1beta1.VizierServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
-          fakePath
-        );
+        const result =
+          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('context', () => {
+      const fakePath = '/rendered/path/context';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        context: 'contextValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.contextPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.contextPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('contextPath', () => {
+        const result = client.contextPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'contextValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.contextPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromContextName', () => {
+        const result = client.matchProjectFromContextName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromContextName', () => {
+        const result = client.matchLocationFromContextName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromContextName', () => {
+        const result = client.matchMetadataStoreFromContextName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchContextFromContextName', () => {
+        const result = client.matchContextFromContextName(fakePath);
+        assert.strictEqual(result, 'contextValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2903,9 +3039,8 @@ describe('v1beta1.VizierServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result = client.matchDataLabelingJobFromDataLabelingJobName(
-          fakePath
-        );
+        const result =
+          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -3043,6 +3178,310 @@ describe('v1beta1.VizierServiceClient', () => {
       });
     });
 
+    describe('entityType', () => {
+      const fakePath = '/rendered/path/entityType';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+        entity_type: 'entityTypeValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.entityTypePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.entityTypePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('entityTypePath', () => {
+        const result = client.entityTypePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue',
+          'entityTypeValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromEntityTypeName', () => {
+        const result = client.matchProjectFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromEntityTypeName', () => {
+        const result = client.matchLocationFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromEntityTypeName', () => {
+        const result = client.matchFeaturestoreFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromEntityTypeName', () => {
+        const result = client.matchEntityTypeFromEntityTypeName(fakePath);
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (client.pathTemplates.entityTypePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('execution', () => {
+      const fakePath = '/rendered/path/execution';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        execution: 'executionValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.executionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.executionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('executionPath', () => {
+        const result = client.executionPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'executionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.executionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExecutionName', () => {
+        const result = client.matchProjectFromExecutionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExecutionName', () => {
+        const result = client.matchLocationFromExecutionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromExecutionName', () => {
+        const result = client.matchMetadataStoreFromExecutionName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExecutionFromExecutionName', () => {
+        const result = client.matchExecutionFromExecutionName(fakePath);
+        assert.strictEqual(result, 'executionValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('feature', () => {
+      const fakePath = '/rendered/path/feature';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+        entity_type: 'entityTypeValue',
+        feature: 'featureValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featurePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featurePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featurePath', () => {
+        const result = client.featurePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue',
+          'entityTypeValue',
+          'featureValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featurePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeatureName', () => {
+        const result = client.matchProjectFromFeatureName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeatureName', () => {
+        const result = client.matchLocationFromFeatureName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromFeatureName', () => {
+        const result = client.matchFeaturestoreFromFeatureName(fakePath);
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEntityTypeFromFeatureName', () => {
+        const result = client.matchEntityTypeFromFeatureName(fakePath);
+        assert.strictEqual(result, 'entityTypeValue');
+        assert(
+          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeatureFromFeatureName', () => {
+        const result = client.matchFeatureFromFeatureName(fakePath);
+        assert.strictEqual(result, 'featureValue');
+        assert(
+          (client.pathTemplates.featurePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('featurestore', () => {
+      const fakePath = '/rendered/path/featurestore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        featurestore: 'featurestoreValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.featurestorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.featurestorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('featurestorePath', () => {
+        const result = client.featurestorePath(
+          'projectValue',
+          'locationValue',
+          'featurestoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromFeaturestoreName', () => {
+        const result = client.matchProjectFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromFeaturestoreName', () => {
+        const result = client.matchLocationFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFeaturestoreFromFeaturestoreName', () => {
+        const result = client.matchFeaturestoreFromFeaturestoreName(fakePath);
+        assert.strictEqual(result, 'featurestoreValue');
+        assert(
+          (client.pathTemplates.featurestorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('hyperparameterTuningJob', () => {
       const fakePath = '/rendered/path/hyperparameterTuningJob';
       const expectedParameters = {
@@ -3070,47 +3509,182 @@ describe('v1beta1.VizierServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result = client.matchProjectFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result = client.matchLocationFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+            fakePath
+          );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('index', () => {
+      const fakePath = '/rendered/path/index';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        index: 'indexValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.indexPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.indexPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('indexPath', () => {
+        const result = client.indexPath(
+          'projectValue',
+          'locationValue',
+          'indexValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.indexPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIndexName', () => {
+        const result = client.matchProjectFromIndexName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromIndexName', () => {
+        const result = client.matchLocationFromIndexName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIndexFromIndexName', () => {
+        const result = client.matchIndexFromIndexName(fakePath);
+        assert.strictEqual(result, 'indexValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('indexEndpoint', () => {
+      const fakePath = '/rendered/path/indexEndpoint';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        index_endpoint: 'indexEndpointValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.indexEndpointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.indexEndpointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('indexEndpointPath', () => {
+        const result = client.indexEndpointPath(
+          'projectValue',
+          'locationValue',
+          'indexEndpointValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIndexEndpointName', () => {
+        const result = client.matchProjectFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromIndexEndpointName', () => {
+        const result = client.matchLocationFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIndexEndpointFromIndexEndpointName', () => {
+        const result = client.matchIndexEndpointFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'indexEndpointValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3160,6 +3734,148 @@ describe('v1beta1.VizierServiceClient', () => {
         assert.strictEqual(result, 'locationValue');
         assert(
           (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('metadataSchema', () => {
+      const fakePath = '/rendered/path/metadataSchema';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        metadata_schema: 'metadataSchemaValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.metadataSchemaPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.metadataSchemaPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('metadataSchemaPath', () => {
+        const result = client.metadataSchemaPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'metadataSchemaValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMetadataSchemaName', () => {
+        const result = client.matchProjectFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMetadataSchemaName', () => {
+        const result = client.matchLocationFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromMetadataSchemaName', () => {
+        const result =
+          client.matchMetadataStoreFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataSchemaFromMetadataSchemaName', () => {
+        const result =
+          client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
+        assert.strictEqual(result, 'metadataSchemaValue');
+        assert(
+          (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('metadataStore', () => {
+      const fakePath = '/rendered/path/metadataStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.metadataStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.metadataStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('metadataStorePath', () => {
+        const result = client.metadataStorePath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromMetadataStoreName', () => {
+        const result = client.matchProjectFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromMetadataStoreName', () => {
+        const result = client.matchLocationFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromMetadataStoreName', () => {
+        const result = client.matchMetadataStoreFromMetadataStoreName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.metadataStorePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3224,6 +3940,85 @@ describe('v1beta1.VizierServiceClient', () => {
         assert.strictEqual(result, 'modelValue');
         assert(
           (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelDeploymentMonitoringJob', () => {
+      const fakePath = '/rendered/path/modelDeploymentMonitoringJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('modelDeploymentMonitoringJobPath', () => {
+        const result = client.modelDeploymentMonitoringJobPath(
+          'projectValue',
+          'locationValue',
+          'modelDeploymentMonitoringJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelDeploymentMonitoringJobName', () => {
+        const result =
+          client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelDeploymentMonitoringJobName', () => {
+        const result =
+          client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', () => {
+        const result =
+          client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3337,34 +4132,38 @@ describe('v1beta1.VizierServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result = client.matchProjectFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result = client.matchLocationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3374,21 +4173,24 @@ describe('v1beta1.VizierServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result = client.matchEvaluationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3398,8 +4200,74 @@ describe('v1beta1.VizierServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('pipelineJob', () => {
+      const fakePath = '/rendered/path/pipelineJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        pipeline_job: 'pipelineJobValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.pipelineJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pipelineJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('pipelineJobPath', () => {
+        const result = client.pipelineJobPath(
+          'projectValue',
+          'locationValue',
+          'pipelineJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPipelineJobName', () => {
+        const result = client.matchProjectFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPipelineJobName', () => {
+        const result = client.matchLocationFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPipelineJobFromPipelineJobName', () => {
+        const result = client.matchPipelineJobFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'pipelineJobValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3460,9 +4328,8 @@ describe('v1beta1.VizierServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result = client.matchSpecialistPoolFromSpecialistPoolName(
-          fakePath
-        );
+        const result =
+          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -3536,6 +4403,379 @@ describe('v1beta1.VizierServiceClient', () => {
       });
     });
 
+    describe('tensorboard', () => {
+      const fakePath = '/rendered/path/tensorboard';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tensorboardPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardPath', () => {
+        const result = client.tensorboardPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardName', () => {
+        const result = client.matchProjectFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardName', () => {
+        const result = client.matchLocationFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardName', () => {
+        const result = client.matchTensorboardFromTensorboardName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (client.pathTemplates.tensorboardPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardExperiment', () => {
+      const fakePath = '/rendered/path/tensorboardExperiment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardExperimentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardExperimentPath', () => {
+        const result = client.tensorboardExperimentPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardExperimentName', () => {
+        const result =
+          client.matchProjectFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardExperimentName', () => {
+        const result =
+          client.matchLocationFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardExperimentName', () => {
+        const result =
+          client.matchTensorboardFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardExperimentName', () => {
+        const result =
+          client.matchExperimentFromTensorboardExperimentName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardRun', () => {
+      const fakePath = '/rendered/path/tensorboardRun';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+        run: 'runValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tensorboardRunPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardRunPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardRunPath', () => {
+        const result = client.tensorboardRunPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue',
+          'runValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardRunName', () => {
+        const result = client.matchProjectFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardRunName', () => {
+        const result = client.matchLocationFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardRunName', () => {
+        const result = client.matchTensorboardFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardRunName', () => {
+        const result = client.matchExperimentFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRunFromTensorboardRunName', () => {
+        const result = client.matchRunFromTensorboardRunName(fakePath);
+        assert.strictEqual(result, 'runValue');
+        assert(
+          (client.pathTemplates.tensorboardRunPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('tensorboardTimeSeries', () => {
+      const fakePath = '/rendered/path/tensorboardTimeSeries';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        tensorboard: 'tensorboardValue',
+        experiment: 'experimentValue',
+        run: 'runValue',
+        time_series: 'timeSeriesValue',
+      };
+      const client = new vizierserviceModule.v1beta1.VizierServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.tensorboardTimeSeriesPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('tensorboardTimeSeriesPath', () => {
+        const result = client.tensorboardTimeSeriesPath(
+          'projectValue',
+          'locationValue',
+          'tensorboardValue',
+          'experimentValue',
+          'runValue',
+          'timeSeriesValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromTensorboardTimeSeriesName', () => {
+        const result =
+          client.matchProjectFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromTensorboardTimeSeriesName', () => {
+        const result =
+          client.matchLocationFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTensorboardFromTensorboardTimeSeriesName', () => {
+        const result =
+          client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'tensorboardValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExperimentFromTensorboardTimeSeriesName', () => {
+        const result =
+          client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'experimentValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchRunFromTensorboardTimeSeriesName', () => {
+        const result = client.matchRunFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'runValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchTimeSeriesFromTensorboardTimeSeriesName', () => {
+        const result =
+          client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
+        assert.strictEqual(result, 'timeSeriesValue');
+        assert(
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('trainingPipeline', () => {
       const fakePath = '/rendered/path/trainingPipeline';
       const expectedParameters = {
@@ -3563,8 +4803,10 @@ describe('v1beta1.VizierServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.trainingPipelinePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.trainingPipelinePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -3591,9 +4833,8 @@ describe('v1beta1.VizierServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result = client.matchTrainingPipelineFromTrainingPipelineName(
-          fakePath
-        );
+        const result =
+          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
