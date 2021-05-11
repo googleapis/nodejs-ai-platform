@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MetadataStore()
       );
-      client.innerApiCalls.getMetadataStore = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getMetadataStore =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getMetadataStore(
           request,
@@ -393,9 +391,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Artifact()
       );
-      client.innerApiCalls.createArtifact = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createArtifact =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createArtifact(
           request,
@@ -505,9 +502,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Artifact()
       );
-      client.innerApiCalls.getArtifact = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getArtifact =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getArtifact(
           request,
@@ -619,9 +615,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Artifact()
       );
-      client.innerApiCalls.updateArtifact = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateArtifact =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateArtifact(
           request,
@@ -732,9 +727,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Context()
       );
-      client.innerApiCalls.createContext = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createContext =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createContext(
           request,
@@ -844,9 +838,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Context()
       );
-      client.innerApiCalls.getContext = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getContext =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getContext(
           request,
@@ -958,9 +951,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Context()
       );
-      client.innerApiCalls.updateContext = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateContext =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateContext(
           request,
@@ -1040,9 +1032,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsResponse()
       );
-      client.innerApiCalls.addContextArtifactsAndExecutions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.addContextArtifactsAndExecutions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.addContextArtifactsAndExecutions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1073,9 +1064,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AddContextArtifactsAndExecutionsResponse()
       );
-      client.innerApiCalls.addContextArtifactsAndExecutions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addContextArtifactsAndExecutions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addContextArtifactsAndExecutions(
           request,
@@ -1157,9 +1147,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AddContextChildrenResponse()
       );
-      client.innerApiCalls.addContextChildren = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.addContextChildren =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.addContextChildren(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1190,9 +1179,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AddContextChildrenResponse()
       );
-      client.innerApiCalls.addContextChildren = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addContextChildren =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addContextChildren(
           request,
@@ -1271,9 +1259,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
       );
-      client.innerApiCalls.queryContextLineageSubgraph = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.queryContextLineageSubgraph =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.queryContextLineageSubgraph(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1304,9 +1291,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
       );
-      client.innerApiCalls.queryContextLineageSubgraph = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.queryContextLineageSubgraph =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.queryContextLineageSubgraph(
           request,
@@ -1419,9 +1405,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Execution()
       );
-      client.innerApiCalls.createExecution = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createExecution =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createExecution(
           request,
@@ -1531,9 +1516,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Execution()
       );
-      client.innerApiCalls.getExecution = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getExecution =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getExecution(
           request,
@@ -1645,9 +1629,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Execution()
       );
-      client.innerApiCalls.updateExecution = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateExecution =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateExecution(
           request,
@@ -1727,9 +1710,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AddExecutionEventsResponse()
       );
-      client.innerApiCalls.addExecutionEvents = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.addExecutionEvents =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.addExecutionEvents(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1760,9 +1742,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AddExecutionEventsResponse()
       );
-      client.innerApiCalls.addExecutionEvents = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addExecutionEvents =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addExecutionEvents(
           request,
@@ -1841,9 +1822,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
       );
-      client.innerApiCalls.queryExecutionInputsAndOutputs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.queryExecutionInputsAndOutputs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.queryExecutionInputsAndOutputs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1874,9 +1854,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
       );
-      client.innerApiCalls.queryExecutionInputsAndOutputs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.queryExecutionInputsAndOutputs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.queryExecutionInputsAndOutputs(
           request,
@@ -1958,9 +1937,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
       );
-      client.innerApiCalls.createMetadataSchema = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createMetadataSchema =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createMetadataSchema(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1991,9 +1969,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
       );
-      client.innerApiCalls.createMetadataSchema = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createMetadataSchema =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createMetadataSchema(
           request,
@@ -2103,9 +2080,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
       );
-      client.innerApiCalls.getMetadataSchema = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getMetadataSchema =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getMetadataSchema(
           request,
@@ -2184,9 +2160,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
       );
-      client.innerApiCalls.queryArtifactLineageSubgraph = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.queryArtifactLineageSubgraph =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.queryArtifactLineageSubgraph(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2217,9 +2192,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.LineageSubgraph()
       );
-      client.innerApiCalls.queryArtifactLineageSubgraph = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.queryArtifactLineageSubgraph =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.queryArtifactLineageSubgraph(
           request,
@@ -2301,9 +2275,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createMetadataStore = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createMetadataStore =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createMetadataStore(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2335,9 +2308,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createMetadataStore = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createMetadataStore =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createMetadataStore(
           request,
@@ -2497,9 +2469,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteMetadataStore = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteMetadataStore =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteMetadataStore(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2531,9 +2502,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteMetadataStore = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteMetadataStore =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteMetadataStore(
           request,
@@ -2693,9 +2663,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteContext = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteContext =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteContext(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2727,9 +2696,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteContext = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteContext =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteContext(
           request,
@@ -2897,9 +2865,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.MetadataStore()
         ),
       ];
-      client.innerApiCalls.listMetadataStores = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listMetadataStores =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listMetadataStores(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2938,9 +2905,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.MetadataStore()
         ),
       ];
-      client.innerApiCalls.listMetadataStores = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listMetadataStores =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listMetadataStores(
           request,
@@ -3020,12 +2986,12 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.MetadataStore()
         ),
       ];
-      client.descriptors.page.listMetadataStores.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listMetadataStores.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listMetadataStoresStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.MetadataStore[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.MetadataStore[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.MetadataStore) => {
@@ -3047,10 +3013,9 @@ describe('v1beta1.MetadataServiceClient', () => {
           .calledWith(client.innerApiCalls.listMetadataStores, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataStores
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataStores.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3067,13 +3032,12 @@ describe('v1beta1.MetadataServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listMetadataStores.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listMetadataStores.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listMetadataStoresStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.MetadataStore[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.MetadataStore[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.MetadataStore) => {
@@ -3094,10 +3058,9 @@ describe('v1beta1.MetadataServiceClient', () => {
           .calledWith(client.innerApiCalls.listMetadataStores, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataStores
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataStores.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3124,25 +3087,25 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.MetadataStore()
         ),
       ];
-      client.descriptors.page.listMetadataStores.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1beta1.IMetadataStore[] = [];
+      client.descriptors.page.listMetadataStores.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.IMetadataStore[] =
+        [];
       const iterable = client.listMetadataStoresAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listMetadataStores
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listMetadataStores.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataStores
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataStores.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3159,27 +3122,26 @@ describe('v1beta1.MetadataServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listMetadataStores.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listMetadataStores.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listMetadataStoresAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IMetadataStore[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.IMetadataStore[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listMetadataStores
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listMetadataStores.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataStores
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataStores.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3254,9 +3216,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Artifact()
         ),
       ];
-      client.innerApiCalls.listArtifacts = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listArtifacts =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listArtifacts(
           request,
@@ -3334,9 +3295,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Artifact()
         ),
       ];
-      client.descriptors.page.listArtifacts.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listArtifacts.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listArtifactsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1beta1.Artifact[] = [];
@@ -3361,10 +3321,9 @@ describe('v1beta1.MetadataServiceClient', () => {
           .calledWith(client.innerApiCalls.listArtifacts, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listArtifacts
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listArtifacts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3381,10 +3340,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listArtifacts.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listArtifacts.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listArtifactsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1beta1.Artifact[] = [];
@@ -3408,10 +3365,9 @@ describe('v1beta1.MetadataServiceClient', () => {
           .calledWith(client.innerApiCalls.listArtifacts, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listArtifacts
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listArtifacts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3438,9 +3394,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Artifact()
         ),
       ];
-      client.descriptors.page.listArtifacts.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listArtifacts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.aiplatform.v1beta1.IArtifact[] = [];
       const iterable = client.listArtifactsAsync(request);
       for await (const resource of iterable) {
@@ -3448,15 +3403,15 @@ describe('v1beta1.MetadataServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listArtifacts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listArtifacts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listArtifacts
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listArtifacts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3473,27 +3428,26 @@ describe('v1beta1.MetadataServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listArtifacts.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listArtifacts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listArtifactsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IArtifact[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.IArtifact[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listArtifacts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listArtifacts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listArtifacts
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listArtifacts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3568,9 +3522,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Context()
         ),
       ];
-      client.innerApiCalls.listContexts = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listContexts =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listContexts(
           request,
@@ -3648,9 +3601,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Context()
         ),
       ];
-      client.descriptors.page.listContexts.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listContexts.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listContextsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1beta1.Context[] = [];
@@ -3675,10 +3627,9 @@ describe('v1beta1.MetadataServiceClient', () => {
           .calledWith(client.innerApiCalls.listContexts, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listContexts
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listContexts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3722,10 +3673,9 @@ describe('v1beta1.MetadataServiceClient', () => {
           .calledWith(client.innerApiCalls.listContexts, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listContexts
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listContexts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3752,9 +3702,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Context()
         ),
       ];
-      client.descriptors.page.listContexts.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listContexts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.aiplatform.v1beta1.IContext[] = [];
       const iterable = client.listContextsAsync(request);
       for await (const resource of iterable) {
@@ -3762,15 +3711,15 @@ describe('v1beta1.MetadataServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listContexts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listContexts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listContexts
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listContexts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3787,10 +3736,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listContexts.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listContexts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listContextsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.aiplatform.v1beta1.IContext[] = [];
@@ -3799,15 +3746,15 @@ describe('v1beta1.MetadataServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listContexts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listContexts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listContexts
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listContexts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3882,9 +3829,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Execution()
         ),
       ];
-      client.innerApiCalls.listExecutions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listExecutions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listExecutions(
           request,
@@ -3962,12 +3908,12 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Execution()
         ),
       ];
-      client.descriptors.page.listExecutions.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listExecutions.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listExecutionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.Execution[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.Execution[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.Execution) => {
@@ -3989,10 +3935,9 @@ describe('v1beta1.MetadataServiceClient', () => {
           .calledWith(client.innerApiCalls.listExecutions, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listExecutions
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listExecutions.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4009,13 +3954,12 @@ describe('v1beta1.MetadataServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listExecutions.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listExecutions.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listExecutionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.Execution[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.Execution[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.Execution) => {
@@ -4036,10 +3980,9 @@ describe('v1beta1.MetadataServiceClient', () => {
           .calledWith(client.innerApiCalls.listExecutions, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listExecutions
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listExecutions.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4066,9 +4009,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Execution()
         ),
       ];
-      client.descriptors.page.listExecutions.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listExecutions.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.aiplatform.v1beta1.IExecution[] = [];
       const iterable = client.listExecutionsAsync(request);
       for await (const resource of iterable) {
@@ -4076,15 +4018,15 @@ describe('v1beta1.MetadataServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listExecutions
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listExecutions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listExecutions
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listExecutions.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4101,27 +4043,26 @@ describe('v1beta1.MetadataServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listExecutions.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listExecutions.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listExecutionsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IExecution[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.IExecution[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listExecutions
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listExecutions.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listExecutions
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listExecutions.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4157,9 +4098,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
         ),
       ];
-      client.innerApiCalls.listMetadataSchemas = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listMetadataSchemas =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listMetadataSchemas(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4198,9 +4138,8 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
         ),
       ];
-      client.innerApiCalls.listMetadataSchemas = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listMetadataSchemas =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listMetadataSchemas(
           request,
@@ -4280,12 +4219,12 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
         ),
       ];
-      client.descriptors.page.listMetadataSchemas.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listMetadataSchemas.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listMetadataSchemasStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.MetadataSchema[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.MetadataSchema[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.MetadataSchema) => {
@@ -4307,10 +4246,9 @@ describe('v1beta1.MetadataServiceClient', () => {
           .calledWith(client.innerApiCalls.listMetadataSchemas, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataSchemas
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataSchemas.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4327,13 +4265,12 @@ describe('v1beta1.MetadataServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listMetadataSchemas.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listMetadataSchemas.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listMetadataSchemasStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.MetadataSchema[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.MetadataSchema[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.MetadataSchema) => {
@@ -4354,10 +4291,9 @@ describe('v1beta1.MetadataServiceClient', () => {
           .calledWith(client.innerApiCalls.listMetadataSchemas, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataSchemas
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataSchemas.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4384,25 +4320,25 @@ describe('v1beta1.MetadataServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.MetadataSchema()
         ),
       ];
-      client.descriptors.page.listMetadataSchemas.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1beta1.IMetadataSchema[] = [];
+      client.descriptors.page.listMetadataSchemas.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.IMetadataSchema[] =
+        [];
       const iterable = client.listMetadataSchemasAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listMetadataSchemas
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listMetadataSchemas.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataSchemas
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataSchemas.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4419,27 +4355,26 @@ describe('v1beta1.MetadataServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listMetadataSchemas.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listMetadataSchemas.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listMetadataSchemasAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IMetadataSchema[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.IMetadataSchema[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listMetadataSchemas
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listMetadataSchemas.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listMetadataSchemas
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listMetadataSchemas.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4600,9 +4535,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -4715,8 +4649,10 @@ describe('v1beta1.MetadataServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -4726,8 +4662,10 @@ describe('v1beta1.MetadataServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4737,21 +4675,24 @@ describe('v1beta1.MetadataServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
-          fakePath
-        );
+        const result =
+          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5028,9 +4969,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result = client.matchDataLabelingJobFromDataLabelingJobName(
-          fakePath
-        );
+        const result =
+          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -5499,47 +5439,54 @@ describe('v1beta1.MetadataServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result = client.matchProjectFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result = client.matchLocationFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+            fakePath
+          );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5779,9 +5726,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       });
 
       it('matchMetadataStoreFromMetadataSchemaName', () => {
-        const result = client.matchMetadataStoreFromMetadataSchemaName(
-          fakePath
-        );
+        const result =
+          client.matchMetadataStoreFromMetadataSchemaName(fakePath);
         assert.strictEqual(result, 'metadataStoreValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -5791,9 +5737,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       });
 
       it('matchMetadataSchemaFromMetadataSchemaName', () => {
-        const result = client.matchMetadataSchemaFromMetadataSchemaName(
-          fakePath
-        );
+        const result =
+          client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
         assert.strictEqual(result, 'metadataSchemaValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -5943,12 +5888,10 @@ describe('v1beta1.MetadataServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('modelDeploymentMonitoringJobPath', () => {
         const result = client.modelDeploymentMonitoringJobPath(
@@ -5958,47 +5901,54 @@ describe('v1beta1.MetadataServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelDeploymentMonitoringJobName', () => {
-        const result = client.matchProjectFromModelDeploymentMonitoringJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelDeploymentMonitoringJobName', () => {
-        const result = client.matchLocationFromModelDeploymentMonitoringJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', () => {
-        const result = client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-          fakePath
-        );
+        const result =
+          client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
         assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
         assert(
-          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6112,34 +6062,38 @@ describe('v1beta1.MetadataServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result = client.matchProjectFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result = client.matchLocationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6149,21 +6103,24 @@ describe('v1beta1.MetadataServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result = client.matchEvaluationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6173,8 +6130,10 @@ describe('v1beta1.MetadataServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6337,9 +6296,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result = client.matchSpecialistPoolFromSpecialistPoolName(
-          fakePath
-        );
+        const result =
+          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -6506,60 +6464,66 @@ describe('v1beta1.MetadataServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.tensorboardExperimentPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardExperimentName', () => {
-        const result = client.matchProjectFromTensorboardExperimentName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromTensorboardExperimentName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.tensorboardExperimentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardExperimentName', () => {
-        const result = client.matchLocationFromTensorboardExperimentName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromTensorboardExperimentName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.tensorboardExperimentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardExperimentName', () => {
-        const result = client.matchTensorboardFromTensorboardExperimentName(
-          fakePath
-        );
+        const result =
+          client.matchTensorboardFromTensorboardExperimentName(fakePath);
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (client.pathTemplates.tensorboardExperimentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardExperimentName', () => {
-        const result = client.matchExperimentFromTensorboardExperimentName(
-          fakePath
-        );
+        const result =
+          client.matchExperimentFromTensorboardExperimentName(fakePath);
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (client.pathTemplates.tensorboardExperimentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6687,60 +6651,66 @@ describe('v1beta1.MetadataServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardTimeSeriesName', () => {
-        const result = client.matchProjectFromTensorboardTimeSeriesName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardTimeSeriesName', () => {
-        const result = client.matchLocationFromTensorboardTimeSeriesName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardTimeSeriesName', () => {
-        const result = client.matchTensorboardFromTensorboardTimeSeriesName(
-          fakePath
-        );
+        const result =
+          client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardTimeSeriesName', () => {
-        const result = client.matchExperimentFromTensorboardTimeSeriesName(
-          fakePath
-        );
+        const result =
+          client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6750,21 +6720,24 @@ describe('v1beta1.MetadataServiceClient', () => {
         const result = client.matchRunFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'runValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTimeSeriesFromTensorboardTimeSeriesName', () => {
-        const result = client.matchTimeSeriesFromTensorboardTimeSeriesName(
-          fakePath
-        );
+        const result =
+          client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'timeSeriesValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6798,8 +6771,10 @@ describe('v1beta1.MetadataServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.trainingPipelinePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.trainingPipelinePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -6826,9 +6801,8 @@ describe('v1beta1.MetadataServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result = client.matchTrainingPipelineFromTrainingPipelineName(
-          fakePath
-        );
+        const result =
+          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)

@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -186,49 +185,46 @@ describe('v1beta1.TensorboardServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient();
+    const client =
+      new tensorboardserviceModule.v1beta1.TensorboardServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-      {
+    const client =
+      new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-      {
+    const client =
+      new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.tensorboardServiceStub, undefined);
     await client.initialize();
     assert(client.tensorboardServiceStub);
   });
 
   it('has close method', () => {
-    const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-      {
+    const client =
+      new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-      {
+    const client =
+      new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -237,12 +233,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-      {
+    const client =
+      new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -261,12 +256,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('getTensorboard', () => {
     it('invokes getTensorboard without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardRequest()
@@ -294,12 +288,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes getTensorboard without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardRequest()
@@ -316,9 +309,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Tensorboard()
       );
-      client.innerApiCalls.getTensorboard = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTensorboard =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTensorboard(
           request,
@@ -344,12 +336,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes getTensorboard with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardRequest()
@@ -379,12 +370,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('createTensorboardExperiment', () => {
     it('invokes createTensorboardExperiment without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardExperimentRequest()
@@ -401,9 +391,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
       );
-      client.innerApiCalls.createTensorboardExperiment = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createTensorboardExperiment =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createTensorboardExperiment(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -414,12 +403,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes createTensorboardExperiment without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardExperimentRequest()
@@ -436,9 +424,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
       );
-      client.innerApiCalls.createTensorboardExperiment = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTensorboardExperiment =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTensorboardExperiment(
           request,
@@ -464,12 +451,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes createTensorboardExperiment with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardExperimentRequest()
@@ -502,12 +488,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('getTensorboardExperiment', () => {
     it('invokes getTensorboardExperiment without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardExperimentRequest()
@@ -524,9 +509,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
       );
-      client.innerApiCalls.getTensorboardExperiment = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getTensorboardExperiment =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getTensorboardExperiment(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -537,12 +521,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes getTensorboardExperiment without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardExperimentRequest()
@@ -559,9 +542,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
       );
-      client.innerApiCalls.getTensorboardExperiment = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTensorboardExperiment =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTensorboardExperiment(
           request,
@@ -587,12 +569,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes getTensorboardExperiment with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardExperimentRequest()
@@ -625,12 +606,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('updateTensorboardExperiment', () => {
     it('invokes updateTensorboardExperiment without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardExperimentRequest()
@@ -648,9 +628,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
       );
-      client.innerApiCalls.updateTensorboardExperiment = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTensorboardExperiment =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateTensorboardExperiment(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -661,12 +640,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes updateTensorboardExperiment without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardExperimentRequest()
@@ -684,9 +662,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
       );
-      client.innerApiCalls.updateTensorboardExperiment = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTensorboardExperiment =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateTensorboardExperiment(
           request,
@@ -712,12 +689,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes updateTensorboardExperiment with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardExperimentRequest()
@@ -751,12 +727,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('createTensorboardRun', () => {
     it('invokes createTensorboardRun without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardRunRequest()
@@ -773,9 +748,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
       );
-      client.innerApiCalls.createTensorboardRun = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createTensorboardRun =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createTensorboardRun(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -786,12 +760,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes createTensorboardRun without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardRunRequest()
@@ -808,9 +781,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
       );
-      client.innerApiCalls.createTensorboardRun = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTensorboardRun =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTensorboardRun(
           request,
@@ -836,12 +808,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes createTensorboardRun with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardRunRequest()
@@ -871,12 +842,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('getTensorboardRun', () => {
     it('invokes getTensorboardRun without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardRunRequest()
@@ -904,12 +874,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes getTensorboardRun without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardRunRequest()
@@ -926,9 +895,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
       );
-      client.innerApiCalls.getTensorboardRun = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTensorboardRun =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTensorboardRun(
           request,
@@ -954,12 +922,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes getTensorboardRun with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardRunRequest()
@@ -989,12 +956,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('updateTensorboardRun', () => {
     it('invokes updateTensorboardRun without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardRunRequest()
@@ -1012,9 +978,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
       );
-      client.innerApiCalls.updateTensorboardRun = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTensorboardRun =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateTensorboardRun(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1025,12 +990,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes updateTensorboardRun without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardRunRequest()
@@ -1048,9 +1012,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
       );
-      client.innerApiCalls.updateTensorboardRun = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTensorboardRun =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateTensorboardRun(
           request,
@@ -1076,12 +1039,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes updateTensorboardRun with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardRunRequest()
@@ -1112,12 +1074,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('createTensorboardTimeSeries', () => {
     it('invokes createTensorboardTimeSeries without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardTimeSeriesRequest()
@@ -1134,9 +1095,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
       );
-      client.innerApiCalls.createTensorboardTimeSeries = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createTensorboardTimeSeries =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createTensorboardTimeSeries(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1147,12 +1107,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes createTensorboardTimeSeries without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardTimeSeriesRequest()
@@ -1169,9 +1128,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
       );
-      client.innerApiCalls.createTensorboardTimeSeries = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTensorboardTimeSeries =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTensorboardTimeSeries(
           request,
@@ -1197,12 +1155,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes createTensorboardTimeSeries with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardTimeSeriesRequest()
@@ -1235,12 +1192,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('getTensorboardTimeSeries', () => {
     it('invokes getTensorboardTimeSeries without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardTimeSeriesRequest()
@@ -1257,9 +1213,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
       );
-      client.innerApiCalls.getTensorboardTimeSeries = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getTensorboardTimeSeries =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getTensorboardTimeSeries(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1270,12 +1225,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes getTensorboardTimeSeries without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardTimeSeriesRequest()
@@ -1292,9 +1246,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
       );
-      client.innerApiCalls.getTensorboardTimeSeries = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTensorboardTimeSeries =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTensorboardTimeSeries(
           request,
@@ -1320,12 +1273,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes getTensorboardTimeSeries with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTensorboardTimeSeriesRequest()
@@ -1358,12 +1310,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('updateTensorboardTimeSeries', () => {
     it('invokes updateTensorboardTimeSeries without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardTimeSeriesRequest()
@@ -1381,9 +1332,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
       );
-      client.innerApiCalls.updateTensorboardTimeSeries = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTensorboardTimeSeries =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateTensorboardTimeSeries(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1394,12 +1344,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes updateTensorboardTimeSeries without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardTimeSeriesRequest()
@@ -1417,9 +1366,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
       );
-      client.innerApiCalls.updateTensorboardTimeSeries = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTensorboardTimeSeries =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateTensorboardTimeSeries(
           request,
@@ -1445,12 +1393,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes updateTensorboardTimeSeries with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardTimeSeriesRequest()
@@ -1484,12 +1431,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('readTensorboardTimeSeriesData', () => {
     it('invokes readTensorboardTimeSeriesData without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataRequest()
@@ -1506,9 +1452,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataResponse()
       );
-      client.innerApiCalls.readTensorboardTimeSeriesData = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.readTensorboardTimeSeriesData =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.readTensorboardTimeSeriesData(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1519,12 +1464,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes readTensorboardTimeSeriesData without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataRequest()
@@ -1541,9 +1485,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataResponse()
       );
-      client.innerApiCalls.readTensorboardTimeSeriesData = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.readTensorboardTimeSeriesData =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.readTensorboardTimeSeriesData(
           request,
@@ -1569,12 +1512,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes readTensorboardTimeSeriesData with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardTimeSeriesDataRequest()
@@ -1607,12 +1549,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('writeTensorboardRunData', () => {
     it('invokes writeTensorboardRunData without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataRequest()
@@ -1629,9 +1570,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataResponse()
       );
-      client.innerApiCalls.writeTensorboardRunData = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.writeTensorboardRunData =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.writeTensorboardRunData(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1642,12 +1582,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes writeTensorboardRunData without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataRequest()
@@ -1664,9 +1603,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataResponse()
       );
-      client.innerApiCalls.writeTensorboardRunData = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.writeTensorboardRunData =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.writeTensorboardRunData(
           request,
@@ -1692,12 +1630,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes writeTensorboardRunData with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardRunDataRequest()
@@ -1730,12 +1667,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('createTensorboard', () => {
     it('invokes createTensorboard without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardRequest()
@@ -1752,9 +1688,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createTensorboard = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createTensorboard =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createTensorboard(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1766,12 +1701,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes createTensorboard without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardRequest()
@@ -1788,9 +1722,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createTensorboard = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTensorboard =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTensorboard(
           request,
@@ -1823,12 +1756,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes createTensorboard with call error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardRequest()
@@ -1856,12 +1788,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes createTensorboard with LRO error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTensorboardRequest()
@@ -1891,12 +1822,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes checkCreateTensorboardProgress without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1915,12 +1845,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes checkCreateTensorboardProgress with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1938,12 +1867,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('updateTensorboard', () => {
     it('invokes updateTensorboard without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardRequest()
@@ -1961,9 +1889,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateTensorboard = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTensorboard =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateTensorboard(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1975,12 +1902,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes updateTensorboard without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardRequest()
@@ -1998,9 +1924,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateTensorboard = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTensorboard =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateTensorboard(
           request,
@@ -2033,12 +1958,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes updateTensorboard with call error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardRequest()
@@ -2067,12 +1991,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes updateTensorboard with LRO error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateTensorboardRequest()
@@ -2103,12 +2026,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes checkUpdateTensorboardProgress without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2127,12 +2049,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes checkUpdateTensorboardProgress with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2150,12 +2071,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('deleteTensorboard', () => {
     it('invokes deleteTensorboard without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardRequest()
@@ -2172,9 +2092,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTensorboard = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTensorboard =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteTensorboard(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2186,12 +2105,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboard without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardRequest()
@@ -2208,9 +2126,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTensorboard = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTensorboard =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTensorboard(
           request,
@@ -2243,12 +2160,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboard with call error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardRequest()
@@ -2276,12 +2192,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboard with LRO error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardRequest()
@@ -2311,12 +2226,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes checkDeleteTensorboardProgress without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2335,12 +2249,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes checkDeleteTensorboardProgress with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2358,12 +2271,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('deleteTensorboardExperiment', () => {
     it('invokes deleteTensorboardExperiment without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardExperimentRequest()
@@ -2380,9 +2292,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTensorboardExperiment = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTensorboardExperiment =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteTensorboardExperiment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2394,12 +2305,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboardExperiment without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardExperimentRequest()
@@ -2416,9 +2326,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTensorboardExperiment = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTensorboardExperiment =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTensorboardExperiment(
           request,
@@ -2451,12 +2360,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboardExperiment with call error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardExperimentRequest()
@@ -2487,12 +2395,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboardExperiment with LRO error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardExperimentRequest()
@@ -2522,12 +2429,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes checkDeleteTensorboardExperimentProgress without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2537,21 +2443,21 @@ describe('v1beta1.TensorboardServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteTensorboardExperimentProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkDeleteTensorboardExperimentProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
     it('invokes checkDeleteTensorboardExperimentProgress with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2569,12 +2475,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('deleteTensorboardRun', () => {
     it('invokes deleteTensorboardRun without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardRunRequest()
@@ -2591,9 +2496,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTensorboardRun = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTensorboardRun =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteTensorboardRun(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2605,12 +2509,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboardRun without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardRunRequest()
@@ -2627,9 +2530,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTensorboardRun = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTensorboardRun =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTensorboardRun(
           request,
@@ -2662,12 +2564,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboardRun with call error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardRunRequest()
@@ -2695,12 +2596,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboardRun with LRO error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardRunRequest()
@@ -2730,12 +2630,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes checkDeleteTensorboardRunProgress without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2754,12 +2653,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes checkDeleteTensorboardRunProgress with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2777,12 +2675,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('deleteTensorboardTimeSeries', () => {
     it('invokes deleteTensorboardTimeSeries without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardTimeSeriesRequest()
@@ -2799,9 +2696,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTensorboardTimeSeries = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTensorboardTimeSeries =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteTensorboardTimeSeries(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2813,12 +2709,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboardTimeSeries without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardTimeSeriesRequest()
@@ -2835,9 +2730,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteTensorboardTimeSeries = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTensorboardTimeSeries =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTensorboardTimeSeries(
           request,
@@ -2870,12 +2764,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboardTimeSeries with call error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardTimeSeriesRequest()
@@ -2906,12 +2799,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes deleteTensorboardTimeSeries with LRO error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTensorboardTimeSeriesRequest()
@@ -2941,12 +2833,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes checkDeleteTensorboardTimeSeriesProgress without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2956,21 +2847,21 @@ describe('v1beta1.TensorboardServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteTensorboardTimeSeriesProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkDeleteTensorboardTimeSeriesProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
     it('invokes checkDeleteTensorboardTimeSeriesProgress with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2988,12 +2879,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('readTensorboardBlobData', () => {
     it('invokes readTensorboardBlobData without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataRequest()
@@ -3010,9 +2900,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataResponse()
       );
-      client.innerApiCalls.readTensorboardBlobData = stubServerStreamingCall(
-        expectedResponse
-      );
+      client.innerApiCalls.readTensorboardBlobData =
+        stubServerStreamingCall(expectedResponse);
       const stream = client.readTensorboardBlobData(request);
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -3037,12 +2926,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes readTensorboardBlobData with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ReadTensorboardBlobDataRequest()
@@ -3086,12 +2974,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('listTensorboards', () => {
     it('invokes listTensorboards without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest()
@@ -3127,12 +3014,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboards without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest()
@@ -3157,9 +3043,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Tensorboard()
         ),
       ];
-      client.innerApiCalls.listTensorboards = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTensorboards =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTensorboards(
           request,
@@ -3187,12 +3072,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboards with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest()
@@ -3220,12 +3104,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboardsStream without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest()
@@ -3243,12 +3126,12 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Tensorboard()
         ),
       ];
-      client.descriptors.page.listTensorboards.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTensorboards.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTensorboardsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.Tensorboard[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.Tensorboard[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.Tensorboard) => {
@@ -3270,21 +3153,19 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(client.innerApiCalls.listTensorboards, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboards
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboards.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listTensorboardsStream with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest()
@@ -3292,13 +3173,12 @@ describe('v1beta1.TensorboardServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTensorboards.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTensorboards.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTensorboardsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.Tensorboard[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.Tensorboard[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.Tensorboard) => {
@@ -3319,21 +3199,19 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(client.innerApiCalls.listTensorboards, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboards
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboards.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listTensorboards without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest()
@@ -3351,36 +3229,35 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Tensorboard()
         ),
       ];
-      client.descriptors.page.listTensorboards.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboard[] = [];
+      client.descriptors.page.listTensorboards.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboard[] =
+        [];
       const iterable = client.listTensorboardsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTensorboards
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTensorboards.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboards
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboards.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listTensorboards with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardsRequest()
@@ -3388,27 +3265,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTensorboards.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTensorboards.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTensorboardsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboard[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboard[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTensorboards
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTensorboards.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboards
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboards.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3416,12 +3292,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('listTensorboardExperiments', () => {
     it('invokes listTensorboardExperiments without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest()
@@ -3446,9 +3321,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
         ),
       ];
-      client.innerApiCalls.listTensorboardExperiments = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listTensorboardExperiments =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listTensorboardExperiments(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3459,12 +3333,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboardExperiments without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest()
@@ -3489,9 +3362,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
         ),
       ];
-      client.innerApiCalls.listTensorboardExperiments = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTensorboardExperiments =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTensorboardExperiments(
           request,
@@ -3519,12 +3391,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboardExperiments with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest()
@@ -3555,12 +3426,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboardExperimentsStream without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest()
@@ -3578,12 +3448,12 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
         ),
       ];
-      client.descriptors.page.listTensorboardExperiments.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTensorboardExperiments.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTensorboardExperimentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment[] =
+          [];
         stream.on(
           'data',
           (
@@ -3602,27 +3472,28 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listTensorboardExperiments
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listTensorboardExperiments, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardExperiments
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listTensorboardExperimentsStream with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest()
@@ -3630,13 +3501,12 @@ describe('v1beta1.TensorboardServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTensorboardExperiments.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTensorboardExperiments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTensorboardExperimentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment[] =
+          [];
         stream.on(
           'data',
           (
@@ -3654,27 +3524,28 @@ describe('v1beta1.TensorboardServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listTensorboardExperiments
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listTensorboardExperiments, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardExperiments
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listTensorboardExperiments without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest()
@@ -3692,36 +3563,37 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardExperiment()
         ),
       ];
-      client.descriptors.page.listTensorboardExperiments.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment[] = [];
+      client.descriptors.page.listTensorboardExperiments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment[] =
+        [];
       const iterable = client.listTensorboardExperimentsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTensorboardExperiments
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardExperiments
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listTensorboardExperiments with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardExperimentsRequest()
@@ -3729,27 +3601,28 @@ describe('v1beta1.TensorboardServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTensorboardExperiments.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTensorboardExperiments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTensorboardExperimentsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTensorboardExperiments
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardExperiments
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardExperiments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3757,12 +3630,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('listTensorboardRuns', () => {
     it('invokes listTensorboardRuns without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest()
@@ -3787,9 +3659,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
         ),
       ];
-      client.innerApiCalls.listTensorboardRuns = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listTensorboardRuns =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listTensorboardRuns(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3800,12 +3671,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboardRuns without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest()
@@ -3830,9 +3700,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
         ),
       ];
-      client.innerApiCalls.listTensorboardRuns = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTensorboardRuns =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTensorboardRuns(
           request,
@@ -3860,12 +3729,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboardRuns with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest()
@@ -3893,12 +3761,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboardRunsStream without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest()
@@ -3916,12 +3783,12 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
         ),
       ];
-      client.descriptors.page.listTensorboardRuns.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTensorboardRuns.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTensorboardRunsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardRun[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardRun[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.TensorboardRun) => {
@@ -3943,21 +3810,19 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(client.innerApiCalls.listTensorboardRuns, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardRuns
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardRuns.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listTensorboardRunsStream with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest()
@@ -3965,13 +3830,12 @@ describe('v1beta1.TensorboardServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTensorboardRuns.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTensorboardRuns.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTensorboardRunsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardRun[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardRun[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.TensorboardRun) => {
@@ -3992,21 +3856,19 @@ describe('v1beta1.TensorboardServiceClient', () => {
           .calledWith(client.innerApiCalls.listTensorboardRuns, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardRuns
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardRuns.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listTensorboardRuns without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest()
@@ -4024,36 +3886,35 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardRun()
         ),
       ];
-      client.descriptors.page.listTensorboardRuns.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[] = [];
+      client.descriptors.page.listTensorboardRuns.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[] =
+        [];
       const iterable = client.listTensorboardRunsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTensorboardRuns
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardRuns
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listTensorboardRuns with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardRunsRequest()
@@ -4061,27 +3922,26 @@ describe('v1beta1.TensorboardServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTensorboardRuns.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTensorboardRuns.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTensorboardRunsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardRun[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTensorboardRuns
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardRuns
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardRuns.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4089,12 +3949,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('listTensorboardTimeSeries', () => {
     it('invokes listTensorboardTimeSeries without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest()
@@ -4119,9 +3978,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
         ),
       ];
-      client.innerApiCalls.listTensorboardTimeSeries = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listTensorboardTimeSeries =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listTensorboardTimeSeries(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4132,12 +3990,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboardTimeSeries without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest()
@@ -4162,9 +4019,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
         ),
       ];
-      client.innerApiCalls.listTensorboardTimeSeries = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTensorboardTimeSeries =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTensorboardTimeSeries(
           request,
@@ -4192,12 +4048,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboardTimeSeries with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest()
@@ -4228,12 +4083,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes listTensorboardTimeSeriesStream without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest()
@@ -4251,12 +4105,12 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
         ),
       ];
-      client.descriptors.page.listTensorboardTimeSeries.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTensorboardTimeSeries.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTensorboardTimeSeriesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries[] =
+          [];
         stream.on(
           'data',
           (
@@ -4275,27 +4129,28 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listTensorboardTimeSeries
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listTensorboardTimeSeries, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardTimeSeries
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listTensorboardTimeSeriesStream with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest()
@@ -4303,13 +4158,12 @@ describe('v1beta1.TensorboardServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTensorboardTimeSeries.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTensorboardTimeSeries.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTensorboardTimeSeriesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries[] =
+          [];
         stream.on(
           'data',
           (
@@ -4327,27 +4181,28 @@ describe('v1beta1.TensorboardServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listTensorboardTimeSeries
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listTensorboardTimeSeries, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardTimeSeries
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listTensorboardTimeSeries without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest()
@@ -4365,36 +4220,37 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TensorboardTimeSeries()
         ),
       ];
-      client.descriptors.page.listTensorboardTimeSeries.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries[] = [];
+      client.descriptors.page.listTensorboardTimeSeries.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries[] =
+        [];
       const iterable = client.listTensorboardTimeSeriesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTensorboardTimeSeries
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardTimeSeries
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listTensorboardTimeSeries with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTensorboardTimeSeriesRequest()
@@ -4402,27 +4258,28 @@ describe('v1beta1.TensorboardServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTensorboardTimeSeries.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTensorboardTimeSeries.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTensorboardTimeSeriesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTensorboardTimeSeries
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTensorboardTimeSeries
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTensorboardTimeSeries
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4430,12 +4287,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
 
   describe('exportTensorboardTimeSeriesData', () => {
     it('invokes exportTensorboardTimeSeriesData without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest()
@@ -4460,9 +4316,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()
         ),
       ];
-      client.innerApiCalls.exportTensorboardTimeSeriesData = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.exportTensorboardTimeSeriesData =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.exportTensorboardTimeSeriesData(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4473,12 +4328,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes exportTensorboardTimeSeriesData without error using callback', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest()
@@ -4503,9 +4357,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()
         ),
       ];
-      client.innerApiCalls.exportTensorboardTimeSeriesData = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportTensorboardTimeSeriesData =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportTensorboardTimeSeriesData(
           request,
@@ -4533,12 +4386,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes exportTensorboardTimeSeriesData with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest()
@@ -4569,12 +4421,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
 
     it('invokes exportTensorboardTimeSeriesDataStream without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest()
@@ -4592,12 +4443,12 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()
         ),
       ];
-      client.descriptors.page.exportTensorboardTimeSeriesData.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.exportTensorboardTimeSeriesData.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.exportTensorboardTimeSeriesDataStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint[] =
+          [];
         stream.on(
           'data',
           (
@@ -4616,8 +4467,10 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.exportTensorboardTimeSeriesData
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(
             client.innerApiCalls.exportTensorboardTimeSeriesData,
@@ -4625,21 +4478,20 @@ describe('v1beta1.TensorboardServiceClient', () => {
           )
       );
       assert.strictEqual(
-        (client.descriptors.page.exportTensorboardTimeSeriesData
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes exportTensorboardTimeSeriesDataStream with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest()
@@ -4647,13 +4499,12 @@ describe('v1beta1.TensorboardServiceClient', () => {
       request.tensorboardTimeSeries = '';
       const expectedHeaderRequestParams = 'tensorboard_time_series=';
       const expectedError = new Error('expected');
-      client.descriptors.page.exportTensorboardTimeSeriesData.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.exportTensorboardTimeSeriesData.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.exportTensorboardTimeSeriesDataStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint[] =
+          [];
         stream.on(
           'data',
           (
@@ -4671,8 +4522,10 @@ describe('v1beta1.TensorboardServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.exportTensorboardTimeSeriesData
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(
             client.innerApiCalls.exportTensorboardTimeSeriesData,
@@ -4680,21 +4533,20 @@ describe('v1beta1.TensorboardServiceClient', () => {
           )
       );
       assert.strictEqual(
-        (client.descriptors.page.exportTensorboardTimeSeriesData
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with exportTensorboardTimeSeriesData without error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest()
@@ -4712,36 +4564,37 @@ describe('v1beta1.TensorboardServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.TimeSeriesDataPoint()
         ),
       ];
-      client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint[] = [];
+      client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint[] =
+        [];
       const iterable = client.exportTensorboardTimeSeriesDataAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.exportTensorboardTimeSeriesData
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.exportTensorboardTimeSeriesData
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with exportTensorboardTimeSeriesData with error', async () => {
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportTensorboardTimeSeriesDataRequest()
@@ -4749,27 +4602,28 @@ describe('v1beta1.TensorboardServiceClient', () => {
       request.tensorboardTimeSeries = '';
       const expectedHeaderRequestParams = 'tensorboard_time_series=';
       const expectedError = new Error('expected');
-      client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.exportTensorboardTimeSeriesData.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.exportTensorboardTimeSeriesDataAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint[] = [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.ITimeSeriesDataPoint[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.exportTensorboardTimeSeriesData
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.exportTensorboardTimeSeriesData
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.exportTensorboardTimeSeriesData
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4785,12 +4639,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         data_item: 'dataItemValue',
         annotation: 'annotationValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.annotationPathTemplate.render = sinon
         .stub()
@@ -4874,12 +4727,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         dataset: 'datasetValue',
         annotation_spec: 'annotationSpecValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
@@ -4934,9 +4786,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -4954,12 +4805,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         artifact: 'artifactValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.artifactPathTemplate.render = sinon
         .stub()
@@ -5031,12 +4881,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         batch_prediction_job: 'batchPredictionJobValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
         .stub()
@@ -5053,8 +4902,10 @@ describe('v1beta1.TensorboardServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -5064,8 +4915,10 @@ describe('v1beta1.TensorboardServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5075,21 +4928,24 @@ describe('v1beta1.TensorboardServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
-          fakePath
-        );
+        const result =
+          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (client.pathTemplates.batchPredictionJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.batchPredictionJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5104,12 +4960,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         context: 'contextValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.contextPathTemplate.render = sinon
         .stub()
@@ -5181,12 +5036,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         custom_job: 'customJobValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.customJobPathTemplate.render = sinon
         .stub()
@@ -5248,12 +5102,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         dataset: 'datasetValue',
         data_item: 'dataItemValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
@@ -5325,12 +5178,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         data_labeling_job: 'dataLabelingJobValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
         .stub()
@@ -5374,9 +5226,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result = client.matchDataLabelingJobFromDataLabelingJobName(
-          fakePath
-        );
+        const result =
+          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -5393,12 +5244,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         dataset: 'datasetValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -5459,12 +5309,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         endpoint: 'endpointValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.endpointPathTemplate.render = sinon
         .stub()
@@ -5526,12 +5375,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         featurestore: 'featurestoreValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -5604,12 +5452,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         execution: 'executionValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.executionPathTemplate.render = sinon
         .stub()
@@ -5683,12 +5530,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         entity_type: 'entityTypeValue',
         feature: 'featureValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.featurePathTemplate.render = sinon
         .stub()
@@ -5771,12 +5617,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         featurestore: 'featurestoreValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.featurestorePathTemplate.render = sinon
         .stub()
@@ -5837,12 +5682,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
         .stub()
@@ -5859,47 +5703,54 @@ describe('v1beta1.TensorboardServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result = client.matchProjectFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result = client.matchLocationFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromHyperparameterTuningJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-          fakePath
-        );
+        const result =
+          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+            fakePath
+          );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (client.pathTemplates.hyperparameterTuningJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.hyperparameterTuningJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5913,12 +5764,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         index: 'indexValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.indexPathTemplate.render = sinon
         .stub()
@@ -5979,12 +5829,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         index_endpoint: 'indexEndpointValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.indexEndpointPathTemplate.render = sinon
         .stub()
@@ -6044,12 +5893,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -6097,12 +5945,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         metadata_schema: 'metadataSchemaValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.metadataSchemaPathTemplate.render = sinon
         .stub()
@@ -6147,9 +5994,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       });
 
       it('matchMetadataStoreFromMetadataSchemaName', () => {
-        const result = client.matchMetadataStoreFromMetadataSchemaName(
-          fakePath
-        );
+        const result =
+          client.matchMetadataStoreFromMetadataSchemaName(fakePath);
         assert.strictEqual(result, 'metadataStoreValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -6159,9 +6005,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       });
 
       it('matchMetadataSchemaFromMetadataSchemaName', () => {
-        const result = client.matchMetadataSchemaFromMetadataSchemaName(
-          fakePath
-        );
+        const result =
+          client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
         assert.strictEqual(result, 'metadataSchemaValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -6178,12 +6023,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         metadata_store: 'metadataStoreValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.metadataStorePathTemplate.render = sinon
         .stub()
@@ -6244,12 +6088,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         model: 'modelValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -6310,19 +6153,16 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('modelDeploymentMonitoringJobPath', () => {
         const result = client.modelDeploymentMonitoringJobPath(
@@ -6332,47 +6172,54 @@ describe('v1beta1.TensorboardServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelDeploymentMonitoringJobName', () => {
-        const result = client.matchProjectFromModelDeploymentMonitoringJobName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelDeploymentMonitoringJobName', () => {
-        const result = client.matchLocationFromModelDeploymentMonitoringJobName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', () => {
-        const result = client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-          fakePath
-        );
+        const result =
+          client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
         assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
         assert(
-          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6387,12 +6234,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         model: 'modelValue',
         evaluation: 'evaluationValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
@@ -6466,12 +6312,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         evaluation: 'evaluationValue',
         slice: 'sliceValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
         .stub()
@@ -6490,34 +6335,38 @@ describe('v1beta1.TensorboardServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result = client.matchProjectFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result = client.matchLocationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6527,21 +6376,24 @@ describe('v1beta1.TensorboardServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result = client.matchEvaluationFromModelEvaluationSliceName(
-          fakePath
-        );
+        const result =
+          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6551,8 +6403,10 @@ describe('v1beta1.TensorboardServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (client.pathTemplates.modelEvaluationSlicePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.modelEvaluationSlicePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6566,12 +6420,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         pipeline_job: 'pipelineJobValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.pipelineJobPathTemplate.render = sinon
         .stub()
@@ -6630,12 +6483,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -6672,12 +6524,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         specialist_pool: 'specialistPoolValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.specialistPoolPathTemplate.render = sinon
         .stub()
@@ -6721,9 +6572,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result = client.matchSpecialistPoolFromSpecialistPoolName(
-          fakePath
-        );
+        const result =
+          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -6740,12 +6590,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         study: 'studyValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.studyPathTemplate.render = sinon
         .stub()
@@ -6806,12 +6655,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         tensorboard: 'tensorboardValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.tensorboardPathTemplate.render = sinon
         .stub()
@@ -6873,12 +6721,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         tensorboard: 'tensorboardValue',
         experiment: 'experimentValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
         .stub()
@@ -6896,60 +6743,66 @@ describe('v1beta1.TensorboardServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.tensorboardExperimentPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardExperimentName', () => {
-        const result = client.matchProjectFromTensorboardExperimentName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromTensorboardExperimentName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.tensorboardExperimentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardExperimentName', () => {
-        const result = client.matchLocationFromTensorboardExperimentName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromTensorboardExperimentName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.tensorboardExperimentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardExperimentName', () => {
-        const result = client.matchTensorboardFromTensorboardExperimentName(
-          fakePath
-        );
+        const result =
+          client.matchTensorboardFromTensorboardExperimentName(fakePath);
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (client.pathTemplates.tensorboardExperimentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardExperimentName', () => {
-        const result = client.matchExperimentFromTensorboardExperimentName(
-          fakePath
-        );
+        const result =
+          client.matchExperimentFromTensorboardExperimentName(fakePath);
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (client.pathTemplates.tensorboardExperimentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardExperimentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6965,12 +6818,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         experiment: 'experimentValue',
         run: 'runValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.tensorboardRunPathTemplate.render = sinon
         .stub()
@@ -7056,12 +6908,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         run: 'runValue',
         time_series: 'timeSeriesValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
         .stub()
@@ -7081,60 +6932,66 @@ describe('v1beta1.TensorboardServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardTimeSeriesName', () => {
-        const result = client.matchProjectFromTensorboardTimeSeriesName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardTimeSeriesName', () => {
-        const result = client.matchLocationFromTensorboardTimeSeriesName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardTimeSeriesName', () => {
-        const result = client.matchTensorboardFromTensorboardTimeSeriesName(
-          fakePath
-        );
+        const result =
+          client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardTimeSeriesName', () => {
-        const result = client.matchExperimentFromTensorboardTimeSeriesName(
-          fakePath
-        );
+        const result =
+          client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -7144,21 +7001,24 @@ describe('v1beta1.TensorboardServiceClient', () => {
         const result = client.matchRunFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'runValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTimeSeriesFromTensorboardTimeSeriesName', () => {
-        const result = client.matchTimeSeriesFromTensorboardTimeSeriesName(
-          fakePath
-        );
+        const result =
+          client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'timeSeriesValue');
         assert(
-          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.tensorboardTimeSeriesPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -7172,12 +7032,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         location: 'locationValue',
         training_pipeline: 'trainingPipelineValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.trainingPipelinePathTemplate.render = sinon
         .stub()
@@ -7194,8 +7053,10 @@ describe('v1beta1.TensorboardServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.trainingPipelinePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.trainingPipelinePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -7222,9 +7083,8 @@ describe('v1beta1.TensorboardServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result = client.matchTrainingPipelineFromTrainingPipelineName(
-          fakePath
-        );
+        const result =
+          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
@@ -7242,12 +7102,11 @@ describe('v1beta1.TensorboardServiceClient', () => {
         study: 'studyValue',
         trial: 'trialValue',
       };
-      const client = new tensorboardserviceModule.v1beta1.TensorboardServiceClient(
-        {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.trialPathTemplate.render = sinon
         .stub()
