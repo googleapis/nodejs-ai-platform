@@ -28,9 +28,10 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -165,46 +166,49 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client =
-      new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient();
+    const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client =
-      new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+    const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+      {
         fallback: true,
-      });
+      }
+    );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+    const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     assert.strictEqual(client.indexEndpointServiceStub, undefined);
     await client.initialize();
     assert(client.indexEndpointServiceStub);
   });
 
   it('has close method', () => {
-    const client =
-      new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+    const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client =
-      new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+    const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -213,11 +217,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client =
-      new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+    const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -236,11 +241,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
 
   describe('getIndexEndpoint', () => {
     it('invokes getIndexEndpoint without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
@@ -268,11 +274,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes getIndexEndpoint without error using callback', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
@@ -289,8 +296,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
-      client.innerApiCalls.getIndexEndpoint =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.getIndexEndpoint = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.getIndexEndpoint(
           request,
@@ -316,11 +324,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes getIndexEndpoint with error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
@@ -350,11 +359,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
 
   describe('updateIndexEndpoint', () => {
     it('invokes updateIndexEndpoint without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
@@ -372,8 +382,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
-      client.innerApiCalls.updateIndexEndpoint =
-        stubSimpleCall(expectedResponse);
+      client.innerApiCalls.updateIndexEndpoint = stubSimpleCall(
+        expectedResponse
+      );
       const [response] = await client.updateIndexEndpoint(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -384,11 +395,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes updateIndexEndpoint without error using callback', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
@@ -406,8 +418,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
-      client.innerApiCalls.updateIndexEndpoint =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.updateIndexEndpoint = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.updateIndexEndpoint(
           request,
@@ -433,11 +446,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes updateIndexEndpoint with error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
@@ -468,11 +482,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
 
   describe('createIndexEndpoint', () => {
     it('invokes createIndexEndpoint without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
@@ -489,8 +504,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createIndexEndpoint =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.createIndexEndpoint = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.createIndexEndpoint(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -502,11 +518,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes createIndexEndpoint without error using callback', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
@@ -523,8 +540,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createIndexEndpoint =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.createIndexEndpoint = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.createIndexEndpoint(
           request,
@@ -557,11 +575,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes createIndexEndpoint with call error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
@@ -589,11 +608,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes createIndexEndpoint with LRO error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
@@ -623,11 +643,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes checkCreateIndexEndpointProgress without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -646,11 +667,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes checkCreateIndexEndpointProgress with error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -668,11 +690,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
 
   describe('deleteIndexEndpoint', () => {
     it('invokes deleteIndexEndpoint without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
@@ -689,8 +712,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteIndexEndpoint =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.deleteIndexEndpoint = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.deleteIndexEndpoint(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -702,11 +726,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes deleteIndexEndpoint without error using callback', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
@@ -723,8 +748,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteIndexEndpoint =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.deleteIndexEndpoint = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.deleteIndexEndpoint(
           request,
@@ -757,11 +783,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes deleteIndexEndpoint with call error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
@@ -789,11 +816,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes deleteIndexEndpoint with LRO error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
@@ -823,11 +851,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes checkDeleteIndexEndpointProgress without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -846,11 +875,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes checkDeleteIndexEndpointProgress with error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -868,11 +898,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
 
   describe('deployIndex', () => {
     it('invokes deployIndex without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
@@ -901,11 +932,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes deployIndex without error using callback', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
@@ -922,8 +954,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deployIndex =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.deployIndex = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.deployIndex(
           request,
@@ -956,11 +989,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes deployIndex with call error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
@@ -988,11 +1022,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes deployIndex with LRO error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
@@ -1022,11 +1057,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes checkDeployIndexProgress without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1045,11 +1081,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes checkDeployIndexProgress with error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1064,11 +1101,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
 
   describe('undeployIndex', () => {
     it('invokes undeployIndex without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
@@ -1085,8 +1123,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.undeployIndex =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.undeployIndex = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.undeployIndex(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1098,11 +1137,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes undeployIndex without error using callback', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
@@ -1119,8 +1159,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.undeployIndex =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.undeployIndex = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.undeployIndex(
           request,
@@ -1153,11 +1194,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes undeployIndex with call error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
@@ -1185,11 +1227,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes undeployIndex with LRO error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
@@ -1219,11 +1262,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes checkUndeployIndexProgress without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1242,11 +1286,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes checkUndeployIndexProgress with error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1264,11 +1309,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
 
   describe('listIndexEndpoints', () => {
     it('invokes listIndexEndpoints without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
@@ -1293,8 +1339,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
         ),
       ];
-      client.innerApiCalls.listIndexEndpoints =
-        stubSimpleCall(expectedResponse);
+      client.innerApiCalls.listIndexEndpoints = stubSimpleCall(
+        expectedResponse
+      );
       const [response] = await client.listIndexEndpoints(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1305,11 +1352,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes listIndexEndpoints without error using callback', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
@@ -1334,8 +1382,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
         ),
       ];
-      client.innerApiCalls.listIndexEndpoints =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.listIndexEndpoints = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.listIndexEndpoints(
           request,
@@ -1363,11 +1412,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes listIndexEndpoints with error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
@@ -1395,11 +1445,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
     });
 
     it('invokes listIndexEndpointsStream without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
@@ -1417,12 +1468,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
         ),
       ];
-      client.descriptors.page.listIndexEndpoints.createStream =
-        stubPageStreamingCall(expectedResponse);
+      client.descriptors.page.listIndexEndpoints.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
       const stream = client.listIndexEndpointsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IndexEndpoint[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.IndexEndpoint[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.IndexEndpoint) => {
@@ -1444,19 +1495,21 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
           .calledWith(client.innerApiCalls.listIndexEndpoints, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listIndexEndpoints.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listIndexEndpoints
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listIndexEndpointsStream with error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
@@ -1464,12 +1517,13 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listIndexEndpoints.createStream =
-        stubPageStreamingCall(undefined, expectedError);
+      client.descriptors.page.listIndexEndpoints.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
       const stream = client.listIndexEndpointsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IndexEndpoint[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.IndexEndpoint[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.IndexEndpoint) => {
@@ -1490,19 +1544,21 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
           .calledWith(client.innerApiCalls.listIndexEndpoints, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listIndexEndpoints.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listIndexEndpoints
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listIndexEndpoints without error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
@@ -1520,35 +1576,36 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
         ),
       ];
-      client.descriptors.page.listIndexEndpoints.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1beta1.IIndexEndpoint[] =
-        [];
+      client.descriptors.page.listIndexEndpoints.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.aiplatform.v1beta1.IIndexEndpoint[] = [];
       const iterable = client.listIndexEndpointsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listIndexEndpoints
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listIndexEndpoints
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listIndexEndpoints with error', async () => {
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
@@ -1556,26 +1613,27 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listIndexEndpoints.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
+      client.descriptors.page.listIndexEndpoints.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
       const iterable = client.listIndexEndpointsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IIndexEndpoint[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.IIndexEndpoint[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listIndexEndpoints
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listIndexEndpoints
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -1591,11 +1649,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         data_item: 'dataItemValue',
         annotation: 'annotationValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.annotationPathTemplate.render = sinon
         .stub()
@@ -1679,11 +1738,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         dataset: 'datasetValue',
         annotation_spec: 'annotationSpecValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
@@ -1738,8 +1798,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result =
-          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
+        const result = client.matchAnnotationSpecFromAnnotationSpecName(
+          fakePath
+        );
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -1757,11 +1818,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         artifact: 'artifactValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.artifactPathTemplate.render = sinon
         .stub()
@@ -1833,11 +1895,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         batch_prediction_job: 'batchPredictionJobValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
         .stub()
@@ -1854,10 +1917,8 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1867,10 +1928,8 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1880,24 +1939,21 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result =
-          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
+        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1912,11 +1968,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         context: 'contextValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.contextPathTemplate.render = sinon
         .stub()
@@ -1988,11 +2045,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         custom_job: 'customJobValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.customJobPathTemplate.render = sinon
         .stub()
@@ -2054,11 +2112,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         dataset: 'datasetValue',
         data_item: 'dataItemValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
@@ -2130,11 +2189,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         data_labeling_job: 'dataLabelingJobValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
         .stub()
@@ -2178,8 +2238,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result =
-          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
+        const result = client.matchDataLabelingJobFromDataLabelingJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -2196,11 +2257,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         dataset: 'datasetValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -2261,11 +2323,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         endpoint: 'endpointValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.endpointPathTemplate.render = sinon
         .stub()
@@ -2327,11 +2390,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         featurestore: 'featurestoreValue',
         entity_type: 'entityTypeValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -2404,11 +2468,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         execution: 'executionValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.executionPathTemplate.render = sinon
         .stub()
@@ -2482,11 +2547,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         entity_type: 'entityTypeValue',
         feature: 'featureValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.featurePathTemplate.render = sinon
         .stub()
@@ -2569,11 +2635,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         featurestore: 'featurestoreValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.featurestorePathTemplate.render = sinon
         .stub()
@@ -2634,11 +2701,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
         .stub()
@@ -2655,54 +2723,47 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchProjectFromHyperparameterTuningJobName(fakePath);
+        const result = client.matchProjectFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchLocationFromHyperparameterTuningJobName(fakePath);
+        const result = client.matchLocationFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-            fakePath
-          );
+        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2716,11 +2777,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         index: 'indexValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.indexPathTemplate.render = sinon
         .stub()
@@ -2781,11 +2843,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         index_endpoint: 'indexEndpointValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.indexEndpointPathTemplate.render = sinon
         .stub()
@@ -2845,11 +2908,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -2897,11 +2961,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         metadata_schema: 'metadataSchemaValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.metadataSchemaPathTemplate.render = sinon
         .stub()
@@ -2946,8 +3011,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       });
 
       it('matchMetadataStoreFromMetadataSchemaName', () => {
-        const result =
-          client.matchMetadataStoreFromMetadataSchemaName(fakePath);
+        const result = client.matchMetadataStoreFromMetadataSchemaName(
+          fakePath
+        );
         assert.strictEqual(result, 'metadataStoreValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -2957,8 +3023,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       });
 
       it('matchMetadataSchemaFromMetadataSchemaName', () => {
-        const result =
-          client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
+        const result = client.matchMetadataSchemaFromMetadataSchemaName(
+          fakePath
+        );
         assert.strictEqual(result, 'metadataSchemaValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -2975,11 +3042,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         metadata_store: 'metadataStoreValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.metadataStorePathTemplate.render = sinon
         .stub()
@@ -3040,11 +3108,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         model: 'modelValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -3105,16 +3174,19 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
       it('modelDeploymentMonitoringJobPath', () => {
         const result = client.modelDeploymentMonitoringJobPath(
@@ -3124,54 +3196,47 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
+        const result = client.matchProjectFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
+        const result = client.matchLocationFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-            fakePath
-          );
+        const result = client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3186,11 +3251,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         model: 'modelValue',
         evaluation: 'evaluationValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
@@ -3264,11 +3330,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         evaluation: 'evaluationValue',
         slice: 'sliceValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
         .stub()
@@ -3287,38 +3354,34 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchProjectFromModelEvaluationSliceName(fakePath);
+        const result = client.matchProjectFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchLocationFromModelEvaluationSliceName(fakePath);
+        const result = client.matchLocationFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3328,24 +3391,21 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
+        const result = client.matchEvaluationFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3355,10 +3415,8 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3372,11 +3430,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         pipeline_job: 'pipelineJobValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.pipelineJobPathTemplate.render = sinon
         .stub()
@@ -3437,11 +3496,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         specialist_pool: 'specialistPoolValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.specialistPoolPathTemplate.render = sinon
         .stub()
@@ -3485,8 +3545,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result =
-          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
+        const result = client.matchSpecialistPoolFromSpecialistPoolName(
+          fakePath
+        );
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -3503,11 +3564,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         study: 'studyValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.studyPathTemplate.render = sinon
         .stub()
@@ -3568,11 +3630,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         tensorboard: 'tensorboardValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardPathTemplate.render = sinon
         .stub()
@@ -3634,11 +3697,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         tensorboard: 'tensorboardValue',
         experiment: 'experimentValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
         .stub()
@@ -3656,66 +3720,60 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardExperimentName', () => {
-        const result =
-          client.matchProjectFromTensorboardExperimentName(fakePath);
+        const result = client.matchProjectFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardExperimentName', () => {
-        const result =
-          client.matchLocationFromTensorboardExperimentName(fakePath);
+        const result = client.matchLocationFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardExperimentName', () => {
-        const result =
-          client.matchTensorboardFromTensorboardExperimentName(fakePath);
+        const result = client.matchTensorboardFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardExperimentName', () => {
-        const result =
-          client.matchExperimentFromTensorboardExperimentName(fakePath);
+        const result = client.matchExperimentFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3731,11 +3789,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         experiment: 'experimentValue',
         run: 'runValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardRunPathTemplate.render = sinon
         .stub()
@@ -3821,11 +3880,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         run: 'runValue',
         time_series: 'timeSeriesValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
         .stub()
@@ -3845,66 +3905,60 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchProjectFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchProjectFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchLocationFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchLocationFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchTensorboardFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchExperimentFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3914,24 +3968,21 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         const result = client.matchRunFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'runValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTimeSeriesFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchTimeSeriesFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'timeSeriesValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3945,11 +3996,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         location: 'locationValue',
         training_pipeline: 'trainingPipelineValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.trainingPipelinePathTemplate.render = sinon
         .stub()
@@ -3966,10 +4018,8 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.trainingPipelinePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.trainingPipelinePathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -3996,8 +4046,9 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result =
-          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
+        const result = client.matchTrainingPipelineFromTrainingPipelineName(
+          fakePath
+        );
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
@@ -4015,11 +4066,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         study: 'studyValue',
         trial: 'trialValue',
       };
-      const client =
-        new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient({
+      const client = new indexendpointserviceModule.v1beta1.IndexEndpointServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.trialPathTemplate.render = sinon
         .stub()

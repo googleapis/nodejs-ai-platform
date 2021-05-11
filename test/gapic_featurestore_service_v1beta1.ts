@@ -28,9 +28,10 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -165,46 +166,49 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client =
-      new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient();
+    const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client =
-      new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+    const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+      {
         fallback: true,
-      });
+      }
+    );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+    const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     assert.strictEqual(client.featurestoreServiceStub, undefined);
     await client.initialize();
     assert(client.featurestoreServiceStub);
   });
 
   it('has close method', () => {
-    const client =
-      new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+    const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client =
-      new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+    const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -213,11 +217,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client =
-      new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+    const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -236,11 +241,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('getFeaturestore', () => {
     it('invokes getFeaturestore without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetFeaturestoreRequest()
@@ -268,11 +274,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes getFeaturestore without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetFeaturestoreRequest()
@@ -289,8 +296,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Featurestore()
       );
-      client.innerApiCalls.getFeaturestore =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.getFeaturestore = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.getFeaturestore(
           request,
@@ -316,11 +324,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes getFeaturestore with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetFeaturestoreRequest()
@@ -350,11 +359,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('getEntityType', () => {
     it('invokes getEntityType without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetEntityTypeRequest()
@@ -382,11 +392,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes getEntityType without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetEntityTypeRequest()
@@ -403,8 +414,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.EntityType()
       );
-      client.innerApiCalls.getEntityType =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.getEntityType = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.getEntityType(
           request,
@@ -430,11 +442,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes getEntityType with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetEntityTypeRequest()
@@ -464,11 +477,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('updateEntityType', () => {
     it('invokes updateEntityType without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateEntityTypeRequest()
@@ -497,11 +511,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes updateEntityType without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateEntityTypeRequest()
@@ -519,8 +534,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.EntityType()
       );
-      client.innerApiCalls.updateEntityType =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.updateEntityType = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.updateEntityType(
           request,
@@ -546,11 +562,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes updateEntityType with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateEntityTypeRequest()
@@ -581,11 +598,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('getFeature', () => {
     it('invokes getFeature without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetFeatureRequest()
@@ -613,11 +631,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes getFeature without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetFeatureRequest()
@@ -634,8 +653,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Feature()
       );
-      client.innerApiCalls.getFeature =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.getFeature = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.getFeature(
           request,
@@ -661,11 +681,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes getFeature with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetFeatureRequest()
@@ -695,11 +716,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('updateFeature', () => {
     it('invokes updateFeature without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureRequest()
@@ -728,11 +750,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes updateFeature without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureRequest()
@@ -750,8 +773,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Feature()
       );
-      client.innerApiCalls.updateFeature =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.updateFeature = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.updateFeature(
           request,
@@ -777,11 +801,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes updateFeature with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateFeatureRequest()
@@ -812,11 +837,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('createFeaturestore', () => {
     it('invokes createFeaturestore without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateFeaturestoreRequest()
@@ -833,8 +859,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createFeaturestore =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.createFeaturestore = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.createFeaturestore(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -846,11 +873,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes createFeaturestore without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateFeaturestoreRequest()
@@ -867,8 +895,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createFeaturestore =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.createFeaturestore = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.createFeaturestore(
           request,
@@ -901,11 +930,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes createFeaturestore with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateFeaturestoreRequest()
@@ -933,11 +963,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes createFeaturestore with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateFeaturestoreRequest()
@@ -967,11 +998,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkCreateFeaturestoreProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -990,11 +1022,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkCreateFeaturestoreProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1012,11 +1045,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('updateFeaturestore', () => {
     it('invokes updateFeaturestore without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateFeaturestoreRequest()
@@ -1034,8 +1068,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateFeaturestore =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.updateFeaturestore = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.updateFeaturestore(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1047,11 +1082,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes updateFeaturestore without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateFeaturestoreRequest()
@@ -1069,8 +1105,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateFeaturestore =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.updateFeaturestore = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.updateFeaturestore(
           request,
@@ -1103,11 +1140,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes updateFeaturestore with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateFeaturestoreRequest()
@@ -1136,11 +1174,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes updateFeaturestore with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateFeaturestoreRequest()
@@ -1171,11 +1210,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkUpdateFeaturestoreProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1194,11 +1234,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkUpdateFeaturestoreProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1216,11 +1257,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('deleteFeaturestore', () => {
     it('invokes deleteFeaturestore without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteFeaturestoreRequest()
@@ -1237,8 +1279,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteFeaturestore =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.deleteFeaturestore = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.deleteFeaturestore(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1250,11 +1293,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes deleteFeaturestore without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteFeaturestoreRequest()
@@ -1271,8 +1315,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteFeaturestore =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.deleteFeaturestore = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.deleteFeaturestore(
           request,
@@ -1305,11 +1350,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes deleteFeaturestore with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteFeaturestoreRequest()
@@ -1337,11 +1383,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes deleteFeaturestore with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteFeaturestoreRequest()
@@ -1371,11 +1418,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkDeleteFeaturestoreProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1394,11 +1442,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkDeleteFeaturestoreProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1416,11 +1465,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('createEntityType', () => {
     it('invokes createEntityType without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateEntityTypeRequest()
@@ -1437,8 +1487,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createEntityType =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.createEntityType = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.createEntityType(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1450,11 +1501,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes createEntityType without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateEntityTypeRequest()
@@ -1471,8 +1523,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createEntityType =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.createEntityType = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.createEntityType(
           request,
@@ -1505,11 +1558,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes createEntityType with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateEntityTypeRequest()
@@ -1537,11 +1591,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes createEntityType with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateEntityTypeRequest()
@@ -1571,11 +1626,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkCreateEntityTypeProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1594,11 +1650,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkCreateEntityTypeProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1616,11 +1673,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('deleteEntityType', () => {
     it('invokes deleteEntityType without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteEntityTypeRequest()
@@ -1637,8 +1695,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteEntityType =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.deleteEntityType = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.deleteEntityType(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1650,11 +1709,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes deleteEntityType without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteEntityTypeRequest()
@@ -1671,8 +1731,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteEntityType =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.deleteEntityType = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.deleteEntityType(
           request,
@@ -1705,11 +1766,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes deleteEntityType with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteEntityTypeRequest()
@@ -1737,11 +1799,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes deleteEntityType with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteEntityTypeRequest()
@@ -1771,11 +1834,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkDeleteEntityTypeProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1794,11 +1858,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkDeleteEntityTypeProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1816,11 +1881,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('createFeature', () => {
     it('invokes createFeature without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateFeatureRequest()
@@ -1837,8 +1903,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createFeature =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.createFeature = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.createFeature(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1850,11 +1917,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes createFeature without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateFeatureRequest()
@@ -1871,8 +1939,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createFeature =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.createFeature = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.createFeature(
           request,
@@ -1905,11 +1974,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes createFeature with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateFeatureRequest()
@@ -1937,11 +2007,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes createFeature with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateFeatureRequest()
@@ -1971,11 +2042,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkCreateFeatureProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1994,11 +2066,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkCreateFeatureProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2016,11 +2089,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('batchCreateFeatures', () => {
     it('invokes batchCreateFeatures without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesRequest()
@@ -2037,8 +2111,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchCreateFeatures =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.batchCreateFeatures = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.batchCreateFeatures(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2050,11 +2125,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes batchCreateFeatures without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesRequest()
@@ -2071,8 +2147,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchCreateFeatures =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.batchCreateFeatures = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.batchCreateFeatures(
           request,
@@ -2105,11 +2182,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes batchCreateFeatures with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesRequest()
@@ -2137,11 +2215,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes batchCreateFeatures with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.BatchCreateFeaturesRequest()
@@ -2171,11 +2250,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkBatchCreateFeaturesProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2194,11 +2274,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkBatchCreateFeaturesProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2216,11 +2297,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('deleteFeature', () => {
     it('invokes deleteFeature without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteFeatureRequest()
@@ -2237,8 +2319,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteFeature =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.deleteFeature = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.deleteFeature(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2250,11 +2333,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes deleteFeature without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteFeatureRequest()
@@ -2271,8 +2355,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteFeature =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.deleteFeature = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.deleteFeature(
           request,
@@ -2305,11 +2390,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes deleteFeature with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteFeatureRequest()
@@ -2337,11 +2423,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes deleteFeature with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteFeatureRequest()
@@ -2371,11 +2458,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkDeleteFeatureProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2394,11 +2482,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkDeleteFeatureProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2416,11 +2505,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('importFeatureValues', () => {
     it('invokes importFeatureValues without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ImportFeatureValuesRequest()
@@ -2437,8 +2527,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importFeatureValues =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.importFeatureValues = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.importFeatureValues(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2450,11 +2541,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes importFeatureValues without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ImportFeatureValuesRequest()
@@ -2471,8 +2563,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importFeatureValues =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.importFeatureValues = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.importFeatureValues(
           request,
@@ -2505,11 +2598,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes importFeatureValues with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ImportFeatureValuesRequest()
@@ -2537,11 +2631,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes importFeatureValues with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ImportFeatureValuesRequest()
@@ -2571,11 +2666,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkImportFeatureValuesProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2594,11 +2690,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkImportFeatureValuesProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2616,11 +2713,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('batchReadFeatureValues', () => {
     it('invokes batchReadFeatureValues without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.BatchReadFeatureValuesRequest()
@@ -2637,8 +2735,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchReadFeatureValues =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.batchReadFeatureValues = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.batchReadFeatureValues(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2650,11 +2749,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes batchReadFeatureValues without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.BatchReadFeatureValuesRequest()
@@ -2671,8 +2771,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchReadFeatureValues =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.batchReadFeatureValues = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.batchReadFeatureValues(
           request,
@@ -2705,11 +2806,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes batchReadFeatureValues with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.BatchReadFeatureValuesRequest()
@@ -2740,11 +2842,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes batchReadFeatureValues with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.BatchReadFeatureValuesRequest()
@@ -2774,11 +2877,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkBatchReadFeatureValuesProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2797,11 +2901,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkBatchReadFeatureValuesProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -2819,11 +2924,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('exportFeatureValues', () => {
     it('invokes exportFeatureValues without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportFeatureValuesRequest()
@@ -2840,8 +2946,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportFeatureValues =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.exportFeatureValues = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.exportFeatureValues(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2853,11 +2960,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes exportFeatureValues without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportFeatureValuesRequest()
@@ -2874,8 +2982,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportFeatureValues =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.exportFeatureValues = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.exportFeatureValues(
           request,
@@ -2908,11 +3017,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes exportFeatureValues with call error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportFeatureValuesRequest()
@@ -2940,11 +3050,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes exportFeatureValues with LRO error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportFeatureValuesRequest()
@@ -2974,11 +3085,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkExportFeatureValuesProgress without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -2997,11 +3109,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes checkExportFeatureValuesProgress with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -3019,11 +3132,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('listFeaturestores', () => {
     it('invokes listFeaturestores without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest()
@@ -3059,11 +3173,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes listFeaturestores without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest()
@@ -3088,8 +3203,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Featurestore()
         ),
       ];
-      client.innerApiCalls.listFeaturestores =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.listFeaturestores = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.listFeaturestores(
           request,
@@ -3117,11 +3233,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes listFeaturestores with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest()
@@ -3149,11 +3266,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes listFeaturestoresStream without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest()
@@ -3171,12 +3289,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Featurestore()
         ),
       ];
-      client.descriptors.page.listFeaturestores.createStream =
-        stubPageStreamingCall(expectedResponse);
+      client.descriptors.page.listFeaturestores.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
       const stream = client.listFeaturestoresStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.Featurestore[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.Featurestore[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.Featurestore) => {
@@ -3198,19 +3316,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           .calledWith(client.innerApiCalls.listFeaturestores, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listFeaturestores.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listFeaturestores
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listFeaturestoresStream with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest()
@@ -3218,12 +3338,13 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listFeaturestores.createStream =
-        stubPageStreamingCall(undefined, expectedError);
+      client.descriptors.page.listFeaturestores.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
       const stream = client.listFeaturestoresStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.Featurestore[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.Featurestore[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.Featurestore) => {
@@ -3244,19 +3365,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           .calledWith(client.innerApiCalls.listFeaturestores, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listFeaturestores.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listFeaturestores
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listFeaturestores without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest()
@@ -3274,35 +3397,36 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Featurestore()
         ),
       ];
-      client.descriptors.page.listFeaturestores.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1beta1.IFeaturestore[] =
-        [];
+      client.descriptors.page.listFeaturestores.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.aiplatform.v1beta1.IFeaturestore[] = [];
       const iterable = client.listFeaturestoresAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listFeaturestores.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listFeaturestores
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listFeaturestores.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listFeaturestores
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listFeaturestores with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturestoresRequest()
@@ -3310,26 +3434,27 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listFeaturestores.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
+      client.descriptors.page.listFeaturestores.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
       const iterable = client.listFeaturestoresAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IFeaturestore[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.IFeaturestore[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listFeaturestores.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listFeaturestores
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listFeaturestores.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listFeaturestores
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -3337,11 +3462,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('listEntityTypes', () => {
     it('invokes listEntityTypes without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest()
@@ -3377,11 +3503,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes listEntityTypes without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest()
@@ -3406,8 +3533,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.EntityType()
         ),
       ];
-      client.innerApiCalls.listEntityTypes =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.listEntityTypes = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.listEntityTypes(
           request,
@@ -3433,11 +3561,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes listEntityTypes with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest()
@@ -3465,11 +3594,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes listEntityTypesStream without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest()
@@ -3487,12 +3617,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.EntityType()
         ),
       ];
-      client.descriptors.page.listEntityTypes.createStream =
-        stubPageStreamingCall(expectedResponse);
+      client.descriptors.page.listEntityTypes.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
       const stream = client.listEntityTypesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.EntityType[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.EntityType[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.EntityType) => {
@@ -3514,19 +3644,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           .calledWith(client.innerApiCalls.listEntityTypes, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEntityTypes.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listEntityTypes
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listEntityTypesStream with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest()
@@ -3534,12 +3666,13 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEntityTypes.createStream =
-        stubPageStreamingCall(undefined, expectedError);
+      client.descriptors.page.listEntityTypes.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
       const stream = client.listEntityTypesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.EntityType[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.EntityType[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.aiplatform.v1beta1.EntityType) => {
@@ -3560,19 +3693,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           .calledWith(client.innerApiCalls.listEntityTypes, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEntityTypes.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listEntityTypes
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listEntityTypes without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest()
@@ -3590,35 +3725,36 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.EntityType()
         ),
       ];
-      client.descriptors.page.listEntityTypes.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1beta1.IEntityType[] =
-        [];
+      client.descriptors.page.listEntityTypes.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.aiplatform.v1beta1.IEntityType[] = [];
       const iterable = client.listEntityTypesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEntityTypes.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listEntityTypes
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEntityTypes.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listEntityTypes
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listEntityTypes with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListEntityTypesRequest()
@@ -3626,26 +3762,27 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEntityTypes.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
+      client.descriptors.page.listEntityTypes.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
       const iterable = client.listEntityTypesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IEntityType[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.IEntityType[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEntityTypes.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listEntityTypes
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEntityTypes.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listEntityTypes
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -3653,11 +3790,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('listFeatures', () => {
     it('invokes listFeatures without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturesRequest()
@@ -3693,11 +3831,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes listFeatures without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturesRequest()
@@ -3722,8 +3861,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Feature()
         ),
       ];
-      client.innerApiCalls.listFeatures =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.listFeatures = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.listFeatures(
           request,
@@ -3749,11 +3889,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes listFeatures with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturesRequest()
@@ -3781,11 +3922,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes listFeaturesStream without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturesRequest()
@@ -3803,8 +3945,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Feature()
         ),
       ];
-      client.descriptors.page.listFeatures.createStream =
-        stubPageStreamingCall(expectedResponse);
+      client.descriptors.page.listFeatures.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
       const stream = client.listFeaturesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1beta1.Feature[] = [];
@@ -3829,19 +3972,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           .calledWith(client.innerApiCalls.listFeatures, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listFeatures.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listFeatures
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listFeaturesStream with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturesRequest()
@@ -3876,19 +4021,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           .calledWith(client.innerApiCalls.listFeatures, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listFeatures.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listFeatures
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listFeatures without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturesRequest()
@@ -3906,8 +4053,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Feature()
         ),
       ];
-      client.descriptors.page.listFeatures.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
+      client.descriptors.page.listFeatures.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
       const responses: protos.google.cloud.aiplatform.v1beta1.IFeature[] = [];
       const iterable = client.listFeaturesAsync(request);
       for await (const resource of iterable) {
@@ -3915,25 +4063,26 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listFeatures.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listFeatures
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listFeatures.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listFeatures
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listFeatures with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListFeaturesRequest()
@@ -3941,8 +4090,10 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listFeatures.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
+      client.descriptors.page.listFeatures.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
       const iterable = client.listFeaturesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.aiplatform.v1beta1.IFeature[] = [];
@@ -3951,15 +4102,15 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listFeatures.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listFeatures
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listFeatures.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listFeatures
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -3967,11 +4118,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
 
   describe('searchFeatures', () => {
     it('invokes searchFeatures without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest()
@@ -4007,11 +4159,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes searchFeatures without error using callback', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest()
@@ -4036,8 +4189,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Feature()
         ),
       ];
-      client.innerApiCalls.searchFeatures =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.searchFeatures = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.searchFeatures(
           request,
@@ -4063,11 +4217,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes searchFeatures with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest()
@@ -4095,11 +4250,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
     });
 
     it('invokes searchFeaturesStream without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest()
@@ -4117,8 +4273,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Feature()
         ),
       ];
-      client.descriptors.page.searchFeatures.createStream =
-        stubPageStreamingCall(expectedResponse);
+      client.descriptors.page.searchFeatures.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
       const stream = client.searchFeaturesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1beta1.Feature[] = [];
@@ -4143,19 +4300,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           .calledWith(client.innerApiCalls.searchFeatures, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchFeatures.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchFeatures
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes searchFeaturesStream with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest()
@@ -4163,8 +4322,10 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       request.location = '';
       const expectedHeaderRequestParams = 'location=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchFeatures.createStream =
-        stubPageStreamingCall(undefined, expectedError);
+      client.descriptors.page.searchFeatures.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
       const stream = client.searchFeaturesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1beta1.Feature[] = [];
@@ -4188,19 +4349,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           .calledWith(client.innerApiCalls.searchFeatures, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchFeatures.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchFeatures
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with searchFeatures without error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest()
@@ -4218,8 +4381,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Feature()
         ),
       ];
-      client.descriptors.page.searchFeatures.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
+      client.descriptors.page.searchFeatures.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
       const responses: protos.google.cloud.aiplatform.v1beta1.IFeature[] = [];
       const iterable = client.searchFeaturesAsync(request);
       for await (const resource of iterable) {
@@ -4227,25 +4391,26 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchFeatures.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.searchFeatures
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchFeatures.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchFeatures
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with searchFeatures with error', async () => {
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SearchFeaturesRequest()
@@ -4253,8 +4418,10 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       request.location = '';
       const expectedHeaderRequestParams = 'location=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchFeatures.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
+      client.descriptors.page.searchFeatures.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
       const iterable = client.searchFeaturesAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.aiplatform.v1beta1.IFeature[] = [];
@@ -4263,15 +4430,15 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchFeatures.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.searchFeatures
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchFeatures.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchFeatures
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -4287,11 +4454,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         data_item: 'dataItemValue',
         annotation: 'annotationValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.annotationPathTemplate.render = sinon
         .stub()
@@ -4375,11 +4543,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         dataset: 'datasetValue',
         annotation_spec: 'annotationSpecValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
@@ -4434,8 +4603,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result =
-          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
+        const result = client.matchAnnotationSpecFromAnnotationSpecName(
+          fakePath
+        );
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -4453,11 +4623,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         artifact: 'artifactValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.artifactPathTemplate.render = sinon
         .stub()
@@ -4529,11 +4700,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         batch_prediction_job: 'batchPredictionJobValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
         .stub()
@@ -4550,10 +4722,8 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -4563,10 +4733,8 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4576,24 +4744,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result =
-          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
+        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4608,11 +4773,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         context: 'contextValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.contextPathTemplate.render = sinon
         .stub()
@@ -4684,11 +4850,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         custom_job: 'customJobValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.customJobPathTemplate.render = sinon
         .stub()
@@ -4750,11 +4917,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         dataset: 'datasetValue',
         data_item: 'dataItemValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
@@ -4826,11 +4994,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         data_labeling_job: 'dataLabelingJobValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
         .stub()
@@ -4874,8 +5043,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result =
-          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
+        const result = client.matchDataLabelingJobFromDataLabelingJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -4892,11 +5062,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         dataset: 'datasetValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -4957,11 +5128,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         endpoint: 'endpointValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.endpointPathTemplate.render = sinon
         .stub()
@@ -5023,11 +5195,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         featurestore: 'featurestoreValue',
         entity_type: 'entityTypeValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -5100,11 +5273,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         execution: 'executionValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.executionPathTemplate.render = sinon
         .stub()
@@ -5178,11 +5352,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         entity_type: 'entityTypeValue',
         feature: 'featureValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.featurePathTemplate.render = sinon
         .stub()
@@ -5265,11 +5440,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         featurestore: 'featurestoreValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.featurestorePathTemplate.render = sinon
         .stub()
@@ -5330,11 +5506,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
         .stub()
@@ -5351,54 +5528,47 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchProjectFromHyperparameterTuningJobName(fakePath);
+        const result = client.matchProjectFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchLocationFromHyperparameterTuningJobName(fakePath);
+        const result = client.matchLocationFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-            fakePath
-          );
+        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5412,11 +5582,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         index: 'indexValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.indexPathTemplate.render = sinon
         .stub()
@@ -5477,11 +5648,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         index_endpoint: 'indexEndpointValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.indexEndpointPathTemplate.render = sinon
         .stub()
@@ -5541,11 +5713,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -5593,11 +5766,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         metadata_schema: 'metadataSchemaValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.metadataSchemaPathTemplate.render = sinon
         .stub()
@@ -5642,8 +5816,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       });
 
       it('matchMetadataStoreFromMetadataSchemaName', () => {
-        const result =
-          client.matchMetadataStoreFromMetadataSchemaName(fakePath);
+        const result = client.matchMetadataStoreFromMetadataSchemaName(
+          fakePath
+        );
         assert.strictEqual(result, 'metadataStoreValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -5653,8 +5828,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       });
 
       it('matchMetadataSchemaFromMetadataSchemaName', () => {
-        const result =
-          client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
+        const result = client.matchMetadataSchemaFromMetadataSchemaName(
+          fakePath
+        );
         assert.strictEqual(result, 'metadataSchemaValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -5671,11 +5847,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         metadata_store: 'metadataStoreValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.metadataStorePathTemplate.render = sinon
         .stub()
@@ -5736,11 +5913,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         model: 'modelValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -5801,16 +5979,19 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
       it('modelDeploymentMonitoringJobPath', () => {
         const result = client.modelDeploymentMonitoringJobPath(
@@ -5820,54 +6001,47 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
+        const result = client.matchProjectFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
+        const result = client.matchLocationFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-            fakePath
-          );
+        const result = client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -5882,11 +6056,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         model: 'modelValue',
         evaluation: 'evaluationValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
@@ -5960,11 +6135,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         evaluation: 'evaluationValue',
         slice: 'sliceValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
         .stub()
@@ -5983,38 +6159,34 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchProjectFromModelEvaluationSliceName(fakePath);
+        const result = client.matchProjectFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchLocationFromModelEvaluationSliceName(fakePath);
+        const result = client.matchLocationFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6024,24 +6196,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
+        const result = client.matchEvaluationFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6051,10 +6220,8 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6068,11 +6235,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         pipeline_job: 'pipelineJobValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.pipelineJobPathTemplate.render = sinon
         .stub()
@@ -6131,11 +6299,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -6172,11 +6341,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         specialist_pool: 'specialistPoolValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.specialistPoolPathTemplate.render = sinon
         .stub()
@@ -6220,8 +6390,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result =
-          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
+        const result = client.matchSpecialistPoolFromSpecialistPoolName(
+          fakePath
+        );
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -6238,11 +6409,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         study: 'studyValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.studyPathTemplate.render = sinon
         .stub()
@@ -6303,11 +6475,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         tensorboard: 'tensorboardValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardPathTemplate.render = sinon
         .stub()
@@ -6369,11 +6542,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         tensorboard: 'tensorboardValue',
         experiment: 'experimentValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
         .stub()
@@ -6391,66 +6565,60 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardExperimentName', () => {
-        const result =
-          client.matchProjectFromTensorboardExperimentName(fakePath);
+        const result = client.matchProjectFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardExperimentName', () => {
-        const result =
-          client.matchLocationFromTensorboardExperimentName(fakePath);
+        const result = client.matchLocationFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardExperimentName', () => {
-        const result =
-          client.matchTensorboardFromTensorboardExperimentName(fakePath);
+        const result = client.matchTensorboardFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardExperimentName', () => {
-        const result =
-          client.matchExperimentFromTensorboardExperimentName(fakePath);
+        const result = client.matchExperimentFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6466,11 +6634,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         experiment: 'experimentValue',
         run: 'runValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardRunPathTemplate.render = sinon
         .stub()
@@ -6556,11 +6725,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         run: 'runValue',
         time_series: 'timeSeriesValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
         .stub()
@@ -6580,66 +6750,60 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchProjectFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchProjectFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchLocationFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchLocationFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchTensorboardFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchExperimentFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6649,24 +6813,21 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         const result = client.matchRunFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'runValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTimeSeriesFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchTimeSeriesFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'timeSeriesValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -6680,11 +6841,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         location: 'locationValue',
         training_pipeline: 'trainingPipelineValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.trainingPipelinePathTemplate.render = sinon
         .stub()
@@ -6701,10 +6863,8 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.trainingPipelinePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.trainingPipelinePathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -6731,8 +6891,9 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result =
-          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
+        const result = client.matchTrainingPipelineFromTrainingPipelineName(
+          fakePath
+        );
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
@@ -6750,11 +6911,12 @@ describe('v1beta1.FeaturestoreServiceClient', () => {
         study: 'studyValue',
         trial: 'trialValue',
       };
-      const client =
-        new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient({
+      const client = new featurestoreserviceModule.v1beta1.FeaturestoreServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.trialPathTemplate.render = sinon
         .stub()

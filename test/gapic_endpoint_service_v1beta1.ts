@@ -28,9 +28,10 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -280,8 +281,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Endpoint()
       );
-      client.innerApiCalls.getEndpoint =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.getEndpoint = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.getEndpoint(
           request,
@@ -393,8 +395,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.Endpoint()
       );
-      client.innerApiCalls.updateEndpoint =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.updateEndpoint = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.updateEndpoint(
           request,
@@ -474,8 +477,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createEndpoint =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.createEndpoint = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.createEndpoint(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -507,8 +511,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createEndpoint =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.createEndpoint = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.createEndpoint(
           request,
@@ -668,8 +673,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteEndpoint =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.deleteEndpoint = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.deleteEndpoint(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -701,8 +707,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteEndpoint =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.deleteEndpoint = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.deleteEndpoint(
           request,
@@ -894,8 +901,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deployModel =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.deployModel = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.deployModel(
           request,
@@ -1052,8 +1060,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.undeployModel =
-        stubLongRunningCall(expectedResponse);
+      client.innerApiCalls.undeployModel = stubLongRunningCall(
+        expectedResponse
+      );
       const [operation] = await client.undeployModel(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1085,8 +1094,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.undeployModel =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.undeployModel = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.undeployModel(
           request,
@@ -1293,8 +1303,9 @@ describe('v1beta1.EndpointServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Endpoint()
         ),
       ];
-      client.innerApiCalls.listEndpoints =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.listEndpoints = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.listEndpoints(
           request,
@@ -1372,8 +1383,9 @@ describe('v1beta1.EndpointServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Endpoint()
         ),
       ];
-      client.descriptors.page.listEndpoints.createStream =
-        stubPageStreamingCall(expectedResponse);
+      client.descriptors.page.listEndpoints.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
       const stream = client.listEndpointsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1beta1.Endpoint[] = [];
@@ -1398,9 +1410,10 @@ describe('v1beta1.EndpointServiceClient', () => {
           .calledWith(client.innerApiCalls.listEndpoints, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEndpoints.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listEndpoints
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -1417,8 +1430,10 @@ describe('v1beta1.EndpointServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEndpoints.createStream =
-        stubPageStreamingCall(undefined, expectedError);
+      client.descriptors.page.listEndpoints.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
       const stream = client.listEndpointsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.aiplatform.v1beta1.Endpoint[] = [];
@@ -1442,9 +1457,10 @@ describe('v1beta1.EndpointServiceClient', () => {
           .calledWith(client.innerApiCalls.listEndpoints, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEndpoints.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listEndpoints
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -1471,8 +1487,9 @@ describe('v1beta1.EndpointServiceClient', () => {
           new protos.google.cloud.aiplatform.v1beta1.Endpoint()
         ),
       ];
-      client.descriptors.page.listEndpoints.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
+      client.descriptors.page.listEndpoints.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
       const responses: protos.google.cloud.aiplatform.v1beta1.IEndpoint[] = [];
       const iterable = client.listEndpointsAsync(request);
       for await (const resource of iterable) {
@@ -1480,15 +1497,15 @@ describe('v1beta1.EndpointServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listEndpoints
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listEndpoints
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -1505,26 +1522,27 @@ describe('v1beta1.EndpointServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEndpoints.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
+      client.descriptors.page.listEndpoints.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
       const iterable = client.listEndpointsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1beta1.IEndpoint[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1beta1.IEndpoint[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.listEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.listEndpoints
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.listEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.listEndpoints
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -1685,8 +1703,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result =
-          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
+        const result = client.matchAnnotationSpecFromAnnotationSpecName(
+          fakePath
+        );
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -1799,10 +1818,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1812,10 +1829,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1825,24 +1840,21 @@ describe('v1beta1.EndpointServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result =
-          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
+        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2119,8 +2131,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result =
-          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
+        const result = client.matchDataLabelingJobFromDataLabelingJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -2589,54 +2602,47 @@ describe('v1beta1.EndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchProjectFromHyperparameterTuningJobName(fakePath);
+        const result = client.matchProjectFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchLocationFromHyperparameterTuningJobName(fakePath);
+        const result = client.matchLocationFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-            fakePath
-          );
+        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2876,8 +2882,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       });
 
       it('matchMetadataStoreFromMetadataSchemaName', () => {
-        const result =
-          client.matchMetadataStoreFromMetadataSchemaName(fakePath);
+        const result = client.matchMetadataStoreFromMetadataSchemaName(
+          fakePath
+        );
         assert.strictEqual(result, 'metadataStoreValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -2887,8 +2894,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       });
 
       it('matchMetadataSchemaFromMetadataSchemaName', () => {
-        const result =
-          client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
+        const result = client.matchMetadataSchemaFromMetadataSchemaName(
+          fakePath
+        );
         assert.strictEqual(result, 'metadataSchemaValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -3038,10 +3046,12 @@ describe('v1beta1.EndpointServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
       it('modelDeploymentMonitoringJobPath', () => {
         const result = client.modelDeploymentMonitoringJobPath(
@@ -3051,54 +3061,47 @@ describe('v1beta1.EndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
+        const result = client.matchProjectFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
+        const result = client.matchLocationFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-            fakePath
-          );
+        const result = client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3212,38 +3215,34 @@ describe('v1beta1.EndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchProjectFromModelEvaluationSliceName(fakePath);
+        const result = client.matchProjectFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchLocationFromModelEvaluationSliceName(fakePath);
+        const result = client.matchLocationFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3253,24 +3252,21 @@ describe('v1beta1.EndpointServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
+        const result = client.matchEvaluationFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3280,10 +3276,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3408,8 +3402,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result =
-          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
+        const result = client.matchSpecialistPoolFromSpecialistPoolName(
+          fakePath
+        );
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -3576,66 +3571,60 @@ describe('v1beta1.EndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardExperimentName', () => {
-        const result =
-          client.matchProjectFromTensorboardExperimentName(fakePath);
+        const result = client.matchProjectFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardExperimentName', () => {
-        const result =
-          client.matchLocationFromTensorboardExperimentName(fakePath);
+        const result = client.matchLocationFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardExperimentName', () => {
-        const result =
-          client.matchTensorboardFromTensorboardExperimentName(fakePath);
+        const result = client.matchTensorboardFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardExperimentName', () => {
-        const result =
-          client.matchExperimentFromTensorboardExperimentName(fakePath);
+        const result = client.matchExperimentFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3763,66 +3752,60 @@ describe('v1beta1.EndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchProjectFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchProjectFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchLocationFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchLocationFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchTensorboardFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchExperimentFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3832,24 +3815,21 @@ describe('v1beta1.EndpointServiceClient', () => {
         const result = client.matchRunFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'runValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTimeSeriesFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchTimeSeriesFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'timeSeriesValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3883,10 +3863,8 @@ describe('v1beta1.EndpointServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.trainingPipelinePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.trainingPipelinePathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -3913,8 +3891,9 @@ describe('v1beta1.EndpointServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result =
-          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
+        const result = client.matchTrainingPipelineFromTrainingPipelineName(
+          fakePath
+        );
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)

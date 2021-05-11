@@ -26,9 +26,10 @@ import * as predictionserviceModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -185,8 +186,9 @@ describe('v1.PredictionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.PredictResponse()
       );
-      client.innerApiCalls.predict =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.predict = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.predict(
           request,
@@ -395,8 +397,9 @@ describe('v1.PredictionServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result =
-          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
+        const result = client.matchAnnotationSpecFromAnnotationSpecName(
+          fakePath
+        );
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -433,10 +436,8 @@ describe('v1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -446,10 +447,8 @@ describe('v1.PredictionServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -459,24 +458,21 @@ describe('v1.PredictionServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result =
-          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
+        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -677,8 +673,9 @@ describe('v1.PredictionServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result =
-          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
+        const result = client.matchDataLabelingJobFromDataLabelingJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -843,54 +840,47 @@ describe('v1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchProjectFromHyperparameterTuningJobName(fakePath);
+        const result = client.matchProjectFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchLocationFromHyperparameterTuningJobName(fakePath);
+        const result = client.matchLocationFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-            fakePath
-          );
+        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1068,38 +1058,34 @@ describe('v1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchProjectFromModelEvaluationSliceName(fakePath);
+        const result = client.matchProjectFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchLocationFromModelEvaluationSliceName(fakePath);
+        const result = client.matchLocationFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1109,24 +1095,21 @@ describe('v1.PredictionServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
+        const result = client.matchEvaluationFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1136,10 +1119,8 @@ describe('v1.PredictionServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1200,8 +1181,9 @@ describe('v1.PredictionServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result =
-          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
+        const result = client.matchSpecialistPoolFromSpecialistPoolName(
+          fakePath
+        );
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -1238,10 +1220,8 @@ describe('v1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.trainingPipelinePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.trainingPipelinePathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1268,8 +1248,9 @@ describe('v1.PredictionServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result =
-          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
+        const result = client.matchTrainingPipelineFromTrainingPipelineName(
+          fakePath
+        );
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)

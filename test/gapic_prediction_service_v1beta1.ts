@@ -26,9 +26,10 @@ import * as predictionserviceModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -69,8 +70,7 @@ describe('v1beta1.PredictionServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client =
-      new predictionserviceModule.v1beta1.PredictionServiceClient();
+    const client = new predictionserviceModule.v1beta1.PredictionServiceClient();
     assert(client);
   });
 
@@ -135,11 +135,12 @@ describe('v1beta1.PredictionServiceClient', () => {
 
   describe('predict', () => {
     it('invokes predict without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.PredictRequest()
@@ -167,11 +168,12 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes predict without error using callback', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.PredictRequest()
@@ -188,8 +190,9 @@ describe('v1beta1.PredictionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.PredictResponse()
       );
-      client.innerApiCalls.predict =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.predict = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.predict(
           request,
@@ -215,11 +218,12 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes predict with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.PredictRequest()
@@ -246,11 +250,12 @@ describe('v1beta1.PredictionServiceClient', () => {
 
   describe('explain', () => {
     it('invokes explain without error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExplainRequest()
@@ -278,11 +283,12 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes explain without error using callback', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExplainRequest()
@@ -299,8 +305,9 @@ describe('v1beta1.PredictionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExplainResponse()
       );
-      client.innerApiCalls.explain =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.explain = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.explain(
           request,
@@ -326,11 +333,12 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes explain with error', async () => {
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExplainRequest()
@@ -365,11 +373,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         data_item: 'dataItemValue',
         annotation: 'annotationValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.annotationPathTemplate.render = sinon
         .stub()
@@ -453,11 +462,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         dataset: 'datasetValue',
         annotation_spec: 'annotationSpecValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
@@ -512,8 +522,9 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result =
-          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
+        const result = client.matchAnnotationSpecFromAnnotationSpecName(
+          fakePath
+        );
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -531,11 +542,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         artifact: 'artifactValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.artifactPathTemplate.render = sinon
         .stub()
@@ -607,11 +619,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         batch_prediction_job: 'batchPredictionJobValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.batchPredictionJobPathTemplate.render = sinon
         .stub()
@@ -628,10 +641,8 @@ describe('v1beta1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -641,10 +652,8 @@ describe('v1beta1.PredictionServiceClient', () => {
         const result = client.matchProjectFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -654,24 +663,21 @@ describe('v1beta1.PredictionServiceClient', () => {
         const result = client.matchLocationFromBatchPredictionJobName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchBatchPredictionJobFromBatchPredictionJobName', () => {
-        const result =
-          client.matchBatchPredictionJobFromBatchPredictionJobName(fakePath);
+        const result = client.matchBatchPredictionJobFromBatchPredictionJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'batchPredictionJobValue');
         assert(
-          (
-            client.pathTemplates.batchPredictionJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.batchPredictionJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -686,11 +692,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         context: 'contextValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.contextPathTemplate.render = sinon
         .stub()
@@ -762,11 +769,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         custom_job: 'customJobValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.customJobPathTemplate.render = sinon
         .stub()
@@ -828,11 +836,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         dataset: 'datasetValue',
         data_item: 'dataItemValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.dataItemPathTemplate.render = sinon
         .stub()
@@ -904,11 +913,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         data_labeling_job: 'dataLabelingJobValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.dataLabelingJobPathTemplate.render = sinon
         .stub()
@@ -952,8 +962,9 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
 
       it('matchDataLabelingJobFromDataLabelingJobName', () => {
-        const result =
-          client.matchDataLabelingJobFromDataLabelingJobName(fakePath);
+        const result = client.matchDataLabelingJobFromDataLabelingJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'dataLabelingJobValue');
         assert(
           (client.pathTemplates.dataLabelingJobPathTemplate.match as SinonStub)
@@ -970,11 +981,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         dataset: 'datasetValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -1035,11 +1047,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         endpoint: 'endpointValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.endpointPathTemplate.render = sinon
         .stub()
@@ -1101,11 +1114,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         featurestore: 'featurestoreValue',
         entity_type: 'entityTypeValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -1178,11 +1192,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         execution: 'executionValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.executionPathTemplate.render = sinon
         .stub()
@@ -1256,11 +1271,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         entity_type: 'entityTypeValue',
         feature: 'featureValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.featurePathTemplate.render = sinon
         .stub()
@@ -1343,11 +1359,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         featurestore: 'featurestoreValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.featurestorePathTemplate.render = sinon
         .stub()
@@ -1408,11 +1425,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.hyperparameterTuningJobPathTemplate.render = sinon
         .stub()
@@ -1429,54 +1447,47 @@ describe('v1beta1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchProjectFromHyperparameterTuningJobName(fakePath);
+        const result = client.matchProjectFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchLocationFromHyperparameterTuningJobName(fakePath);
+        const result = client.matchLocationFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchHyperparameterTuningJobFromHyperparameterTuningJobName', () => {
-        const result =
-          client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
-            fakePath
-          );
+        const result = client.matchHyperparameterTuningJobFromHyperparameterTuningJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'hyperparameterTuningJobValue');
         assert(
-          (
-            client.pathTemplates.hyperparameterTuningJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.hyperparameterTuningJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1490,11 +1501,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         index: 'indexValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.indexPathTemplate.render = sinon
         .stub()
@@ -1555,11 +1567,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         index_endpoint: 'indexEndpointValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.indexEndpointPathTemplate.render = sinon
         .stub()
@@ -1621,11 +1634,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         metadata_store: 'metadataStoreValue',
         metadata_schema: 'metadataSchemaValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.metadataSchemaPathTemplate.render = sinon
         .stub()
@@ -1670,8 +1684,9 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
 
       it('matchMetadataStoreFromMetadataSchemaName', () => {
-        const result =
-          client.matchMetadataStoreFromMetadataSchemaName(fakePath);
+        const result = client.matchMetadataStoreFromMetadataSchemaName(
+          fakePath
+        );
         assert.strictEqual(result, 'metadataStoreValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -1681,8 +1696,9 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
 
       it('matchMetadataSchemaFromMetadataSchemaName', () => {
-        const result =
-          client.matchMetadataSchemaFromMetadataSchemaName(fakePath);
+        const result = client.matchMetadataSchemaFromMetadataSchemaName(
+          fakePath
+        );
         assert.strictEqual(result, 'metadataSchemaValue');
         assert(
           (client.pathTemplates.metadataSchemaPathTemplate.match as SinonStub)
@@ -1699,11 +1715,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         metadata_store: 'metadataStoreValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.metadataStorePathTemplate.render = sinon
         .stub()
@@ -1764,11 +1781,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         model: 'modelValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -1829,16 +1847,19 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
-        sinon.stub().returns(fakePath);
-      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
-        sinon.stub().returns(expectedParameters);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
 
       it('modelDeploymentMonitoringJobPath', () => {
         const result = client.modelDeploymentMonitoringJobPath(
@@ -1848,54 +1869,47 @@ describe('v1beta1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
+        const result = client.matchProjectFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
+        const result = client.matchLocationFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', () => {
-        const result =
-          client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
-            fakePath
-          );
+        const result = client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+          fakePath
+        );
         assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
         assert(
-          (
-            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1910,11 +1924,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         model: 'modelValue',
         evaluation: 'evaluationValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
@@ -1988,11 +2003,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         evaluation: 'evaluationValue',
         slice: 'sliceValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.modelEvaluationSlicePathTemplate.render = sinon
         .stub()
@@ -2011,38 +2027,34 @@ describe('v1beta1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchProjectFromModelEvaluationSliceName(fakePath);
+        const result = client.matchProjectFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchLocationFromModelEvaluationSliceName(fakePath);
+        const result = client.matchLocationFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2052,24 +2064,21 @@ describe('v1beta1.PredictionServiceClient', () => {
         const result = client.matchModelFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'modelValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEvaluationFromModelEvaluationSliceName', () => {
-        const result =
-          client.matchEvaluationFromModelEvaluationSliceName(fakePath);
+        const result = client.matchEvaluationFromModelEvaluationSliceName(
+          fakePath
+        );
         assert.strictEqual(result, 'evaluationValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2079,10 +2088,8 @@ describe('v1beta1.PredictionServiceClient', () => {
         const result = client.matchSliceFromModelEvaluationSliceName(fakePath);
         assert.strictEqual(result, 'sliceValue');
         assert(
-          (
-            client.pathTemplates.modelEvaluationSlicePathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.modelEvaluationSlicePathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2096,11 +2103,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         pipeline_job: 'pipelineJobValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.pipelineJobPathTemplate.render = sinon
         .stub()
@@ -2161,11 +2169,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         specialist_pool: 'specialistPoolValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.specialistPoolPathTemplate.render = sinon
         .stub()
@@ -2209,8 +2218,9 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
 
       it('matchSpecialistPoolFromSpecialistPoolName', () => {
-        const result =
-          client.matchSpecialistPoolFromSpecialistPoolName(fakePath);
+        const result = client.matchSpecialistPoolFromSpecialistPoolName(
+          fakePath
+        );
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
@@ -2227,11 +2237,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         study: 'studyValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.studyPathTemplate.render = sinon
         .stub()
@@ -2292,11 +2303,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         tensorboard: 'tensorboardValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardPathTemplate.render = sinon
         .stub()
@@ -2358,11 +2370,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         tensorboard: 'tensorboardValue',
         experiment: 'experimentValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardExperimentPathTemplate.render = sinon
         .stub()
@@ -2380,66 +2393,60 @@ describe('v1beta1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardExperimentName', () => {
-        const result =
-          client.matchProjectFromTensorboardExperimentName(fakePath);
+        const result = client.matchProjectFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardExperimentName', () => {
-        const result =
-          client.matchLocationFromTensorboardExperimentName(fakePath);
+        const result = client.matchLocationFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardExperimentName', () => {
-        const result =
-          client.matchTensorboardFromTensorboardExperimentName(fakePath);
+        const result = client.matchTensorboardFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardExperimentName', () => {
-        const result =
-          client.matchExperimentFromTensorboardExperimentName(fakePath);
+        const result = client.matchExperimentFromTensorboardExperimentName(
+          fakePath
+        );
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (
-            client.pathTemplates.tensorboardExperimentPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardExperimentPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2455,11 +2462,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         experiment: 'experimentValue',
         run: 'runValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardRunPathTemplate.render = sinon
         .stub()
@@ -2545,11 +2553,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         run: 'runValue',
         time_series: 'timeSeriesValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.tensorboardTimeSeriesPathTemplate.render = sinon
         .stub()
@@ -2569,66 +2578,60 @@ describe('v1beta1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchProjectFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchProjectFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchLocationFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchLocationFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTensorboardFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchTensorboardFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchTensorboardFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'tensorboardValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchExperimentFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchExperimentFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchExperimentFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'experimentValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2638,24 +2641,21 @@ describe('v1beta1.PredictionServiceClient', () => {
         const result = client.matchRunFromTensorboardTimeSeriesName(fakePath);
         assert.strictEqual(result, 'runValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTimeSeriesFromTensorboardTimeSeriesName', () => {
-        const result =
-          client.matchTimeSeriesFromTensorboardTimeSeriesName(fakePath);
+        const result = client.matchTimeSeriesFromTensorboardTimeSeriesName(
+          fakePath
+        );
         assert.strictEqual(result, 'timeSeriesValue');
         assert(
-          (
-            client.pathTemplates.tensorboardTimeSeriesPathTemplate
-              .match as SinonStub
-          )
+          (client.pathTemplates.tensorboardTimeSeriesPathTemplate
+            .match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2669,11 +2669,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         training_pipeline: 'trainingPipelineValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.trainingPipelinePathTemplate.render = sinon
         .stub()
@@ -2690,10 +2691,8 @@ describe('v1beta1.PredictionServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (
-            client.pathTemplates.trainingPipelinePathTemplate
-              .render as SinonStub
-          )
+          (client.pathTemplates.trainingPipelinePathTemplate
+            .render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2720,8 +2719,9 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
 
       it('matchTrainingPipelineFromTrainingPipelineName', () => {
-        const result =
-          client.matchTrainingPipelineFromTrainingPipelineName(fakePath);
+        const result = client.matchTrainingPipelineFromTrainingPipelineName(
+          fakePath
+        );
         assert.strictEqual(result, 'trainingPipelineValue');
         assert(
           (client.pathTemplates.trainingPipelinePathTemplate.match as SinonStub)
@@ -2739,11 +2739,12 @@ describe('v1beta1.PredictionServiceClient', () => {
         study: 'studyValue',
         trial: 'trialValue',
       };
-      const client =
-        new predictionserviceModule.v1beta1.PredictionServiceClient({
+      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       client.pathTemplates.trialPathTemplate.render = sinon
         .stub()

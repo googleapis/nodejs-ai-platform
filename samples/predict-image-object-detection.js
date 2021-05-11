@@ -28,8 +28,11 @@ async function main(filename, endpointId, project, location = 'us-central1') {
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
   const aiplatform = require('@google-cloud/aiplatform');
-  const {instance, params, prediction} =
-    aiplatform.protos.google.cloud.aiplatform.v1.schema.predict;
+  const {
+    instance,
+    params,
+    prediction,
+  } = aiplatform.protos.google.cloud.aiplatform.v1.schema.predict;
 
   // Imports the Google Cloud Prediction Service Client library
   const {PredictionServiceClient} = aiplatform.v1;
@@ -74,10 +77,9 @@ async function main(filename, endpointId, project, location = 'us-central1') {
     const predictions = response.predictions;
     console.log('Predictions :');
     for (const predictionResultVal of predictions) {
-      const predictionResultObj =
-        prediction.ImageObjectDetectionPredictionResult.fromValue(
-          predictionResultVal
-        );
+      const predictionResultObj = prediction.ImageObjectDetectionPredictionResult.fromValue(
+        predictionResultVal
+      );
       for (const [i, label] of predictionResultObj.displayNames.entries()) {
         console.log(`\tDisplay name: ${label}`);
         console.log(`\tConfidences: ${predictionResultObj.confidences[i]}`);
