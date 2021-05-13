@@ -59,10 +59,12 @@ machine learning development lifecycle.
   * [Get-model-evaluation-text-classification](#get-model-evaluation-text-classification)
   * [Get-model-evaluation-text-entity-extraction](#get-model-evaluation-text-entity-extraction)
   * [Get-model-evaluation-text-sentiment-analysis](#get-model-evaluation-text-sentiment-analysis)
+  * [Get-model-evaluation-video-action-recognition](#get-model-evaluation-video-action-recognition)
   * [Get-model-evaluation-video-classification](#get-model-evaluation-video-classification)
   * [Get-model-evaluation-video-object-tracking](#get-model-evaluation-video-object-tracking)
   * [Get-model-evaluation](#get-model-evaluation)
   * [Get-model](#get-model)
+  * [Get-training-pipeline](#get-training-pipeline)
   * [Import-data-image-classification](#import-data-image-classification)
   * [Import-data-image-object-detection](#import-data-image-object-detection)
   * [Import-data-text-classification-single-label](#import-data-text-classification-single-label)
@@ -849,6 +851,23 @@ __Usage:__
 
 
 
+### Get-model-evaluation-video-action-recognition
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-video-action-recognition.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-video-action-recognition.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-video-action-recognition.js`
+
+
+-----
+
+
+
+
 ### Get-model-evaluation-video-classification
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-video-classification.js).
@@ -910,6 +929,23 @@ __Usage:__
 
 
 `node samples/get-model.js`
+
+
+-----
+
+
+
+
+### Get-training-pipeline
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-training-pipeline.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-training-pipeline.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-training-pipeline.js`
 
 
 -----
