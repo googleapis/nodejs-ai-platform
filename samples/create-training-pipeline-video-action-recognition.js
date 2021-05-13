@@ -56,7 +56,7 @@ async function main(
     const trainingTaskInputObj = new definition.AutoMlVideoActionRecognitionInputs(
       { 
         // modelType can be either 'CLOUD' or 'MOBILE_VERSATILE_1'
-        modelType = 'CLOUD'
+        modelType: 'CLOUD'
       }
     );
     const trainingTaskInputs = trainingTaskInputObj.toValue();
