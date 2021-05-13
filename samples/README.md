@@ -37,6 +37,7 @@ machine learning development lifecycle.
   * [Create-training-pipeline-text-classification](#create-training-pipeline-text-classification)
   * [Create-training-pipeline-text-entity-extraction](#create-training-pipeline-text-entity-extraction)
   * [Create-training-pipeline-text-sentiment-analysis](#create-training-pipeline-text-sentiment-analysis)
+  * [Create-training-pipeline-video-action-recognition](#create-training-pipeline-video-action-recognition)
   * [Create-training-pipeline-video-classification](#create-training-pipeline-video-classification)
   * [Create-training-pipeline-video-object-tracking](#create-training-pipeline-video-object-tracking)
   * [Delete-batch-prediction-job](#delete-batch-prediction-job)
@@ -467,6 +468,23 @@ __Usage:__
 
 
 `node samples/create-training-pipeline-text-sentiment-analysis.js`
+
+
+-----
+
+
+
+
+### Create-training-pipeline-video-action-recognition
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-video-action-recognition.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-video-action-recognition.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-training-pipeline-video-action-recognition.js`
 
 
 -----
