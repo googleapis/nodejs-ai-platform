@@ -39,7 +39,6 @@ const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
 describe('AI platform import data video action recognition', () => {
-
   before('should create the new dataset', async () => {
     const parent = `projects/${project}/locations/${location}`;
     const [operation] = await datasetServiceClient.createDataset({
@@ -47,8 +46,8 @@ describe('AI platform import data video action recognition', () => {
       dataset: {
         displayName: datasetDisplayName,
         metadataSchemaUri:
-        'gs://google-cloud-aiplatform/schema/dataset/metadata/video_1.0.0.yaml',
-      }
+          'gs://google-cloud-aiplatform/schema/dataset/metadata/video_1.0.0.yaml',
+      },
     });
     const [response] = await operation.promise();
     const datasetName = response.name;
@@ -63,11 +62,14 @@ describe('AI platform import data video action recognition', () => {
   });
 
   after('should cancel the import job and delete the dataset', async () => {
-    const datasetName = datasetServiceClient.datasetPath(project, location, datasetId);
+    const datasetName = datasetServiceClient.datasetPath(
+      project,
+      location,
+      datasetId
+    );
     const [operation] = await datasetServiceClient.deleteDataset({
-      name: datasetName
+      name: datasetName,
     });
     await operation.promise();
   });
-  
 });
