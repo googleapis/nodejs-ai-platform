@@ -52,6 +52,7 @@ machine learning development lifecycle.
   * [Export-model](#export-model)
   * [Get-batch-prediction-job](#get-batch-prediction-job)
   * [Get-custom-job](#get-custom-job)
+  * [Get-hyperparameter-tuning-job](#get-hyperparameter-tuning-job)
   * [Get-model-evaluation-image-classification](#get-model-evaluation-image-classification)
   * [Get-model-evaluation-image-object-detection](#get-model-evaluation-image-object-detection)
   * [Get-model-evaluation-slice](#get-model-evaluation-slice)
@@ -726,6 +727,23 @@ __Usage:__
 
 
 `node samples/get-custom-job.js`
+
+
+-----
+
+
+
+
+### Get-hyperparameter-tuning-job
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-hyperparameter-tuning-job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-hyperparameter-tuning-job.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-hyperparameter-tuning-job.js`
 
 
 -----
