@@ -16,24 +16,58 @@
 
 'use strict';
 
-const path = require('path');
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
+const {after, before, describe, it} = require('mocha');
 
+const uuid = require('uuid').v4;
 const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-const cwd = path.join(__dirname, '..');
 
-const datasetId = process.env.TRAINING_PIPELINE_VIDEO_ACTION_DATASET_ID;
+const aiplatform = require('@google-cloud/aiplatform');
+const clientOptions = {
+  apiEndpoint: 'us-central1-aiplatform.googleapis.com',
+};
+
+const datasetServiceClient = new aiplatform.v1.DatasetServiceClient(
+  clientOptions
+);
+
+let datasetId = '';
+const datasetDisplayName = `temp_import_data_node_var_${uuid()}`;
 const gcsSourceUri = 'gs://automl-video-demo-data/ucaip-var/swimrun.jsonl';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
 describe('AI platform import data video action recognition', () => {
+
+  before('should create the new dataset', async () => {
+    const parent = `projects/${project}/locations/${location}`;
+    const [operation] = await datasetServiceClient.createDataset({
+      parent,
+      dataset: {
+        displayName: datasetDisplayName,
+        metadataSchemaUri:
+        'gs://google-cloud-aiplatform/schema/dataset/metadata/video_1.0.0.yaml',
+      }
+    });
+    const [response] = await operation.promise();
+    const datasetName = response.name;
+    datasetId = datasetName.split('datasets/')[1];
+  });
+
   it('should import video action recognition data to dataset', async () => {
     const stdout = execSync(
-      `node ./import-data-video-classification.js ${datasetId} ${gcsSourceUri} ${project} ${location}`
+      `node ./import-data-video-action-recognition.js ${datasetId} ${gcsSourceUri} ${project} ${location}`
     );
     assert.match(stdout, /Import data video action recognition response/);
   });
+
+  after('should cancel the import job and delete the dataset', async () => {
+    const datasetName = datasetServiceClient.datasetPath(project, location, datasetId);
+    const [operation] = await datasetServiceClient.deleteDataset({
+      name: datasetName
+    });
+    await operation.promise();
+  });
+  
 });
