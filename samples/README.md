@@ -67,6 +67,7 @@ machine learning development lifecycle.
   * [Import-data-text-classification-single-label](#import-data-text-classification-single-label)
   * [Import-data-text-entity-extraction](#import-data-text-entity-extraction)
   * [Import-data-text-sentiment-analysis](#import-data-text-sentiment-analysis)
+  * [Import-data-video-action-recognition](#import-data-video-action-recognition)
   * [Import-data-video-classification](#import-data-video-classification)
   * [Import-data-video-object-tracking](#import-data-video-object-tracking)
   * [Import-data](#import-data)
@@ -976,6 +977,23 @@ __Usage:__
 
 
 `node samples/import-data-text-sentiment-analysis.js`
+
+
+-----
+
+
+
+
+### Import-data-video-action-recognition
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-video-action-recognition.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-video-action-recognition.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-data-video-action-recognition.js`
 
 
 -----
