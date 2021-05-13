@@ -44,7 +44,7 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
     const name = modelServiceClient.modelEvaluationPath(
       project,
       location,
-      model,
+      modelId,
       evaluationId
     );
     const request = {

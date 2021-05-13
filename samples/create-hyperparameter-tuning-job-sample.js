@@ -36,6 +36,11 @@ function main(
   // Imports the Google Cloud Pipeline Service Client library
   const {JobServiceClient} = require('@google-cloud/aiplatform');
 
+  // Specifies the location of the api endpoint
+  const clientOptions = {
+    apiEndpoint: 'us-central1-aiplatform.googleapis.com',
+  };
+
   // Instantiates a client
   const jobServiceClient = new JobServiceClient(clientOptions);
 
