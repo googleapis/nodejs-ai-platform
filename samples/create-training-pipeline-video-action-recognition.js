@@ -53,12 +53,11 @@ async function main(
     // Configure the parent resource
     const parent = `projects/${project}/locations/${location}`;
     // Values should match the input expected by your model.
-    const trainingTaskInputObj = new definition.AutoMlVideoActionRecognitionInputs(
-      { 
+    const trainingTaskInputObj =
+      new definition.AutoMlVideoActionRecognitionInputs({
         // modelType can be either 'CLOUD' or 'MOBILE_VERSATILE_1'
-        modelType: 'CLOUD'
-      }
-    );
+        modelType: 'CLOUD',
+      });
     const trainingTaskInputs = trainingTaskInputObj.toValue();
 
     const modelToUpload = {displayName: modelDisplayName};
