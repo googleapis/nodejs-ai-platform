@@ -35,9 +35,8 @@ async function main(
   // const project = 'YOUR_PROJECT_ID';
   // const location = 'YOUR_PROJECT_LOCATION';
   const aiplatform = require('@google-cloud/aiplatform');
-  const {
-    definition,
-  } = aiplatform.protos.google.cloud.aiplatform.v1.schema.trainingjob;
+  const {definition} =
+      aiplatform.protos.google.cloud.aiplatform.v1.schema.trainingjob;
 
   // Imports the Google Cloud Pipeline Service Client library
   const {PipelineServiceClient} = aiplatform.v1;
@@ -54,12 +53,11 @@ async function main(
     // Configure the parent resource
     const parent = `projects/${project}/locations/${location}`;
     // Values should match the input expected by your model.
-    const trainingTaskInputObj = new definition.AutoMlVideoActionRecognitionInputs(
-      {
+    const trainingTaskInputObj =
+      new definition.AutoMlVideoActionRecognitionInputs({
         // modelType can be either 'CLOUD' or 'MOBILE_VERSATILE_1'
         modelType: 'CLOUD',
-      }
-    );
+      });
     const trainingTaskInputs = trainingTaskInputObj.toValue();
 
     const modelToUpload = {displayName: modelDisplayName};

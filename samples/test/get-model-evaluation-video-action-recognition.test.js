@@ -16,13 +16,11 @@
 
 'use strict';
 
-const path = require('path');
 const {assert} = require('chai');
 const {describe, it} = require('mocha');
 
 const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-const cwd = path.join(__dirname, '..');
 
 const modelId = '3530998029718913024';
 const evaluationId = '305008923591573504';
