@@ -36,7 +36,7 @@ async function main(
   // const location = 'YOUR_PROJECT_LOCATION';
   const aiplatform = require('@google-cloud/aiplatform');
   const {definition} =
-      aiplatform.protos.google.cloud.aiplatform.v1.schema.trainingjob;
+    aiplatform.protos.google.cloud.aiplatform.v1.schema.trainingjob;
 
   // Imports the Google Cloud Pipeline Service Client library
   const {PipelineServiceClient} = aiplatform.v1;
