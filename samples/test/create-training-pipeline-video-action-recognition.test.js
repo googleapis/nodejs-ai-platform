@@ -32,7 +32,7 @@ const pipelineServiceClient = new aiplatform.v1.PipelineServiceClient(
   clientOptions
 );
 
-const datasetId = process.env.TRAINING_PIPELINE_VIDEO_ACTION_DATASET_ID;
+const datasetId = '6881957627459272704';
 const modelDisplayName = `temp_create_training_pipeline_node_var_model_test_${uuid()}`;
 const trainingPipelineDisplayName = `temp_create_training_pipeline_node_var_test_${uuid()}`;
 const location = 'us-central1';

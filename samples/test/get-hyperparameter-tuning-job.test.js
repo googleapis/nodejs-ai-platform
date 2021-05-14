@@ -22,7 +22,7 @@ const {describe, it} = require('mocha');
 const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const tuningJobId = process.env.GET_HP_TUNING_JOB_ID;
+const tuningJobId = '2216298782247616512';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 

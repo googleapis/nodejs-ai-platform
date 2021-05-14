@@ -24,21 +24,18 @@ const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
-const modelId = process.env.VIDEO_ACTION_MODEL_ID;
-const evaluationId = process.env.VIDEO_ACTION_EVALUATION_ID;
+const modelId = '3530998029718913024';
+const evaluationId = '305008923591573504';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
-describe('AI platform get video classification model evaluation', () => {
+describe('AI platform get video action recognition model evaluation', () => {
   it('should get the evaluation from the specified model', async () => {
     const stdout = execSync(
-      `node ./get-model-evaluation-video-classification.js ${modelId} \
+      `node ./get-model-evaluation-video-action-recognition.js ${modelId} \
                                                              ${evaluationId} \
                                                              ${project} \
-                                                             ${location} `,
-      {
-        cwd,
-      }
+                                                             ${location}`
     );
     assert.match(stdout, /Get model evaluation video classification response/);
   });
