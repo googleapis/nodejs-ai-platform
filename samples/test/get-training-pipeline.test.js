@@ -22,7 +22,7 @@ const {describe, it} = require('mocha');
 const cp = require('child_process');
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
-const trainingPipelineId = process.env.GET_TRAINING_PIPELINE_ID;
+const trainingPipelineId = '1419759782528548864';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 

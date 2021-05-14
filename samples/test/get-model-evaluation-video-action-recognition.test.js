@@ -35,6 +35,9 @@ describe('AI platform get video action recognition model evaluation', () => {
                                                              ${project} \
                                                              ${location}`
     );
-    assert.match(stdout, /Get model evaluation video classification response/);
+    assert.match(
+      stdout,
+      /Get model evaluation video action recognition response/
+    );
   });
 });

@@ -29,8 +29,9 @@ async function main(endpointId, project, location = 'us-central1') {
   // const location = 'YOUR_PROJECT_LOCATION';
 
   // Imports the Google Cloud Endpoint Service Client library
-  const {PredictionServiceClient, helpers} =
-    require('@google-cloud/aiplatform').v1beta1;
+  const {PredictionServiceClient} = require('@google-cloud/aiplatform').v1beta1;
+
+  const {helpers} = require('@google-cloud/aiplatform');
   // Specifies the location of the api endpoint:
   const clientOptions = {
     apiEndpoint: 'us-central1-aiplatform.googleapis.com',
