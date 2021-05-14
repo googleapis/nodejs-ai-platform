@@ -48,6 +48,7 @@ machine learning development lifecycle.
   * [Delete-endpoint](#delete-endpoint)
   * [Delete-export-model](#delete-export-model)
   * [Delete-model](#delete-model)
+  * [Deploy-model-custom-trained-model](#deploy-model-custom-trained-model)
   * [Deploy-model](#deploy-model)
   * [Export-model-tabular-classification](#export-model-tabular-classification)
   * [Export-model](#export-model)
@@ -660,6 +661,23 @@ __Usage:__
 
 
 `node samples/delete-model.js`
+
+
+-----
+
+
+
+
+### Deploy-model-custom-trained-model
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/deploy-model-custom-trained-model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/deploy-model-custom-trained-model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/deploy-model-custom-trained-model.js`
 
 
 -----
