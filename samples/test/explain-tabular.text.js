@@ -25,17 +25,11 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const endpointId = '4966625964059525120';
 const project = process.env.CAIP_PROJECT_ID;
 const location = 'us-central1';
-const instance = {
-  petal_length: '1.4',
-  petal_width: '1.3',
-  sepal_length: '5.1',
-  sepal_width: '2.8',
-};
 
 describe('AI platform explain tabular', () => {
   it('should make predictions and get explainations from tabular model', async () => {
     const stdout = execSync(
-      `node ./explain-tabular.js  "${instance}" ${endpointId} \
+      `node ./explain-tabular.js  ${endpointId} \
                                                  ${project} \
                                                  ${location}`
     );

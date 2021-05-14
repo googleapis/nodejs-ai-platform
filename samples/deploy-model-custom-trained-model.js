@@ -85,6 +85,7 @@ async function main(
 
     console.log('Deploy model response');
     const modelDeployed = result.deployedModel;
+    console.log(`\t\tId : ${modelDeployed.id}`);
     console.log(modelDeployed);
   }
   deployModelCustomTrainedModel();

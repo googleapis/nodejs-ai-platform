@@ -16,7 +16,7 @@
 
 'use strict';
 
-async function main(instance, endpointId, project, location = 'us-central1') {
+async function main(endpointId, project, location = 'us-central1') {
   // [START aiplatform_explain_tabular_sample]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
@@ -29,8 +29,10 @@ async function main(instance, endpointId, project, location = 'us-central1') {
   // const location = 'YOUR_PROJECT_LOCATION';
 
   // Imports the Google Cloud Endpoint Service Client library
-  const {PredictionServiceClient, helpers} =
-    require('@google-cloud/aiplatform').v1beta1;
+  const {
+    PredictionServiceClient,
+    helpers,
+  } = require('@google-cloud/aiplatform').v1beta1;
   // Specifies the location of the api endpoint:
   const clientOptions = {
     apiEndpoint: 'us-central1-aiplatform.googleapis.com',
@@ -48,8 +50,16 @@ async function main(instance, endpointId, project, location = 'us-central1') {
 
   async function explainTabular() {
     // The format of each instance should conform to the deployed model's
-    // prediction input schema.
-    const instances = [helpers.toValue(instance)];
+    // prediction input schema. These instances for demonstration purposes
+    // only.
+    const instances = [
+      helpers.toValue({
+        petal_length: '1.4',
+        petal_width: '1.3',
+        sepal_length: '5.1',
+        sepal_width: '2.8',
+      }),
+    ];
 
     // Tabular models do not have additional parameters
     const parameters = helpers.toValue({});
