@@ -20,6 +20,7 @@ machine learning development lifecycle.
   * [Create-batch-prediction-job-text-classification](#create-batch-prediction-job-text-classification)
   * [Create-batch-prediction-job-text-entity-extraction](#create-batch-prediction-job-text-entity-extraction)
   * [Create-batch-prediction-job-text-sentiment-analysis](#create-batch-prediction-job-text-sentiment-analysis)
+  * [Create-batch-prediction-job-video-action-recognition](#create-batch-prediction-job-video-action-recognition)
   * [Create-batch-prediction-job-video-classification](#create-batch-prediction-job-video-classification)
   * [Create-batch-prediction-job-video-object-tracking](#create-batch-prediction-job-video-object-tracking)
   * [Create-custom-job](#create-custom-job)
@@ -185,6 +186,23 @@ __Usage:__
 
 
 `node samples/create-batch-prediction-job-text-sentiment-analysis.js`
+
+
+-----
+
+
+
+
+### Create-batch-prediction-job-video-action-recognition
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-video-action-recognition.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-video-action-recognition.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-batch-prediction-job-video-action-recognition.js`
 
 
 -----
