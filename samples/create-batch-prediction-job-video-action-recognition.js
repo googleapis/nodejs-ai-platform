@@ -16,7 +16,7 @@
 
 'use strict';
 
-async function main(
+function main(
   batchPredictionDisplayName,
   modelId,
   gcsSourceUri,
