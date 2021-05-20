@@ -42,7 +42,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  A service for managing AI Platform's IndexEndpoints.
+ *  A service for managing Vertex AI's IndexEndpoints.
  * @class
  * @memberof v1beta1
  */
