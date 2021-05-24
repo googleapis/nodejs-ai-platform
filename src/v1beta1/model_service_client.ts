@@ -598,8 +598,7 @@ export class ModelServiceClient {
    *   Required. The Model which replaces the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource.
-   *   For the `FieldMask` definition, see
-   *   [FieldMask](https://tinyurl.com/protobufs/google.protobuf#fieldmask).
+   *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
