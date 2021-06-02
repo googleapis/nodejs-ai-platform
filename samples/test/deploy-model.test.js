@@ -50,7 +50,6 @@ describe('AI platform deploy model', () => {
   });
 
   after('should undeploy the deployed model', async () => {
-
     // If test failed, the attempt to undeploy will fail too.
     // Check to see whether we have a deployedModelId
     if (deployedModelId === undefined) {
