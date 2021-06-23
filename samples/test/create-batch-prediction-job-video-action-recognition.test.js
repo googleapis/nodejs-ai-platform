@@ -56,6 +56,11 @@ describe('AI platform create batch prediction job video action recognition', () 
       .split('\n')[0];
   });
   after('should cancel delete the batch prediction job', async () => {
+    if (!batchPredictionJobId || batchPredictionJobId.length === 0) {
+      console.log('Batch prediction Job ID did not get parsed right');
+      throw new Error('teardown failed due to nonvalid params');
+    }
+
     const name = jobServiceClient.batchPredictionJobPath(
       project,
       location,
