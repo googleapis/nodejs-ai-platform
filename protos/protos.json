@@ -6313,23 +6313,17 @@
                           "options": {
                             "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
                             "(google.api.http).body": "*",
-                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:predictInternal",
-                            "(google.api.http).additional_bindings.body": "*",
-                            "(google.api.method_signature)": "endpoint,parameters,instances"
+                            "(google.api.method_signature)": "endpoint,instances,parameters"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
-                                "body": "*",
-                                "additional_bindings": {
-                                  "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:predictInternal",
-                                  "body": "*"
-                                }
+                                "body": "*"
                               }
                             },
                             {
-                              "(google.api.method_signature)": "endpoint,parameters,instances"
+                              "(google.api.method_signature)": "endpoint,instances,parameters"
                             }
                           ]
                         }
