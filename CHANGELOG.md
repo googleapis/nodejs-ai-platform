@@ -1,5 +1,41 @@
 # Changelog
 
+### [1.9.1](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.9.0...v1.9.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#172](https://www.github.com/googleapis/nodejs-ai-platform/issues/172)) ([d22eceb](https://www.github.com/googleapis/nodejs-ai-platform/commit/d22ecebc4693b63516a69753c19fa7a7a400464f))
+
+## [1.9.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.8.0...v1.9.0) (2021-07-15)
+
+
+### Features
+
+* Adds additional_experiments field to AutoMlTablesInputs ([#170](https://www.github.com/googleapis/nodejs-ai-platform/issues/170)) ([4a0a502](https://www.github.com/googleapis/nodejs-ai-platform/commit/4a0a502bb1a01efb701202098524f0020d1faad4))
+
+## [1.8.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.4...v1.8.0) (2021-07-14)
+
+
+### Features
+
+* Removes AcceleratorType.TPU_V2 and TPU_V3 constants ([#167](https://www.github.com/googleapis/nodejs-ai-platform/issues/167)) ([72d153e](https://www.github.com/googleapis/nodejs-ai-platform/commit/72d153ea7732a0d4b73a4ab8d727679523adf6df))
+
+### [1.7.4](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.3...v1.7.4) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#164](https://www.github.com/googleapis/nodejs-ai-platform/issues/164)) ([1ec11fc](https://www.github.com/googleapis/nodejs-ai-platform/commit/1ec11fc4fac373ee1a28ac10676fbfe9fc5535d1))
+
+### [1.7.3](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.2...v1.7.3) (2021-06-29)
+
+
+### Bug Fixes
+
+* add C#, PHP and Ruby options for all AI Platform protos ([#158](https://www.github.com/googleapis/nodejs-ai-platform/issues/158)) ([da0babf](https://www.github.com/googleapis/nodejs-ai-platform/commit/da0babf54c6b074b8dc3d0354f8a57b9bc0cefc1))
+* **deps:** google-gax v2.17.0 with mTLS ([#161](https://www.github.com/googleapis/nodejs-ai-platform/issues/161)) ([8e7d46f](https://www.github.com/googleapis/nodejs-ai-platform/commit/8e7d46f1252c4e89a663dd28b70b49bf269f091a))
+
 ### [1.7.2](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.1...v1.7.2) (2021-06-22)
 
 
