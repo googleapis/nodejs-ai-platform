@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.10.2](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.10.1...v1.10.2) (2021-08-29)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.24.1 ([#190](https://www.github.com/googleapis/nodejs-ai-platform/issues/190)) ([ce5177f](https://www.github.com/googleapis/nodejs-ai-platform/commit/ce5177f34896aa8fdd94e6aae169c09a33e34939))
+
 ### [1.10.1](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.10.0...v1.10.1) (2021-08-09)
 
 
