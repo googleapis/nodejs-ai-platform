@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
-import * as specialistpoolserviceModule from '../src';
+import * as indexendpointserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -144,67 +144,70 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.SpecialistPoolServiceClient', () => {
+describe('v1.IndexEndpointServiceClient', () => {
   it('has servicePath', () => {
     const servicePath =
-      specialistpoolserviceModule.v1.SpecialistPoolServiceClient.servicePath;
+      indexendpointserviceModule.v1.IndexEndpointServiceClient.servicePath;
     assert(servicePath);
   });
 
   it('has apiEndpoint', () => {
     const apiEndpoint =
-      specialistpoolserviceModule.v1.SpecialistPoolServiceClient.apiEndpoint;
+      indexendpointserviceModule.v1.IndexEndpointServiceClient.apiEndpoint;
     assert(apiEndpoint);
   });
 
   it('has port', () => {
-    const port =
-      specialistpoolserviceModule.v1.SpecialistPoolServiceClient.port;
+    const port = indexendpointserviceModule.v1.IndexEndpointServiceClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
 
   it('should create a client with no option', () => {
     const client =
-      new specialistpoolserviceModule.v1.SpecialistPoolServiceClient();
+      new indexendpointserviceModule.v1.IndexEndpointServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client =
-      new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+    const client = new indexendpointserviceModule.v1.IndexEndpointServiceClient(
+      {
         fallback: true,
-      });
+      }
+    );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+    const client = new indexendpointserviceModule.v1.IndexEndpointServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
-    assert.strictEqual(client.specialistPoolServiceStub, undefined);
+      }
+    );
+    assert.strictEqual(client.indexEndpointServiceStub, undefined);
     await client.initialize();
-    assert(client.specialistPoolServiceStub);
+    assert(client.indexEndpointServiceStub);
   });
 
   it('has close method', () => {
-    const client =
-      new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+    const client = new indexendpointserviceModule.v1.IndexEndpointServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client =
-      new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+    const client = new indexendpointserviceModule.v1.IndexEndpointServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -213,11 +216,12 @@ describe('v1.SpecialistPoolServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client =
-      new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+    const client = new indexendpointserviceModule.v1.IndexEndpointServiceClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -234,16 +238,16 @@ describe('v1.SpecialistPoolServiceClient', () => {
     assert.strictEqual(result, fakeProjectId);
   });
 
-  describe('getSpecialistPool', () => {
-    it('invokes getSpecialistPool without error', async () => {
+  describe('getIndexEndpoint', () => {
+    it('invokes getIndexEndpoint without error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.GetIndexEndpointRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -255,27 +259,27 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SpecialistPool()
+        new protos.google.cloud.aiplatform.v1.IndexEndpoint()
       );
-      client.innerApiCalls.getSpecialistPool = stubSimpleCall(expectedResponse);
-      const [response] = await client.getSpecialistPool(request);
+      client.innerApiCalls.getIndexEndpoint = stubSimpleCall(expectedResponse);
+      const [response] = await client.getIndexEndpoint(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getSpecialistPool as SinonStub)
+        (client.innerApiCalls.getIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes getSpecialistPool without error using callback', async () => {
+    it('invokes getIndexEndpoint without error using callback', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.GetIndexEndpointRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -287,16 +291,16 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.SpecialistPool()
+        new protos.google.cloud.aiplatform.v1.IndexEndpoint()
       );
-      client.innerApiCalls.getSpecialistPool =
+      client.innerApiCalls.getIndexEndpoint =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getSpecialistPool(
+        client.getIndexEndpoint(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ISpecialistPool | null
+            result?: protos.google.cloud.aiplatform.v1.IIndexEndpoint | null
           ) => {
             if (err) {
               reject(err);
@@ -309,21 +313,21 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getSpecialistPool as SinonStub)
+        (client.innerApiCalls.getIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes getSpecialistPool with error', async () => {
+    it('invokes getIndexEndpoint with error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.GetSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.GetIndexEndpointRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -335,32 +339,33 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.getSpecialistPool = stubSimpleCall(
+      client.innerApiCalls.getIndexEndpoint = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.getSpecialistPool(request), expectedError);
+      await assert.rejects(client.getIndexEndpoint(request), expectedError);
       assert(
-        (client.innerApiCalls.getSpecialistPool as SinonStub)
+        (client.innerApiCalls.getIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('createSpecialistPool', () => {
-    it('invokes createSpecialistPool without error', async () => {
+  describe('updateIndexEndpoint', () => {
+    it('invokes updateIndexEndpoint without error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.UpdateIndexEndpointRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      request.indexEndpoint = {};
+      request.indexEndpoint.name = '';
+      const expectedHeaderRequestParams = 'index_endpoint.name=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -369,29 +374,112 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.longrunning.Operation()
+        new protos.google.cloud.aiplatform.v1.IndexEndpoint()
       );
-      client.innerApiCalls.createSpecialistPool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.createSpecialistPool(request);
-      const [response] = await operation.promise();
+      client.innerApiCalls.updateIndexEndpoint =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateIndexEndpoint(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createSpecialistPool as SinonStub)
+        (client.innerApiCalls.updateIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes createSpecialistPool without error using callback', async () => {
+    it('invokes updateIndexEndpoint without error using callback', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.UpdateIndexEndpointRequest()
+      );
+      request.indexEndpoint = {};
+      request.indexEndpoint.name = '';
+      const expectedHeaderRequestParams = 'index_endpoint.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.IndexEndpoint()
+      );
+      client.innerApiCalls.updateIndexEndpoint =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateIndexEndpoint(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IIndexEndpoint | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateIndexEndpoint as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateIndexEndpoint with error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateIndexEndpointRequest()
+      );
+      request.indexEndpoint = {};
+      request.indexEndpoint.name = '';
+      const expectedHeaderRequestParams = 'index_endpoint.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateIndexEndpoint = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateIndexEndpoint(request), expectedError);
+      assert(
+        (client.innerApiCalls.updateIndexEndpoint as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('createIndexEndpoint', () => {
+    it('invokes createIndexEndpoint without error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateIndexEndpointRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -405,16 +493,50 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createSpecialistPool =
+      client.innerApiCalls.createIndexEndpoint =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createIndexEndpoint(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createIndexEndpoint as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createIndexEndpoint without error using callback', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateIndexEndpointRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createIndexEndpoint =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.createSpecialistPool(
+        client.createIndexEndpoint(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.aiplatform.v1.ISpecialistPool,
-              protos.google.cloud.aiplatform.v1.ICreateSpecialistPoolOperationMetadata
+              protos.google.cloud.aiplatform.v1.IIndexEndpoint,
+              protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -426,27 +548,27 @@ describe('v1.SpecialistPoolServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.aiplatform.v1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1.ICreateSpecialistPoolOperationMetadata
+        protos.google.cloud.aiplatform.v1.IIndexEndpoint,
+        protos.google.cloud.aiplatform.v1.ICreateIndexEndpointOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.createSpecialistPool as SinonStub)
+        (client.innerApiCalls.createIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes createSpecialistPool with call error', async () => {
+    it('invokes createIndexEndpoint with call error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.CreateIndexEndpointRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -458,27 +580,27 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.createSpecialistPool = stubLongRunningCall(
+      client.innerApiCalls.createIndexEndpoint = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.createSpecialistPool(request), expectedError);
+      await assert.rejects(client.createIndexEndpoint(request), expectedError);
       assert(
-        (client.innerApiCalls.createSpecialistPool as SinonStub)
+        (client.innerApiCalls.createIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes createSpecialistPool with LRO error', async () => {
+    it('invokes createIndexEndpoint with LRO error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.CreateIndexEndpointRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -490,23 +612,23 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.createSpecialistPool = stubLongRunningCall(
+      client.innerApiCalls.createIndexEndpoint = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.createSpecialistPool(request);
+      const [operation] = await client.createIndexEndpoint(request);
       await assert.rejects(operation.promise(), expectedError);
       assert(
-        (client.innerApiCalls.createSpecialistPool as SinonStub)
+        (client.innerApiCalls.createIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes checkCreateSpecialistPoolProgress without error', async () => {
+    it('invokes checkCreateIndexEndpointProgress without error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -519,7 +641,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateSpecialistPoolProgress(
+      const decodedOperation = await client.checkCreateIndexEndpointProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -527,9 +649,9 @@ describe('v1.SpecialistPoolServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkCreateSpecialistPoolProgress with error', async () => {
+    it('invokes checkCreateIndexEndpointProgress with error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -541,23 +663,23 @@ describe('v1.SpecialistPoolServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkCreateSpecialistPoolProgress(''),
+        client.checkCreateIndexEndpointProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('deleteSpecialistPool', () => {
-    it('invokes deleteSpecialistPool without error', async () => {
+  describe('deleteIndexEndpoint', () => {
+    it('invokes deleteIndexEndpoint without error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.DeleteIndexEndpointRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -571,27 +693,27 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteSpecialistPool =
+      client.innerApiCalls.deleteIndexEndpoint =
         stubLongRunningCall(expectedResponse);
-      const [operation] = await client.deleteSpecialistPool(request);
+      const [operation] = await client.deleteIndexEndpoint(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.deleteSpecialistPool as SinonStub)
+        (client.innerApiCalls.deleteIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes deleteSpecialistPool without error using callback', async () => {
+    it('invokes deleteIndexEndpoint without error using callback', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.DeleteIndexEndpointRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -605,10 +727,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteSpecialistPool =
+      client.innerApiCalls.deleteIndexEndpoint =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.deleteSpecialistPool(
+        client.deleteIndexEndpoint(
           request,
           (
             err?: Error | null,
@@ -632,21 +754,21 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.deleteSpecialistPool as SinonStub)
+        (client.innerApiCalls.deleteIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes deleteSpecialistPool with call error', async () => {
+    it('invokes deleteIndexEndpoint with call error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.DeleteIndexEndpointRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -658,27 +780,27 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSpecialistPool = stubLongRunningCall(
+      client.innerApiCalls.deleteIndexEndpoint = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.deleteSpecialistPool(request), expectedError);
+      await assert.rejects(client.deleteIndexEndpoint(request), expectedError);
       assert(
-        (client.innerApiCalls.deleteSpecialistPool as SinonStub)
+        (client.innerApiCalls.deleteIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes deleteSpecialistPool with LRO error', async () => {
+    it('invokes deleteIndexEndpoint with LRO error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.DeleteIndexEndpointRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -690,23 +812,23 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSpecialistPool = stubLongRunningCall(
+      client.innerApiCalls.deleteIndexEndpoint = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.deleteSpecialistPool(request);
+      const [operation] = await client.deleteIndexEndpoint(request);
       await assert.rejects(operation.promise(), expectedError);
       assert(
-        (client.innerApiCalls.deleteSpecialistPool as SinonStub)
+        (client.innerApiCalls.deleteIndexEndpoint as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes checkDeleteSpecialistPoolProgress without error', async () => {
+    it('invokes checkDeleteIndexEndpointProgress without error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -719,7 +841,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteSpecialistPoolProgress(
+      const decodedOperation = await client.checkDeleteIndexEndpointProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -727,9 +849,9 @@ describe('v1.SpecialistPoolServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkDeleteSpecialistPoolProgress with error', async () => {
+    it('invokes checkDeleteIndexEndpointProgress with error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -741,27 +863,26 @@ describe('v1.SpecialistPoolServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkDeleteSpecialistPoolProgress(''),
+        client.checkDeleteIndexEndpointProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('updateSpecialistPool', () => {
-    it('invokes updateSpecialistPool without error', async () => {
+  describe('deployIndex', () => {
+    it('invokes deployIndex without error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.DeployIndexRequest()
       );
-      request.specialistPool = {};
-      request.specialistPool.name = '';
-      const expectedHeaderRequestParams = 'specialist_pool.name=';
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -772,31 +893,29 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateSpecialistPool =
-        stubLongRunningCall(expectedResponse);
-      const [operation] = await client.updateSpecialistPool(request);
+      client.innerApiCalls.deployIndex = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deployIndex(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.updateSpecialistPool as SinonStub)
+        (client.innerApiCalls.deployIndex as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes updateSpecialistPool without error using callback', async () => {
+    it('invokes deployIndex without error using callback', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.DeployIndexRequest()
       );
-      request.specialistPool = {};
-      request.specialistPool.name = '';
-      const expectedHeaderRequestParams = 'specialist_pool.name=';
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -807,16 +926,16 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateSpecialistPool =
+      client.innerApiCalls.deployIndex =
         stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateSpecialistPool(
+        client.deployIndex(
           request,
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.aiplatform.v1.ISpecialistPool,
-              protos.google.cloud.aiplatform.v1.IUpdateSpecialistPoolOperationMetadata
+              protos.google.cloud.aiplatform.v1.IDeployIndexResponse,
+              protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
             > | null
           ) => {
             if (err) {
@@ -828,31 +947,30 @@ describe('v1.SpecialistPoolServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.aiplatform.v1.ISpecialistPool,
-        protos.google.cloud.aiplatform.v1.IUpdateSpecialistPoolOperationMetadata
+        protos.google.cloud.aiplatform.v1.IDeployIndexResponse,
+        protos.google.cloud.aiplatform.v1.IDeployIndexOperationMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.updateSpecialistPool as SinonStub)
+        (client.innerApiCalls.deployIndex as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes updateSpecialistPool with call error', async () => {
+    it('invokes deployIndex with call error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.DeployIndexRequest()
       );
-      request.specialistPool = {};
-      request.specialistPool.name = '';
-      const expectedHeaderRequestParams = 'specialist_pool.name=';
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -861,31 +979,30 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateSpecialistPool = stubLongRunningCall(
+      client.innerApiCalls.deployIndex = stubLongRunningCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.updateSpecialistPool(request), expectedError);
+      await assert.rejects(client.deployIndex(request), expectedError);
       assert(
-        (client.innerApiCalls.updateSpecialistPool as SinonStub)
+        (client.innerApiCalls.deployIndex as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes updateSpecialistPool with LRO error', async () => {
+    it('invokes deployIndex with LRO error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest()
+        new protos.google.cloud.aiplatform.v1.DeployIndexRequest()
       );
-      request.specialistPool = {};
-      request.specialistPool.name = '';
-      const expectedHeaderRequestParams = 'specialist_pool.name=';
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -894,23 +1011,23 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateSpecialistPool = stubLongRunningCall(
+      client.innerApiCalls.deployIndex = stubLongRunningCall(
         undefined,
         undefined,
         expectedError
       );
-      const [operation] = await client.updateSpecialistPool(request);
+      const [operation] = await client.deployIndex(request);
       await assert.rejects(operation.promise(), expectedError);
       assert(
-        (client.innerApiCalls.updateSpecialistPool as SinonStub)
+        (client.innerApiCalls.deployIndex as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes checkUpdateSpecialistPoolProgress without error', async () => {
+    it('invokes checkDeployIndexProgress without error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -923,7 +1040,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateSpecialistPoolProgress(
+      const decodedOperation = await client.checkDeployIndexProgress(
         expectedResponse.name
       );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
@@ -931,9 +1048,206 @@ describe('v1.SpecialistPoolServiceClient', () => {
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
-    it('invokes checkUpdateSpecialistPoolProgress with error', async () => {
+    it('invokes checkDeployIndexProgress with error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkDeployIndexProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('undeployIndex', () => {
+    it('invokes undeployIndex without error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UndeployIndexRequest()
+      );
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.undeployIndex =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.undeployIndex(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.undeployIndex as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes undeployIndex without error using callback', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UndeployIndexRequest()
+      );
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.undeployIndex =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.undeployIndex(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1.IUndeployIndexResponse,
+              protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1.IUndeployIndexResponse,
+        protos.google.cloud.aiplatform.v1.IUndeployIndexOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.undeployIndex as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes undeployIndex with call error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UndeployIndexRequest()
+      );
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.undeployIndex = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.undeployIndex(request), expectedError);
+      assert(
+        (client.innerApiCalls.undeployIndex as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes undeployIndex with LRO error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UndeployIndexRequest()
+      );
+      request.indexEndpoint = '';
+      const expectedHeaderRequestParams = 'index_endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.undeployIndex = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.undeployIndex(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.undeployIndex as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkUndeployIndexProgress without error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUndeployIndexProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUndeployIndexProgress with error', async () => {
+      const client =
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -945,23 +1259,23 @@ describe('v1.SpecialistPoolServiceClient', () => {
         expectedError
       );
       await assert.rejects(
-        client.checkUpdateSpecialistPoolProgress(''),
+        client.checkUndeployIndexProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
 
-  describe('listSpecialistPools', () => {
-    it('invokes listSpecialistPools without error', async () => {
+  describe('listIndexEndpoints', () => {
+    it('invokes listIndexEndpoints without error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
+        new protos.google.cloud.aiplatform.v1.ListIndexEndpointsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -974,35 +1288,35 @@ describe('v1.SpecialistPoolServiceClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
       ];
-      client.innerApiCalls.listSpecialistPools =
+      client.innerApiCalls.listIndexEndpoints =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.listSpecialistPools(request);
+      const [response] = await client.listIndexEndpoints(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listSpecialistPools as SinonStub)
+        (client.innerApiCalls.listIndexEndpoints as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes listSpecialistPools without error using callback', async () => {
+    it('invokes listIndexEndpoints without error using callback', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
+        new protos.google.cloud.aiplatform.v1.ListIndexEndpointsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1015,23 +1329,23 @@ describe('v1.SpecialistPoolServiceClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
       ];
-      client.innerApiCalls.listSpecialistPools =
+      client.innerApiCalls.listIndexEndpoints =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.listSpecialistPools(
+        client.listIndexEndpoints(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.aiplatform.v1.ISpecialistPool[] | null
+            result?: protos.google.cloud.aiplatform.v1.IIndexEndpoint[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1044,21 +1358,21 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.listSpecialistPools as SinonStub)
+        (client.innerApiCalls.listIndexEndpoints as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes listSpecialistPools with error', async () => {
+    it('invokes listIndexEndpoints with error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
+        new protos.google.cloud.aiplatform.v1.ListIndexEndpointsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
@@ -1070,50 +1384,49 @@ describe('v1.SpecialistPoolServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.listSpecialistPools = stubSimpleCall(
+      client.innerApiCalls.listIndexEndpoints = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.listSpecialistPools(request), expectedError);
+      await assert.rejects(client.listIndexEndpoints(request), expectedError);
       assert(
-        (client.innerApiCalls.listSpecialistPools as SinonStub)
+        (client.innerApiCalls.listIndexEndpoints as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes listSpecialistPoolsStream without error', async () => {
+    it('invokes listIndexEndpointsStream without error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
+        new protos.google.cloud.aiplatform.v1.ListIndexEndpointsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
       ];
-      client.descriptors.page.listSpecialistPools.createStream =
+      client.descriptors.page.listIndexEndpoints.createStream =
         stubPageStreamingCall(expectedResponse);
-      const stream = client.listSpecialistPoolsStream(request);
+      const stream = client.listIndexEndpointsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.SpecialistPool[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1.IndexEndpoint[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.aiplatform.v1.SpecialistPool) => {
+          (response: protos.google.cloud.aiplatform.v1.IndexEndpoint) => {
             responses.push(response);
           }
         );
@@ -1127,40 +1440,39 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listSpecialistPools.createStream as SinonStub)
+        (client.descriptors.page.listIndexEndpoints.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSpecialistPools, request)
+          .calledWith(client.innerApiCalls.listIndexEndpoints, request)
       );
       assert.strictEqual(
         (
-          client.descriptors.page.listSpecialistPools.createStream as SinonStub
+          client.descriptors.page.listIndexEndpoints.createStream as SinonStub
         ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('invokes listSpecialistPoolsStream with error', async () => {
+    it('invokes listIndexEndpointsStream with error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
+        new protos.google.cloud.aiplatform.v1.ListIndexEndpointsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listSpecialistPools.createStream =
+      client.descriptors.page.listIndexEndpoints.createStream =
         stubPageStreamingCall(undefined, expectedError);
-      const stream = client.listSpecialistPoolsStream(request);
+      const stream = client.listIndexEndpointsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.aiplatform.v1.SpecialistPool[] =
-          [];
+        const responses: protos.google.cloud.aiplatform.v1.IndexEndpoint[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.aiplatform.v1.SpecialistPool) => {
+          (response: protos.google.cloud.aiplatform.v1.IndexEndpoint) => {
             responses.push(response);
           }
         );
@@ -1173,81 +1485,81 @@ describe('v1.SpecialistPoolServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listSpecialistPools.createStream as SinonStub)
+        (client.descriptors.page.listIndexEndpoints.createStream as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.listSpecialistPools, request)
+          .calledWith(client.innerApiCalls.listIndexEndpoints, request)
       );
       assert.strictEqual(
         (
-          client.descriptors.page.listSpecialistPools.createStream as SinonStub
+          client.descriptors.page.listIndexEndpoints.createStream as SinonStub
         ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('uses async iteration with listSpecialistPools without error', async () => {
+    it('uses async iteration with listIndexEndpoints without error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
+        new protos.google.cloud.aiplatform.v1.ListIndexEndpointsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
         generateSampleMessage(
-          new protos.google.cloud.aiplatform.v1.SpecialistPool()
+          new protos.google.cloud.aiplatform.v1.IndexEndpoint()
         ),
       ];
-      client.descriptors.page.listSpecialistPools.asyncIterate =
+      client.descriptors.page.listIndexEndpoints.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.aiplatform.v1.ISpecialistPool[] = [];
-      const iterable = client.listSpecialistPoolsAsync(request);
+      const responses: protos.google.cloud.aiplatform.v1.IIndexEndpoint[] = [];
+      const iterable = client.listIndexEndpointsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listSpecialistPools.asyncIterate as SinonStub
+          client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
         (
-          client.descriptors.page.listSpecialistPools.asyncIterate as SinonStub
+          client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub
         ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
-    it('uses async iteration with listSpecialistPools with error', async () => {
+    it('uses async iteration with listIndexEndpoints with error', async () => {
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
+        new protos.google.cloud.aiplatform.v1.ListIndexEndpointsRequest()
       );
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listSpecialistPools.asyncIterate =
+      client.descriptors.page.listIndexEndpoints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.listSpecialistPoolsAsync(request);
+      const iterable = client.listIndexEndpointsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.aiplatform.v1.ISpecialistPool[] =
+        const responses: protos.google.cloud.aiplatform.v1.IIndexEndpoint[] =
           [];
         for await (const resource of iterable) {
           responses.push(resource!);
@@ -1255,13 +1567,13 @@ describe('v1.SpecialistPoolServiceClient', () => {
       });
       assert.deepStrictEqual(
         (
-          client.descriptors.page.listSpecialistPools.asyncIterate as SinonStub
+          client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub
         ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
         (
-          client.descriptors.page.listSpecialistPools.asyncIterate as SinonStub
+          client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub
         ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
@@ -1279,7 +1591,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         annotation: 'annotationValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1367,7 +1679,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         annotation_spec: 'annotationSpecValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1445,7 +1757,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         artifact: 'artifactValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1521,7 +1833,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         batch_prediction_job: 'batchPredictionJobValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1600,7 +1912,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         context: 'contextValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1676,7 +1988,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         custom_job: 'customJobValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1742,7 +2054,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         data_item: 'dataItemValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1818,7 +2130,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         data_labeling_job: 'dataLabelingJobValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1884,7 +2196,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         dataset: 'datasetValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -1949,7 +2261,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         endpoint: 'endpointValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2015,7 +2327,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         execution: 'executionValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2091,7 +2403,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         hyperparameter_tuning_job: 'hyperparameterTuningJobValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2173,7 +2485,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         index: 'indexValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2238,7 +2550,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         index_endpoint: 'indexEndpointValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2302,7 +2614,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         location: 'locationValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2353,7 +2665,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         model: 'modelValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2418,7 +2730,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2499,7 +2811,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2577,7 +2889,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         slice: 'sliceValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2685,7 +2997,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         pipeline_job: 'pipelineJobValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2750,7 +3062,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         specialist_pool: 'specialistPoolValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2816,7 +3128,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         study: 'studyValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2881,7 +3193,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         training_pipeline: 'trainingPipelineValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
@@ -2951,7 +3263,7 @@ describe('v1.SpecialistPoolServiceClient', () => {
         trial: 'trialValue',
       };
       const client =
-        new specialistpoolserviceModule.v1.SpecialistPoolServiceClient({
+        new indexendpointserviceModule.v1.IndexEndpointServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
