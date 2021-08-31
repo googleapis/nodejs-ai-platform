@@ -18,25 +18,35 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1beta1/prediction_service_client_config.json`.
+ * `src/v1/index_service_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './prediction_service_client_config.json';
-
+import * as gapicConfig from './index_service_client_config.json';
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  A service for online predictions and explanations.
+ *  A service for creating and managing Vertex AI's Index resources.
  * @class
- * @memberof v1beta1
+ * @memberof v1
  */
-export class PredictionServiceClient {
+export class IndexServiceClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -54,10 +64,11 @@ export class PredictionServiceClient {
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   pathTemplates: {[name: string]: gax.PathTemplate};
-  predictionServiceStub?: Promise<{[name: string]: Function}>;
+  operationsClient: gax.OperationsClient;
+  indexServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of PredictionServiceClient.
+   * Construct an instance of IndexServiceClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -92,7 +103,7 @@ export class PredictionServiceClient {
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof PredictionServiceClient;
+    const staticMembers = this.constructor as typeof IndexServiceClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -185,17 +196,8 @@ export class PredictionServiceClient {
       endpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
-      entityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}'
-      ),
       executionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
-      ),
-      featurePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}'
-      ),
-      featurestorePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/featurestores/{featurestore}'
       ),
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
@@ -206,11 +208,8 @@ export class PredictionServiceClient {
       indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
       ),
-      metadataSchemaPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/metadataSchemas/{metadata_schema}'
-      ),
-      metadataStorePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/metadataStores/{metadata_store}'
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
       ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
@@ -234,18 +233,6 @@ export class PredictionServiceClient {
       studyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/studies/{study}'
       ),
-      tensorboardPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tensorboards/{tensorboard}'
-      ),
-      tensorboardExperimentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
-      ),
-      tensorboardRunPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}'
-      ),
-      tensorboardTimeSeriesPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}'
-      ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
       ),
@@ -254,9 +241,69 @@ export class PredictionServiceClient {
       ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listIndexes: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'indexes'
+      ),
+    };
+
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+
+    this.operationsClient = this._gaxModule
+      .lro({
+        auth: this.auth,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      })
+      .operationsClient(opts);
+    const createIndexResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.Index'
+    ) as gax.protobuf.Type;
+    const createIndexMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.CreateIndexOperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateIndexResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.Index'
+    ) as gax.protobuf.Type;
+    const updateIndexMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.UpdateIndexOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteIndexResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteIndexMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      createIndex: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createIndexResponse.decode.bind(createIndexResponse),
+        createIndexMetadata.decode.bind(createIndexMetadata)
+      ),
+      updateIndex: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateIndexResponse.decode.bind(updateIndexResponse),
+        updateIndexMetadata.decode.bind(updateIndexMetadata)
+      ),
+      deleteIndex: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteIndexResponse.decode.bind(deleteIndexResponse),
+        deleteIndexMetadata.decode.bind(deleteIndexMetadata)
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.aiplatform.v1beta1.PredictionService',
+      'google.cloud.aiplatform.v1.IndexService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -284,29 +331,34 @@ export class PredictionServiceClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.predictionServiceStub) {
-      return this.predictionServiceStub;
+    if (this.indexServiceStub) {
+      return this.indexServiceStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.aiplatform.v1beta1.PredictionService.
-    this.predictionServiceStub = this._gaxGrpc.createStub(
+    // google.cloud.aiplatform.v1.IndexService.
+    this.indexServiceStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.aiplatform.v1beta1.PredictionService'
+            'google.cloud.aiplatform.v1.IndexService'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.aiplatform.v1beta1
-            .PredictionService,
+          (this._protos as any).google.cloud.aiplatform.v1.IndexService,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const predictionServiceStubMethods = ['predict', 'rawPredict', 'explain'];
-    for (const methodName of predictionServiceStubMethods) {
-      const callPromise = this.predictionServiceStub.then(
+    const indexServiceStubMethods = [
+      'createIndex',
+      'getIndex',
+      'listIndexes',
+      'updateIndex',
+      'deleteIndex',
+    ];
+    for (const methodName of indexServiceStubMethods) {
+      const callPromise = this.indexServiceStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -320,7 +372,10 @@ export class PredictionServiceClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -330,7 +385,7 @@ export class PredictionServiceClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.predictionServiceStub;
+    return this.indexServiceStub;
   }
 
   /**
@@ -386,87 +441,70 @@ export class PredictionServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  predict(
-    request?: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
+  getIndex(
+    request?: protos.google.cloud.aiplatform.v1.IGetIndexRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
-      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | undefined,
+      protos.google.cloud.aiplatform.v1.IIndex,
+      protos.google.cloud.aiplatform.v1.IGetIndexRequest | undefined,
       {} | undefined
     ]
   >;
-  predict(
-    request: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
+  getIndex(
+    request: protos.google.cloud.aiplatform.v1.IGetIndexRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
-      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | null | undefined,
+      protos.google.cloud.aiplatform.v1.IIndex,
+      protos.google.cloud.aiplatform.v1.IGetIndexRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
-  predict(
-    request: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
+  getIndex(
+    request: protos.google.cloud.aiplatform.v1.IGetIndexRequest,
     callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
-      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | null | undefined,
+      protos.google.cloud.aiplatform.v1.IIndex,
+      protos.google.cloud.aiplatform.v1.IGetIndexRequest | null | undefined,
       {} | null | undefined
     >
   ): void;
   /**
-   * Perform an online prediction.
+   * Gets an Index.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.endpoint
-   *   Required. The name of the Endpoint requested to serve the prediction.
+   * @param {string} request.name
+   *   Required. The name of the Index resource.
    *   Format:
-   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
-   * @param {number[]} request.instances
-   *   Required. The instances that are the input to the prediction call.
-   *   A DeployedModel may have an upper limit on the number of instances it
-   *   supports per request, and when it is exceeded the prediction call errors
-   *   in case of AutoML Models, or, in case of customer created Models, the
-   *   behaviour is as documented by that Model.
-   *   The schema of any single instance may be specified via Endpoint's
-   *   DeployedModels' {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's}
-   *   {@link google.cloud.aiplatform.v1beta1.Model.predict_schemata|PredictSchemata's}
-   *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
-   * @param {google.protobuf.Value} request.parameters
-   *   The parameters that govern the prediction. The schema of the parameters may
-   *   be specified via Endpoint's DeployedModels' {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's }
-   *   {@link google.cloud.aiplatform.v1beta1.Model.predict_schemata|PredictSchemata's}
-   *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
+   *   `projects/{project}/locations/{location}/indexes/{index}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PredictResponse]{@link google.cloud.aiplatform.v1beta1.PredictResponse}.
+   *   The first element of the array is an object representing [Index]{@link google.cloud.aiplatform.v1.Index}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
-   * const [response] = await client.predict(request);
+   * const [response] = await client.getIndex(request);
    */
-  predict(
-    request?: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
+  getIndex(
+    request?: protos.google.cloud.aiplatform.v1.IGetIndexRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
-          | protos.google.cloud.aiplatform.v1beta1.IPredictRequest
-          | null
-          | undefined,
+          protos.google.cloud.aiplatform.v1.IIndex,
+          protos.google.cloud.aiplatform.v1.IGetIndexRequest | null | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
-      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | null | undefined,
+      protos.google.cloud.aiplatform.v1.IIndex,
+      protos.google.cloud.aiplatform.v1.IGetIndexRequest | null | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.aiplatform.v1beta1.IPredictResponse,
-      protos.google.cloud.aiplatform.v1beta1.IPredictRequest | undefined,
+      protos.google.cloud.aiplatform.v1.IIndex,
+      protos.google.cloud.aiplatform.v1.IGetIndexRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -483,242 +521,654 @@ export class PredictionServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       gax.routingHeader.fromParams({
-        endpoint: request.endpoint || '',
+        name: request.name || '',
       });
     this.initialize();
-    return this.innerApiCalls.predict(request, options, callback);
-  }
-  rawPredict(
-    request?: protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  rawPredict(
-    request: protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  rawPredict(
-    request: protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest,
-    callback: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Perform an online prediction with arbitrary http payload.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.endpoint
-   *   Required. The name of the Endpoint requested to serve the prediction.
-   *   Format:
-   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
-   * @param {google.api.HttpBody} request.httpBody
-   *   The prediction input. Supports HTTP headers and arbitrary data payload.
-   *
-   *   A {@link google.cloud.aiplatform.v1beta1.DeployedModel|DeployedModel} may have an upper limit on the number of instances it
-   *   supports per request. When this limit it is exceeded for an AutoML model,
-   *   the {@link google.cloud.aiplatform.v1beta1.PredictionService.RawPredict|RawPredict} method returns an error.
-   *   When this limit is exceeded for a custom-trained model, the behavior varies
-   *   depending on the model.
-   *
-   *   You can specify the schema for each instance in the
-   *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri|predict_schemata.instance_schema_uri}
-   *   field when you create a {@link google.cloud.aiplatform.v1beta1.Model|Model}. This schema applies when you deploy the
-   *   `Model` as a `DeployedModel` to an {@link google.cloud.aiplatform.v1beta1.Endpoint|Endpoint} and use the `RawPredict`
-   *   method.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [HttpBody]{@link google.api.HttpBody}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.rawPredict(request);
-   */
-  rawPredict(
-    request?: protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.api.IHttpBody,
-          | protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.api.IHttpBody,
-      | protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.api.IHttpBody,
-      protos.google.cloud.aiplatform.v1beta1.IRawPredictRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        endpoint: request.endpoint || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.rawPredict(request, options, callback);
-  }
-  explain(
-    request?: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
-      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  explain(
-    request: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
-      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  explain(
-    request: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
-    callback: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
-      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Perform an online explanation.
-   *
-   * If {@link google.cloud.aiplatform.v1beta1.ExplainRequest.deployed_model_id|deployed_model_id} is specified,
-   * the corresponding DeployModel must have
-   * {@link google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec|explanation_spec}
-   * populated. If {@link google.cloud.aiplatform.v1beta1.ExplainRequest.deployed_model_id|deployed_model_id}
-   * is not specified, all DeployedModels must have
-   * {@link google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec|explanation_spec}
-   * populated. Only deployed AutoML tabular Models have
-   * explanation_spec.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.endpoint
-   *   Required. The name of the Endpoint requested to serve the explanation.
-   *   Format:
-   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
-   * @param {number[]} request.instances
-   *   Required. The instances that are the input to the explanation call.
-   *   A DeployedModel may have an upper limit on the number of instances it
-   *   supports per request, and when it is exceeded the explanation call errors
-   *   in case of AutoML Models, or, in case of customer created Models, the
-   *   behaviour is as documented by that Model.
-   *   The schema of any single instance may be specified via Endpoint's
-   *   DeployedModels' {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's}
-   *   {@link google.cloud.aiplatform.v1beta1.Model.predict_schemata|PredictSchemata's}
-   *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
-   * @param {google.protobuf.Value} request.parameters
-   *   The parameters that govern the prediction. The schema of the parameters may
-   *   be specified via Endpoint's DeployedModels' {@link google.cloud.aiplatform.v1beta1.DeployedModel.model|Model's }
-   *   {@link google.cloud.aiplatform.v1beta1.Model.predict_schemata|PredictSchemata's}
-   *   {@link google.cloud.aiplatform.v1beta1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
-   * @param {google.cloud.aiplatform.v1beta1.ExplanationSpecOverride} request.explanationSpecOverride
-   *   If specified, overrides the
-   *   {@link google.cloud.aiplatform.v1beta1.DeployedModel.explanation_spec|explanation_spec} of the DeployedModel.
-   *   Can be used for explaining prediction results with different
-   *   configurations, such as:
-   *    - Explaining top-5 predictions results as opposed to top-1;
-   *    - Increasing path count or step count of the attribution methods to reduce
-   *      approximate errors;
-   *    - Using different baselines for explaining the prediction results.
-   * @param {string} request.deployedModelId
-   *   If specified, this ExplainRequest will be served by the chosen
-   *   DeployedModel, overriding {@link google.cloud.aiplatform.v1beta1.Endpoint.traffic_split|Endpoint.traffic_split}.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ExplainResponse]{@link google.cloud.aiplatform.v1beta1.ExplainResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.explain(request);
-   */
-  explain(
-    request?: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
-          | protos.google.cloud.aiplatform.v1beta1.IExplainRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
-      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.aiplatform.v1beta1.IExplainResponse,
-      protos.google.cloud.aiplatform.v1beta1.IExplainRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        endpoint: request.endpoint || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.explain(request, options, callback);
+    return this.innerApiCalls.getIndex(request, options, callback);
   }
 
+  createIndex(
+    request?: protos.google.cloud.aiplatform.v1.ICreateIndexRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IIndex,
+        protos.google.cloud.aiplatform.v1.ICreateIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createIndex(
+    request: protos.google.cloud.aiplatform.v1.ICreateIndexRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IIndex,
+        protos.google.cloud.aiplatform.v1.ICreateIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createIndex(
+    request: protos.google.cloud.aiplatform.v1.ICreateIndexRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IIndex,
+        protos.google.cloud.aiplatform.v1.ICreateIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates an Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the Index in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.Index} request.index
+   *   Required. The Index to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.createIndex(request);
+   * const [response] = await operation.promise();
+   */
+  createIndex(
+    request?: protos.google.cloud.aiplatform.v1.ICreateIndexRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IIndex,
+            protos.google.cloud.aiplatform.v1.ICreateIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IIndex,
+        protos.google.cloud.aiplatform.v1.ICreateIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IIndex,
+        protos.google.cloud.aiplatform.v1.ICreateIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createIndex(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createIndex()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateIndexProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkCreateIndexProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.Index,
+      protos.google.cloud.aiplatform.v1.CreateIndexOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createIndex,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.Index,
+      protos.google.cloud.aiplatform.v1.CreateIndexOperationMetadata
+    >;
+  }
+  updateIndex(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateIndexRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IIndex,
+        protos.google.cloud.aiplatform.v1.IUpdateIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateIndex(
+    request: protos.google.cloud.aiplatform.v1.IUpdateIndexRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IIndex,
+        protos.google.cloud.aiplatform.v1.IUpdateIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateIndex(
+    request: protos.google.cloud.aiplatform.v1.IUpdateIndexRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IIndex,
+        protos.google.cloud.aiplatform.v1.IUpdateIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates an Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1.Index} request.index
+   *   Required. The Index which updates the resource on the server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The update mask applies to the resource.
+   *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.updateIndex(request);
+   * const [response] = await operation.promise();
+   */
+  updateIndex(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateIndexRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IIndex,
+            protos.google.cloud.aiplatform.v1.IUpdateIndexOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IIndex,
+        protos.google.cloud.aiplatform.v1.IUpdateIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IIndex,
+        protos.google.cloud.aiplatform.v1.IUpdateIndexOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'index.name': request.index!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateIndex(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateIndex()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpdateIndexProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkUpdateIndexProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.Index,
+      protos.google.cloud.aiplatform.v1.UpdateIndexOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateIndex,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.Index,
+      protos.google.cloud.aiplatform.v1.UpdateIndexOperationMetadata
+    >;
+  }
+  deleteIndex(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteIndexRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteIndex(
+    request: protos.google.cloud.aiplatform.v1.IDeleteIndexRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteIndex(
+    request: protos.google.cloud.aiplatform.v1.IDeleteIndexRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes an Index.
+   * An Index can only be deleted when all its
+   * {@link google.cloud.aiplatform.v1.Index.deployed_indexes|DeployedIndexes} had been undeployed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the Index resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/indexes/{index}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteIndex(request);
+   * const [response] = await operation.promise();
+   */
+  deleteIndex(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteIndexRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteIndex(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteIndex()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteIndexProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeleteIndexProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteIndex,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
+  }
+  listIndexes(
+    request?: protos.google.cloud.aiplatform.v1.IListIndexesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IIndex[],
+      protos.google.cloud.aiplatform.v1.IListIndexesRequest | null,
+      protos.google.cloud.aiplatform.v1.IListIndexesResponse
+    ]
+  >;
+  listIndexes(
+    request: protos.google.cloud.aiplatform.v1.IListIndexesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListIndexesRequest,
+      protos.google.cloud.aiplatform.v1.IListIndexesResponse | null | undefined,
+      protos.google.cloud.aiplatform.v1.IIndex
+    >
+  ): void;
+  listIndexes(
+    request: protos.google.cloud.aiplatform.v1.IListIndexesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListIndexesRequest,
+      protos.google.cloud.aiplatform.v1.IListIndexesResponse | null | undefined,
+      protos.google.cloud.aiplatform.v1.IIndex
+    >
+  ): void;
+  /**
+   * Lists Indexes in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to list the Indexes.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token} of the previous
+   *   {@link google.cloud.aiplatform.v1.IndexService.ListIndexes|IndexService.ListIndexes} call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Index]{@link google.cloud.aiplatform.v1.Index}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listIndexesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listIndexes(
+    request?: protos.google.cloud.aiplatform.v1.IListIndexesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListIndexesRequest,
+          | protos.google.cloud.aiplatform.v1.IListIndexesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IIndex
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListIndexesRequest,
+      protos.google.cloud.aiplatform.v1.IListIndexesResponse | null | undefined,
+      protos.google.cloud.aiplatform.v1.IIndex
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IIndex[],
+      protos.google.cloud.aiplatform.v1.IListIndexesRequest | null,
+      protos.google.cloud.aiplatform.v1.IListIndexesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listIndexes(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to list the Indexes.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token} of the previous
+   *   {@link google.cloud.aiplatform.v1.IndexService.ListIndexes|IndexService.ListIndexes} call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Index]{@link google.cloud.aiplatform.v1.Index} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listIndexesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listIndexesStream(
+    request?: protos.google.cloud.aiplatform.v1.IListIndexesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listIndexes.createStream(
+      this.innerApiCalls.listIndexes as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listIndexes`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location from which to list the Indexes.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListIndexesResponse.next_page_token|ListIndexesResponse.next_page_token} of the previous
+   *   {@link google.cloud.aiplatform.v1.IndexService.ListIndexes|IndexService.ListIndexes} call.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Index]{@link google.cloud.aiplatform.v1.Index}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listIndexesAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listIndexesAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListIndexesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IIndex> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listIndexes.asyncIterate(
+      this.innerApiCalls['listIndexes'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IIndex>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1359,77 +1809,6 @@ export class PredictionServiceClient {
   }
 
   /**
-   * Return a fully-qualified entityType resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} featurestore
-   * @param {string} entity_type
-   * @returns {string} Resource name string.
-   */
-  entityTypePath(
-    project: string,
-    location: string,
-    featurestore: string,
-    entityType: string
-  ) {
-    return this.pathTemplates.entityTypePathTemplate.render({
-      project: project,
-      location: location,
-      featurestore: featurestore,
-      entity_type: entityType,
-    });
-  }
-
-  /**
-   * Parse the project from EntityType resource.
-   *
-   * @param {string} entityTypeName
-   *   A fully-qualified path representing EntityType resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .project;
-  }
-
-  /**
-   * Parse the location from EntityType resource.
-   *
-   * @param {string} entityTypeName
-   *   A fully-qualified path representing EntityType resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .location;
-  }
-
-  /**
-   * Parse the featurestore from EntityType resource.
-   *
-   * @param {string} entityTypeName
-   *   A fully-qualified path representing EntityType resource.
-   * @returns {string} A string representing the featurestore.
-   */
-  matchFeaturestoreFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .featurestore;
-  }
-
-  /**
-   * Parse the entity_type from EntityType resource.
-   *
-   * @param {string} entityTypeName
-   *   A fully-qualified path representing EntityType resource.
-   * @returns {string} A string representing the entity_type.
-   */
-  matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .entity_type;
-  }
-
-  /**
    * Return a fully-qualified execution resource name string.
    *
    * @param {string} project
@@ -1498,141 +1877,6 @@ export class PredictionServiceClient {
   matchExecutionFromExecutionName(executionName: string) {
     return this.pathTemplates.executionPathTemplate.match(executionName)
       .execution;
-  }
-
-  /**
-   * Return a fully-qualified feature resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} featurestore
-   * @param {string} entity_type
-   * @param {string} feature
-   * @returns {string} Resource name string.
-   */
-  featurePath(
-    project: string,
-    location: string,
-    featurestore: string,
-    entityType: string,
-    feature: string
-  ) {
-    return this.pathTemplates.featurePathTemplate.render({
-      project: project,
-      location: location,
-      featurestore: featurestore,
-      entity_type: entityType,
-      feature: feature,
-    });
-  }
-
-  /**
-   * Parse the project from Feature resource.
-   *
-   * @param {string} featureName
-   *   A fully-qualified path representing Feature resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromFeatureName(featureName: string) {
-    return this.pathTemplates.featurePathTemplate.match(featureName).project;
-  }
-
-  /**
-   * Parse the location from Feature resource.
-   *
-   * @param {string} featureName
-   *   A fully-qualified path representing Feature resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromFeatureName(featureName: string) {
-    return this.pathTemplates.featurePathTemplate.match(featureName).location;
-  }
-
-  /**
-   * Parse the featurestore from Feature resource.
-   *
-   * @param {string} featureName
-   *   A fully-qualified path representing Feature resource.
-   * @returns {string} A string representing the featurestore.
-   */
-  matchFeaturestoreFromFeatureName(featureName: string) {
-    return this.pathTemplates.featurePathTemplate.match(featureName)
-      .featurestore;
-  }
-
-  /**
-   * Parse the entity_type from Feature resource.
-   *
-   * @param {string} featureName
-   *   A fully-qualified path representing Feature resource.
-   * @returns {string} A string representing the entity_type.
-   */
-  matchEntityTypeFromFeatureName(featureName: string) {
-    return this.pathTemplates.featurePathTemplate.match(featureName)
-      .entity_type;
-  }
-
-  /**
-   * Parse the feature from Feature resource.
-   *
-   * @param {string} featureName
-   *   A fully-qualified path representing Feature resource.
-   * @returns {string} A string representing the feature.
-   */
-  matchFeatureFromFeatureName(featureName: string) {
-    return this.pathTemplates.featurePathTemplate.match(featureName).feature;
-  }
-
-  /**
-   * Return a fully-qualified featurestore resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} featurestore
-   * @returns {string} Resource name string.
-   */
-  featurestorePath(project: string, location: string, featurestore: string) {
-    return this.pathTemplates.featurestorePathTemplate.render({
-      project: project,
-      location: location,
-      featurestore: featurestore,
-    });
-  }
-
-  /**
-   * Parse the project from Featurestore resource.
-   *
-   * @param {string} featurestoreName
-   *   A fully-qualified path representing Featurestore resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
-      .project;
-  }
-
-  /**
-   * Parse the location from Featurestore resource.
-   *
-   * @param {string} featurestoreName
-   *   A fully-qualified path representing Featurestore resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
-      .location;
-  }
-
-  /**
-   * Parse the featurestore from Featurestore resource.
-   *
-   * @param {string} featurestoreName
-   *   A fully-qualified path representing Featurestore resource.
-   * @returns {string} A string representing the featurestore.
-   */
-  matchFeaturestoreFromFeaturestoreName(featurestoreName: string) {
-    return this.pathTemplates.featurestorePathTemplate.match(featurestoreName)
-      .featurestore;
   }
 
   /**
@@ -1802,130 +2046,39 @@ export class PredictionServiceClient {
   }
 
   /**
-   * Return a fully-qualified metadataSchema resource name string.
+   * Return a fully-qualified location resource name string.
    *
    * @param {string} project
    * @param {string} location
-   * @param {string} metadata_store
-   * @param {string} metadata_schema
    * @returns {string} Resource name string.
    */
-  metadataSchemaPath(
-    project: string,
-    location: string,
-    metadataStore: string,
-    metadataSchema: string
-  ) {
-    return this.pathTemplates.metadataSchemaPathTemplate.render({
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
       project: project,
       location: location,
-      metadata_store: metadataStore,
-      metadata_schema: metadataSchema,
     });
   }
 
   /**
-   * Parse the project from MetadataSchema resource.
+   * Parse the project from Location resource.
    *
-   * @param {string} metadataSchemaName
-   *   A fully-qualified path representing MetadataSchema resource.
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
    * @returns {string} A string representing the project.
    */
-  matchProjectFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).project;
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
   }
 
   /**
-   * Parse the location from MetadataSchema resource.
+   * Parse the location from Location resource.
    *
-   * @param {string} metadataSchemaName
-   *   A fully-qualified path representing MetadataSchema resource.
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
    * @returns {string} A string representing the location.
    */
-  matchLocationFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).location;
-  }
-
-  /**
-   * Parse the metadata_store from MetadataSchema resource.
-   *
-   * @param {string} metadataSchemaName
-   *   A fully-qualified path representing MetadataSchema resource.
-   * @returns {string} A string representing the metadata_store.
-   */
-  matchMetadataStoreFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).metadata_store;
-  }
-
-  /**
-   * Parse the metadata_schema from MetadataSchema resource.
-   *
-   * @param {string} metadataSchemaName
-   *   A fully-qualified path representing MetadataSchema resource.
-   * @returns {string} A string representing the metadata_schema.
-   */
-  matchMetadataSchemaFromMetadataSchemaName(metadataSchemaName: string) {
-    return this.pathTemplates.metadataSchemaPathTemplate.match(
-      metadataSchemaName
-    ).metadata_schema;
-  }
-
-  /**
-   * Return a fully-qualified metadataStore resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} metadata_store
-   * @returns {string} Resource name string.
-   */
-  metadataStorePath(project: string, location: string, metadataStore: string) {
-    return this.pathTemplates.metadataStorePathTemplate.render({
-      project: project,
-      location: location,
-      metadata_store: metadataStore,
-    });
-  }
-
-  /**
-   * Parse the project from MetadataStore resource.
-   *
-   * @param {string} metadataStoreName
-   *   A fully-qualified path representing MetadataStore resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
-      .project;
-  }
-
-  /**
-   * Parse the location from MetadataStore resource.
-   *
-   * @param {string} metadataStoreName
-   *   A fully-qualified path representing MetadataStore resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
-      .location;
-  }
-
-  /**
-   * Parse the metadata_store from MetadataStore resource.
-   *
-   * @param {string} metadataStoreName
-   *   A fully-qualified path representing MetadataStore resource.
-   * @returns {string} A string representing the metadata_store.
-   */
-  matchMetadataStoreFromMetadataStoreName(metadataStoreName: string) {
-    return this.pathTemplates.metadataStorePathTemplate.match(metadataStoreName)
-      .metadata_store;
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -2371,345 +2524,6 @@ export class PredictionServiceClient {
   }
 
   /**
-   * Return a fully-qualified tensorboard resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} tensorboard
-   * @returns {string} Resource name string.
-   */
-  tensorboardPath(project: string, location: string, tensorboard: string) {
-    return this.pathTemplates.tensorboardPathTemplate.render({
-      project: project,
-      location: location,
-      tensorboard: tensorboard,
-    });
-  }
-
-  /**
-   * Parse the project from Tensorboard resource.
-   *
-   * @param {string} tensorboardName
-   *   A fully-qualified path representing Tensorboard resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
-      .project;
-  }
-
-  /**
-   * Parse the location from Tensorboard resource.
-   *
-   * @param {string} tensorboardName
-   *   A fully-qualified path representing Tensorboard resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
-      .location;
-  }
-
-  /**
-   * Parse the tensorboard from Tensorboard resource.
-   *
-   * @param {string} tensorboardName
-   *   A fully-qualified path representing Tensorboard resource.
-   * @returns {string} A string representing the tensorboard.
-   */
-  matchTensorboardFromTensorboardName(tensorboardName: string) {
-    return this.pathTemplates.tensorboardPathTemplate.match(tensorboardName)
-      .tensorboard;
-  }
-
-  /**
-   * Return a fully-qualified tensorboardExperiment resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} tensorboard
-   * @param {string} experiment
-   * @returns {string} Resource name string.
-   */
-  tensorboardExperimentPath(
-    project: string,
-    location: string,
-    tensorboard: string,
-    experiment: string
-  ) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.render({
-      project: project,
-      location: location,
-      tensorboard: tensorboard,
-      experiment: experiment,
-    });
-  }
-
-  /**
-   * Parse the project from TensorboardExperiment resource.
-   *
-   * @param {string} tensorboardExperimentName
-   *   A fully-qualified path representing TensorboardExperiment resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromTensorboardExperimentName(tensorboardExperimentName: string) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).project;
-  }
-
-  /**
-   * Parse the location from TensorboardExperiment resource.
-   *
-   * @param {string} tensorboardExperimentName
-   *   A fully-qualified path representing TensorboardExperiment resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromTensorboardExperimentName(
-    tensorboardExperimentName: string
-  ) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).location;
-  }
-
-  /**
-   * Parse the tensorboard from TensorboardExperiment resource.
-   *
-   * @param {string} tensorboardExperimentName
-   *   A fully-qualified path representing TensorboardExperiment resource.
-   * @returns {string} A string representing the tensorboard.
-   */
-  matchTensorboardFromTensorboardExperimentName(
-    tensorboardExperimentName: string
-  ) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).tensorboard;
-  }
-
-  /**
-   * Parse the experiment from TensorboardExperiment resource.
-   *
-   * @param {string} tensorboardExperimentName
-   *   A fully-qualified path representing TensorboardExperiment resource.
-   * @returns {string} A string representing the experiment.
-   */
-  matchExperimentFromTensorboardExperimentName(
-    tensorboardExperimentName: string
-  ) {
-    return this.pathTemplates.tensorboardExperimentPathTemplate.match(
-      tensorboardExperimentName
-    ).experiment;
-  }
-
-  /**
-   * Return a fully-qualified tensorboardRun resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} tensorboard
-   * @param {string} experiment
-   * @param {string} run
-   * @returns {string} Resource name string.
-   */
-  tensorboardRunPath(
-    project: string,
-    location: string,
-    tensorboard: string,
-    experiment: string,
-    run: string
-  ) {
-    return this.pathTemplates.tensorboardRunPathTemplate.render({
-      project: project,
-      location: location,
-      tensorboard: tensorboard,
-      experiment: experiment,
-      run: run,
-    });
-  }
-
-  /**
-   * Parse the project from TensorboardRun resource.
-   *
-   * @param {string} tensorboardRunName
-   *   A fully-qualified path representing TensorboardRun resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).project;
-  }
-
-  /**
-   * Parse the location from TensorboardRun resource.
-   *
-   * @param {string} tensorboardRunName
-   *   A fully-qualified path representing TensorboardRun resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).location;
-  }
-
-  /**
-   * Parse the tensorboard from TensorboardRun resource.
-   *
-   * @param {string} tensorboardRunName
-   *   A fully-qualified path representing TensorboardRun resource.
-   * @returns {string} A string representing the tensorboard.
-   */
-  matchTensorboardFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).tensorboard;
-  }
-
-  /**
-   * Parse the experiment from TensorboardRun resource.
-   *
-   * @param {string} tensorboardRunName
-   *   A fully-qualified path representing TensorboardRun resource.
-   * @returns {string} A string representing the experiment.
-   */
-  matchExperimentFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).experiment;
-  }
-
-  /**
-   * Parse the run from TensorboardRun resource.
-   *
-   * @param {string} tensorboardRunName
-   *   A fully-qualified path representing TensorboardRun resource.
-   * @returns {string} A string representing the run.
-   */
-  matchRunFromTensorboardRunName(tensorboardRunName: string) {
-    return this.pathTemplates.tensorboardRunPathTemplate.match(
-      tensorboardRunName
-    ).run;
-  }
-
-  /**
-   * Return a fully-qualified tensorboardTimeSeries resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} tensorboard
-   * @param {string} experiment
-   * @param {string} run
-   * @param {string} time_series
-   * @returns {string} Resource name string.
-   */
-  tensorboardTimeSeriesPath(
-    project: string,
-    location: string,
-    tensorboard: string,
-    experiment: string,
-    run: string,
-    timeSeries: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.render({
-      project: project,
-      location: location,
-      tensorboard: tensorboard,
-      experiment: experiment,
-      run: run,
-      time_series: timeSeries,
-    });
-  }
-
-  /**
-   * Parse the project from TensorboardTimeSeries resource.
-   *
-   * @param {string} tensorboardTimeSeriesName
-   *   A fully-qualified path representing TensorboardTimeSeries resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).project;
-  }
-
-  /**
-   * Parse the location from TensorboardTimeSeries resource.
-   *
-   * @param {string} tensorboardTimeSeriesName
-   *   A fully-qualified path representing TensorboardTimeSeries resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).location;
-  }
-
-  /**
-   * Parse the tensorboard from TensorboardTimeSeries resource.
-   *
-   * @param {string} tensorboardTimeSeriesName
-   *   A fully-qualified path representing TensorboardTimeSeries resource.
-   * @returns {string} A string representing the tensorboard.
-   */
-  matchTensorboardFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).tensorboard;
-  }
-
-  /**
-   * Parse the experiment from TensorboardTimeSeries resource.
-   *
-   * @param {string} tensorboardTimeSeriesName
-   *   A fully-qualified path representing TensorboardTimeSeries resource.
-   * @returns {string} A string representing the experiment.
-   */
-  matchExperimentFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).experiment;
-  }
-
-  /**
-   * Parse the run from TensorboardTimeSeries resource.
-   *
-   * @param {string} tensorboardTimeSeriesName
-   *   A fully-qualified path representing TensorboardTimeSeries resource.
-   * @returns {string} A string representing the run.
-   */
-  matchRunFromTensorboardTimeSeriesName(tensorboardTimeSeriesName: string) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).run;
-  }
-
-  /**
-   * Parse the time_series from TensorboardTimeSeries resource.
-   *
-   * @param {string} tensorboardTimeSeriesName
-   *   A fully-qualified path representing TensorboardTimeSeries resource.
-   * @returns {string} A string representing the time_series.
-   */
-  matchTimeSeriesFromTensorboardTimeSeriesName(
-    tensorboardTimeSeriesName: string
-  ) {
-    return this.pathTemplates.tensorboardTimeSeriesPathTemplate.match(
-      tensorboardTimeSeriesName
-    ).time_series;
-  }
-
-  /**
    * Return a fully-qualified trainingPipeline resource name string.
    *
    * @param {string} project
@@ -2839,9 +2653,10 @@ export class PredictionServiceClient {
   close(): Promise<void> {
     this.initialize();
     if (!this._terminated) {
-      return this.predictionServiceStub!.then(stub => {
+      return this.indexServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();
