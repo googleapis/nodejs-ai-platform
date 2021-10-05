@@ -58,4 +58,4 @@ jobs:
       - uses: JustinBeckwith/linkinator-action@v1
         with:
           paths: docs/
-        entrypoint: node --max-old-space-size=8192 dist/index.js
+        main: node --max-old-space-size=8192 dist/index.js
