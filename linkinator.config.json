@@ -7,5 +7,5 @@
     "https://console.cloud.google.com/cloudshell"
   ],
   "silent": true,
-  "concurrency": 20
+  "concurrency": 5
 }
