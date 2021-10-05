@@ -49,7 +49,7 @@ async function main(customJobId, project, location = 'us-central1') {
     const [response] = await jobServiceClient.deleteCustomJob(request);
 
     console.log('Delete custom job response');
-    console.log(`${response}`);
+    console.log(response);
   }
   setTimeout(deleteCustomJob, 60000);
   // [END aiplatform_delete_custom_job]

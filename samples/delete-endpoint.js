@@ -53,7 +53,7 @@ async function main(endpointId, project, location = 'us-central1') {
     const result = response.result;
 
     console.log('Delete endpoint response :');
-    console.log(`${result}`);
+    console.log(result);
   }
   deleteEndpoint();
   // [END aiplatform_delete_endpoint]

@@ -52,7 +52,7 @@ async function main(datasetId, project, location = 'us-central1') {
     const result = response.result;
 
     console.log('Delete dataset response :');
-    console.log(`${result}`);
+    console.log(result);
   }
   deleteDataset();
   // [END aiplatform_delete_dataset]
