@@ -48,7 +48,7 @@ async function main(customJobId, project, location = 'us-central1') {
     const [response] = await jobServiceClient.cancelCustomJob(request);
 
     console.log('Cancel custom job response');
-    console.log(`${response}`);
+    console.log(response);
   }
   cancelCustomJob();
   // [END aiplatform_cancel_custom_job]

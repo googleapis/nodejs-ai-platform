@@ -73,7 +73,7 @@ async function main(
     const [response] = await jobServiceClient.createCustomJob(request);
 
     console.log('Create custom job response');
-    console.log(`${JSON.stringify(response)}`);
+    console.log(JSON.stringify(response));
   }
   createCustomJob();
   // [END aiplatform_create_custom_job]
