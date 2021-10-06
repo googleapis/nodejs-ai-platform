@@ -50,7 +50,7 @@ async function main(modelId, project, location = 'us-central1') {
     await response.promise();
     const result = response.result;
 
-    console.log('Delete model response :\n', result);
+    console.log('Delete model response:\n', result);
   }
   deleteModel();
   // [END aiplatform_delete_model]
