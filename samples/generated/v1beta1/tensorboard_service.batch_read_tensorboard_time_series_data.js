@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 'use strict';
 
 function main(tensorboard, timeSeries) {
@@ -35,7 +34,8 @@ function main(tensorboard, timeSeries) {
   // const timeSeries = 'abc123'
 
   // Imports the Aiplatform library
-  const {TensorboardServiceClient} = require('@google-cloud/aiplatform').v1beta1;
+  const {TensorboardServiceClient} =
+    require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
   const aiplatformClient = new TensorboardServiceClient();
@@ -48,7 +48,9 @@ function main(tensorboard, timeSeries) {
     };
 
     // Run request
-    const response = await aiplatformClient.batchReadTensorboardTimeSeriesData(request);
+    const response = await aiplatformClient.batchReadTensorboardTimeSeriesData(
+      request
+    );
     console.log(response);
   }
 
