@@ -27,7 +27,7 @@ const cwd = path.join(__dirname, '..');
 
 const datasetDisplayName = `temp_create_dataset_tables_bigquery_test_${uuid()}`;
 const bigquerySourceUri =
-  'bq://prj-ucaip-tutorials.bigquery_dataset.walmart_triptrain_train';
+  'bq://ucaip-sample-tests.table_test.all_bq_types';
 const project = process.env.CAIP_PROJECT_ID;
 const location = process.env.LOCATION;
 
@@ -44,7 +44,7 @@ it('should create a new bigquery tabular dataset in the parent resource', async 
   );
   assert.match(stdout, /Create dataset tabular bigquery response/);
   datasetId = stdout
-    .split('/locations/us-central1/datasets/')[1]
+    .split(`/locations/${location}/datasets/`)[1]
     .split('/')[0]
     .split('/')[0];
 });
