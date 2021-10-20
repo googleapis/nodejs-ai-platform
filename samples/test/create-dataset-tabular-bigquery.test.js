@@ -17,12 +17,12 @@
 'use strict';
 
 const path = require('path');
-const { assert } = require('chai');
-const { after, describe, it } = require('mocha');
+const {assert} = require('chai');
+const {after, describe, it} = require('mocha');
 
 const uuid = require('uuid').v4;
 const cp = require('child_process');
-const execSync = cmd => cp.execSync(cmd, { encoding: 'utf-8' });
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 const cwd = path.join(__dirname, '..');
 
 const datasetDisplayName = `temp_create_dataset_tables_bigquery_test_${uuid()}`;
