@@ -18,7 +18,7 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {after, describe, it} = require('mocha');
+const {after, it} = require('mocha');
 
 const uuid = require('uuid').v4;
 const cp = require('child_process');
