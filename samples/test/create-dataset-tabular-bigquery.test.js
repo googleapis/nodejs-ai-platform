@@ -18,7 +18,7 @@
 
 const path = require('path');
 const {assert} = require('chai');
-const {after, it} = require('mocha');
+const {after, describe, it} = require('mocha');
 
 const uuid = require('uuid').v4;
 const cp = require('child_process');
@@ -32,23 +32,25 @@ const location = process.env.LOCATION;
 
 let datasetId;
 
-it('should create a new bigquery tabular dataset in the parent resource', async () => {
-  const stdout = execSync(
-    `node ./create-dataset-tabular-bigquery.js ${datasetDisplayName} \
+describe('AI platform create dataset tabular bigquery', () => {
+  it('should create a new bigquery tabular dataset in the parent resource', async () => {
+    const stdout = execSync(
+      `node ./create-dataset-tabular-bigquery.js ${datasetDisplayName} \
                                                   ${bigquerySourceUri} \
                                                   ${project} ${location}`,
-    {
+      {
+        cwd,
+      }
+    );
+    assert.match(stdout, /Create dataset tabular bigquery response/);
+    datasetId = stdout
+      .split(`/locations/${location}/datasets/`)[1]
+      .split('/')[0]
+      .split('/')[0];
+  });
+  after('should delete created dataset', async () => {
+    execSync(`node ./delete-dataset.js ${datasetId} ${project} ${location}`, {
       cwd,
-    }
-  );
-  assert.match(stdout, /Create dataset tabular bigquery response/);
-  datasetId = stdout
-    .split(`/locations/${location}/datasets/`)[1]
-    .split('/')[0]
-    .split('/')[0];
-});
-after('should delete created dataset', async () => {
-  execSync(`node ./delete-dataset.js ${datasetId} ${project} ${location}`, {
-    cwd,
+    });
   });
 });
