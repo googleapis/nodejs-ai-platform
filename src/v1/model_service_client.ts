@@ -514,7 +514,9 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getModel(request);
+   * ```
    */
   getModel(
     request?: protos.google.cloud.aiplatform.v1.IGetModelRequest,
@@ -600,7 +602,9 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateModel(request);
+   * ```
    */
   updateModel(
     request?: protos.google.cloud.aiplatform.v1.IUpdateModelRequest,
@@ -691,7 +695,9 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getModelEvaluation(request);
+   * ```
    */
   getModelEvaluation(
     request?: protos.google.cloud.aiplatform.v1.IGetModelEvaluationRequest,
@@ -787,7 +793,9 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getModelEvaluationSlice(request);
+   * ```
    */
   getModelEvaluationSlice(
     request?: protos.google.cloud.aiplatform.v1.IGetModelEvaluationSliceRequest,
@@ -896,8 +904,10 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.uploadModel(request);
    * const [response] = await operation.promise();
+   * ```
    */
   uploadModel(
     request?: protos.google.cloud.aiplatform.v1.IUploadModelRequest,
@@ -957,10 +967,12 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkUploadModelProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkUploadModelProgress(
     name: string
@@ -1041,8 +1053,10 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteModel(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteModel(
     request?: protos.google.cloud.aiplatform.v1.IDeleteModelRequest,
@@ -1102,10 +1116,12 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteModelProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteModelProgress(
     name: string
@@ -1186,8 +1202,10 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.exportModel(request);
    * const [response] = await operation.promise();
+   * ```
    */
   exportModel(
     request?: protos.google.cloud.aiplatform.v1.IExportModelRequest,
@@ -1247,10 +1265,12 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkExportModelProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkExportModelProgress(
     name: string
@@ -1527,10 +1547,12 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listModelsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listModelsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListModelsRequest,
@@ -1744,10 +1766,12 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listModelEvaluationsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listModelEvaluationsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListModelEvaluationsRequest,
@@ -1974,10 +1998,12 @@ export class ModelServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listModelEvaluationSlicesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listModelEvaluationSlicesAsync(
     request?: protos.google.cloud.aiplatform.v1.IListModelEvaluationSlicesRequest,

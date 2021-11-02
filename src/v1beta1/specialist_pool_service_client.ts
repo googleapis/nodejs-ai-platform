@@ -526,7 +526,9 @@ export class SpecialistPoolServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getSpecialistPool(request);
+   * ```
    */
   getSpecialistPool(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest,
@@ -631,8 +633,10 @@ export class SpecialistPoolServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createSpecialistPool(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createSpecialistPool(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolRequest,
@@ -692,10 +696,12 @@ export class SpecialistPoolServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateSpecialistPoolProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateSpecialistPoolProgress(
     name: string
@@ -777,8 +783,10 @@ export class SpecialistPoolServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteSpecialistPool(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteSpecialistPool(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteSpecialistPoolRequest,
@@ -838,10 +846,12 @@ export class SpecialistPoolServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteSpecialistPoolProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteSpecialistPoolProgress(
     name: string
@@ -920,8 +930,10 @@ export class SpecialistPoolServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.updateSpecialistPool(request);
    * const [response] = await operation.promise();
+   * ```
    */
   updateSpecialistPool(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolRequest,
@@ -981,10 +993,12 @@ export class SpecialistPoolServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkUpdateSpecialistPoolProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkUpdateSpecialistPoolProgress(
     name: string
@@ -1192,10 +1206,12 @@ export class SpecialistPoolServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listSpecialistPoolsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listSpecialistPoolsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,

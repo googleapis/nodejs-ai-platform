@@ -530,7 +530,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createStudy(request);
+   * ```
    */
   createStudy(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest,
@@ -622,7 +624,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getStudy(request);
+   * ```
    */
   getStudy(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest,
@@ -714,7 +718,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.deleteStudy(request);
+   * ```
    */
   deleteStudy(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest,
@@ -809,7 +815,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.lookupStudy(request);
+   * ```
    */
   lookupStudy(
     request?: protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest,
@@ -903,7 +911,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createTrial(request);
+   * ```
    */
   createTrial(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest,
@@ -996,7 +1006,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getTrial(request);
+   * ```
    */
   getTrial(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest,
@@ -1095,7 +1107,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.addTrialMeasurement(request);
+   * ```
    */
   addTrialMeasurement(
     request?: protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest,
@@ -1201,7 +1215,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.completeTrial(request);
+   * ```
    */
   completeTrial(
     request?: protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest,
@@ -1294,7 +1310,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.deleteTrial(request);
+   * ```
    */
   deleteTrial(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest,
@@ -1387,7 +1405,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.stopTrial(request);
+   * ```
    */
   stopTrial(
     request?: protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest,
@@ -1484,7 +1504,9 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.listOptimalTrials(request);
+   * ```
    */
   listOptimalTrials(
     request?: protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest,
@@ -1599,8 +1621,10 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.suggestTrials(request);
    * const [response] = await operation.promise();
+   * ```
    */
   suggestTrials(
     request?: protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest,
@@ -1660,10 +1684,12 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkSuggestTrialsProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkSuggestTrialsProgress(
     name: string
@@ -1745,8 +1771,10 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.checkTrialEarlyStoppingState(request);
    * const [response] = await operation.promise();
+   * ```
    */
   checkTrialEarlyStoppingState(
     request?: protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest,
@@ -1810,10 +1838,12 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCheckTrialEarlyStoppingStateProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCheckTrialEarlyStoppingStateProgress(
     name: string
@@ -2012,10 +2042,12 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listStudiesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listStudiesAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
@@ -2214,10 +2246,12 @@ export class VizierServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listTrialsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listTrialsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,

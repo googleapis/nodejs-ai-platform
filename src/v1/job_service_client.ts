@@ -608,7 +608,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createCustomJob(request);
+   * ```
    */
   createCustomJob(
     request?: protos.google.cloud.aiplatform.v1.ICreateCustomJobRequest,
@@ -697,7 +699,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getCustomJob(request);
+   * ```
    */
   getCustomJob(
     request?: protos.google.cloud.aiplatform.v1.IGetCustomJobRequest,
@@ -797,7 +801,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.cancelCustomJob(request);
+   * ```
    */
   cancelCustomJob(
     request?: protos.google.cloud.aiplatform.v1.ICancelCustomJobRequest,
@@ -894,7 +900,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createDataLabelingJob(request);
+   * ```
    */
   createDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1.ICreateDataLabelingJobRequest,
@@ -990,7 +998,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getDataLabelingJob(request);
+   * ```
    */
   getDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1.IGetDataLabelingJobRequest,
@@ -1086,7 +1096,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.cancelDataLabelingJob(request);
+   * ```
    */
   cancelDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1.ICancelDataLabelingJobRequest,
@@ -1186,7 +1198,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createHyperparameterTuningJob(request);
+   * ```
    */
   createHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1.ICreateHyperparameterTuningJobRequest,
@@ -1289,7 +1303,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getHyperparameterTuningJob(request);
+   * ```
    */
   getHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1.IGetHyperparameterTuningJobRequest,
@@ -1401,7 +1417,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.cancelHyperparameterTuningJob(request);
+   * ```
    */
   cancelHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1.ICancelHyperparameterTuningJobRequest,
@@ -1506,7 +1524,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createBatchPredictionJob(request);
+   * ```
    */
   createBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1.ICreateBatchPredictionJobRequest,
@@ -1609,7 +1629,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getBatchPredictionJob(request);
+   * ```
    */
   getBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1.IGetBatchPredictionJobRequest,
@@ -1717,7 +1739,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.cancelBatchPredictionJob(request);
+   * ```
    */
   cancelBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1.ICancelBatchPredictionJobRequest,
@@ -1822,7 +1846,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createModelDeploymentMonitoringJob(request);
+   * ```
    */
   createModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
@@ -1925,7 +1951,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getModelDeploymentMonitoringJob(request);
+   * ```
    */
   getModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
@@ -2030,7 +2058,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.pauseModelDeploymentMonitoringJob(request);
+   * ```
    */
   pauseModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
@@ -2135,7 +2165,9 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.resumeModelDeploymentMonitoringJob(request);
+   * ```
    */
   resumeModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
@@ -2243,8 +2275,10 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteCustomJob(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteCustomJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
@@ -2304,10 +2338,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteCustomJobProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteCustomJobProgress(
     name: string
@@ -2386,8 +2422,10 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteDataLabelingJob(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteDataLabelingJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteDataLabelingJobRequest,
@@ -2447,10 +2485,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteDataLabelingJobProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteDataLabelingJobProgress(
     name: string
@@ -2529,8 +2569,10 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteHyperparameterTuningJob(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteHyperparameterTuningJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteHyperparameterTuningJobRequest,
@@ -2594,10 +2636,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteHyperparameterTuningJobProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteHyperparameterTuningJobProgress(
     name: string
@@ -2677,8 +2721,10 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteBatchPredictionJob(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteBatchPredictionJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteBatchPredictionJobRequest,
@@ -2742,10 +2788,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteBatchPredictionJobProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteBatchPredictionJobProgress(
     name: string
@@ -2851,8 +2899,10 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.updateModelDeploymentMonitoringJob(request);
    * const [response] = await operation.promise();
+   * ```
    */
   updateModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
@@ -2917,10 +2967,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkUpdateModelDeploymentMonitoringJobProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkUpdateModelDeploymentMonitoringJobProgress(
     name: string
@@ -2999,8 +3051,10 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteModelDeploymentMonitoringJob(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteModelDeploymentMonitoringJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
@@ -3064,10 +3118,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteModelDeploymentMonitoringJobProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteModelDeploymentMonitoringJobProgress(
     name: string
@@ -3329,10 +3385,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listCustomJobsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listCustomJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListCustomJobsRequest,
@@ -3606,10 +3664,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listDataLabelingJobsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listDataLabelingJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListDataLabelingJobsRequest,
@@ -3875,10 +3935,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listHyperparameterTuningJobsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listHyperparameterTuningJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListHyperparameterTuningJobsRequest,
@@ -4150,10 +4212,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listBatchPredictionJobsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listBatchPredictionJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListBatchPredictionJobsRequest,
@@ -4411,10 +4475,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.searchModelDeploymentMonitoringStatsAnomaliesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   searchModelDeploymentMonitoringStatsAnomaliesAsync(
     request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
@@ -4628,10 +4694,12 @@ export class JobServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listModelDeploymentMonitoringJobsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listModelDeploymentMonitoringJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,

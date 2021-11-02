@@ -529,7 +529,9 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getEndpoint(request);
+   * ```
    */
   getEndpoint(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetEndpointRequest,
@@ -622,7 +624,9 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateEndpoint(request);
+   * ```
    */
   updateEndpoint(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateEndpointRequest,
@@ -724,8 +728,10 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createEndpoint(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createEndpoint(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateEndpointRequest,
@@ -785,10 +791,12 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateEndpointProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateEndpointProgress(
     name: string
@@ -867,8 +875,10 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteEndpoint(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteEndpoint(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteEndpointRequest,
@@ -928,10 +938,12 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteEndpointProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteEndpointProgress(
     name: string
@@ -1027,8 +1039,10 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deployModel(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deployModel(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeployModelRequest,
@@ -1088,10 +1102,12 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeployModelProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeployModelProgress(
     name: string
@@ -1181,8 +1197,10 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.undeployModel(request);
    * const [response] = await operation.promise();
+   * ```
    */
   undeployModel(
     request?: protos.google.cloud.aiplatform.v1beta1.IUndeployModelRequest,
@@ -1242,10 +1260,12 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkUndeployModelProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkUndeployModelProgress(
     name: string
@@ -1501,10 +1521,12 @@ export class EndpointServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listEndpointsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listEndpointsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListEndpointsRequest,

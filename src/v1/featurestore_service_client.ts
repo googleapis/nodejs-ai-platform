@@ -627,7 +627,9 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getFeaturestore(request);
+   * ```
    */
   getFeaturestore(
     request?: protos.google.cloud.aiplatform.v1.IGetFeaturestoreRequest,
@@ -720,7 +722,9 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getEntityType(request);
+   * ```
    */
   getEntityType(
     request?: protos.google.cloud.aiplatform.v1.IGetEntityTypeRequest,
@@ -829,7 +833,9 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateEntityType(request);
+   * ```
    */
   updateEntityType(
     request?: protos.google.cloud.aiplatform.v1.IUpdateEntityTypeRequest,
@@ -918,7 +924,9 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getFeature(request);
+   * ```
    */
   getFeature(
     request?: protos.google.cloud.aiplatform.v1.IGetFeatureRequest,
@@ -1025,7 +1033,9 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateFeature(request);
+   * ```
    */
   updateFeature(
     request?: protos.google.cloud.aiplatform.v1.IUpdateFeatureRequest,
@@ -1136,8 +1146,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createFeaturestore(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createFeaturestore(
     request?: protos.google.cloud.aiplatform.v1.ICreateFeaturestoreRequest,
@@ -1197,10 +1209,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateFeaturestoreProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateFeaturestoreProgress(
     name: string
@@ -1293,8 +1307,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.updateFeaturestore(request);
    * const [response] = await operation.promise();
+   * ```
    */
   updateFeaturestore(
     request?: protos.google.cloud.aiplatform.v1.IUpdateFeaturestoreRequest,
@@ -1354,10 +1370,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkUpdateFeaturestoreProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkUpdateFeaturestoreProgress(
     name: string
@@ -1441,8 +1459,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteFeaturestore(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteFeaturestore(
     request?: protos.google.cloud.aiplatform.v1.IDeleteFeaturestoreRequest,
@@ -1502,10 +1522,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteFeaturestoreProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteFeaturestoreProgress(
     name: string
@@ -1594,8 +1616,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createEntityType(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createEntityType(
     request?: protos.google.cloud.aiplatform.v1.ICreateEntityTypeRequest,
@@ -1655,10 +1679,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateEntityTypeProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateEntityTypeProgress(
     name: string
@@ -1741,8 +1767,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteEntityType(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteEntityType(
     request?: protos.google.cloud.aiplatform.v1.IDeleteEntityTypeRequest,
@@ -1802,10 +1830,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteEntityTypeProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteEntityTypeProgress(
     name: string
@@ -1894,8 +1924,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createFeature(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createFeature(
     request?: protos.google.cloud.aiplatform.v1.ICreateFeatureRequest,
@@ -1955,10 +1987,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateFeatureProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateFeatureProgress(
     name: string
@@ -2042,8 +2076,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.batchCreateFeatures(request);
    * const [response] = await operation.promise();
+   * ```
    */
   batchCreateFeatures(
     request?: protos.google.cloud.aiplatform.v1.IBatchCreateFeaturesRequest,
@@ -2103,10 +2139,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkBatchCreateFeaturesProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkBatchCreateFeaturesProgress(
     name: string
@@ -2185,8 +2223,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteFeature(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteFeature(
     request?: protos.google.cloud.aiplatform.v1.IDeleteFeatureRequest,
@@ -2246,10 +2286,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteFeatureProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteFeatureProgress(
     name: string
@@ -2374,8 +2416,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.importFeatureValues(request);
    * const [response] = await operation.promise();
+   * ```
    */
   importFeatureValues(
     request?: protos.google.cloud.aiplatform.v1.IImportFeatureValuesRequest,
@@ -2435,10 +2479,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkImportFeatureValuesProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkImportFeatureValuesProgress(
     name: string
@@ -2565,8 +2611,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.batchReadFeatureValues(request);
    * const [response] = await operation.promise();
+   * ```
    */
   batchReadFeatureValues(
     request?: protos.google.cloud.aiplatform.v1.IBatchReadFeatureValuesRequest,
@@ -2630,10 +2678,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkBatchReadFeatureValuesProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkBatchReadFeatureValuesProgress(
     name: string
@@ -2721,8 +2771,10 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.exportFeatureValues(request);
    * const [response] = await operation.promise();
+   * ```
    */
   exportFeatureValues(
     request?: protos.google.cloud.aiplatform.v1.IExportFeatureValuesRequest,
@@ -2782,10 +2834,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkExportFeatureValuesProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkExportFeatureValuesProgress(
     name: string
@@ -3098,10 +3152,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listFeaturestoresAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listFeaturestoresAsync(
     request?: protos.google.cloud.aiplatform.v1.IListFeaturestoresRequest,
@@ -3414,10 +3470,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listEntityTypesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listEntityTypesAsync(
     request?: protos.google.cloud.aiplatform.v1.IListEntityTypesRequest,
@@ -3751,10 +3809,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listFeaturesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listFeaturesAsync(
     request?: protos.google.cloud.aiplatform.v1.IListFeaturesRequest,
@@ -4157,10 +4217,12 @@ export class FeaturestoreServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.searchFeaturesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   searchFeaturesAsync(
     request?: protos.google.cloud.aiplatform.v1.ISearchFeaturesRequest,

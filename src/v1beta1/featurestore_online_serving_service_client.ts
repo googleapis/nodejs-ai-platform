@@ -459,7 +459,9 @@ export class FeaturestoreOnlineServingServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.readFeatureValues(request);
+   * ```
    */
   readFeatureValues(
     request?: protos.google.cloud.aiplatform.v1beta1.IReadFeatureValuesRequest,
@@ -537,9 +539,11 @@ export class FeaturestoreOnlineServingServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming)
    *   for more details and examples.
    * @example
+   * ```
    * const stream = client.streamingReadFeatureValues(request);
    * stream.on('data', (response) => { ... });
    * stream.on('end', () => { ... });
+   * ```
    */
   streamingReadFeatureValues(
     request?: protos.google.cloud.aiplatform.v1beta1.IStreamingReadFeatureValuesRequest,

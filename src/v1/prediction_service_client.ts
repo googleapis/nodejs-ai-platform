@@ -432,7 +432,9 @@ export class PredictionServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.predict(request);
+   * ```
    */
   predict(
     request?: protos.google.cloud.aiplatform.v1.IPredictRequest,
@@ -539,7 +541,9 @@ export class PredictionServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.rawPredict(request);
+   * ```
    */
   rawPredict(
     request?: protos.google.cloud.aiplatform.v1.IRawPredictRequest,
@@ -662,7 +666,9 @@ export class PredictionServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.explain(request);
+   * ```
    */
   explain(
     request?: protos.google.cloud.aiplatform.v1.IExplainRequest,

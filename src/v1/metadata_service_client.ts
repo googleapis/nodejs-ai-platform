@@ -608,7 +608,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getMetadataStore(request);
+   * ```
    */
   getMetadataStore(
     request?: protos.google.cloud.aiplatform.v1.IGetMetadataStoreRequest,
@@ -712,7 +714,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createArtifact(request);
+   * ```
    */
   createArtifact(
     request?: protos.google.cloud.aiplatform.v1.ICreateArtifactRequest,
@@ -801,7 +805,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getArtifact(request);
+   * ```
    */
   getArtifact(
     request?: protos.google.cloud.aiplatform.v1.IGetArtifactRequest,
@@ -900,7 +906,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateArtifact(request);
+   * ```
    */
   updateArtifact(
     request?: protos.google.cloud.aiplatform.v1.IUpdateArtifactRequest,
@@ -1004,7 +1012,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createContext(request);
+   * ```
    */
   createContext(
     request?: protos.google.cloud.aiplatform.v1.ICreateContextRequest,
@@ -1093,7 +1103,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getContext(request);
+   * ```
    */
   getContext(
     request?: protos.google.cloud.aiplatform.v1.IGetContextRequest,
@@ -1192,7 +1204,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateContext(request);
+   * ```
    */
   updateContext(
     request?: protos.google.cloud.aiplatform.v1.IUpdateContextRequest,
@@ -1302,7 +1316,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.addContextArtifactsAndExecutions(request);
+   * ```
    */
   addContextArtifactsAndExecutions(
     request?: protos.google.cloud.aiplatform.v1.IAddContextArtifactsAndExecutionsRequest,
@@ -1409,7 +1425,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.addContextChildren(request);
+   * ```
    */
   addContextChildren(
     request?: protos.google.cloud.aiplatform.v1.IAddContextChildrenRequest,
@@ -1511,7 +1529,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.queryContextLineageSubgraph(request);
+   * ```
    */
   queryContextLineageSubgraph(
     request?: protos.google.cloud.aiplatform.v1.IQueryContextLineageSubgraphRequest,
@@ -1623,7 +1643,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createExecution(request);
+   * ```
    */
   createExecution(
     request?: protos.google.cloud.aiplatform.v1.ICreateExecutionRequest,
@@ -1712,7 +1734,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getExecution(request);
+   * ```
    */
   getExecution(
     request?: protos.google.cloud.aiplatform.v1.IGetExecutionRequest,
@@ -1811,7 +1835,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateExecution(request);
+   * ```
    */
   updateExecution(
     request?: protos.google.cloud.aiplatform.v1.IUpdateExecutionRequest,
@@ -1910,7 +1936,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.addExecutionEvents(request);
+   * ```
    */
   addExecutionEvents(
     request?: protos.google.cloud.aiplatform.v1.IAddExecutionEventsRequest,
@@ -2009,7 +2037,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.queryExecutionInputsAndOutputs(request);
+   * ```
    */
   queryExecutionInputsAndOutputs(
     request?: protos.google.cloud.aiplatform.v1.IQueryExecutionInputsAndOutputsRequest,
@@ -2124,7 +2154,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createMetadataSchema(request);
+   * ```
    */
   createMetadataSchema(
     request?: protos.google.cloud.aiplatform.v1.ICreateMetadataSchemaRequest,
@@ -2220,7 +2252,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getMetadataSchema(request);
+   * ```
    */
   getMetadataSchema(
     request?: protos.google.cloud.aiplatform.v1.IGetMetadataSchemaRequest,
@@ -2350,7 +2384,9 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.queryArtifactLineageSubgraph(request);
+   * ```
    */
   queryArtifactLineageSubgraph(
     request?: protos.google.cloud.aiplatform.v1.IQueryArtifactLineageSubgraphRequest,
@@ -2469,8 +2505,10 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createMetadataStore(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createMetadataStore(
     request?: protos.google.cloud.aiplatform.v1.ICreateMetadataStoreRequest,
@@ -2530,10 +2568,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateMetadataStoreProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateMetadataStoreProgress(
     name: string
@@ -2615,8 +2655,10 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteMetadataStore(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteMetadataStore(
     request?: protos.google.cloud.aiplatform.v1.IDeleteMetadataStoreRequest,
@@ -2676,10 +2718,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteMetadataStoreProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteMetadataStoreProgress(
     name: string
@@ -2762,8 +2806,10 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteArtifact(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteArtifact(
     request?: protos.google.cloud.aiplatform.v1.IDeleteArtifactRequest,
@@ -2823,10 +2869,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteArtifactProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteArtifactProgress(
     name: string
@@ -2912,8 +2960,10 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.purgeArtifacts(request);
    * const [response] = await operation.promise();
+   * ```
    */
   purgeArtifacts(
     request?: protos.google.cloud.aiplatform.v1.IPurgeArtifactsRequest,
@@ -2973,10 +3023,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkPurgeArtifactsProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkPurgeArtifactsProgress(
     name: string
@@ -3062,8 +3114,10 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteContext(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteContext(
     request?: protos.google.cloud.aiplatform.v1.IDeleteContextRequest,
@@ -3123,10 +3177,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteContextProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteContextProgress(
     name: string
@@ -3212,8 +3268,10 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.purgeContexts(request);
    * const [response] = await operation.promise();
+   * ```
    */
   purgeContexts(
     request?: protos.google.cloud.aiplatform.v1.IPurgeContextsRequest,
@@ -3273,10 +3331,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkPurgeContextsProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkPurgeContextsProgress(
     name: string
@@ -3359,8 +3419,10 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteExecution(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteExecution(
     request?: protos.google.cloud.aiplatform.v1.IDeleteExecutionRequest,
@@ -3420,10 +3482,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteExecutionProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteExecutionProgress(
     name: string
@@ -3509,8 +3573,10 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.purgeExecutions(request);
    * const [response] = await operation.promise();
+   * ```
    */
   purgeExecutions(
     request?: protos.google.cloud.aiplatform.v1.IPurgeExecutionsRequest,
@@ -3570,10 +3636,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkPurgeExecutionsProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkPurgeExecutionsProgress(
     name: string
@@ -3793,10 +3861,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listMetadataStoresAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listMetadataStoresAsync(
     request?: protos.google.cloud.aiplatform.v1.IListMetadataStoresRequest,
@@ -4094,10 +4164,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listArtifactsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listArtifactsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListArtifactsRequest,
@@ -4407,10 +4479,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listContextsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listContextsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListContextsRequest,
@@ -4705,10 +4779,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listExecutionsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listExecutionsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListExecutionsRequest,
@@ -4934,10 +5010,12 @@ export class MetadataServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listMetadataSchemasAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listMetadataSchemasAsync(
     request?: protos.google.cloud.aiplatform.v1.IListMetadataSchemasRequest,

@@ -613,7 +613,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getTensorboard(request);
+   * ```
    */
   getTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRequest,
@@ -717,7 +719,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createTensorboardExperiment(request);
+   * ```
    */
   createTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardExperimentRequest,
@@ -820,7 +824,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getTensorboardExperiment(request);
+   * ```
    */
   getTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardExperimentRequest,
@@ -930,7 +936,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateTensorboardExperiment(request);
+   * ```
    */
   updateTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardExperimentRequest,
@@ -1042,7 +1050,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createTensorboardRun(request);
+   * ```
    */
   createTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRunRequest,
@@ -1146,7 +1156,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.batchCreateTensorboardRuns(request);
+   * ```
    */
   batchCreateTensorboardRuns(
     request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest,
@@ -1249,7 +1261,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getTensorboardRun(request);
+   * ```
    */
   getTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRunRequest,
@@ -1355,7 +1369,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateTensorboardRun(request);
+   * ```
    */
   updateTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRunRequest,
@@ -1461,7 +1477,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.batchCreateTensorboardTimeSeries(request);
+   * ```
    */
   batchCreateTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest,
@@ -1572,7 +1590,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createTensorboardTimeSeries(request);
+   * ```
    */
   createTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardTimeSeriesRequest,
@@ -1675,7 +1695,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getTensorboardTimeSeries(request);
+   * ```
    */
   getTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardTimeSeriesRequest,
@@ -1786,7 +1808,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateTensorboardTimeSeries(request);
+   * ```
    */
   updateTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardTimeSeriesRequest,
@@ -1899,7 +1923,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.batchReadTensorboardTimeSeriesData(request);
+   * ```
    */
   batchReadTensorboardTimeSeriesData(
     request?: protos.google.cloud.aiplatform.v1beta1.IBatchReadTensorboardTimeSeriesDataRequest,
@@ -2013,7 +2039,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.readTensorboardTimeSeriesData(request);
+   * ```
    */
   readTensorboardTimeSeriesData(
     request?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardTimeSeriesDataRequest,
@@ -2120,7 +2148,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.writeTensorboardExperimentData(request);
+   * ```
    */
   writeTensorboardExperimentData(
     request?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest,
@@ -2231,7 +2261,9 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.writeTensorboardRunData(request);
+   * ```
    */
   writeTensorboardRunData(
     request?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardRunDataRequest,
@@ -2306,9 +2338,11 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#server-streaming)
    *   for more details and examples.
    * @example
+   * ```
    * const stream = client.readTensorboardBlobData(request);
    * stream.on('data', (response) => { ... });
    * stream.on('end', () => { ... });
+   * ```
    */
   readTensorboardBlobData(
     request?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardBlobDataRequest,
@@ -2382,8 +2416,10 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createTensorboard(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRequest,
@@ -2443,10 +2479,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateTensorboardProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateTensorboardProgress(
     name: string
@@ -2532,8 +2570,10 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.updateTensorboard(request);
    * const [response] = await operation.promise();
+   * ```
    */
   updateTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRequest,
@@ -2593,10 +2633,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkUpdateTensorboardProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkUpdateTensorboardProgress(
     name: string
@@ -2675,8 +2717,10 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteTensorboard(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteTensorboard(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRequest,
@@ -2736,10 +2780,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteTensorboardProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteTensorboardProgress(
     name: string
@@ -2818,8 +2864,10 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteTensorboardExperiment(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteTensorboardExperiment(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardExperimentRequest,
@@ -2883,10 +2931,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteTensorboardExperimentProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteTensorboardExperimentProgress(
     name: string
@@ -2965,8 +3015,10 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteTensorboardRun(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRunRequest,
@@ -3026,10 +3078,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteTensorboardRunProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteTensorboardRunProgress(
     name: string
@@ -3108,8 +3162,10 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteTensorboardTimeSeries(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardTimeSeriesRequest,
@@ -3173,10 +3229,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteTensorboardTimeSeriesProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteTensorboardTimeSeriesProgress(
     name: string
@@ -3417,10 +3475,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listTensorboardsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listTensorboardsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
@@ -3665,10 +3725,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listTensorboardExperimentsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listTensorboardExperimentsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
@@ -3909,10 +3971,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listTensorboardRunsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listTensorboardRunsAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
@@ -4157,10 +4221,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listTensorboardTimeSeriesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listTensorboardTimeSeriesAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
@@ -4404,10 +4470,12 @@ export class TensorboardServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.exportTensorboardTimeSeriesDataAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   exportTensorboardTimeSeriesDataAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,

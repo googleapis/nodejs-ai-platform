@@ -514,7 +514,9 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createTrainingPipeline(request);
+   * ```
    */
   createTrainingPipeline(
     request?: protos.google.cloud.aiplatform.v1.ICreateTrainingPipelineRequest,
@@ -614,7 +616,9 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getTrainingPipeline(request);
+   * ```
    */
   getTrainingPipeline(
     request?: protos.google.cloud.aiplatform.v1.IGetTrainingPipelineRequest,
@@ -719,7 +723,9 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.cancelTrainingPipeline(request);
+   * ```
    */
   cancelTrainingPipeline(
     request?: protos.google.cloud.aiplatform.v1.ICancelTrainingPipelineRequest,
@@ -827,7 +833,9 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.createPipelineJob(request);
+   * ```
    */
   createPipelineJob(
     request?: protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest,
@@ -920,7 +928,9 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getPipelineJob(request);
+   * ```
    */
   getPipelineJob(
     request?: protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest,
@@ -1022,7 +1032,9 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.cancelPipelineJob(request);
+   * ```
    */
   cancelPipelineJob(
     request?: protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest,
@@ -1123,8 +1135,10 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteTrainingPipeline(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteTrainingPipeline(
     request?: protos.google.cloud.aiplatform.v1.IDeleteTrainingPipelineRequest,
@@ -1188,10 +1202,12 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteTrainingPipelineProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteTrainingPipelineProgress(
     name: string
@@ -1270,8 +1286,10 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deletePipelineJob(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deletePipelineJob(
     request?: protos.google.cloud.aiplatform.v1.IDeletePipelineJobRequest,
@@ -1331,10 +1349,12 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeletePipelineJobProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeletePipelineJobProgress(
     name: string
@@ -1593,10 +1613,12 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listTrainingPipelinesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listTrainingPipelinesAsync(
     request?: protos.google.cloud.aiplatform.v1.IListTrainingPipelinesRequest,
@@ -1930,10 +1952,12 @@ export class PipelineServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listPipelineJobsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listPipelineJobsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,

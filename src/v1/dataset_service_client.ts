@@ -527,7 +527,9 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getDataset(request);
+   * ```
    */
   getDataset(
     request?: protos.google.cloud.aiplatform.v1.IGetDatasetRequest,
@@ -624,7 +626,9 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.updateDataset(request);
+   * ```
    */
   updateDataset(
     request?: protos.google.cloud.aiplatform.v1.IUpdateDatasetRequest,
@@ -719,7 +723,9 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getAnnotationSpec(request);
+   * ```
    */
   getAnnotationSpec(
     request?: protos.google.cloud.aiplatform.v1.IGetAnnotationSpecRequest,
@@ -821,8 +827,10 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createDataset(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createDataset(
     request?: protos.google.cloud.aiplatform.v1.ICreateDatasetRequest,
@@ -882,10 +890,12 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateDatasetProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateDatasetProgress(
     name: string
@@ -964,8 +974,10 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteDataset(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteDataset(
     request?: protos.google.cloud.aiplatform.v1.IDeleteDatasetRequest,
@@ -1025,10 +1037,12 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteDatasetProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteDatasetProgress(
     name: string
@@ -1110,8 +1124,10 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.importData(request);
    * const [response] = await operation.promise();
+   * ```
    */
   importData(
     request?: protos.google.cloud.aiplatform.v1.IImportDataRequest,
@@ -1171,10 +1187,12 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkImportDataProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkImportDataProgress(
     name: string
@@ -1255,8 +1273,10 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.exportData(request);
    * const [response] = await operation.promise();
+   * ```
    */
   exportData(
     request?: protos.google.cloud.aiplatform.v1.IExportDataRequest,
@@ -1316,10 +1336,12 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkExportDataProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkExportDataProgress(
     name: string
@@ -1581,10 +1603,12 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listDatasetsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listDatasetsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListDatasetsRequest,
@@ -1801,10 +1825,12 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listDataItemsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listDataItemsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListDataItemsRequest,
@@ -2021,10 +2047,12 @@ export class DatasetServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listAnnotationsAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listAnnotationsAsync(
     request?: protos.google.cloud.aiplatform.v1.IListAnnotationsRequest,

@@ -516,7 +516,9 @@ export class IndexServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
    * @example
+   * ```
    * const [response] = await client.getIndex(request);
+   * ```
    */
   getIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetIndexRequest,
@@ -618,8 +620,10 @@ export class IndexServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.createIndex(request);
    * const [response] = await operation.promise();
+   * ```
    */
   createIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateIndexRequest,
@@ -679,10 +683,12 @@ export class IndexServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkCreateIndexProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkCreateIndexProgress(
     name: string
@@ -762,8 +768,10 @@ export class IndexServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.updateIndex(request);
    * const [response] = await operation.promise();
+   * ```
    */
   updateIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.IUpdateIndexRequest,
@@ -823,10 +831,12 @@ export class IndexServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkUpdateIndexProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkUpdateIndexProgress(
     name: string
@@ -907,8 +917,10 @@ export class IndexServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.deleteIndex(request);
    * const [response] = await operation.promise();
+   * ```
    */
   deleteIndex(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteIndexRequest,
@@ -968,10 +980,12 @@ export class IndexServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkDeleteIndexProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkDeleteIndexProgress(
     name: string
@@ -1185,10 +1199,12 @@ export class IndexServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.listIndexesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   listIndexesAsync(
     request?: protos.google.cloud.aiplatform.v1beta1.IListIndexesRequest,

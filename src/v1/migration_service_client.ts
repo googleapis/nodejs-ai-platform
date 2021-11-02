@@ -494,8 +494,10 @@ export class MigrationServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const [operation] = await client.batchMigrateResources(request);
    * const [response] = await operation.promise();
+   * ```
    */
   batchMigrateResources(
     request?: protos.google.cloud.aiplatform.v1.IBatchMigrateResourcesRequest,
@@ -555,10 +557,12 @@ export class MigrationServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
    * @example
+   * ```
    * const decodedOperation = await checkBatchMigrateResourcesProgress(name);
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * ```
    */
   async checkBatchMigrateResourcesProgress(
     name: string
@@ -808,10 +812,12 @@ export class MigrationServiceClient {
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
    * @example
+   * ```
    * const iterable = client.searchMigratableResourcesAsync(request);
    * for await (const response of iterable) {
    *   // process response
    * }
+   * ```
    */
   searchMigratableResourcesAsync(
     request?: protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesRequest,
