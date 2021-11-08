@@ -2,6 +2,7 @@
   "recurse": true,
   "skip": [
     "https://codecov.io/gh/googleapis/",
+    "https://console.cloud.google.com/cloudshell/open",
     "www.googleapis.com",
     "img.shields.io"
   ],
