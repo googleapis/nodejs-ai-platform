@@ -59,4 +59,4 @@ jobs:
         with:
           paths: docs/
         env:
-          LINKINATOR_DEBUG=true
+          LINKINATOR_DEBUG: true
