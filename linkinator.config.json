@@ -7,8 +7,8 @@
   ],
   "retry": true,
   "retryErrors": true,
-  "retryErrorsCount": 4,
-  "retryErrorsJitter": 10000,
+  "retryErrorsCount": 5,
+  "retryErrorsJitter": 3000,
   "silent": true,
   "concurrency": 5
 }
