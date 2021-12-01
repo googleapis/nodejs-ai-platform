@@ -64,7 +64,7 @@ main(...process.argv.slice(2));
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
+('use strict');
 
 function main(parent) {
   // [START aiplatform_v1_generated_VizierService_ListOptimalTrials_async_sample]

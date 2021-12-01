@@ -73,7 +73,7 @@ main(...process.argv.slice(2));
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
+('use strict');
 
 function main(name, importConfigs) {
   // [START aiplatform_v1beta1_generated_DatasetService_ImportData_async_sample]

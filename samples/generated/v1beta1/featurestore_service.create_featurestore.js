@@ -82,7 +82,7 @@ main(...process.argv.slice(2));
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
+('use strict');
 
 function main(parent, featurestore, featurestoreId) {
   // [START aiplatform_v1beta1_generated_FeaturestoreService_CreateFeaturestore_async_sample]

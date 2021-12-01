@@ -73,7 +73,7 @@ main(...process.argv.slice(2));
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
+('use strict');
 
 function main(parent, migrateResourceRequests) {
   // [START aiplatform_v1beta1_generated_MigrationService_BatchMigrateResources_async_sample]
