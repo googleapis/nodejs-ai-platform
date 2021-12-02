@@ -12,11 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 'use strict';
 
 function main(indexEndpoint, deployedIndex) {
-  // [START aiplatform_v1beta1_generated_IndexEndpointService_DeployIndex_async]
+  // [START aiplatform_v1beta1_generated_IndexEndpointService_MutateDeployedIndex_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
@@ -27,17 +26,20 @@ function main(indexEndpoint, deployedIndex) {
    */
   // const indexEndpoint = 'abc123'
   /**
-   *  Required. The DeployedIndex to be created within the IndexEndpoint.
+   *  Required. The DeployedIndex to be updated within the IndexEndpoint.
+   *  Currently, the updatable fields are DeployedIndex automatic_resources
+   *  and DeployedIndex dedicated_resources
    */
   // const deployedIndex = {}
 
   // Imports the Aiplatform library
-  const {IndexEndpointServiceClient} = require('@google-cloud/aiplatform').v1beta1;
+  const {IndexEndpointServiceClient} =
+    require('@google-cloud/aiplatform').v1beta1;
 
   // Instantiates a client
   const aiplatformClient = new IndexEndpointServiceClient();
 
-  async function callDeployIndex() {
+  async function callMutateDeployedIndex() {
     // Construct request
     const request = {
       indexEndpoint,
@@ -45,13 +47,13 @@ function main(indexEndpoint, deployedIndex) {
     };
 
     // Run request
-    const [operation] = await aiplatformClient.deployIndex(request);
+    const [operation] = await aiplatformClient.mutateDeployedIndex(request);
     const [response] = await operation.promise();
     console.log(response);
   }
 
-  callDeployIndex();
-  // [END aiplatform_v1beta1_generated_IndexEndpointService_DeployIndex_async]
+  callMutateDeployedIndex();
+  // [END aiplatform_v1beta1_generated_IndexEndpointService_MutateDeployedIndex_async]
 }
 
 process.on('unhandledRejection', err => {
