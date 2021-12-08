@@ -22,7 +22,7 @@ function main(
   project,
   location = 'us-central1'
 ) {
-  // [START aiplatform_create_hyperparameter_tuning_job_sample]
+  // [START aiplatform_create_hyperparameter_tuning_job_sample_sample]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    * (Not necessary if passing values as arguments)
@@ -102,7 +102,7 @@ function main(
   }
 
   createHyperParameterTuningJob();
-  // [END aiplatform_create_hyperparameter_tuning_job_sample]
+  // [END aiplatform_create_hyperparameter_tuning_job_sample_sample]
 }
 
 process.on('unhandledRejection', err => {

@@ -17,7 +17,7 @@
 'use strict';
 
 async function main(endpointId, project, location = 'us-central1') {
-  // [START aiplatform_predict_tabular_regression_sample]
+  // [START aiplatform_predict_tabular_regression_sample_sample]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
@@ -101,7 +101,7 @@ async function main(endpointId, project, location = 'us-central1') {
     }
   }
   predictTablesRegression();
-  // [END aiplatform_predict_tabular_regression_sample]
+  // [END aiplatform_predict_tabular_regression_sample_sample]
 }
 
 process.on('unhandledRejection', err => {

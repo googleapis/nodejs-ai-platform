@@ -23,7 +23,7 @@ function main(
   project,
   location = 'us-central1'
 ) {
-  // [START aiplatform_deploy_model_custom_trained_model_sample]
+  // [START aiplatform_deploy_model_custom_trained_model_sample_sample]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
@@ -89,7 +89,7 @@ function main(
     console.log(modelDeployed);
   }
   deployModelCustomTrainedModel();
-  // [END aiplatform_deploy_model_custom_trained_model_sample]
+  // [END aiplatform_deploy_model_custom_trained_model_sample_sample]
 }
 
 process.on('unhandledRejection', err => {

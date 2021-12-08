@@ -17,7 +17,7 @@
 'use strict';
 
 async function main(trainingPipelineId, project, location = 'us-central1') {
-  // [START aiplatform_get_training_pipeline_sample]
+  // [START aiplatform_get_training_pipeline_sample_sample]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
@@ -56,7 +56,7 @@ async function main(trainingPipelineId, project, location = 'us-central1') {
     console.log(`\tTraining pipeline state: ${response.state}`);
   }
   getTrainingPipeline();
-  // [END aiplatform_get_training_pipeline_sample]
+  // [END aiplatform_get_training_pipeline_sample_sample]
 }
 
 process.on('unhandledRejection', err => {
