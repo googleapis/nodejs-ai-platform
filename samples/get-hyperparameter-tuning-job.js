@@ -17,7 +17,7 @@
 'use strict';
 
 async function main(tuningJobId, project, location = 'us-central1') {
-  // [START aiplatform_get_hyperparameter_tuning_job_sample_sample]
+  // [START aiplatform_get_hyperparameter_tuning_job_sample]
   /**
    * TODO(developer): Uncomment these variables before running the sample.\
    * (Not necessary if passing values as arguments)
@@ -59,7 +59,7 @@ async function main(tuningJobId, project, location = 'us-central1') {
     console.log(`\tJob status: ${response.state}`);
   }
   getHyperparameterTuningJob();
-  // [END aiplatform_get_hyperparameter_tuning_job_sample_sample]
+  // [END aiplatform_get_hyperparameter_tuning_job_sample]
 }
 
 process.on('unhandledRejection', err => {
