@@ -17,10 +17,18 @@
 'use strict';
 
 async function main(modelId, evaluationId, project, location = 'us-central1') {
-  // [START aiplatform_get_model_evaluation_image_object_detection]
+  // [START aiplatform_get_model_evaluation_image_object_detection_sample]
   /**
-   * TODO(developer): Uncomment these variables before running the sample.\
+   * TODO(developer): Uncomment these variables before running the sample
+   * (not necessary if passing values as arguments). To obtain evaluationId,
+   * instantiate the client and run the following the commands.
    */
+  // const parentName = `projects/${project}/locations/${location}/models/${modelId}`;
+  // const evalRequest = {
+  //   parent: parentName
+  // };
+  // const [evalResponse] = await modelServiceClient.listModelEvaluations(evalRequest);
+  // console.log(evalResponse);
 
   // const modelId = 'YOUR_MODEL_ID';
   // const evaluationId = 'YOUR_EVALUATION_ID';
@@ -91,7 +99,7 @@ async function main(modelId, evaluationId, project, location = 'us-central1') {
     }
   }
   getModelEvaluationImageObjectDetection();
-  // [END aiplatform_get_model_evaluation_image_object_detection]
+  // [END aiplatform_get_model_evaluation_image_object_detection_sample]
 }
 
 process.on('unhandledRejection', err => {
