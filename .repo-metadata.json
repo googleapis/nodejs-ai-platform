@@ -13,5 +13,5 @@
   "codeowner_team": "@googleapis/ml-apis",
   "distribution_name": "@google-cloud/aiplatform",
   "api_shortname": "aiplatform",
-  "library_type": ""
+  "library_type": "GAPIC_COMBO"
 }
