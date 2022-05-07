@@ -28659,6 +28659,17 @@
                           "options": {
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
+                        },
+                        "templateUri": {
+                          "type": "string",
+                          "id": 19
+                        },
+                        "templateMetadata": {
+                          "type": "PipelineTemplateMetadata",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -28685,6 +28696,14 @@
                               "id": 3
                             }
                           }
+                        }
+                      }
+                    },
+                    "PipelineTemplateMetadata": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
