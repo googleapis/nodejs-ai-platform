@@ -11005,6 +11005,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "displayName": {
+                          "type": "string",
+                          "id": 10
+                        },
                         "metricsSchemaUri": {
                           "type": "string",
                           "id": 2
@@ -11041,6 +11045,10 @@
                           "rule": "repeated",
                           "type": "ModelEvaluationExplanationSpec",
                           "id": 9
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 11
                         }
                       },
                       "nested": {
@@ -27741,6 +27749,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "displayName": {
+                          "type": "string",
+                          "id": 10
+                        },
                         "metricsSchemaUri": {
                           "type": "string",
                           "id": 2
@@ -27769,6 +27781,10 @@
                           "rule": "repeated",
                           "type": "ModelEvaluationExplanationSpec",
                           "id": 9
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 11
                         }
                       },
                       "nested": {
