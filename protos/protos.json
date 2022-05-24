@@ -803,6 +803,10 @@
                         "featureAttributionsSchemaUri": {
                           "type": "string",
                           "id": 3
+                        },
+                        "latentSpaceSource": {
+                          "type": "string",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -3950,6 +3954,27 @@
                             "fixedNodeCount": {
                               "type": "int32",
                               "id": 2
+                            },
+                            "scaling": {
+                              "type": "Scaling",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "Scaling": {
+                              "fields": {
+                                "minNodeCount": {
+                                  "type": "int32",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "maxNodeCount": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
                             }
                           }
                         },
@@ -11785,6 +11810,17 @@
                           "options": {
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
+                        },
+                        "templateUri": {
+                          "type": "string",
+                          "id": 19
+                        },
+                        "templateMetadata": {
+                          "type": "PipelineTemplateMetadata",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -11811,6 +11847,14 @@
                               "id": 3
                             }
                           }
+                        }
+                      }
+                    },
+                    "PipelineTemplateMetadata": {
+                      "fields": {
+                        "version": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
