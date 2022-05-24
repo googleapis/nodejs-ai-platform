@@ -11717,6 +11717,13 @@
                         }
                       }
                     },
+                    "PipelineFailurePolicy": {
+                      "values": {
+                        "PIPELINE_FAILURE_POLICY_UNSPECIFIED": 0,
+                        "PIPELINE_FAILURE_POLICY_FAIL_SLOW": 1,
+                        "PIPELINE_FAILURE_POLICY_FAIL_FAST": 2
+                      }
+                    },
                     "PipelineJob": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/PipelineJob",
@@ -11845,6 +11852,10 @@
                               "keyType": "string",
                               "type": "google.protobuf.Value",
                               "id": 3
+                            },
+                            "failurePolicy": {
+                              "type": "PipelineFailurePolicy",
+                              "id": 4
                             }
                           }
                         }
@@ -28817,6 +28828,13 @@
                         }
                       }
                     },
+                    "PipelineFailurePolicy": {
+                      "values": {
+                        "PIPELINE_FAILURE_POLICY_UNSPECIFIED": 0,
+                        "PIPELINE_FAILURE_POLICY_FAIL_SLOW": 1,
+                        "PIPELINE_FAILURE_POLICY_FAIL_FAST": 2
+                      }
+                    },
                     "PipelineJob": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/PipelineJob",
@@ -28945,6 +28963,10 @@
                               "keyType": "string",
                               "type": "google.protobuf.Value",
                               "id": 3
+                            },
+                            "failurePolicy": {
+                              "type": "PipelineFailurePolicy",
+                              "id": 4
                             }
                           }
                         }
