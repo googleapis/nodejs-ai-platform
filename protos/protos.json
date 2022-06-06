@@ -8723,6 +8723,10 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "monitorWindow": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
                         }
                       }
                     },
@@ -25640,6 +25644,10 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "monitorWindow": {
+                          "type": "google.protobuf.Duration",
+                          "id": 2
                         }
                       }
                     },
