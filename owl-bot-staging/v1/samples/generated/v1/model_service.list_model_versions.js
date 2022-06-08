@@ -21,24 +21,40 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_v1_generated_ModelService_GetModel_async]
+  // [START aiplatform_v1_generated_ModelService_ListModelVersions_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the Model resource.
-   *  Format: `projects/{project}/locations/{location}/models/{model}`
-   *  In order to retrieve a specific version of the model, also provide
-   *  the version ID or version alias.
-   *    Example: `projects/{project}/locations/{location}/models/{model}@2`
-   *               or
-   *             `projects/{project}/locations/{location}/models/{model}@golden`
-   *  If no version ID or alias is specified, the "default" version will be
-   *  returned. The "default" version alias is created for the first version of
-   *  the model, and can be moved to other versions later on. There will be
-   *  exactly one default version.
+   *  Required. The name of the model to list versions for.
    */
   // const name = 'abc123'
+  /**
+   *  The standard list page size.
+   */
+  // const pageSize = 1234
+  /**
+   *  The standard list page token.
+   *  Typically obtained via
+   *  ListModelVersionsResponse.next_page_token google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token  of the previous
+   *  ModelService.ListModelversions   call.
+   */
+  // const pageToken = 'abc123'
+  /**
+   *  An expression for filtering the results of the request. For field names
+   *  both snake_case and camelCase are supported.
+   *    * `labels` supports general map functions that is:
+   *      * `labels.key=value` - key:value equality
+   *      * `labels.key:* or labels:key - key existence
+   *      * A key including a space must be quoted. `labels."a key"`.
+   *  Some examples:
+   *    * `labels.myKey="myValue"`
+   */
+  // const filter = 'abc123'
+  /**
+   *  Mask specifying which fields to read.
+   */
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {ModelServiceClient} = require('@google-cloud/aiplatform').v1;
@@ -46,19 +62,21 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new ModelServiceClient();
 
-  async function callGetModel() {
+  async function callListModelVersions() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await aiplatformClient.getModel(request);
-    console.log(response);
+    const iterable = await aiplatformClient.listModelVersionsAsync(request);
+    for await (const response of iterable) {
+        console.log(response);
+    }
   }
 
-  callGetModel();
-  // [END aiplatform_v1_generated_ModelService_GetModel_async]
+  callListModelVersions();
+  // [END aiplatform_v1_generated_ModelService_ListModelVersions_async]
 }
 
 process.on('unhandledRejection', err => {

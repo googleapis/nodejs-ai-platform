@@ -21,22 +21,14 @@
 'use strict';
 
 function main(name) {
-  // [START aiplatform_v1_generated_ModelService_GetModel_async]
+  // [START aiplatform_v1_generated_ModelService_DeleteModelVersion_async]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the Model resource.
-   *  Format: `projects/{project}/locations/{location}/models/{model}`
-   *  In order to retrieve a specific version of the model, also provide
-   *  the version ID or version alias.
-   *    Example: `projects/{project}/locations/{location}/models/{model}@2`
-   *               or
-   *             `projects/{project}/locations/{location}/models/{model}@golden`
-   *  If no version ID or alias is specified, the "default" version will be
-   *  returned. The "default" version alias is created for the first version of
-   *  the model, and can be moved to other versions later on. There will be
-   *  exactly one default version.
+   *  Required. The name of the model version to be deleted, with a version ID explicitly
+   *  included.
+   *  Example: `projects/{project}/locations/{location}/models/{model}@1234`
    */
   // const name = 'abc123'
 
@@ -46,19 +38,20 @@ function main(name) {
   // Instantiates a client
   const aiplatformClient = new ModelServiceClient();
 
-  async function callGetModel() {
+  async function callDeleteModelVersion() {
     // Construct request
     const request = {
       name,
     };
 
     // Run request
-    const response = await aiplatformClient.getModel(request);
+    const [operation] = await aiplatformClient.deleteModelVersion(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callGetModel();
-  // [END aiplatform_v1_generated_ModelService_GetModel_async]
+  callDeleteModelVersion();
+  // [END aiplatform_v1_generated_ModelService_DeleteModelVersion_async]
 }
 
 process.on('unhandledRejection', err => {
