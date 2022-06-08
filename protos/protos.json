@@ -500,6 +500,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "successfulForecastPointCount": {
+                          "type": "int64",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -520,6 +527,14 @@
                           "rule": "repeated",
                           "type": "Attribution",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "neighbors": {
+                          "rule": "repeated",
+                          "type": "Neighbor",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -586,6 +601,24 @@
                         "outputName": {
                           "type": "string",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Neighbor": {
+                      "fields": {
+                        "neighborId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "neighborDistance": {
+                          "type": "double",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -756,6 +789,10 @@
                         "metadata": {
                           "type": "ExplanationMetadataOverride",
                           "id": 2
+                        },
+                        "examplesOverride": {
+                          "type": "ExamplesOverride",
+                          "id": 3
                         }
                       }
                     },
@@ -779,6 +816,58 @@
                               "id": 1
                             }
                           }
+                        }
+                      }
+                    },
+                    "ExamplesOverride": {
+                      "fields": {
+                        "neighborCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "crowdingCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "restrictions": {
+                          "rule": "repeated",
+                          "type": "ExamplesRestrictionsNamespace",
+                          "id": 3
+                        },
+                        "returnEmbeddings": {
+                          "type": "bool",
+                          "id": 4
+                        },
+                        "dataFormat": {
+                          "type": "DataFormat",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "DataFormat": {
+                          "values": {
+                            "DATA_FORMAT_UNSPECIFIED": 0,
+                            "INSTANCES": 1,
+                            "EMBEDDINGS": 2
+                          }
+                        }
+                      }
+                    },
+                    "ExamplesRestrictionsNamespace": {
+                      "fields": {
+                        "namespaceName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "allow": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        },
+                        "deny": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -1305,6 +1394,32 @@
                           "type": "string",
                           "id": 1
                         },
+                        "versionId": {
+                          "type": "string",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "versionAliases": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 29
+                        },
+                        "versionCreateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "versionUpdateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "displayName": {
                           "type": "string",
                           "id": 2,
@@ -1315,6 +1430,10 @@
                         "description": {
                           "type": "string",
                           "id": 3
+                        },
+                        "versionDescription": {
+                          "type": "string",
+                          "id": 30
                         },
                         "predictSchemata": {
                           "type": "PredictSchemata",
@@ -11228,6 +11347,24 @@
                             }
                           ]
                         },
+                        "ListModelVersions": {
+                          "requestType": "ListModelVersionsRequest",
+                          "responseType": "ListModelVersionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/models/*}:listVersions",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/models/*}:listVersions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "UpdateModel": {
                           "requestType": "UpdateModelRequest",
                           "responseType": "Model",
@@ -11271,6 +11408,52 @@
                                 "response_type": "google.protobuf.Empty",
                                 "metadata_type": "DeleteOperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "DeleteModelVersion": {
+                          "requestType": "DeleteModelVersionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/models/*}:deleteVersion",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/models/*}:deleteVersion"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "MergeVersionAliases": {
+                          "requestType": "MergeVersionAliasesRequest",
+                          "responseType": "Model",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/models/*}:mergeVersionAliases",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,version_aliases"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/models/*}:mergeVersionAliases",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,version_aliases"
                             }
                           ]
                         },
@@ -11406,6 +11589,20 @@
                             "(google.api.resource_reference).type": "locations.googleapis.com/Location"
                           }
                         },
+                        "parentModel": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "modelId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "model": {
                           "type": "Model",
                           "id": 2,
@@ -11491,6 +11688,47 @@
                         }
                       }
                     },
+                    "ListModelVersionsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListModelVersionsResponse": {
+                      "fields": {
+                        "models": {
+                          "rule": "repeated",
+                          "type": "Model",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "UpdateModelRequest": {
                       "fields": {
                         "model": {
@@ -11517,6 +11755,38 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteModelVersionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        }
+                      }
+                    },
+                    "MergeVersionAliasesRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
+                          }
+                        },
+                        "versionAliases": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -12608,6 +12878,20 @@
                         "modelToUpload": {
                           "type": "Model",
                           "id": 7
+                        },
+                        "modelId": {
+                          "type": "string",
+                          "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "parentModel": {
+                          "type": "string",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "state": {
                           "type": "PipelineState",
@@ -18736,6 +19020,11 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3
+                        },
+                        "env": {
+                          "rule": "repeated",
+                          "type": "EnvVar",
+                          "id": 4
                         }
                       }
                     },
@@ -18767,6 +19056,11 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 4
+                        },
+                        "env": {
+                          "rule": "repeated",
+                          "type": "EnvVar",
+                          "id": 5
                         }
                       }
                     },
