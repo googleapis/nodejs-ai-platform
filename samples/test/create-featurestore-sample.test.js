@@ -27,7 +27,8 @@ const project = process.env.CAIP_PROJECT_ID;
 const featurestoreId = `featurestore_sample_${uuid()
   .replace(/-/g, '_')
   .slice(10, 20)}`;
-const fixedNodeCount = 1;
+const minNodeCount = 1;
+const maxNodeCount = 5;
 const location = 'us-central1';
 const apiEndpoint = 'us-central1-aiplatform.googleapis.com';
 
@@ -57,7 +58,7 @@ describe('AI platform create featurestore', async function () {
   this.retries(2);
   it('should create a featurestore', async () => {
     const stdout = execSync(
-      `node ./create-featurestore-sample.js ${project} ${featurestoreId} ${fixedNodeCount} ${location} ${apiEndpoint}`
+      `node ./create-featurestore-sample.js ${project} ${featurestoreId} ${minNodeCount} ${maxNodeCount} ${location} ${apiEndpoint}`
     );
     assert.match(stdout, /Create featurestore response/);
   });

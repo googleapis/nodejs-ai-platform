@@ -25,7 +25,8 @@
 async function main(
   project,
   featurestoreId,
-  fixedNodeCount = 1,
+  minNodeCount = 1,
+  maxNodeCount = 5,
   location = 'us-central1',
   apiEndpoint = 'us-central1-aiplatform.googleapis.com',
   timeout = 900000
@@ -38,13 +39,15 @@ async function main(
 
   // const project = 'YOUR_PROJECT_ID';
   // const featurestoreId = 'YOUR_FEATURESTORE_ID';
-  // const fixedNodeCount = <NO_OF_NODES>;
+  // const minNodeCount = <MINIMUM_NO_OF_NODES>;
+  // const maxNodeCount = <MAXIMUM_NO_OF_NODES>;
   // const location = 'YOUR_PROJECT_LOCATION';
   // const apiEndpoint = 'YOUR_API_ENDPOINT';
   // const timeout = <TIMEOUT_IN_MILLI_SECONDS>;
 
   // Imports the Google Cloud Featurestore Service Client library
-  const {FeaturestoreServiceClient} = require('@google-cloud/aiplatform').v1;
+  const {FeaturestoreServiceClient} =
+    require('@google-cloud/aiplatform').v1beta1;
 
   // Specifies the location of the api endpoint
   const clientOptions = {
@@ -61,7 +64,12 @@ async function main(
     const parent = `projects/${project}/locations/${location}`;
 
     const featurestore = {
-      onlineServingConfig: {fixedNodeCount: Number(fixedNodeCount)},
+      onlineServingConfig: {
+        scaling: {
+          minNodeCount: minNodeCount,
+          maxNodeCount: maxNodeCount,
+        },
+      },
     };
 
     const request = {
