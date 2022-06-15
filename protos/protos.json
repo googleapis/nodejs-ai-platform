@@ -8964,6 +8964,10 @@
                               "keyType": "string",
                               "type": "ThresholdConfig",
                               "id": 2
+                            },
+                            "defaultSkewThreshold": {
+                              "type": "ThresholdConfig",
+                              "id": 6
                             }
                           }
                         },
@@ -8978,6 +8982,10 @@
                               "keyType": "string",
                               "type": "ThresholdConfig",
                               "id": 2
+                            },
+                            "defaultDriftThreshold": {
+                              "type": "ThresholdConfig",
+                              "id": 5
                             }
                           }
                         },
@@ -26060,6 +26068,10 @@
                               "keyType": "string",
                               "type": "ThresholdConfig",
                               "id": 2
+                            },
+                            "defaultSkewThreshold": {
+                              "type": "ThresholdConfig",
+                              "id": 6
                             }
                           }
                         },
@@ -26074,6 +26086,10 @@
                               "keyType": "string",
                               "type": "ThresholdConfig",
                               "id": 2
+                            },
+                            "defaultDriftThreshold": {
+                              "type": "ThresholdConfig",
+                              "id": 5
                             }
                           }
                         },
