@@ -11636,6 +11636,13 @@
                           "options": {
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Model"
                           }
+                        },
+                        "modelVersionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
