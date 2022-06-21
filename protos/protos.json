@@ -17365,6 +17365,10 @@
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 24
+                        },
+                        "modelMonitoringConfig": {
+                          "type": "ModelMonitoringConfig",
+                          "id": 26
                         }
                       },
                       "nested": {
@@ -18411,6 +18415,231 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "ModelMonitoringConfig": {
+                      "fields": {
+                        "objectiveConfigs": {
+                          "rule": "repeated",
+                          "type": "ModelMonitoringObjectiveConfig",
+                          "id": 3
+                        },
+                        "alertConfig": {
+                          "type": "ModelMonitoringAlertConfig",
+                          "id": 2
+                        },
+                        "analysisInstanceSchemaUri": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ModelMonitoringObjectiveConfig": {
+                      "fields": {
+                        "trainingDataset": {
+                          "type": "TrainingDataset",
+                          "id": 1
+                        },
+                        "trainingPredictionSkewDetectionConfig": {
+                          "type": "TrainingPredictionSkewDetectionConfig",
+                          "id": 2
+                        },
+                        "predictionDriftDetectionConfig": {
+                          "type": "PredictionDriftDetectionConfig",
+                          "id": 3
+                        },
+                        "explanationConfig": {
+                          "type": "ExplanationConfig",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "TrainingDataset": {
+                          "oneofs": {
+                            "dataSource": {
+                              "oneof": [
+                                "dataset",
+                                "gcsSource",
+                                "bigquerySource"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "dataset": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                              }
+                            },
+                            "gcsSource": {
+                              "type": "GcsSource",
+                              "id": 4
+                            },
+                            "bigquerySource": {
+                              "type": "BigQuerySource",
+                              "id": 5
+                            },
+                            "dataFormat": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "targetField": {
+                              "type": "string",
+                              "id": 6
+                            },
+                            "loggingSamplingStrategy": {
+                              "type": "SamplingStrategy",
+                              "id": 7
+                            }
+                          }
+                        },
+                        "TrainingPredictionSkewDetectionConfig": {
+                          "fields": {
+                            "skewThresholds": {
+                              "keyType": "string",
+                              "type": "ThresholdConfig",
+                              "id": 1
+                            },
+                            "attributionScoreSkewThresholds": {
+                              "keyType": "string",
+                              "type": "ThresholdConfig",
+                              "id": 2
+                            },
+                            "defaultSkewThreshold": {
+                              "type": "ThresholdConfig",
+                              "id": 6
+                            }
+                          }
+                        },
+                        "PredictionDriftDetectionConfig": {
+                          "fields": {
+                            "driftThresholds": {
+                              "keyType": "string",
+                              "type": "ThresholdConfig",
+                              "id": 1
+                            },
+                            "attributionScoreDriftThresholds": {
+                              "keyType": "string",
+                              "type": "ThresholdConfig",
+                              "id": 2
+                            },
+                            "defaultDriftThreshold": {
+                              "type": "ThresholdConfig",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "ExplanationConfig": {
+                          "fields": {
+                            "enableFeatureAttributes": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "explanationBaseline": {
+                              "type": "ExplanationBaseline",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "ExplanationBaseline": {
+                              "oneofs": {
+                                "destination": {
+                                  "oneof": [
+                                    "gcs",
+                                    "bigquery"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "gcs": {
+                                  "type": "GcsDestination",
+                                  "id": 2
+                                },
+                                "bigquery": {
+                                  "type": "BigQueryDestination",
+                                  "id": 3
+                                },
+                                "predictionFormat": {
+                                  "type": "PredictionFormat",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "PredictionFormat": {
+                                  "values": {
+                                    "PREDICTION_FORMAT_UNSPECIFIED": 0,
+                                    "JSONL": 2,
+                                    "BIGQUERY": 3
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ModelMonitoringAlertConfig": {
+                      "oneofs": {
+                        "alert": {
+                          "oneof": [
+                            "emailAlertConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "emailAlertConfig": {
+                          "type": "EmailAlertConfig",
+                          "id": 1
+                        },
+                        "enableLogging": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "EmailAlertConfig": {
+                          "fields": {
+                            "userEmails": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ThresholdConfig": {
+                      "oneofs": {
+                        "threshold": {
+                          "oneof": [
+                            "value"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "value": {
+                          "type": "double",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "SamplingStrategy": {
+                      "fields": {
+                        "randomSampleConfig": {
+                          "type": "RandomSampleConfig",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "RandomSampleConfig": {
+                          "fields": {
+                            "sampleRate": {
+                              "type": "double",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -25999,214 +26228,6 @@
                               "rule": "repeated",
                               "type": "FeatureStatsAnomaly",
                               "id": 5
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ModelMonitoringObjectiveConfig": {
-                      "fields": {
-                        "trainingDataset": {
-                          "type": "TrainingDataset",
-                          "id": 1
-                        },
-                        "trainingPredictionSkewDetectionConfig": {
-                          "type": "TrainingPredictionSkewDetectionConfig",
-                          "id": 2
-                        },
-                        "predictionDriftDetectionConfig": {
-                          "type": "PredictionDriftDetectionConfig",
-                          "id": 3
-                        },
-                        "explanationConfig": {
-                          "type": "ExplanationConfig",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "TrainingDataset": {
-                          "oneofs": {
-                            "dataSource": {
-                              "oneof": [
-                                "dataset",
-                                "gcsSource",
-                                "bigquerySource"
-                              ]
-                            }
-                          },
-                          "fields": {
-                            "dataset": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
-                              }
-                            },
-                            "gcsSource": {
-                              "type": "GcsSource",
-                              "id": 4
-                            },
-                            "bigquerySource": {
-                              "type": "BigQuerySource",
-                              "id": 5
-                            },
-                            "dataFormat": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "targetField": {
-                              "type": "string",
-                              "id": 6
-                            },
-                            "loggingSamplingStrategy": {
-                              "type": "SamplingStrategy",
-                              "id": 7
-                            }
-                          }
-                        },
-                        "TrainingPredictionSkewDetectionConfig": {
-                          "fields": {
-                            "skewThresholds": {
-                              "keyType": "string",
-                              "type": "ThresholdConfig",
-                              "id": 1
-                            },
-                            "attributionScoreSkewThresholds": {
-                              "keyType": "string",
-                              "type": "ThresholdConfig",
-                              "id": 2
-                            },
-                            "defaultSkewThreshold": {
-                              "type": "ThresholdConfig",
-                              "id": 6
-                            }
-                          }
-                        },
-                        "PredictionDriftDetectionConfig": {
-                          "fields": {
-                            "driftThresholds": {
-                              "keyType": "string",
-                              "type": "ThresholdConfig",
-                              "id": 1
-                            },
-                            "attributionScoreDriftThresholds": {
-                              "keyType": "string",
-                              "type": "ThresholdConfig",
-                              "id": 2
-                            },
-                            "defaultDriftThreshold": {
-                              "type": "ThresholdConfig",
-                              "id": 5
-                            }
-                          }
-                        },
-                        "ExplanationConfig": {
-                          "fields": {
-                            "enableFeatureAttributes": {
-                              "type": "bool",
-                              "id": 1
-                            },
-                            "explanationBaseline": {
-                              "type": "ExplanationBaseline",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "ExplanationBaseline": {
-                              "oneofs": {
-                                "destination": {
-                                  "oneof": [
-                                    "gcs",
-                                    "bigquery"
-                                  ]
-                                }
-                              },
-                              "fields": {
-                                "gcs": {
-                                  "type": "GcsDestination",
-                                  "id": 2
-                                },
-                                "bigquery": {
-                                  "type": "BigQueryDestination",
-                                  "id": 3
-                                },
-                                "predictionFormat": {
-                                  "type": "PredictionFormat",
-                                  "id": 1
-                                }
-                              },
-                              "nested": {
-                                "PredictionFormat": {
-                                  "values": {
-                                    "PREDICTION_FORMAT_UNSPECIFIED": 0,
-                                    "JSONL": 2,
-                                    "BIGQUERY": 3
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ModelMonitoringAlertConfig": {
-                      "oneofs": {
-                        "alert": {
-                          "oneof": [
-                            "emailAlertConfig"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "emailAlertConfig": {
-                          "type": "EmailAlertConfig",
-                          "id": 1
-                        },
-                        "enableLogging": {
-                          "type": "bool",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "EmailAlertConfig": {
-                          "fields": {
-                            "userEmails": {
-                              "rule": "repeated",
-                              "type": "string",
-                              "id": 1
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ThresholdConfig": {
-                      "oneofs": {
-                        "threshold": {
-                          "oneof": [
-                            "value"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "value": {
-                          "type": "double",
-                          "id": 1
-                        }
-                      }
-                    },
-                    "SamplingStrategy": {
-                      "fields": {
-                        "randomSampleConfig": {
-                          "type": "RandomSampleConfig",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "RandomSampleConfig": {
-                          "fields": {
-                            "sampleRate": {
-                              "type": "double",
-                              "id": 1
                             }
                           }
                         }
