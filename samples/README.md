@@ -47,6 +47,7 @@ machine learning development lifecycle.
   * [Delete-dataset](#delete-dataset)
   * [Delete-endpoint](#delete-endpoint)
   * [Delete-export-model](#delete-export-model)
+  * [Delete-featurestore-sample](#delete-featurestore-sample)
   * [Delete-model](#delete-model)
   * [Deploy-model-custom-trained-model](#deploy-model-custom-trained-model)
   * [Deploy-model](#deploy-model)
@@ -644,6 +645,23 @@ __Usage:__
 
 
 `node samples/delete-export-model.js`
+
+
+-----
+
+
+
+
+### Delete-featurestore-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-featurestore-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-featurestore-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-featurestore-sample.js`
 
 
 -----
