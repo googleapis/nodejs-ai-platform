@@ -28665,6 +28665,26 @@
                             }
                           ]
                         },
+                        "BatchImportModelEvaluationSlices": {
+                          "requestType": "BatchImportModelEvaluationSlicesRequest",
+                          "responseType": "BatchImportModelEvaluationSlicesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/*/models/*/evaluations/*}/slices:batchImport",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,model_evaluation_slices"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/*/models/*/evaluations/*}/slices:batchImport",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,model_evaluation_slices"
+                            }
+                          ]
+                        },
                         "GetModelEvaluation": {
                           "requestType": "GetModelEvaluationRequest",
                           "responseType": "ModelEvaluation",
@@ -29071,6 +29091,38 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchImportModelEvaluationSlicesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/ModelEvaluation"
+                          }
+                        },
+                        "modelEvaluationSlices": {
+                          "rule": "repeated",
+                          "type": "ModelEvaluationSlice",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "BatchImportModelEvaluationSlicesResponse": {
+                      "fields": {
+                        "importedModelEvaluationSlices": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
