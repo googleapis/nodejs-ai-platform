@@ -1369,6 +1369,11 @@
                 "importModelEvaluation"
               ]
             },
+            "BatchImportModelEvaluationSlices": {
+              "methods": [
+                "batchImportModelEvaluationSlices"
+              ]
+            },
             "GetModelEvaluation": {
               "methods": [
                 "getModelEvaluation"
@@ -1455,6 +1460,11 @@
             "ImportModelEvaluation": {
               "methods": [
                 "importModelEvaluation"
+              ]
+            },
+            "BatchImportModelEvaluationSlices": {
+              "methods": [
+                "batchImportModelEvaluationSlices"
               ]
             },
             "GetModelEvaluation": {

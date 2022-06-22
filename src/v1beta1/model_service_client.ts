@@ -439,6 +439,7 @@ export class ModelServiceClient {
       'mergeVersionAliases',
       'exportModel',
       'importModelEvaluation',
+      'batchImportModelEvaluationSlices',
       'getModelEvaluation',
       'listModelEvaluations',
       'getModelEvaluationSlice',
@@ -953,6 +954,111 @@ export class ModelServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.importModelEvaluation(request, options, callback);
+  }
+  /**
+   * Imports a list of externally generated ModelEvaluationSlice.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the parent ModelEvaluation resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
+   * @param {number[]} request.modelEvaluationSlices
+   *   Required. Model evaluation slice resource to be imported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchImportModelEvaluationSlicesResponse]{@link google.cloud.aiplatform.v1beta1.BatchImportModelEvaluationSlicesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/model_service.batch_import_model_evaluation_slices.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_ModelService_BatchImportModelEvaluationSlices_async
+   */
+  batchImportModelEvaluationSlices(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  batchImportModelEvaluationSlices(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchImportModelEvaluationSlices(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchImportModelEvaluationSlices(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesResponse,
+          | protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IBatchImportModelEvaluationSlicesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchImportModelEvaluationSlices(
+      request,
+      options,
+      callback
+    );
   }
   /**
    * Gets a ModelEvaluation.
