@@ -2011,6 +2011,315 @@ describe('v1beta1.DatasetServiceClient', () => {
     });
   });
 
+  describe('listSavedQueries', () => {
+    it('invokes listSavedQueries without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+      ];
+      client.innerApiCalls.listSavedQueries = stubSimpleCall(expectedResponse);
+      const [response] = await client.listSavedQueries(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listSavedQueries as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listSavedQueries without error using callback', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+      ];
+      client.innerApiCalls.listSavedQueries =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listSavedQueries(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.ISavedQuery[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listSavedQueries as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listSavedQueries with error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listSavedQueries = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listSavedQueries(request), expectedError);
+      assert(
+        (client.innerApiCalls.listSavedQueries as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listSavedQueriesStream without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+      ];
+      client.descriptors.page.listSavedQueries.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listSavedQueriesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.SavedQuery[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1beta1.SavedQuery) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listSavedQueries.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSavedQueries, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listSavedQueries.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listSavedQueriesStream with error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSavedQueries.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listSavedQueriesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.SavedQuery[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1beta1.SavedQuery) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listSavedQueries.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listSavedQueries, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listSavedQueries.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listSavedQueries without error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1beta1.SavedQuery()
+        ),
+      ];
+      client.descriptors.page.listSavedQueries.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1beta1.ISavedQuery[] =
+        [];
+      const iterable = client.listSavedQueriesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSavedQueries.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listSavedQueries.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listSavedQueries with error', async () => {
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listSavedQueries.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listSavedQueriesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1beta1.ISavedQuery[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listSavedQueries.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listSavedQueries.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('listAnnotations', () => {
     it('invokes listAnnotations without error', async () => {
       const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
@@ -4959,6 +5268,82 @@ describe('v1beta1.DatasetServiceClient', () => {
         assert.strictEqual(result, 'pipelineJobValue');
         assert(
           (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('savedQuery', () => {
+      const fakePath = '/rendered/path/savedQuery';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        saved_query: 'savedQueryValue',
+      };
+      const client = new datasetserviceModule.v1beta1.DatasetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.savedQueryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.savedQueryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('savedQueryPath', () => {
+        const result = client.savedQueryPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'savedQueryValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSavedQueryName', () => {
+        const result = client.matchProjectFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSavedQueryName', () => {
+        const result = client.matchLocationFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromSavedQueryName', () => {
+        const result = client.matchDatasetFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSavedQueryFromSavedQueryName', () => {
+        const result = client.matchSavedQueryFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'savedQueryValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

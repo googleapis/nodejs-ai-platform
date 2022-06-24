@@ -3417,6 +3417,82 @@ describe('v1.MigrationServiceClient', () => {
       });
     });
 
+    describe('savedQuery', () => {
+      const fakePath = '/rendered/path/savedQuery';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        dataset: 'datasetValue',
+        saved_query: 'savedQueryValue',
+      };
+      const client = new migrationserviceModule.v1.MigrationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.savedQueryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.savedQueryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('savedQueryPath', () => {
+        const result = client.savedQueryPath(
+          'projectValue',
+          'locationValue',
+          'datasetValue',
+          'savedQueryValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromSavedQueryName', () => {
+        const result = client.matchProjectFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromSavedQueryName', () => {
+        const result = client.matchLocationFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDatasetFromSavedQueryName', () => {
+        const result = client.matchDatasetFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'datasetValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSavedQueryFromSavedQueryName', () => {
+        const result = client.matchSavedQueryFromSavedQueryName(fakePath);
+        assert.strictEqual(result, 'savedQueryValue');
+        assert(
+          (client.pathTemplates.savedQueryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('specialistPool', () => {
       const fakePath = '/rendered/path/specialistPool';
       const expectedParameters = {

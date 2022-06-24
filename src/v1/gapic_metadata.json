@@ -59,6 +59,13 @@
                 "listDataItemsAsync"
               ]
             },
+            "ListSavedQueries": {
+              "methods": [
+                "listSavedQueries",
+                "listSavedQueriesStream",
+                "listSavedQueriesAsync"
+              ]
+            },
             "ListAnnotations": {
               "methods": [
                 "listAnnotations",
@@ -118,6 +125,13 @@
                 "listDataItems",
                 "listDataItemsStream",
                 "listDataItemsAsync"
+              ]
+            },
+            "ListSavedQueries": {
+              "methods": [
+                "listSavedQueries",
+                "listSavedQueriesStream",
+                "listSavedQueriesAsync"
               ]
             },
             "ListAnnotations": {

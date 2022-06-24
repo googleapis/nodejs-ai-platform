@@ -254,6 +254,9 @@ export class MetadataServiceClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
+      savedQueryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
+      ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
@@ -6981,6 +6984,77 @@ export class MetadataServiceClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified savedQuery resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @param {string} saved_query
+   * @returns {string} Resource name string.
+   */
+  savedQueryPath(
+    project: string,
+    location: string,
+    dataset: string,
+    savedQuery: string
+  ) {
+    return this.pathTemplates.savedQueryPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      saved_query: savedQuery,
+    });
+  }
+
+  /**
+   * Parse the project from SavedQuery resource.
+   *
+   * @param {string} savedQueryName
+   *   A fully-qualified path representing SavedQuery resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSavedQueryName(savedQueryName: string) {
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .project;
+  }
+
+  /**
+   * Parse the location from SavedQuery resource.
+   *
+   * @param {string} savedQueryName
+   *   A fully-qualified path representing SavedQuery resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSavedQueryName(savedQueryName: string) {
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .location;
+  }
+
+  /**
+   * Parse the dataset from SavedQuery resource.
+   *
+   * @param {string} savedQueryName
+   *   A fully-qualified path representing SavedQuery resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromSavedQueryName(savedQueryName: string) {
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .dataset;
+  }
+
+  /**
+   * Parse the saved_query from SavedQuery resource.
+   *
+   * @param {string} savedQueryName
+   *   A fully-qualified path representing SavedQuery resource.
+   * @returns {string} A string representing the saved_query.
+   */
+  matchSavedQueryFromSavedQueryName(savedQueryName: string) {
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName)
+      .saved_query;
   }
 
   /**

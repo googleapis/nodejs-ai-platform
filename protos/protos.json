@@ -2601,6 +2601,24 @@
                             }
                           ]
                         },
+                        "ListSavedQueries": {
+                          "requestType": "ListSavedQueriesRequest",
+                          "responseType": "ListSavedQueriesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/datasets/*}/savedQueries",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/datasets/*}/savedQueries"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "GetAnnotationSpec": {
                           "requestType": "GetAnnotationSpecRequest",
                           "responseType": "AnnotationSpec",
@@ -2873,6 +2891,51 @@
                         }
                       }
                     },
+                    "ListSavedQueriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 5
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListSavedQueriesResponse": {
+                      "fields": {
+                        "savedQueries": {
+                          "rule": "repeated",
+                          "type": "SavedQuery",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "GetAnnotationSpecRequest": {
                       "fields": {
                         "name": {
@@ -2965,6 +3028,78 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        }
+                      }
+                    },
+                    "SavedQuery": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/SavedQuery",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 12
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotationFilter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "problemType": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "annotationSpecCount": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "supportAutomlTraining": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -13088,6 +13223,10 @@
                         "annotationSchemaUri": {
                           "type": "string",
                           "id": 9
+                        },
+                        "savedQueryId": {
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
@@ -19946,6 +20085,24 @@
                             }
                           ]
                         },
+                        "ListSavedQueries": {
+                          "requestType": "ListSavedQueriesRequest",
+                          "responseType": "ListSavedQueriesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/datasets/*}/savedQueries",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/*/datasets/*}/savedQueries"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "GetAnnotationSpec": {
                           "requestType": "GetAnnotationSpecRequest",
                           "responseType": "AnnotationSpec",
@@ -20218,6 +20375,51 @@
                         }
                       }
                     },
+                    "ListSavedQueriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 5
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListSavedQueriesResponse": {
+                      "fields": {
+                        "savedQueries": {
+                          "rule": "repeated",
+                          "type": "SavedQuery",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "GetAnnotationSpecRequest": {
                       "fields": {
                         "name": {
@@ -20310,6 +20512,78 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        }
+                      }
+                    },
+                    "SavedQuery": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/SavedQuery",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 12
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotationFilter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "problemType": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "annotationSpecCount": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "supportAutomlTraining": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -30322,6 +30596,10 @@
                         "annotationSchemaUri": {
                           "type": "string",
                           "id": 9
+                        },
+                        "savedQueryId": {
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
