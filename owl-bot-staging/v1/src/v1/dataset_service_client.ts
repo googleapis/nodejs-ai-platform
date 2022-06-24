@@ -238,6 +238,9 @@ export class DatasetServiceClient {
       pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
+      savedQueryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}'
+      ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
       ),
@@ -272,6 +275,8 @@ export class DatasetServiceClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'datasets'),
       listDataItems:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'dataItems'),
+      listSavedQueries:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'savedQueries'),
       listAnnotations:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'annotations')
     };
@@ -365,7 +370,7 @@ export class DatasetServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const datasetServiceStubMethods =
-        ['createDataset', 'getDataset', 'updateDataset', 'listDatasets', 'deleteDataset', 'importData', 'exportData', 'listDataItems', 'getAnnotationSpec', 'listAnnotations'];
+        ['createDataset', 'getDataset', 'updateDataset', 'listDatasets', 'deleteDataset', 'importData', 'exportData', 'listDataItems', 'listSavedQueries', 'getAnnotationSpec', 'listAnnotations'];
     for (const methodName of datasetServiceStubMethods) {
       const callPromise = this.datasetServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -1499,6 +1504,206 @@ export class DatasetServiceClient {
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IDataItem>;
+  }
+ /**
+ * Lists SavedQueries in a Dataset.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Dataset to list SavedQueries from.
+ *   Format:
+ *   `projects/{project}/locations/{location}/datasets/{dataset}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {string} request.orderBy
+ *   A comma-separated list of fields to order by, sorted in ascending order.
+ *   Use "desc" after a field name for descending.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of [SavedQuery]{@link google.cloud.aiplatform.v1.SavedQuery}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listSavedQueriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
+  listSavedQueries(
+      request?: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.aiplatform.v1.ISavedQuery[],
+        protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest|null,
+        protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse
+      ]>;
+  listSavedQueries(
+      request: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1.ISavedQuery>): void;
+  listSavedQueries(
+      request: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1.ISavedQuery>): void;
+  listSavedQueries(
+      request?: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1.ISavedQuery>,
+      callback?: PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+          protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse|null|undefined,
+          protos.google.cloud.aiplatform.v1.ISavedQuery>):
+      Promise<[
+        protos.google.cloud.aiplatform.v1.ISavedQuery[],
+        protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest|null,
+        protos.google.cloud.aiplatform.v1.IListSavedQueriesResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'parent': request.parent || '',
+    });
+    this.initialize();
+    return this.innerApiCalls.listSavedQueries(request, options, callback);
+  }
+
+/**
+ * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Dataset to list SavedQueries from.
+ *   Format:
+ *   `projects/{project}/locations/{location}/datasets/{dataset}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {string} request.orderBy
+ *   A comma-separated list of fields to order by, sorted in ascending order.
+ *   Use "desc" after a field name for descending.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing [SavedQuery]{@link google.cloud.aiplatform.v1.SavedQuery} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listSavedQueriesAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ */
+  listSavedQueriesStream(
+      request?: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'parent': request.parent || '',
+    });
+    const defaultCallSettings = this._defaults['listSavedQueries'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSavedQueries.createStream(
+      this.innerApiCalls.listSavedQueries as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listSavedQueries`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The resource name of the Dataset to list SavedQueries from.
+ *   Format:
+ *   `projects/{project}/locations/{location}/datasets/{dataset}`
+ * @param {string} request.filter
+ *   The standard list filter.
+ * @param {number} request.pageSize
+ *   The standard list page size.
+ * @param {string} request.pageToken
+ *   The standard list page token.
+ * @param {google.protobuf.FieldMask} request.readMask
+ *   Mask specifying which fields to read.
+ * @param {string} request.orderBy
+ *   A comma-separated list of fields to order by, sorted in ascending order.
+ *   Use "desc" after a field name for descending.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   [SavedQuery]{@link google.cloud.aiplatform.v1.SavedQuery}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dataset_service.list_saved_queries.js</caption>
+ * region_tag:aiplatform_v1_generated_DatasetService_ListSavedQueries_async
+ */
+  listSavedQueriesAsync(
+      request?: protos.google.cloud.aiplatform.v1.IListSavedQueriesRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.aiplatform.v1.ISavedQuery>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'parent': request.parent || '',
+    });
+    const defaultCallSettings = this._defaults['listSavedQueries'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.listSavedQueries.asyncIterate(
+      this.innerApiCalls['listSavedQueries'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.ISavedQuery>;
   }
  /**
  * Lists Annotations belongs to a dataitem
@@ -3493,6 +3698,68 @@ export class DatasetServiceClient {
    */
   matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
     return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName).pipeline_job;
+  }
+
+  /**
+   * Return a fully-qualified savedQuery resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} dataset
+   * @param {string} saved_query
+   * @returns {string} Resource name string.
+   */
+  savedQueryPath(project:string,location:string,dataset:string,savedQuery:string) {
+    return this.pathTemplates.savedQueryPathTemplate.render({
+      project: project,
+      location: location,
+      dataset: dataset,
+      saved_query: savedQuery,
+    });
+  }
+
+  /**
+   * Parse the project from SavedQuery resource.
+   *
+   * @param {string} savedQueryName
+   *   A fully-qualified path representing SavedQuery resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromSavedQueryName(savedQueryName: string) {
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).project;
+  }
+
+  /**
+   * Parse the location from SavedQuery resource.
+   *
+   * @param {string} savedQueryName
+   *   A fully-qualified path representing SavedQuery resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromSavedQueryName(savedQueryName: string) {
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).location;
+  }
+
+  /**
+   * Parse the dataset from SavedQuery resource.
+   *
+   * @param {string} savedQueryName
+   *   A fully-qualified path representing SavedQuery resource.
+   * @returns {string} A string representing the dataset.
+   */
+  matchDatasetFromSavedQueryName(savedQueryName: string) {
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).dataset;
+  }
+
+  /**
+   * Parse the saved_query from SavedQuery resource.
+   *
+   * @param {string} savedQueryName
+   *   A fully-qualified path representing SavedQuery resource.
+   * @returns {string} A string representing the saved_query.
+   */
+  matchSavedQueryFromSavedQueryName(savedQueryName: string) {
+    return this.pathTemplates.savedQueryPathTemplate.match(savedQueryName).saved_query;
   }
 
   /**
