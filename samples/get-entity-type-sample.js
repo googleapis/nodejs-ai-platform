@@ -28,7 +28,7 @@ async function main(
   entityTypeId,
   location = 'us-central1',
   apiEndpoint = 'us-central1-aiplatform.googleapis.com',
-  timeout = 300000
+  timeout = 5000
 ) {
   // [START aiplatform_get_entity_type_sample]
   /**

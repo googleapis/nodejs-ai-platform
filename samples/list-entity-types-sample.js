@@ -27,7 +27,7 @@ async function main(
   featurestoreId,
   location = 'us-central1',
   apiEndpoint = 'us-central1-aiplatform.googleapis.com',
-  timeout = 300000
+  timeout = 5000
 ) {
   // [START aiplatform_list_entity_types_sample]
   /**
