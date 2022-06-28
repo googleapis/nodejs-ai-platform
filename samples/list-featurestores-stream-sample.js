@@ -26,7 +26,7 @@ async function main(
   project,
   location = 'us-central1',
   apiEndpoint = 'us-central1-aiplatform.googleapis.com',
-  timeout = 300000
+  timeout = 5000
 ) {
   // [START aiplatform_list_featurestores_stream_sample]
   /**

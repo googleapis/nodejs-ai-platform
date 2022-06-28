@@ -29,7 +29,7 @@ async function main(
   maxNodeCount = 3,
   location = 'us-central1',
   apiEndpoint = 'us-central1-aiplatform.googleapis.com',
-  timeout = 300000
+  timeout = 600000
 ) {
   // [START aiplatform_update_featurestore_sample]
   /**
