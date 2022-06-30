@@ -15,6 +15,7 @@ machine learning development lifecycle.
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Batch-read-feature-values-sample](#batch-read-feature-values-sample)
   * [Cancel-batch-prediction-job](#cancel-batch-prediction-job)
   * [Cancel-custom-job](#cancel-custom-job)
   * [Create-batch-prediction-job-text-classification](#create-batch-prediction-job-text-classification)
@@ -52,6 +53,8 @@ machine learning development lifecycle.
   * [Delete-model](#delete-model)
   * [Deploy-model-custom-trained-model](#deploy-model-custom-trained-model)
   * [Deploy-model](#deploy-model)
+  * [Export-feature-values-sample](#export-feature-values-sample)
+  * [Export-feature-values-snapshot-sample](#export-feature-values-snapshot-sample)
   * [Export-model-tabular-classification](#export-model-tabular-classification)
   * [Export-model](#export-model)
   * [Get-batch-prediction-job](#get-batch-prediction-job)
@@ -80,6 +83,7 @@ machine learning development lifecycle.
   * [Import-data-video-classification](#import-data-video-classification)
   * [Import-data-video-object-tracking](#import-data-video-object-tracking)
   * [Import-data](#import-data)
+  * [Import-feature-values-sample](#import-feature-values-sample)
   * [List-endpoints](#list-endpoints)
   * [List-model-evaluation-slices](#list-model-evaluation-slices)
   * [Predict-custom-trained-model](#predict-custom-trained-model)
@@ -91,6 +95,7 @@ machine learning development lifecycle.
   * [Predict-text-entity-extraction](#predict-text-entity-extraction)
   * [Predict-text-sentiment-analysis](#predict-text-sentiment-analysis)
   * [Quickstart](#quickstart)
+  * [Read-feature-values-sample](#read-feature-values-sample)
   * [Undeploy-model](#undeploy-model)
   * [Upload-model](#upload-model)
 
@@ -106,6 +111,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Batch-read-feature-values-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/batch-read-feature-values-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/batch-read-feature-values-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/batch-read-feature-values-sample.js`
+
+
+-----
+
 
 
 
@@ -738,6 +760,40 @@ __Usage:__
 
 
 
+### Export-feature-values-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/export-feature-values-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/export-feature-values-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/export-feature-values-sample.js`
+
+
+-----
+
+
+
+
+### Export-feature-values-snapshot-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/export-feature-values-snapshot-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/export-feature-values-snapshot-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/export-feature-values-snapshot-sample.js`
+
+
+-----
+
+
+
+
 ### Export-model-tabular-classification
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/export-model-tabular-classification.js).
@@ -1214,6 +1270,23 @@ __Usage:__
 
 
 
+### Import-feature-values-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-feature-values-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-feature-values-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-feature-values-sample.js`
+
+
+-----
+
+
+
+
 ### List-endpoints
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-endpoints.js).
@@ -1394,6 +1467,23 @@ __Usage:__
 
 
 `node samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Read-feature-values-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/read-feature-values-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/read-feature-values-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/read-feature-values-sample.js`
 
 
 -----
