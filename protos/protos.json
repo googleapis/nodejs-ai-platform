@@ -20703,7 +20703,8 @@
                         "predictionResources": {
                           "oneof": [
                             "dedicatedResources",
-                            "automaticResources"
+                            "automaticResources",
+                            "sharedResources"
                           ]
                         }
                       },
@@ -20715,6 +20716,13 @@
                         "automaticResources": {
                           "type": "AutomaticResources",
                           "id": 8
+                        },
+                        "sharedResources": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/DeploymentResourcePool"
+                          }
                         },
                         "id": {
                           "type": "string",
