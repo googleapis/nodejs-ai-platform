@@ -149,7 +149,7 @@ describe('AI platform feature api samples', async function () {
     const stdout = execSync(
       `node ./list-features-stream-sample.js ${project} ${featurestoreId} ${entityTypeId} ${location} ${apiEndpoint}`
     );
-    assert.match(stdout, /Stream object listFeaturesStream is closed/);
+    assert.match(stdout, /List features stream response/);
   });
   it('should search features', async () => {
     const stdout = execSync(
@@ -167,7 +167,7 @@ describe('AI platform feature api samples', async function () {
     const stdout = execSync(
       `node ./search-features-stream-sample.js ${project} "${query}" ${location} ${apiEndpoint}`
     );
-    assert.match(stdout, /Stream object searchFeaturesStream is closed/);
+    assert.match(stdout, /Search features stream response/);
   });
   it('should update the feature', async () => {
     const stdout = execSync(
