@@ -106,7 +106,7 @@ describe('AI platform entity type api samples test', async function () {
     const stdout = execSync(
       `node ./list-entity-types-stream-sample.js ${project} ${featurestoreId} ${location} ${apiEndpoint}`
     );
-    assert.match(stdout, /Stream object listEntityTypesStream is closed/);
+    assert.match(stdout, /List entity types stream response/);
   });
   it('should update the entity type', async () => {
     const stdout = execSync(
