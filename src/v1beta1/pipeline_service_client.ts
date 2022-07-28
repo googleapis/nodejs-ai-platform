@@ -2411,21 +2411,22 @@ export class PipelineServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *     * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
+   *     * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`
+   *     * `NOT display_name="my_pipeline"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `training_task_definition:"*automl_text_classification*"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -2532,21 +2533,22 @@ export class PipelineServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *     * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
+   *     * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`
+   *     * `NOT display_name="my_pipeline"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `training_task_definition:"*automl_text_classification*"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -2601,21 +2603,22 @@ export class PipelineServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *     * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
+   *     * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`
+   *     * `NOT display_name="my_pipeline"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `training_task_definition:"*automl_text_classification*"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -2674,8 +2677,8 @@ export class PipelineServiceClient {
    *   * `pipeline_name`: Supports `=` and `!=` comparisons.
    *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *    for example, can check if pipeline's display_name contains *step* by doing
-   *     display_name:\"*step*\"
+   *     for example, can check if pipeline's display_name contains *step* by
+   *     doing display_name:\"*step*\"
    *   * `state`: Supports `=` and `!=` comparisons.
    *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
    *     Values must be in RFC 3339 format.
@@ -2686,7 +2689,7 @@ export class PipelineServiceClient {
    *   * `labels`: Supports key-value equality and key presence.
    *   * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-   *   wildcard.
+   *     wildcard.
    *
    *   Filter expressions can be combined together using logical operators
    *   (`AND` & `OR`).
@@ -2718,6 +2721,7 @@ export class PipelineServiceClient {
    *   there are multiple jobs having the same create time, order them by the end
    *   time in ascending order. if order_by is not specified, it will order by
    *   default order is create time in descending order. Supported fields:
+   *
    *     * `create_time`
    *     * `update_time`
    *     * `end_time`
@@ -2824,8 +2828,8 @@ export class PipelineServiceClient {
    *   * `pipeline_name`: Supports `=` and `!=` comparisons.
    *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *    for example, can check if pipeline's display_name contains *step* by doing
-   *     display_name:\"*step*\"
+   *     for example, can check if pipeline's display_name contains *step* by
+   *     doing display_name:\"*step*\"
    *   * `state`: Supports `=` and `!=` comparisons.
    *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
    *     Values must be in RFC 3339 format.
@@ -2836,7 +2840,7 @@ export class PipelineServiceClient {
    *   * `labels`: Supports key-value equality and key presence.
    *   * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-   *   wildcard.
+   *     wildcard.
    *
    *   Filter expressions can be combined together using logical operators
    *   (`AND` & `OR`).
@@ -2868,6 +2872,7 @@ export class PipelineServiceClient {
    *   there are multiple jobs having the same create time, order them by the end
    *   time in ascending order. if order_by is not specified, it will order by
    *   default order is create time in descending order. Supported fields:
+   *
    *     * `create_time`
    *     * `update_time`
    *     * `end_time`
@@ -2922,8 +2927,8 @@ export class PipelineServiceClient {
    *   * `pipeline_name`: Supports `=` and `!=` comparisons.
    *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *    for example, can check if pipeline's display_name contains *step* by doing
-   *     display_name:\"*step*\"
+   *     for example, can check if pipeline's display_name contains *step* by
+   *     doing display_name:\"*step*\"
    *   * `state`: Supports `=` and `!=` comparisons.
    *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
    *     Values must be in RFC 3339 format.
@@ -2934,7 +2939,7 @@ export class PipelineServiceClient {
    *   * `labels`: Supports key-value equality and key presence.
    *   * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-   *   wildcard.
+   *     wildcard.
    *
    *   Filter expressions can be combined together using logical operators
    *   (`AND` & `OR`).
@@ -2966,6 +2971,7 @@ export class PipelineServiceClient {
    *   there are multiple jobs having the same create time, order them by the end
    *   time in ascending order. if order_by is not specified, it will order by
    *   default order is create time in descending order. Supported fields:
+   *
    *     * `create_time`
    *     * `update_time`
    *     * `end_time`

@@ -4137,19 +4137,17 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4259,19 +4257,17 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4329,19 +4325,17 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4398,19 +4392,17 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4524,19 +4516,17 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4598,19 +4588,17 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4671,19 +4659,17 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4797,19 +4783,17 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4867,19 +4851,17 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4936,21 +4918,18 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
-   *
-   *     * `model_display_name` supports = and !=
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `model_display_name` supports `=`, `!=` comparisons.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5064,21 +5043,18 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
-   *
-   *     * `model_display_name` supports = and !=
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `model_display_name` supports `=`, `!=` comparisons.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5136,21 +5112,18 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
-   *
-   *     * `model_display_name` supports = and !=
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `model_display_name` supports `=`, `!=` comparisons.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5465,6 +5438,20 @@ export class JobServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5572,6 +5559,20 @@ export class JobServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5624,6 +5625,20 @@ export class JobServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
