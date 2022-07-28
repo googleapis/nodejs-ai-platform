@@ -73,7 +73,7 @@ describe('AI platform featurestore api samples test', async function () {
     const stdout = execSync(
       `node ./list-featurestores-stream-sample.js ${project} ${location} ${apiEndpoint}`
     );
-    assert.match(stdout, /Stream object listFeaturestoresStream is closed/);
+    assert.match(stdout, /List featurestores stream response/);
   });
   it('should update featurestores fixed nodes', async () => {
     const stdout = execSync(
