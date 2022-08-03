@@ -15,8 +15,8 @@ machine learning development lifecycle.
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Batch-read-feature-values-sample](#batch-read-feature-values-sample)
   * [Batch-create-features-sample](#batch-create-features-sample)
+  * [Batch-read-feature-values-sample](#batch-read-feature-values-sample)
   * [Cancel-batch-prediction-job](#cancel-batch-prediction-job)
   * [Cancel-custom-job](#cancel-custom-job)
   * [Create-batch-prediction-job-text-classification](#create-batch-prediction-job-text-classification)
@@ -141,23 +141,6 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Batch-read-feature-values-sample
-
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/batch-read-feature-values-sample.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/batch-read-feature-values-sample.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/batch-read-feature-values-sample.js`
-
-
------
-
-
-
-
 ### Batch-create-features-sample
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/batch-create-features-sample.js).
@@ -168,6 +151,23 @@ __Usage:__
 
 
 `node samples/batch-create-features-sample.js`
+
+
+-----
+
+
+
+
+### Batch-read-feature-values-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/batch-read-feature-values-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/batch-read-feature-values-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/batch-read-feature-values-sample.js`
 
 
 -----
