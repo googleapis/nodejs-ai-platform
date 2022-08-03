@@ -33,6 +33,8 @@ machine learning development lifecycle.
   * [Create-dataset](#create-dataset)
   * [Create-endpoint](#create-endpoint)
   * [Create-feature-sample](#create-feature-sample)
+  * [Create-entity-type-monitoring-sample](#create-entity-type-monitoring-sample)
+  * [Create-entity-type-sample](#create-entity-type-sample)
   * [Create-featurestore-fixed-nodes-sample](#create-featurestore-fixed-nodes-sample)
   * [Create-featurestore-sample](#create-featurestore-sample)
   * [Create-hyperparameter-tuning-job](#create-hyperparameter-tuning-job)
@@ -50,6 +52,7 @@ machine learning development lifecycle.
   * [Delete-custom-job](#delete-custom-job)
   * [Delete-dataset](#delete-dataset)
   * [Delete-endpoint](#delete-endpoint)
+  * [Delete-entity-type-sample](#delete-entity-type-sample)
   * [Delete-export-model](#delete-export-model)
   * [Delete-feature-sample](#delete-feature-sample)
   * [Delete-featurestore-sample](#delete-featurestore-sample)
@@ -61,6 +64,7 @@ machine learning development lifecycle.
   * [Get-batch-prediction-job](#get-batch-prediction-job)
   * [Get-custom-job](#get-custom-job)
   * [Get-feature-sample](#get-feature-sample)
+  * [Get-entity-type-sample](#get-entity-type-sample)
   * [Get-featurestore-sample](#get-featurestore-sample)
   * [Get-hyperparameter-tuning-job](#get-hyperparameter-tuning-job)
   * [Get-model-evaluation-image-classification](#get-model-evaluation-image-classification)
@@ -90,6 +94,9 @@ machine learning development lifecycle.
   * [List-features-async-sample](#list-features-async-sample)
   * [List-features-sample](#list-features-sample)
   * [List-features-stream-sample](#list-features-stream-sample)
+  * [List-entity-types-async-sample](#list-entity-types-async-sample)
+  * [List-entity-types-sample](#list-entity-types-sample)
+  * [List-entity-types-stream-sample](#list-entity-types-stream-sample)
   * [List-featurestores-async-sample](#list-featurestores-async-sample)
   * [List-featurestores-sample](#list-featurestores-sample)
   * [List-featurestores-stream-sample](#list-featurestores-stream-sample)
@@ -108,6 +115,8 @@ machine learning development lifecycle.
   * [Search-features-stream-sample](#search-features-stream-sample)
   * [Undeploy-model](#undeploy-model)
   * [Update-feature-sample](#update-feature-sample)
+  * [Update-entity-type-monitoring-sample](#update-entity-type-monitoring-sample)
+  * [Update-entity-type-sample](#update-entity-type-sample)
   * [Update-featurestore-fixed-nodes-sample](#update-featurestore-fixed-nodes-sample)
   * [Update-featurestore-sample](#update-featurestore-sample)
   * [Upload-model](#upload-model)
@@ -433,6 +442,40 @@ __Usage:__
 
 
 
+### Create-entity-type-monitoring-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-entity-type-monitoring-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-entity-type-monitoring-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-entity-type-monitoring-sample.js`
+
+
+-----
+
+
+
+
+### Create-entity-type-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-entity-type-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-entity-type-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-entity-type-sample.js`
+
+
+-----
+
+
+
+
 ### Create-featurestore-fixed-nodes-sample
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-featurestore-fixed-nodes-sample.js).
@@ -722,6 +765,23 @@ __Usage:__
 
 
 
+### Delete-entity-type-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-entity-type-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-entity-type-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-entity-type-sample.js`
+
+
+-----
+
+
+
+
 ### Delete-export-model
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-export-model.js).
@@ -902,6 +962,23 @@ __Usage:__
 
 
 `node samples/get-feature-sample.js`
+
+
+-----
+
+
+
+
+### Get-entity-type-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-entity-type-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-entity-type-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-entity-type-sample.js`
 
 
 -----
@@ -1368,6 +1445,23 @@ __Usage:__
 
 
 
+### List-entity-types-async-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-entity-types-async-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-entity-types-async-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-entity-types-async-sample.js`
+
+
+-----
+
+
+
+
 ### List-features-sample
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-features-sample.js).
@@ -1385,6 +1479,23 @@ __Usage:__
 
 
 
+### List-entity-types-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-entity-types-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-entity-types-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-entity-types-sample.js`
+
+
+-----
+
+
+
+
 ### List-features-stream-sample
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-features-stream-sample.js).
@@ -1395,6 +1506,23 @@ __Usage:__
 
 
 `node samples/list-features-stream-sample.js`
+
+
+-----
+
+
+
+
+### List-entity-types-stream-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-entity-types-stream-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-entity-types-stream-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-entity-types-stream-sample.js`
 
 
 -----
@@ -1701,6 +1829,40 @@ __Usage:__
 
 
 `node samples/update-feature-sample.js`
+
+
+-----
+
+
+
+
+### Update-entity-type-monitoring-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/update-entity-type-monitoring-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/update-entity-type-monitoring-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update-entity-type-monitoring-sample.js`
+
+
+-----
+
+
+
+
+### Update-entity-type-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/update-entity-type-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/update-entity-type-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update-entity-type-sample.js`
 
 
 -----
