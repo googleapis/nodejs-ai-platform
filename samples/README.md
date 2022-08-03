@@ -52,6 +52,7 @@ machine learning development lifecycle.
   * [Delete-endpoint](#delete-endpoint)
   * [Delete-export-model](#delete-export-model)
   * [Delete-feature-sample](#delete-feature-sample)
+  * [Delete-featurestore-sample](#delete-featurestore-sample)
   * [Delete-model](#delete-model)
   * [Deploy-model-custom-trained-model](#deploy-model-custom-trained-model)
   * [Deploy-model](#deploy-model)
@@ -60,6 +61,7 @@ machine learning development lifecycle.
   * [Get-batch-prediction-job](#get-batch-prediction-job)
   * [Get-custom-job](#get-custom-job)
   * [Get-feature-sample](#get-feature-sample)
+  * [Get-featurestore-sample](#get-featurestore-sample)
   * [Get-hyperparameter-tuning-job](#get-hyperparameter-tuning-job)
   * [Get-model-evaluation-image-classification](#get-model-evaluation-image-classification)
   * [Get-model-evaluation-image-object-detection](#get-model-evaluation-image-object-detection)
@@ -88,6 +90,9 @@ machine learning development lifecycle.
   * [List-features-async-sample](#list-features-async-sample)
   * [List-features-sample](#list-features-sample)
   * [List-features-stream-sample](#list-features-stream-sample)
+  * [List-featurestores-async-sample](#list-featurestores-async-sample)
+  * [List-featurestores-sample](#list-featurestores-sample)
+  * [List-featurestores-stream-sample](#list-featurestores-stream-sample)
   * [List-model-evaluation-slices](#list-model-evaluation-slices)
   * [Predict-custom-trained-model](#predict-custom-trained-model)
   * [Predict-image-classification](#predict-image-classification)
@@ -103,6 +108,8 @@ machine learning development lifecycle.
   * [Search-features-stream-sample](#search-features-stream-sample)
   * [Undeploy-model](#undeploy-model)
   * [Update-feature-sample](#update-feature-sample)
+  * [Update-featurestore-fixed-nodes-sample](#update-featurestore-fixed-nodes-sample)
+  * [Update-featurestore-sample](#update-featurestore-sample)
   * [Upload-model](#upload-model)
 
 ## Before you begin
@@ -732,6 +739,7 @@ __Usage:__
 
 
 
+
 ### Delete-feature-sample
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-feature-sample.js).
@@ -742,6 +750,25 @@ __Usage:__
 
 
 `node samples/delete-feature-sample.js`
+
+
+-----
+
+
+
+
+### Delete-featurestore-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-featurestore-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-featurestore-sample.js,samples/README.md)
+
+__Usage:__
+
+
+
+`node samples/delete-featurestore-sample.js`
+
 
 
 -----
@@ -878,6 +905,23 @@ __Usage:__
 
 
 `node samples/get-feature-sample.js`
+
+
+-----
+
+
+
+
+### Get-featurestore-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-featurestore-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-featurestore-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-featurestore-sample.js`
 
 
 -----
@@ -1310,6 +1354,7 @@ __Usage:__
 
 
 
+
 ### List-features-async-sample
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-features-async-sample.js).
@@ -1320,6 +1365,23 @@ __Usage:__
 
 
 `node samples/list-features-async-sample.js`
+
+
+-----
+
+
+
+
+### List-featurestores-async-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-featurestores-async-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-featurestores-async-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-featurestores-async-sample.js`
 
 
 -----
@@ -1344,6 +1406,23 @@ __Usage:__
 
 
 
+### List-featurestores-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-featurestores-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-featurestores-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-featurestores-sample.js`
+
+
+-----
+
+
+
+
 ### List-features-stream-sample
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-features-stream-sample.js).
@@ -1354,6 +1433,23 @@ __Usage:__
 
 
 `node samples/list-features-stream-sample.js`
+
+
+-----
+
+
+
+
+### List-featurestores-stream-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-featurestores-stream-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-featurestores-stream-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-featurestores-stream-sample.js`
 
 
 -----
@@ -1616,6 +1712,40 @@ __Usage:__
 
 
 
+### Update-featurestore-fixed-nodes-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/update-featurestore-fixed-nodes-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/update-featurestore-fixed-nodes-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update-featurestore-fixed-nodes-sample.js`
+
+
+-----
+
+
+
+
+### Update-featurestore-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/update-featurestore-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/update-featurestore-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update-featurestore-sample.js`
+
+
+-----
+
+
+
+
 ### Upload-model
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/upload-model.js).
@@ -1628,7 +1758,7 @@ __Usage:__
 `node samples/upload-model.js`
 
 
-
+-----
 
 
 
