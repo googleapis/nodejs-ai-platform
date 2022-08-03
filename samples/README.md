@@ -739,7 +739,6 @@ __Usage:__
 
 
 
-
 ### Delete-feature-sample
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-feature-sample.js).
@@ -766,9 +765,7 @@ View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/mai
 __Usage:__
 
 
-
 `node samples/delete-featurestore-sample.js`
-
 
 
 -----
@@ -1354,7 +1351,6 @@ __Usage:__
 
 
 
-
 ### List-features-async-sample
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-features-async-sample.js).
@@ -1365,23 +1361,6 @@ __Usage:__
 
 
 `node samples/list-features-async-sample.js`
-
-
------
-
-
-
-
-### List-featurestores-async-sample
-
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-featurestores-async-sample.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-featurestores-async-sample.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/list-featurestores-async-sample.js`
 
 
 -----
@@ -1406,23 +1385,6 @@ __Usage:__
 
 
 
-### List-featurestores-sample
-
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-featurestores-sample.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-featurestores-sample.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/list-featurestores-sample.js`
-
-
------
-
-
-
-
 ### List-features-stream-sample
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-features-stream-sample.js).
@@ -1433,6 +1395,40 @@ __Usage:__
 
 
 `node samples/list-features-stream-sample.js`
+
+
+-----
+
+
+
+
+### List-featurestores-async-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-featurestores-async-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-featurestores-async-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-featurestores-async-sample.js`
+
+
+-----
+
+
+
+
+### List-featurestores-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-featurestores-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-featurestores-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-featurestores-sample.js`
 
 
 -----
@@ -1758,7 +1754,7 @@ __Usage:__
 `node samples/upload-model.js`
 
 
------
+
 
 
 
