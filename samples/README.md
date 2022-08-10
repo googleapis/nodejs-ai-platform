@@ -15,6 +15,8 @@ machine learning development lifecycle.
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Batch-create-features-sample](#batch-create-features-sample)
+  * [Batch-read-feature-values-sample](#batch-read-feature-values-sample)
   * [Cancel-batch-prediction-job](#cancel-batch-prediction-job)
   * [Cancel-custom-job](#cancel-custom-job)
   * [Create-batch-prediction-job-text-classification](#create-batch-prediction-job-text-classification)
@@ -31,6 +33,9 @@ machine learning development lifecycle.
   * [Create-dataset-video](#create-dataset-video)
   * [Create-dataset](#create-dataset)
   * [Create-endpoint](#create-endpoint)
+  * [Create-entity-type-monitoring-sample](#create-entity-type-monitoring-sample)
+  * [Create-entity-type-sample](#create-entity-type-sample)
+  * [Create-feature-sample](#create-feature-sample)
   * [Create-featurestore-fixed-nodes-sample](#create-featurestore-fixed-nodes-sample)
   * [Create-featurestore-sample](#create-featurestore-sample)
   * [Create-hyperparameter-tuning-job](#create-hyperparameter-tuning-job)
@@ -48,14 +53,22 @@ machine learning development lifecycle.
   * [Delete-custom-job](#delete-custom-job)
   * [Delete-dataset](#delete-dataset)
   * [Delete-endpoint](#delete-endpoint)
+  * [Delete-entity-type-sample](#delete-entity-type-sample)
   * [Delete-export-model](#delete-export-model)
+  * [Delete-feature-sample](#delete-feature-sample)
+  * [Delete-featurestore-sample](#delete-featurestore-sample)
   * [Delete-model](#delete-model)
   * [Deploy-model-custom-trained-model](#deploy-model-custom-trained-model)
   * [Deploy-model](#deploy-model)
+  * [Export-feature-values-sample](#export-feature-values-sample)
+  * [Export-feature-values-snapshot-sample](#export-feature-values-snapshot-sample)
   * [Export-model-tabular-classification](#export-model-tabular-classification)
   * [Export-model](#export-model)
   * [Get-batch-prediction-job](#get-batch-prediction-job)
   * [Get-custom-job](#get-custom-job)
+  * [Get-entity-type-sample](#get-entity-type-sample)
+  * [Get-feature-sample](#get-feature-sample)
+  * [Get-featurestore-sample](#get-featurestore-sample)
   * [Get-hyperparameter-tuning-job](#get-hyperparameter-tuning-job)
   * [Get-model-evaluation-image-classification](#get-model-evaluation-image-classification)
   * [Get-model-evaluation-image-object-detection](#get-model-evaluation-image-object-detection)
@@ -80,7 +93,17 @@ machine learning development lifecycle.
   * [Import-data-video-classification](#import-data-video-classification)
   * [Import-data-video-object-tracking](#import-data-video-object-tracking)
   * [Import-data](#import-data)
+  * [Import-feature-values-sample](#import-feature-values-sample)
   * [List-endpoints](#list-endpoints)
+  * [List-entity-types-async-sample](#list-entity-types-async-sample)
+  * [List-entity-types-sample](#list-entity-types-sample)
+  * [List-entity-types-stream-sample](#list-entity-types-stream-sample)
+  * [List-features-async-sample](#list-features-async-sample)
+  * [List-features-sample](#list-features-sample)
+  * [List-features-stream-sample](#list-features-stream-sample)
+  * [List-featurestores-async-sample](#list-featurestores-async-sample)
+  * [List-featurestores-sample](#list-featurestores-sample)
+  * [List-featurestores-stream-sample](#list-featurestores-stream-sample)
   * [List-model-evaluation-slices](#list-model-evaluation-slices)
   * [Predict-custom-trained-model](#predict-custom-trained-model)
   * [Predict-image-classification](#predict-image-classification)
@@ -91,7 +114,16 @@ machine learning development lifecycle.
   * [Predict-text-entity-extraction](#predict-text-entity-extraction)
   * [Predict-text-sentiment-analysis](#predict-text-sentiment-analysis)
   * [Quickstart](#quickstart)
+  * [Read-feature-values-sample](#read-feature-values-sample)
+  * [Search-features-async-sample](#search-features-async-sample)
+  * [Search-features-sample](#search-features-sample)
+  * [Search-features-stream-sample](#search-features-stream-sample)
   * [Undeploy-model](#undeploy-model)
+  * [Update-entity-type-monitoring-sample](#update-entity-type-monitoring-sample)
+  * [Update-entity-type-sample](#update-entity-type-sample)
+  * [Update-feature-sample](#update-feature-sample)
+  * [Update-featurestore-fixed-nodes-sample](#update-featurestore-fixed-nodes-sample)
+  * [Update-featurestore-sample](#update-featurestore-sample)
   * [Upload-model](#upload-model)
 
 ## Before you begin
@@ -106,6 +138,40 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Batch-create-features-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/batch-create-features-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/batch-create-features-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/batch-create-features-sample.js`
+
+
+-----
+
+
+
+
+### Batch-read-feature-values-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/batch-read-feature-values-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/batch-read-feature-values-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/batch-read-feature-values-sample.js`
+
+
+-----
+
 
 
 
@@ -374,6 +440,57 @@ __Usage:__
 
 
 `node samples/create-endpoint.js`
+
+
+-----
+
+
+
+
+### Create-entity-type-monitoring-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-entity-type-monitoring-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-entity-type-monitoring-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-entity-type-monitoring-sample.js`
+
+
+-----
+
+
+
+
+### Create-entity-type-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-entity-type-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-entity-type-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-entity-type-sample.js`
+
+
+-----
+
+
+
+
+### Create-feature-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-feature-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-feature-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-feature-sample.js`
 
 
 -----
@@ -670,6 +787,23 @@ __Usage:__
 
 
 
+### Delete-entity-type-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-entity-type-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-entity-type-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-entity-type-sample.js`
+
+
+-----
+
+
+
+
 ### Delete-export-model
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-export-model.js).
@@ -680,6 +814,40 @@ __Usage:__
 
 
 `node samples/delete-export-model.js`
+
+
+-----
+
+
+
+
+### Delete-feature-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-feature-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-feature-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-feature-sample.js`
+
+
+-----
+
+
+
+
+### Delete-featurestore-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-featurestore-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-featurestore-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-featurestore-sample.js`
 
 
 -----
@@ -731,6 +899,40 @@ __Usage:__
 
 
 `node samples/deploy-model.js`
+
+
+-----
+
+
+
+
+### Export-feature-values-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/export-feature-values-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/export-feature-values-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/export-feature-values-sample.js`
+
+
+-----
+
+
+
+
+### Export-feature-values-snapshot-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/export-feature-values-snapshot-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/export-feature-values-snapshot-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/export-feature-values-snapshot-sample.js`
 
 
 -----
@@ -799,6 +1001,57 @@ __Usage:__
 
 
 `node samples/get-custom-job.js`
+
+
+-----
+
+
+
+
+### Get-entity-type-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-entity-type-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-entity-type-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-entity-type-sample.js`
+
+
+-----
+
+
+
+
+### Get-feature-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-feature-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-feature-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-feature-sample.js`
+
+
+-----
+
+
+
+
+### Get-featurestore-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-featurestore-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-featurestore-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-featurestore-sample.js`
 
 
 -----
@@ -1214,6 +1467,23 @@ __Usage:__
 
 
 
+### Import-feature-values-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-feature-values-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-feature-values-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-feature-values-sample.js`
+
+
+-----
+
+
+
+
 ### List-endpoints
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-endpoints.js).
@@ -1224,6 +1494,159 @@ __Usage:__
 
 
 `node samples/list-endpoints.js`
+
+
+-----
+
+
+
+
+### List-entity-types-async-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-entity-types-async-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-entity-types-async-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-entity-types-async-sample.js`
+
+
+-----
+
+
+
+
+### List-entity-types-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-entity-types-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-entity-types-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-entity-types-sample.js`
+
+
+-----
+
+
+
+
+### List-entity-types-stream-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-entity-types-stream-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-entity-types-stream-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-entity-types-stream-sample.js`
+
+
+-----
+
+
+
+
+### List-features-async-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-features-async-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-features-async-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-features-async-sample.js`
+
+
+-----
+
+
+
+
+### List-features-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-features-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-features-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-features-sample.js`
+
+
+-----
+
+
+
+
+### List-features-stream-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-features-stream-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-features-stream-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-features-stream-sample.js`
+
+
+-----
+
+
+
+
+### List-featurestores-async-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-featurestores-async-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-featurestores-async-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-featurestores-async-sample.js`
+
+
+-----
+
+
+
+
+### List-featurestores-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-featurestores-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-featurestores-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-featurestores-sample.js`
+
+
+-----
+
+
+
+
+### List-featurestores-stream-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-featurestores-stream-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-featurestores-stream-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-featurestores-stream-sample.js`
 
 
 -----
@@ -1401,6 +1824,74 @@ __Usage:__
 
 
 
+### Read-feature-values-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/read-feature-values-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/read-feature-values-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/read-feature-values-sample.js`
+
+
+-----
+
+
+
+
+### Search-features-async-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/search-features-async-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/search-features-async-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/search-features-async-sample.js`
+
+
+-----
+
+
+
+
+### Search-features-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/search-features-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/search-features-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/search-features-sample.js`
+
+
+-----
+
+
+
+
+### Search-features-stream-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/search-features-stream-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/search-features-stream-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/search-features-stream-sample.js`
+
+
+-----
+
+
+
+
 ### Undeploy-model
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/undeploy-model.js).
@@ -1411,6 +1902,91 @@ __Usage:__
 
 
 `node samples/undeploy-model.js`
+
+
+-----
+
+
+
+
+### Update-entity-type-monitoring-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/update-entity-type-monitoring-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/update-entity-type-monitoring-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update-entity-type-monitoring-sample.js`
+
+
+-----
+
+
+
+
+### Update-entity-type-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/update-entity-type-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/update-entity-type-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update-entity-type-sample.js`
+
+
+-----
+
+
+
+
+### Update-feature-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/update-feature-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/update-feature-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update-feature-sample.js`
+
+
+-----
+
+
+
+
+### Update-featurestore-fixed-nodes-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/update-featurestore-fixed-nodes-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/update-featurestore-fixed-nodes-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update-featurestore-fixed-nodes-sample.js`
+
+
+-----
+
+
+
+
+### Update-featurestore-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/update-featurestore-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/update-featurestore-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/update-featurestore-sample.js`
 
 
 -----
