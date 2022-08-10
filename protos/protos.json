@@ -1587,7 +1587,8 @@
                           "values": {
                             "DEPLOYMENT_RESOURCES_TYPE_UNSPECIFIED": 0,
                             "DEDICATED_RESOURCES": 1,
-                            "AUTOMATIC_RESOURCES": 2
+                            "AUTOMATIC_RESOURCES": 2,
+                            "SHARED_RESOURCES": 3
                           }
                         }
                       }
@@ -1896,6 +1897,7 @@
                           "type": "string",
                           "id": 5,
                           "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "compute.googleapis.com/Network"
                           }
                         },
