@@ -22100,8 +22100,70 @@
                               "(google.api.method_signature)": "entity_type"
                             }
                           ]
+                        },
+                        "WriteFeatureValues": {
+                          "requestType": "WriteFeatureValuesRequest",
+                          "responseType": "WriteFeatureValuesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:writeFeatureValues",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "entity_type,payloads"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:writeFeatureValues",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "entity_type,payloads"
+                            }
+                          ]
                         }
                       }
+                    },
+                    "WriteFeatureValuesRequest": {
+                      "fields": {
+                        "entityType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/EntityType"
+                          }
+                        },
+                        "payloads": {
+                          "rule": "repeated",
+                          "type": "WriteFeatureValuesPayload",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WriteFeatureValuesPayload": {
+                      "fields": {
+                        "entityId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "featureValues": {
+                          "keyType": "string",
+                          "type": "FeatureValue",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WriteFeatureValuesResponse": {
+                      "fields": {}
                     },
                     "ReadFeatureValuesRequest": {
                       "fields": {

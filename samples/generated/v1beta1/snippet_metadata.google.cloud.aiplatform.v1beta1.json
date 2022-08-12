@@ -1200,6 +1200,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_FeaturestoreOnlineServingService_WriteFeatureValues_async",
+            "title": "DatasetService writeFeatureValues Sample",
+            "origin": "API_DEFINITION",
+            "description": " Writes Feature values of one or more entities of an EntityType. The Feature values are merged into existing entities if any. The Feature values to be written must have timestamp within the online storage retention.",
+            "canonical": true,
+            "file": "featurestore_online_serving_service.write_feature_values.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 60,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "WriteFeatureValues",
+                "fullName": "google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingService.WriteFeatureValues",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "entity_type",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "payloads",
+                        "type": "TYPE_MESSAGE[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.WriteFeatureValuesResponse",
+                "client": {
+                    "shortName": "FeaturestoreOnlineServingServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingServiceClient"
+                },
+                "method": {
+                    "shortName": "WriteFeatureValues",
+                    "fullName": "google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingService.WriteFeatureValues",
+                    "service": {
+                        "shortName": "FeaturestoreOnlineServingService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.FeaturestoreOnlineServingService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_FeaturestoreService_CreateFeaturestore_async",
             "title": "DatasetService createFeaturestore Sample",
             "origin": "API_DEFINITION",
