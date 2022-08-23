@@ -645,7 +645,7 @@
                           "type": "ExplanationMetadata",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -6623,6 +6623,109 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "indexStats": {
+                          "type": "IndexStats",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "indexUpdateMethod": {
+                          "type": "IndexUpdateMethod",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "IndexUpdateMethod": {
+                          "values": {
+                            "INDEX_UPDATE_METHOD_UNSPECIFIED": 0,
+                            "BATCH_UPDATE": 1,
+                            "STREAM_UPDATE": 2
+                          }
+                        }
+                      }
+                    },
+                    "IndexDatapoint": {
+                      "fields": {
+                        "datapointId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "featureVector": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "restricts": {
+                          "rule": "repeated",
+                          "type": "Restriction",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "crowdingTag": {
+                          "type": "CrowdingTag",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Restriction": {
+                          "fields": {
+                            "namespace": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "allowList": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "denyList": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "CrowdingTag": {
+                          "fields": {
+                            "crowdingAttribute": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "IndexStats": {
+                      "fields": {
+                        "vectorsCount": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "shardsCount": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -7382,6 +7485,38 @@
                               }
                             }
                           ]
+                        },
+                        "UpsertDatapoints": {
+                          "requestType": "UpsertDatapointsRequest",
+                          "responseType": "UpsertDatapointsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{index=projects/*/locations/*/indexes/*}:upsertDatapoints",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{index=projects/*/locations/*/indexes/*}:upsertDatapoints",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "RemoveDatapoints": {
+                          "requestType": "RemoveDatapointsRequest",
+                          "responseType": "RemoveDatapointsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{index=projects/*/locations/*/indexes/*}:removeDatapoints",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{index=projects/*/locations/*/indexes/*}:removeDatapoints",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -7507,6 +7642,46 @@
                           }
                         }
                       }
+                    },
+                    "UpsertDatapointsRequest": {
+                      "fields": {
+                        "index": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Index"
+                          }
+                        },
+                        "datapoints": {
+                          "rule": "repeated",
+                          "type": "IndexDatapoint",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpsertDatapointsResponse": {
+                      "fields": {}
+                    },
+                    "RemoveDatapointsRequest": {
+                      "fields": {
+                        "index": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Index"
+                          }
+                        },
+                        "datapointIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RemoveDatapointsResponse": {
+                      "fields": {}
                     },
                     "NearestNeighborSearchOperationMetadata": {
                       "fields": {
@@ -17835,7 +18010,7 @@
                           "type": "ExplanationMetadata",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -18647,6 +18822,10 @@
                         "analysisInstanceSchemaUri": {
                           "type": "string",
                           "id": 4
+                        },
+                        "statsAnomaliesBaseDirectory": {
+                          "type": "GcsDestination",
+                          "id": 5
                         }
                       }
                     },
@@ -24517,6 +24696,109 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "indexStats": {
+                          "type": "IndexStats",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "indexUpdateMethod": {
+                          "type": "IndexUpdateMethod",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "IndexUpdateMethod": {
+                          "values": {
+                            "INDEX_UPDATE_METHOD_UNSPECIFIED": 0,
+                            "BATCH_UPDATE": 1,
+                            "STREAM_UPDATE": 2
+                          }
+                        }
+                      }
+                    },
+                    "IndexDatapoint": {
+                      "fields": {
+                        "datapointId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "featureVector": {
+                          "rule": "repeated",
+                          "type": "float",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "restricts": {
+                          "rule": "repeated",
+                          "type": "Restriction",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "crowdingTag": {
+                          "type": "CrowdingTag",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Restriction": {
+                          "fields": {
+                            "namespace": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "allowList": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "denyList": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "CrowdingTag": {
+                          "fields": {
+                            "crowdingAttribute": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "IndexStats": {
+                      "fields": {
+                        "vectorsCount": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "shardsCount": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -25276,6 +25558,38 @@
                               }
                             }
                           ]
+                        },
+                        "UpsertDatapoints": {
+                          "requestType": "UpsertDatapointsRequest",
+                          "responseType": "UpsertDatapointsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{index=projects/*/locations/*/indexes/*}:upsertDatapoints",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{index=projects/*/locations/*/indexes/*}:upsertDatapoints",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "RemoveDatapoints": {
+                          "requestType": "RemoveDatapointsRequest",
+                          "responseType": "RemoveDatapointsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{index=projects/*/locations/*/indexes/*}:removeDatapoints",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{index=projects/*/locations/*/indexes/*}:removeDatapoints",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -25401,6 +25715,46 @@
                           }
                         }
                       }
+                    },
+                    "UpsertDatapointsRequest": {
+                      "fields": {
+                        "index": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Index"
+                          }
+                        },
+                        "datapoints": {
+                          "rule": "repeated",
+                          "type": "IndexDatapoint",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpsertDatapointsResponse": {
+                      "fields": {}
+                    },
+                    "RemoveDatapointsRequest": {
+                      "fields": {
+                        "index": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Index"
+                          }
+                        },
+                        "datapointIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RemoveDatapointsResponse": {
+                      "fields": {}
                     },
                     "NearestNeighborSearchOperationMetadata": {
                       "fields": {

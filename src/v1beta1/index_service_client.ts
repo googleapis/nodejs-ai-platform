@@ -1403,6 +1403,8 @@ export class IndexServiceClient {
       'listIndexes',
       'updateIndex',
       'deleteIndex',
+      'upsertDatapoints',
+      'removeDatapoints',
     ];
     for (const methodName of indexServiceStubMethods) {
       const callPromise = this.indexServiceStub.then(
@@ -1581,6 +1583,208 @@ export class IndexServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.getIndex(request, options, callback);
+  }
+  /**
+   * Add/update Datapoints into an Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.index
+   *   Required. The name of the Index resource to be updated.
+   *   Format:
+   *   `projects/{project}/locations/{location}/indexes/{index}`
+   * @param {number[]} request.datapoints
+   *   A list of datapoints to be created/updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [UpsertDatapointsResponse]{@link google.cloud.aiplatform.v1beta1.UpsertDatapointsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/index_service.upsert_datapoints.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexService_UpsertDatapoints_async
+   */
+  upsertDatapoints(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  upsertDatapoints(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upsertDatapoints(
+    request: protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upsertDatapoints(
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsResponse,
+          | protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IUpsertDatapointsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        index: request.index || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.upsertDatapoints(request, options, callback);
+  }
+  /**
+   * Remove Datapoints from an Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.index
+   *   Required. The name of the Index resource to be updated.
+   *   Format:
+   *   `projects/{project}/locations/{location}/indexes/{index}`
+   * @param {string[]} request.datapointIds
+   *   A list of datapoint ids to be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RemoveDatapointsResponse]{@link google.cloud.aiplatform.v1beta1.RemoveDatapointsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/index_service.remove_datapoints.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_IndexService_RemoveDatapoints_async
+   */
+  removeDatapoints(
+    request?: protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  removeDatapoints(
+    request: protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeDatapoints(
+    request: protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeDatapoints(
+    request?: protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsResponse,
+          | protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IRemoveDatapointsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        index: request.index || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.removeDatapoints(request, options, callback);
   }
 
   /**

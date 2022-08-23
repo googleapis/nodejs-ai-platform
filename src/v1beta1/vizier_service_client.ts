@@ -2567,7 +2567,7 @@ export class VizierServiceClient {
    *   Required. The project and location that the Study belongs to.
    *   Format: `projects/{project}/locations/{location}/studies/{study}`
    * @param {number} request.suggestionCount
-   *   Required. The number of suggestions requested.
+   *   Required. The number of suggestions requested. It must be positive.
    * @param {string} request.clientId
    *   Required. The identifier of the client that is requesting the suggestion.
    *
