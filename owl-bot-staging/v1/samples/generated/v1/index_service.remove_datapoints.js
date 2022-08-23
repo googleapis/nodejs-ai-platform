@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name, versionAliases) {
-  // [START aiplatform_v1_generated_ModelService_MergeVersionAliases_async]
+function main(index) {
+  // [START aiplatform_v1_generated_IndexService_RemoveDatapoints_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,46 +29,35 @@ function main(name, versionAliases) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the model version to merge aliases, with a version ID
-   *  explicitly included.
-   *  Example: `projects/{project}/locations/{location}/models/{model}@1234`
+   *  Required. The name of the Index resource to be updated.
+   *  Format:
+   *  `projects/{project}/locations/{location}/indexes/{index}`
    */
-  // const name = 'abc123'
+  // const index = 'abc123'
   /**
-   *  Required. The set of version aliases to merge.
-   *  The alias should be at most 128 characters, and match
-   *  `[a-z][a-zA-Z0-9-]{0,126}[a-z-0-9]`.
-   *  Add the `-` prefix to an alias means removing that alias from the version.
-   *  `-` is NOT counted in the 128 characters. Example: `-golden` means removing
-   *  the `golden` alias from the version.
-   *  There is NO ordering in aliases, which means
-   *  1) The aliases returned from GetModel API might not have the exactly same
-   *  order from this MergeVersionAliases API. 2) Adding and deleting the same
-   *  alias in the request is not recommended, and the 2 operations will be
-   *  cancelled out.
+   *  A list of datapoint ids to be deleted.
    */
-  // const versionAliases = 'abc123'
+  // const datapointIds = 'abc123'
 
   // Imports the Aiplatform library
-  const {ModelServiceClient} = require('@google-cloud/aiplatform').v1;
+  const {IndexServiceClient} = require('@google-cloud/aiplatform').v1;
 
   // Instantiates a client
-  const aiplatformClient = new ModelServiceClient();
+  const aiplatformClient = new IndexServiceClient();
 
-  async function callMergeVersionAliases() {
+  async function callRemoveDatapoints() {
     // Construct request
     const request = {
-      name,
-      versionAliases,
+      index,
     };
 
     // Run request
-    const response = await aiplatformClient.mergeVersionAliases(request);
+    const response = await aiplatformClient.removeDatapoints(request);
     console.log(response);
   }
 
-  callMergeVersionAliases();
-  // [END aiplatform_v1_generated_ModelService_MergeVersionAliases_async]
+  callRemoveDatapoints();
+  // [END aiplatform_v1_generated_IndexService_RemoveDatapoints_async]
 }
 
 process.on('unhandledRejection', err => {
