@@ -12523,6 +12523,28 @@
                             "failurePolicy": {
                               "type": "PipelineFailurePolicy",
                               "id": 4
+                            },
+                            "inputArtifacts": {
+                              "keyType": "string",
+                              "type": "InputArtifact",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "InputArtifact": {
+                              "oneofs": {
+                                "kind": {
+                                  "oneof": [
+                                    "artifactId"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "artifactId": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
                             }
                           }
                         }
@@ -13183,6 +13205,10 @@
                         "orderBy": {
                           "type": "string",
                           "id": 6
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 7
                         }
                       }
                     },

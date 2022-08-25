@@ -2640,6 +2640,8 @@ export class PipelineServiceClient {
    *     * `update_time`
    *     * `end_time`
    *     * `start_time`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2791,6 +2793,8 @@ export class PipelineServiceClient {
    *     * `update_time`
    *     * `end_time`
    *     * `start_time`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2890,6 +2894,8 @@ export class PipelineServiceClient {
    *     * `update_time`
    *     * `end_time`
    *     * `start_time`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

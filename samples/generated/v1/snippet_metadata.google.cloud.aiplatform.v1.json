@@ -6450,7 +6450,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 114,
+                    "end": 118,
                     "type": "FULL"
                 }
             ],
@@ -6478,6 +6478,10 @@
                     {
                         "name": "order_by",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "read_mask",
+                        "type": ".google.protobuf.FieldMask"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1.ListPipelineJobsResponse",
