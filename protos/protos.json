@@ -5255,6 +5255,10 @@
                         "invalidRowCount": {
                           "type": "int64",
                           "id": 6
+                        },
+                        "timestampOutsideRetentionRowsCount": {
+                          "type": "int64",
+                          "id": 4
                         }
                       }
                     },
@@ -5785,6 +5789,10 @@
                         "invalidRowCount": {
                           "type": "int64",
                           "id": 6
+                        },
+                        "timestampOutsideRetentionRowsCount": {
+                          "type": "int64",
+                          "id": 7
                         }
                       }
                     },
@@ -9893,6 +9901,26 @@
                             }
                           ]
                         },
+                        "RemoveContextChildren": {
+                          "requestType": "RemoveContextChildrenRequest",
+                          "responseType": "RemoveContextChildrenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{context=projects/*/locations/*/metadataStores/*/contexts/*}:removeContextChildren",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "context,child_contexts"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{context=projects/*/locations/*/metadataStores/*/contexts/*}:removeContextChildren",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "context,child_contexts"
+                            }
+                          ]
+                        },
                         "QueryContextLineageSubgraph": {
                           "requestType": "QueryContextLineageSubgraphRequest",
                           "responseType": "LineageSubgraph",
@@ -10314,6 +10342,10 @@
                         "filter": {
                           "type": "string",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -10477,6 +10509,10 @@
                         "filter": {
                           "type": "string",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -10642,6 +10678,29 @@
                     "AddContextChildrenResponse": {
                       "fields": {}
                     },
+                    "RemoveContextChildrenRequest": {
+                      "fields": {
+                        "context": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
+                          }
+                        },
+                        "childContexts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveContextChildrenResponse": {
+                      "fields": {}
+                    },
                     "QueryContextLineageSubgraphRequest": {
                       "fields": {
                         "context": {
@@ -10710,6 +10769,10 @@
                         "filter": {
                           "type": "string",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },

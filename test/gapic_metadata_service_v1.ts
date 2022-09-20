@@ -1411,6 +1411,143 @@ describe('v1.MetadataServiceClient', () => {
     });
   });
 
+  describe('removeContextChildren', () => {
+    it('invokes removeContextChildren without error', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveContextChildrenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveContextChildrenRequest',
+        ['context']
+      );
+      request.context = defaultValue1;
+      const expectedHeaderRequestParams = `context=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveContextChildrenResponse()
+      );
+      client.innerApiCalls.removeContextChildren =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.removeContextChildren(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeContextChildren as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeContextChildren as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeContextChildren without error using callback', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveContextChildrenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveContextChildrenRequest',
+        ['context']
+      );
+      request.context = defaultValue1;
+      const expectedHeaderRequestParams = `context=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveContextChildrenResponse()
+      );
+      client.innerApiCalls.removeContextChildren =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeContextChildren(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IRemoveContextChildrenResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeContextChildren as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeContextChildren as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeContextChildren with error', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveContextChildrenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveContextChildrenRequest',
+        ['context']
+      );
+      request.context = defaultValue1;
+      const expectedHeaderRequestParams = `context=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeContextChildren = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.removeContextChildren(request),
+        expectedError
+      );
+      const actualRequest = (
+        client.innerApiCalls.removeContextChildren as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeContextChildren as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeContextChildren with closed client', async () => {
+      const client = new metadataserviceModule.v1.MetadataServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.RemoveContextChildrenRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveContextChildrenRequest',
+        ['context']
+      );
+      request.context = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(
+        client.removeContextChildren(request),
+        expectedError
+      );
+    });
+  });
+
   describe('queryContextLineageSubgraph', () => {
     it('invokes queryContextLineageSubgraph without error', async () => {
       const client = new metadataserviceModule.v1.MetadataServiceClient({
