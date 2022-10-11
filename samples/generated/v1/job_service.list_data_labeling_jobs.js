@@ -23,6 +23,9 @@
 function main(parent) {
   // [START aiplatform_v1_generated_JobService_ListDataLabelingJobs_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -33,13 +36,20 @@ function main(parent) {
   /**
    *  The standard list filter.
    *  Supported fields:
-   *    * `display_name` supports = and !=.
-   *    * `state` supports = and !=.
+   *    * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *    * `state` supports `=`, `!=` comparisons.
+   *    * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *      `create_time` must be in RFC 3339 format.
+   *    * `labels` supports general map functions that is:
+   *      `labels.key=value` - key:value equality
+   *      `labels.key:* - key existence
    *  Some examples of using the filter are:
-   *   * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *   * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *   * `NOT display_name="my_job"`
-   *   * `state="JOB_STATE_FAILED"`
+   *    * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *    * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *    * `NOT display_name="my_job"`
+   *    * `create_time>"2021-05-18T00:00:00Z"`
+   *    * `labels.keyA=valueA`
+   *    * `labels.keyB:*`
    */
   // const filter = 'abc123'
   /**

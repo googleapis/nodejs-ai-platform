@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -32,9 +32,7 @@ import {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -43,7 +41,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './job_service_client_config.json';
-import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -106,8 +103,18 @@ export class JobServiceClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new JobServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof JobServiceClient;
     const servicePath =
@@ -127,8 +134,13 @@ export class JobServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -149,9 +161,12 @@ export class JobServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
-    this.iamClient = new IamClient(this._gaxGrpc, opts);
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
 
-    this.locationsClient = new LocationsClient(this._gaxGrpc, opts);
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -201,6 +216,9 @@ export class JobServiceClient {
       ),
       datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
+      ),
+      deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
       ),
       endpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
@@ -1439,7 +1457,7 @@ export class JobServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -1526,7 +1544,8 @@ export class JobServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1683,8 +1702,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createCustomJob(request, options, callback);
@@ -1776,8 +1795,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getCustomJob(request, options, callback);
@@ -1884,8 +1903,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelCustomJob(request, options, callback);
@@ -1984,8 +2003,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createDataLabelingJob(request, options, callback);
@@ -2083,8 +2102,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getDataLabelingJob(request, options, callback);
@@ -2182,8 +2201,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelDataLabelingJob(request, options, callback);
@@ -2282,8 +2301,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createHyperparameterTuningJob(
@@ -2385,8 +2404,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getHyperparameterTuningJob(
@@ -2497,8 +2516,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelHyperparameterTuningJob(
@@ -2602,8 +2621,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createBatchPredictionJob(
@@ -2705,8 +2724,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getBatchPredictionJob(request, options, callback);
@@ -2813,8 +2832,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelBatchPredictionJob(
@@ -2918,8 +2937,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createModelDeploymentMonitoringJob(
@@ -3021,8 +3040,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getModelDeploymentMonitoringJob(
@@ -3126,8 +3145,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.pauseModelDeploymentMonitoringJob(
@@ -3231,8 +3250,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.resumeModelDeploymentMonitoringJob(
@@ -3341,8 +3360,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteCustomJob(request, options, callback);
@@ -3367,14 +3386,15 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteCustomJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3480,8 +3500,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteDataLabelingJob(request, options, callback);
@@ -3506,14 +3526,15 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteDataLabelingJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3619,8 +3640,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteHyperparameterTuningJob(
@@ -3649,14 +3670,15 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteHyperparameterTuningJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3763,8 +3785,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteBatchPredictionJob(
@@ -3793,14 +3815,15 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteBatchPredictionJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3933,9 +3956,9 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         'model_deployment_monitoring_job.name':
-          request.modelDeploymentMonitoringJob!.name || '',
+          request.modelDeploymentMonitoringJob!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateModelDeploymentMonitoringJob(
@@ -3964,14 +3987,15 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.UpdateModelDeploymentMonitoringJobOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.updateModelDeploymentMonitoringJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1beta1.ModelDeploymentMonitoringJob,
@@ -4077,8 +4101,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteModelDeploymentMonitoringJob(
@@ -4107,14 +4131,15 @@ export class JobServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteModelDeploymentMonitoringJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -4134,19 +4159,22 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4237,8 +4265,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listCustomJobs(request, options, callback);
@@ -4256,19 +4284,22 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4299,14 +4330,14 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomJobs.createStream(
-      this.innerApiCalls.listCustomJobs as gax.GaxCall,
+      this.innerApiCalls.listCustomJobs as GaxCall,
       request,
       callSettings
     );
@@ -4326,19 +4357,22 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4370,15 +4404,15 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listCustomJobs.asyncIterate(
       this.innerApiCalls['listCustomJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ICustomJob>;
   }
@@ -4395,19 +4429,22 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4502,8 +4539,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listDataLabelingJobs(request, options, callback);
@@ -4521,19 +4558,22 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4568,14 +4608,14 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDataLabelingJobs.createStream(
-      this.innerApiCalls.listDataLabelingJobs as gax.GaxCall,
+      this.innerApiCalls.listDataLabelingJobs as GaxCall,
       request,
       callSettings
     );
@@ -4595,19 +4635,22 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4643,15 +4686,15 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listDataLabelingJobs.asyncIterate(
       this.innerApiCalls['listDataLabelingJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataLabelingJob>;
   }
@@ -4668,19 +4711,22 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4771,8 +4817,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listHyperparameterTuningJobs(
@@ -4794,19 +4840,22 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4837,14 +4886,14 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listHyperparameterTuningJobs.createStream(
-      this.innerApiCalls.listHyperparameterTuningJobs as gax.GaxCall,
+      this.innerApiCalls.listHyperparameterTuningJobs as GaxCall,
       request,
       callSettings
     );
@@ -4864,19 +4913,22 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -4908,15 +4960,15 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listHyperparameterTuningJobs.asyncIterate(
       this.innerApiCalls['listHyperparameterTuningJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IHyperparameterTuningJob>;
   }
@@ -4933,21 +4985,23 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
-   *
-   *     * `model_display_name` supports = and !=
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `model_display_name` supports `=`, `!=` comparisons.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5038,8 +5092,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listBatchPredictionJobs(
@@ -5061,21 +5115,23 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
-   *
-   *     * `model_display_name` supports = and !=
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `model_display_name` supports `=`, `!=` comparisons.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5106,14 +5162,14 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBatchPredictionJobs.createStream(
-      this.innerApiCalls.listBatchPredictionJobs as gax.GaxCall,
+      this.innerApiCalls.listBatchPredictionJobs as GaxCall,
       request,
       callSettings
     );
@@ -5133,21 +5189,23 @@ export class JobServiceClient {
    *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
-   *
-   *     * `model_display_name` supports = and !=
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `model_display_name` supports `=`, `!=` comparisons.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_RUNNING" OR display_name="my_job"`
-   *
-   *    * `NOT display_name="my_job"`
-   *
-   *    * `state="JOB_STATE_FAILED"`
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5179,15 +5237,15 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listBatchPredictionJobs.asyncIterate(
       this.innerApiCalls['listBatchPredictionJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IBatchPredictionJob>;
   }
@@ -5303,9 +5361,9 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         model_deployment_monitoring_job:
-          request.modelDeploymentMonitoringJob || '',
+          request.modelDeploymentMonitoringJob ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies(
@@ -5366,9 +5424,9 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         model_deployment_monitoring_job:
-          request.modelDeploymentMonitoringJob || '',
+          request.modelDeploymentMonitoringJob ?? '',
       });
     const defaultCallSettings =
       this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
@@ -5376,7 +5434,7 @@ export class JobServiceClient {
     this.initialize();
     return this.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.createStream(
       this.innerApiCalls
-        .searchModelDeploymentMonitoringStatsAnomalies as gax.GaxCall,
+        .searchModelDeploymentMonitoringStatsAnomalies as GaxCall,
       request,
       callSettings
     );
@@ -5436,9 +5494,9 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         model_deployment_monitoring_job:
-          request.modelDeploymentMonitoringJob || '',
+          request.modelDeploymentMonitoringJob ?? '',
       });
     const defaultCallSettings =
       this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
@@ -5448,7 +5506,7 @@ export class JobServiceClient {
       this.innerApiCalls[
         'searchModelDeploymentMonitoringStatsAnomalies'
       ] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelMonitoringStatsAnomalies>;
   }
@@ -5462,6 +5520,25 @@ export class JobServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5549,8 +5626,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listModelDeploymentMonitoringJobs(
@@ -5569,6 +5646,25 @@ export class JobServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5596,15 +5692,15 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings =
       this._defaults['listModelDeploymentMonitoringJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listModelDeploymentMonitoringJobs.createStream(
-      this.innerApiCalls.listModelDeploymentMonitoringJobs as gax.GaxCall,
+      this.innerApiCalls.listModelDeploymentMonitoringJobs as GaxCall,
       request,
       callSettings
     );
@@ -5621,6 +5717,25 @@ export class JobServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
+   *   Supported fields:
+   *
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
+   *
+   *   Some examples of using the filter are:
+   *
+   *     * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+   *     * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+   *     * `NOT display_name="my_job"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `labels.keyA=valueA`
+   *     * `labels.keyB:*`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -5649,8 +5764,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings =
       this._defaults['listModelDeploymentMonitoringJobs'];
@@ -5658,7 +5773,7 @@ export class JobServiceClient {
     this.initialize();
     return this.descriptors.page.listModelDeploymentMonitoringJobs.asyncIterate(
       this.innerApiCalls['listModelDeploymentMonitoringJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IModelDeploymentMonitoringJob>;
   }
@@ -6647,6 +6762,71 @@ export class JobServiceClient {
    */
   matchDatasetFromDatasetName(datasetName: string) {
     return this.pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+  }
+
+  /**
+   * Return a fully-qualified deploymentResourcePool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} deployment_resource_pool
+   * @returns {string} Resource name string.
+   */
+  deploymentResourcePoolPath(
+    project: string,
+    location: string,
+    deploymentResourcePool: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
+      project: project,
+      location: location,
+      deployment_resource_pool: deploymentResourcePool,
+    });
+  }
+
+  /**
+   * Parse the project from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).location;
+  }
+
+  /**
+   * Parse the deployment_resource_pool from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the deployment_resource_pool.
+   */
+  matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).deployment_resource_pool;
   }
 
   /**

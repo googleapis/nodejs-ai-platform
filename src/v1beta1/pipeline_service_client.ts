@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -32,9 +32,7 @@ import {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -43,7 +41,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './pipeline_service_client_config.json';
-import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -108,8 +105,18 @@ export class PipelineServiceClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new PipelineServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PipelineServiceClient;
     const servicePath =
@@ -129,8 +136,13 @@ export class PipelineServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -151,9 +163,12 @@ export class PipelineServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
-    this.iamClient = new IamClient(this._gaxGrpc, opts);
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
 
-    this.locationsClient = new LocationsClient(this._gaxGrpc, opts);
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -203,6 +218,9 @@ export class PipelineServiceClient {
       ),
       datasetPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}'
+      ),
+      deploymentResourcePoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}'
       ),
       endpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
@@ -1360,7 +1378,7 @@ export class PipelineServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -1429,7 +1447,8 @@ export class PipelineServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1586,8 +1605,8 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createTrainingPipeline(
@@ -1689,8 +1708,8 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getTrainingPipeline(request, options, callback);
@@ -1797,8 +1816,8 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelTrainingPipeline(
@@ -1908,8 +1927,8 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createPipelineJob(request, options, callback);
@@ -2001,8 +2020,8 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getPipelineJob(request, options, callback);
@@ -2109,8 +2128,8 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelPipelineJob(request, options, callback);
@@ -2215,8 +2234,8 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteTrainingPipeline(
@@ -2245,14 +2264,15 @@ export class PipelineServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteTrainingPipeline,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2358,8 +2378,8 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deletePipelineJob(request, options, callback);
@@ -2384,14 +2404,15 @@ export class PipelineServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deletePipelineJob,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2408,21 +2429,25 @@ export class PipelineServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *     * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
+   *     * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`
+   *     * `NOT display_name="my_pipeline"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `training_task_definition:"*automl_text_classification*"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -2513,8 +2538,8 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTrainingPipelines(request, options, callback);
@@ -2529,21 +2554,25 @@ export class PipelineServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *     * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
+   *     * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`
+   *     * `NOT display_name="my_pipeline"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `training_task_definition:"*automl_text_classification*"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -2574,14 +2603,14 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTrainingPipelines'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTrainingPipelines.createStream(
-      this.innerApiCalls.listTrainingPipelines as gax.GaxCall,
+      this.innerApiCalls.listTrainingPipelines as GaxCall,
       request,
       callSettings
     );
@@ -2598,21 +2627,25 @@ export class PipelineServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   The standard list filter.
+   *
    *   Supported fields:
    *
-   *     * `display_name` supports = and !=.
-   *
-   *     * `state` supports = and !=.
+   *     * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+   *     * `state` supports `=`, `!=` comparisons.
+   *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
+   *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+   *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *     * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
+   *     * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`
+   *     * `NOT display_name="my_pipeline"`
+   *     * `create_time>"2021-05-18T00:00:00Z"`
+   *     * `training_task_definition:"*automl_text_classification*"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -2644,15 +2677,15 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTrainingPipelines'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTrainingPipelines.asyncIterate(
       this.innerApiCalls['listTrainingPipelines'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITrainingPipeline>;
   }
@@ -2671,8 +2704,8 @@ export class PipelineServiceClient {
    *   * `pipeline_name`: Supports `=` and `!=` comparisons.
    *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *    for example, can check if pipeline's display_name contains *step* by doing
-   *     display_name:\"*step*\"
+   *     for example, can check if pipeline's display_name contains *step* by
+   *     doing display_name:\"*step*\"
    *   * `state`: Supports `=` and `!=` comparisons.
    *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
    *     Values must be in RFC 3339 format.
@@ -2683,7 +2716,7 @@ export class PipelineServiceClient {
    *   * `labels`: Supports key-value equality and key presence.
    *   * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-   *   wildcard.
+   *     wildcard.
    *
    *   Filter expressions can be combined together using logical operators
    *   (`AND` & `OR`).
@@ -2715,10 +2748,13 @@ export class PipelineServiceClient {
    *   there are multiple jobs having the same create time, order them by the end
    *   time in ascending order. if order_by is not specified, it will order by
    *   default order is create time in descending order. Supported fields:
+   *
    *     * `create_time`
    *     * `update_time`
    *     * `end_time`
    *     * `start_time`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2800,8 +2836,8 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listPipelineJobs(request, options, callback);
@@ -2821,8 +2857,8 @@ export class PipelineServiceClient {
    *   * `pipeline_name`: Supports `=` and `!=` comparisons.
    *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *    for example, can check if pipeline's display_name contains *step* by doing
-   *     display_name:\"*step*\"
+   *     for example, can check if pipeline's display_name contains *step* by
+   *     doing display_name:\"*step*\"
    *   * `state`: Supports `=` and `!=` comparisons.
    *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
    *     Values must be in RFC 3339 format.
@@ -2833,7 +2869,7 @@ export class PipelineServiceClient {
    *   * `labels`: Supports key-value equality and key presence.
    *   * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-   *   wildcard.
+   *     wildcard.
    *
    *   Filter expressions can be combined together using logical operators
    *   (`AND` & `OR`).
@@ -2865,10 +2901,13 @@ export class PipelineServiceClient {
    *   there are multiple jobs having the same create time, order them by the end
    *   time in ascending order. if order_by is not specified, it will order by
    *   default order is create time in descending order. Supported fields:
+   *
    *     * `create_time`
    *     * `update_time`
    *     * `end_time`
    *     * `start_time`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2890,14 +2929,14 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listPipelineJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPipelineJobs.createStream(
-      this.innerApiCalls.listPipelineJobs as gax.GaxCall,
+      this.innerApiCalls.listPipelineJobs as GaxCall,
       request,
       callSettings
     );
@@ -2919,8 +2958,8 @@ export class PipelineServiceClient {
    *   * `pipeline_name`: Supports `=` and `!=` comparisons.
    *   * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *    for example, can check if pipeline's display_name contains *step* by doing
-   *     display_name:\"*step*\"
+   *     for example, can check if pipeline's display_name contains *step* by
+   *     doing display_name:\"*step*\"
    *   * `state`: Supports `=` and `!=` comparisons.
    *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
    *     Values must be in RFC 3339 format.
@@ -2931,7 +2970,7 @@ export class PipelineServiceClient {
    *   * `labels`: Supports key-value equality and key presence.
    *   * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *   * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-   *   wildcard.
+   *     wildcard.
    *
    *   Filter expressions can be combined together using logical operators
    *   (`AND` & `OR`).
@@ -2963,10 +3002,13 @@ export class PipelineServiceClient {
    *   there are multiple jobs having the same create time, order them by the end
    *   time in ascending order. if order_by is not specified, it will order by
    *   default order is create time in descending order. Supported fields:
+   *
    *     * `create_time`
    *     * `update_time`
    *     * `end_time`
    *     * `start_time`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2989,15 +3031,15 @@ export class PipelineServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listPipelineJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPipelineJobs.asyncIterate(
       this.innerApiCalls['listPipelineJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IPipelineJob>;
   }
@@ -3986,6 +4028,71 @@ export class PipelineServiceClient {
    */
   matchDatasetFromDatasetName(datasetName: string) {
     return this.pathTemplates.datasetPathTemplate.match(datasetName).dataset;
+  }
+
+  /**
+   * Return a fully-qualified deploymentResourcePool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} deployment_resource_pool
+   * @returns {string} Resource name string.
+   */
+  deploymentResourcePoolPath(
+    project: string,
+    location: string,
+    deploymentResourcePool: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.render({
+      project: project,
+      location: location,
+      deployment_resource_pool: deploymentResourcePool,
+    });
+  }
+
+  /**
+   * Parse the project from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).project;
+  }
+
+  /**
+   * Parse the location from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).location;
+  }
+
+  /**
+   * Parse the deployment_resource_pool from DeploymentResourcePool resource.
+   *
+   * @param {string} deploymentResourcePoolName
+   *   A fully-qualified path representing DeploymentResourcePool resource.
+   * @returns {string} A string representing the deployment_resource_pool.
+   */
+  matchDeploymentResourcePoolFromDeploymentResourcePoolName(
+    deploymentResourcePoolName: string
+  ) {
+    return this.pathTemplates.deploymentResourcePoolPathTemplate.match(
+      deploymentResourcePoolName
+    ).deployment_resource_pool;
   }
 
   /**

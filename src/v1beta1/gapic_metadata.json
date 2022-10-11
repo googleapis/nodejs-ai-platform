@@ -145,6 +145,78 @@
         }
       }
     },
+    "DeploymentResourcePoolService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DeploymentResourcePoolServiceClient",
+          "rpcs": {
+            "GetDeploymentResourcePool": {
+              "methods": [
+                "getDeploymentResourcePool"
+              ]
+            },
+            "CreateDeploymentResourcePool": {
+              "methods": [
+                "createDeploymentResourcePool"
+              ]
+            },
+            "DeleteDeploymentResourcePool": {
+              "methods": [
+                "deleteDeploymentResourcePool"
+              ]
+            },
+            "ListDeploymentResourcePools": {
+              "methods": [
+                "listDeploymentResourcePools",
+                "listDeploymentResourcePoolsStream",
+                "listDeploymentResourcePoolsAsync"
+              ]
+            },
+            "QueryDeployedModels": {
+              "methods": [
+                "queryDeployedModels",
+                "queryDeployedModelsStream",
+                "queryDeployedModelsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DeploymentResourcePoolServiceClient",
+          "rpcs": {
+            "GetDeploymentResourcePool": {
+              "methods": [
+                "getDeploymentResourcePool"
+              ]
+            },
+            "CreateDeploymentResourcePool": {
+              "methods": [
+                "createDeploymentResourcePool"
+              ]
+            },
+            "DeleteDeploymentResourcePool": {
+              "methods": [
+                "deleteDeploymentResourcePool"
+              ]
+            },
+            "ListDeploymentResourcePools": {
+              "methods": [
+                "listDeploymentResourcePools",
+                "listDeploymentResourcePoolsStream",
+                "listDeploymentResourcePoolsAsync"
+              ]
+            },
+            "QueryDeployedModels": {
+              "methods": [
+                "queryDeployedModels",
+                "queryDeployedModelsStream",
+                "queryDeployedModelsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EndpointService": {
       "clients": {
         "grpc": {
@@ -243,6 +315,11 @@
                 "readFeatureValues"
               ]
             },
+            "WriteFeatureValues": {
+              "methods": [
+                "writeFeatureValues"
+              ]
+            },
             "StreamingReadFeatureValues": {
               "methods": [
                 "streamingReadFeatureValues"
@@ -256,6 +333,11 @@
             "ReadFeatureValues": {
               "methods": [
                 "readFeatureValues"
+              ]
+            },
+            "WriteFeatureValues": {
+              "methods": [
+                "writeFeatureValues"
               ]
             }
           }
@@ -345,6 +427,11 @@
             "ExportFeatureValues": {
               "methods": [
                 "exportFeatureValues"
+              ]
+            },
+            "DeleteFeatureValues": {
+              "methods": [
+                "deleteFeatureValues"
               ]
             },
             "ListFeaturestores": {
@@ -458,6 +545,11 @@
             "ExportFeatureValues": {
               "methods": [
                 "exportFeatureValues"
+              ]
+            },
+            "DeleteFeatureValues": {
+              "methods": [
+                "deleteFeatureValues"
               ]
             },
             "ListFeaturestores": {
@@ -600,6 +692,16 @@
                 "getIndex"
               ]
             },
+            "UpsertDatapoints": {
+              "methods": [
+                "upsertDatapoints"
+              ]
+            },
+            "RemoveDatapoints": {
+              "methods": [
+                "removeDatapoints"
+              ]
+            },
             "CreateIndex": {
               "methods": [
                 "createIndex"
@@ -630,6 +732,16 @@
             "GetIndex": {
               "methods": [
                 "getIndex"
+              ]
+            },
+            "UpsertDatapoints": {
+              "methods": [
+                "upsertDatapoints"
+              ]
+            },
+            "RemoveDatapoints": {
+              "methods": [
+                "removeDatapoints"
               ]
             },
             "CreateIndex": {
@@ -1026,6 +1138,11 @@
                 "addContextChildren"
               ]
             },
+            "RemoveContextChildren": {
+              "methods": [
+                "removeContextChildren"
+              ]
+            },
             "QueryContextLineageSubgraph": {
               "methods": [
                 "queryContextLineageSubgraph"
@@ -1194,6 +1311,11 @@
             "AddContextChildren": {
               "methods": [
                 "addContextChildren"
+              ]
+            },
+            "RemoveContextChildren": {
+              "methods": [
+                "removeContextChildren"
               ]
             },
             "QueryContextLineageSubgraph": {

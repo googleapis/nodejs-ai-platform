@@ -600,6 +600,16 @@
                 "getIndex"
               ]
             },
+            "UpsertDatapoints": {
+              "methods": [
+                "upsertDatapoints"
+              ]
+            },
+            "RemoveDatapoints": {
+              "methods": [
+                "removeDatapoints"
+              ]
+            },
             "CreateIndex": {
               "methods": [
                 "createIndex"
@@ -630,6 +640,16 @@
             "GetIndex": {
               "methods": [
                 "getIndex"
+              ]
+            },
+            "UpsertDatapoints": {
+              "methods": [
+                "upsertDatapoints"
+              ]
+            },
+            "RemoveDatapoints": {
+              "methods": [
+                "removeDatapoints"
               ]
             },
             "CreateIndex": {
@@ -1026,6 +1046,11 @@
                 "addContextChildren"
               ]
             },
+            "RemoveContextChildren": {
+              "methods": [
+                "removeContextChildren"
+              ]
+            },
             "QueryContextLineageSubgraph": {
               "methods": [
                 "queryContextLineageSubgraph"
@@ -1194,6 +1219,11 @@
             "AddContextChildren": {
               "methods": [
                 "addContextChildren"
+              ]
+            },
+            "RemoveContextChildren": {
+              "methods": [
+                "removeContextChildren"
               ]
             },
             "QueryContextLineageSubgraph": {

@@ -14,12 +14,12 @@
   },
   "dependencies": {
     "@google-cloud/storage": "^6.0.0",
-    "@google-cloud/aiplatform": "^2.1.0",
+    "@google-cloud/aiplatform": "^2.3.0",
     "@google-cloud/bigquery": "^6.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.0.0",
-    "uuid": "^8.3.1"
+    "uuid": "^9.0.0"
   }
 }

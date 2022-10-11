@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -32,9 +32,7 @@ import {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -43,7 +41,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './index_service_client_config.json';
-import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -106,8 +103,18 @@ export class IndexServiceClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new IndexServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof IndexServiceClient;
     const servicePath =
@@ -127,8 +134,13 @@ export class IndexServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -149,9 +161,12 @@ export class IndexServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
-    this.iamClient = new IamClient(this._gaxGrpc, opts);
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
 
-    this.locationsClient = new LocationsClient(this._gaxGrpc, opts);
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -1295,7 +1310,7 @@ export class IndexServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -1336,6 +1351,8 @@ export class IndexServiceClient {
       'listIndexes',
       'updateIndex',
       'deleteIndex',
+      'upsertDatapoints',
+      'removeDatapoints',
     ];
     for (const methodName of indexServiceStubMethods) {
       const callPromise = this.indexServiceStub.then(
@@ -1359,7 +1376,8 @@ export class IndexServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -1500,11 +1518,201 @@ export class IndexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIndex(request, options, callback);
+  }
+  /**
+   * Add/update Datapoints into an Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.index
+   *   Required. The name of the Index resource to be updated.
+   *   Format:
+   *   `projects/{project}/locations/{location}/indexes/{index}`
+   * @param {number[]} request.datapoints
+   *   A list of datapoints to be created/updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [UpsertDatapointsResponse]{@link google.cloud.aiplatform.v1.UpsertDatapointsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/index_service.upsert_datapoints.js</caption>
+   * region_tag:aiplatform_v1_generated_IndexService_UpsertDatapoints_async
+   */
+  upsertDatapoints(
+    request?: protos.google.cloud.aiplatform.v1.IUpsertDatapointsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IUpsertDatapointsResponse,
+      protos.google.cloud.aiplatform.v1.IUpsertDatapointsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  upsertDatapoints(
+    request: protos.google.cloud.aiplatform.v1.IUpsertDatapointsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IUpsertDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1.IUpsertDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upsertDatapoints(
+    request: protos.google.cloud.aiplatform.v1.IUpsertDatapointsRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IUpsertDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1.IUpsertDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  upsertDatapoints(
+    request?: protos.google.cloud.aiplatform.v1.IUpsertDatapointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IUpsertDatapointsResponse,
+          | protos.google.cloud.aiplatform.v1.IUpsertDatapointsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IUpsertDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1.IUpsertDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IUpsertDatapointsResponse,
+      protos.google.cloud.aiplatform.v1.IUpsertDatapointsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        index: request.index ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.upsertDatapoints(request, options, callback);
+  }
+  /**
+   * Remove Datapoints from an Index.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.index
+   *   Required. The name of the Index resource to be updated.
+   *   Format:
+   *   `projects/{project}/locations/{location}/indexes/{index}`
+   * @param {string[]} request.datapointIds
+   *   A list of datapoint ids to be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RemoveDatapointsResponse]{@link google.cloud.aiplatform.v1.RemoveDatapointsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/index_service.remove_datapoints.js</caption>
+   * region_tag:aiplatform_v1_generated_IndexService_RemoveDatapoints_async
+   */
+  removeDatapoints(
+    request?: protos.google.cloud.aiplatform.v1.IRemoveDatapointsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IRemoveDatapointsResponse,
+      protos.google.cloud.aiplatform.v1.IRemoveDatapointsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  removeDatapoints(
+    request: protos.google.cloud.aiplatform.v1.IRemoveDatapointsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IRemoveDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1.IRemoveDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeDatapoints(
+    request: protos.google.cloud.aiplatform.v1.IRemoveDatapointsRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IRemoveDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1.IRemoveDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeDatapoints(
+    request?: protos.google.cloud.aiplatform.v1.IRemoveDatapointsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IRemoveDatapointsResponse,
+          | protos.google.cloud.aiplatform.v1.IRemoveDatapointsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IRemoveDatapointsResponse,
+      | protos.google.cloud.aiplatform.v1.IRemoveDatapointsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IRemoveDatapointsResponse,
+      protos.google.cloud.aiplatform.v1.IRemoveDatapointsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        index: request.index ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.removeDatapoints(request, options, callback);
   }
 
   /**
@@ -1607,8 +1815,8 @@ export class IndexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createIndex(request, options, callback);
@@ -1633,14 +1841,15 @@ export class IndexServiceClient {
       protos.google.cloud.aiplatform.v1.CreateIndexOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createIndex,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.Index,
@@ -1747,8 +1956,8 @@ export class IndexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'index.name': request.index!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'index.name': request.index!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateIndex(request, options, callback);
@@ -1773,14 +1982,15 @@ export class IndexServiceClient {
       protos.google.cloud.aiplatform.v1.UpdateIndexOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.updateIndex,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.aiplatform.v1.Index,
@@ -1888,8 +2098,8 @@ export class IndexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteIndex(request, options, callback);
@@ -1914,14 +2124,15 @@ export class IndexServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteIndex,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2022,8 +2233,8 @@ export class IndexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listIndexes(request, options, callback);
@@ -2068,14 +2279,14 @@ export class IndexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIndexes.createStream(
-      this.innerApiCalls.listIndexes as gax.GaxCall,
+      this.innerApiCalls.listIndexes as GaxCall,
       request,
       callSettings
     );
@@ -2123,15 +2334,15 @@ export class IndexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listIndexes.asyncIterate(
       this.innerApiCalls['listIndexes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IIndex>;
   }

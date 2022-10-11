@@ -23,6 +23,9 @@
 function main(parent) {
   // [START aiplatform_v1_generated_PipelineService_ListPipelineJobs_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -36,8 +39,8 @@ function main(parent) {
    *  * `pipeline_name`: Supports `=` and `!=` comparisons.
    *  * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *  * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-   *   for example, can check if pipeline's display_name contains *step* by doing
-   *    display_name:\"*step*\"
+   *    for example, can check if pipeline's display_name contains *step* by
+   *    doing display_name:\"*step*\"
    *  * `state`: Supports `=` and `!=` comparisons.
    *  * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
    *    Values must be in RFC 3339 format.
@@ -48,7 +51,7 @@ function main(parent) {
    *  * `labels`: Supports key-value equality and key presence.
    *  * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
    *  * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-   *  wildcard.
+   *    wildcard.
    *  Filter expressions can be combined together using logical operators
    *  (`AND` & `OR`).
    *  For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
@@ -88,6 +91,10 @@ function main(parent) {
    *    * `start_time`
    */
   // const orderBy = 'abc123'
+  /**
+   *  Mask specifying which fields to read.
+   */
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {PipelineServiceClient} = require('@google-cloud/aiplatform').v1;

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/aiplatform",
-  "version": "2.1.0",
+  "version": "2.3.0",
   "description": "Vertex AI client for Node.js",
   "repository": "googleapis/nodejs-ai-platform",
   "license": "Apache-2.0",
@@ -47,7 +47,7 @@
     "test": "c8 node build/test/run.js"
   },
   "dependencies": {
-    "google-gax": "^3.0.1",
+    "google-gax": "^3.3.0",
     "protobuf.js": "^1.1.2"
   },
   "devDependencies": {

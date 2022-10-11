@@ -23,6 +23,9 @@
 function main(name, versionAliases) {
   // [START aiplatform_v1beta1_generated_ModelService_MergeVersionAliases_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -34,7 +37,7 @@ function main(name, versionAliases) {
   /**
    *  Required. The set of version aliases to merge.
    *  The alias should be at most 128 characters, and match
-   *  `[a-z][a-z0-9-]{0,126}[a-z-0-9]`.
+   *  `[a-z][a-zA-Z0-9-]{0,126}[a-z-0-9]`.
    *  Add the `-` prefix to an alias means removing that alias from the version.
    *  `-` is NOT counted in the 128 characters. Example: `-golden` means removing
    *  the `golden` alias from the version.
