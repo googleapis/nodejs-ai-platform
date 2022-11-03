@@ -79,6 +79,12 @@ function main(featurestore, destination, entityTypeSpecs) {
    *  BatchReadFeatureValuesRequest.request   .
    */
   // const entityTypeSpecs = 1234
+  /**
+   *  Optional. Excludes Feature values with feature generation timestamp before this
+   *  timestamp. If not set, retrieve oldest values kept in Feature Store.
+   *  Timestamp, if present, must not have higher than millisecond precision.
+   */
+  // const startTime = {}
 
   // Imports the Aiplatform library
   const {FeaturestoreServiceClient} = require('@google-cloud/aiplatform').v1;

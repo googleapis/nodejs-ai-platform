@@ -30,7 +30,7 @@ function main(parent, deploymentResourcePool, deploymentResourcePoolId) {
    */
   /**
    *  Required. The parent location resource where this DeploymentResourcePool will be
-   *  created. Format: projects/{project}/locations/{location}
+   *  created. Format: `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**

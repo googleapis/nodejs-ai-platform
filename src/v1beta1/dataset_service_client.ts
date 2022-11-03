@@ -566,6 +566,9 @@ export class DatasetServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
@@ -798,6 +801,10 @@ export class DatasetServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -976,6 +983,9 @@ export class DatasetServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -1139,6 +1149,9 @@ export class DatasetServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
@@ -1320,6 +1333,9 @@ export class DatasetServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',

@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The parent Location which owns this collection of DeploymentResourcePools.
-   *  Format: projects/{project}/locations/{location}
+   *  Format: `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**

@@ -582,6 +582,9 @@ export class TensorboardServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
@@ -814,6 +817,10 @@ export class TensorboardServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -992,6 +999,9 @@ export class TensorboardServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -1155,6 +1165,9 @@ export class TensorboardServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
@@ -1336,6 +1349,9 @@ export class TensorboardServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -3345,7 +3361,7 @@ export class TensorboardServiceClient {
    * @param {string} request.timeSeries
    *   Required. The resource name of the TensorboardTimeSeries to list Blobs.
    *   Format:
-   *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}'
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
    * @param {string[]} request.blobIds
    *   IDs of the blobs to read.
    * @param {object} [options]
@@ -4478,7 +4494,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Tensorboard to list TensorboardExperiments.
    *   Format:
-   *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}'
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
    * @param {string} request.filter
    *   Lists the TensorboardExperiments that match the filter expression.
    * @param {number} request.pageSize
@@ -4597,7 +4613,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Tensorboard to list TensorboardExperiments.
    *   Format:
-   *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}'
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
    * @param {string} request.filter
    *   Lists the TensorboardExperiments that match the filter expression.
    * @param {number} request.pageSize
@@ -4660,7 +4676,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Tensorboard to list TensorboardExperiments.
    *   Format:
-   *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}'
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
    * @param {string} request.filter
    *   Lists the TensorboardExperiments that match the filter expression.
    * @param {number} request.pageSize
@@ -4722,7 +4738,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the TensorboardExperiment to list TensorboardRuns.
    *   Format:
-   *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
    * @param {string} request.filter
    *   Lists the TensorboardRuns that match the filter expression.
    * @param {number} request.pageSize
@@ -4837,7 +4853,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the TensorboardExperiment to list TensorboardRuns.
    *   Format:
-   *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
    * @param {string} request.filter
    *   Lists the TensorboardRuns that match the filter expression.
    * @param {number} request.pageSize
@@ -4900,7 +4916,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the TensorboardExperiment to list TensorboardRuns.
    *   Format:
-   *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
    * @param {string} request.filter
    *   Lists the TensorboardRuns that match the filter expression.
    * @param {number} request.pageSize
@@ -4962,7 +4978,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the TensorboardRun to list TensorboardTimeSeries.
    *   Format:
-   *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}'
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
    * @param {string} request.filter
    *   Lists the TensorboardTimeSeries that match the filter expression.
    * @param {number} request.pageSize
@@ -5081,7 +5097,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the TensorboardRun to list TensorboardTimeSeries.
    *   Format:
-   *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}'
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
    * @param {string} request.filter
    *   Lists the TensorboardTimeSeries that match the filter expression.
    * @param {number} request.pageSize
@@ -5144,7 +5160,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the TensorboardRun to list TensorboardTimeSeries.
    *   Format:
-   *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}'
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
    * @param {string} request.filter
    *   Lists the TensorboardTimeSeries that match the filter expression.
    * @param {number} request.pageSize

@@ -31,7 +31,7 @@ function main(deploymentResourcePool) {
   /**
    *  Required. The name of the target DeploymentResourcePool to query.
    *  Format:
-   *  projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}
+   *  `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
    */
   // const deploymentResourcePool = 'abc123'
   /**

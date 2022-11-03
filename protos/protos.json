@@ -1559,6 +1559,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "metadataArtifact": {
+                          "type": "string",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2409,6 +2416,11 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 2
+                        },
+                        "annotationLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
                         },
                         "importSchemaUri": {
                           "type": "string",
@@ -5331,6 +5343,13 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -12867,6 +12886,22 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "aiplatform.googleapis.com/CustomJob"
                               }
+                            },
+                            "failedMainJobs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "failedPreCachingCheckJobs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -13518,6 +13553,10 @@
                         "savedQueryId": {
                           "type": "string",
                           "id": 7
+                        },
+                        "persistMlUseAssignment": {
+                          "type": "bool",
+                          "id": 11
                         }
                       }
                     },
@@ -17499,6 +17538,7 @@
                         "NVIDIA_TESLA_P4": 4,
                         "NVIDIA_TESLA_T4": 5,
                         "NVIDIA_TESLA_A100": 8,
+                        "NVIDIA_A100_80GB": 9,
                         "TPU_V2": 6,
                         "TPU_V3": 7
                       }
@@ -19662,6 +19702,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "metadataArtifact": {
+                          "type": "string",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -20512,6 +20559,11 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 2
+                        },
+                        "annotationLabels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
                         },
                         "importSchemaUri": {
                           "type": "string",
@@ -21533,6 +21585,14 @@
                           "rule": "repeated",
                           "type": "DeployedModelRef",
                           "id": 3
+                        },
+                        "totalDeployedModelCount": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "totalEndpointCount": {
+                          "type": "int32",
+                          "id": 5
                         }
                       }
                     },
@@ -23803,6 +23863,13 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       },
@@ -31042,6 +31109,22 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY",
                                 "(google.api.resource_reference).type": "aiplatform.googleapis.com/CustomJob"
                               }
+                            },
+                            "failedMainJobs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "failedPreCachingCheckJobs": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -31693,6 +31776,10 @@
                         "savedQueryId": {
                           "type": "string",
                           "id": 7
+                        },
+                        "persistMlUseAssignment": {
+                          "type": "bool",
+                          "id": 11
                         }
                       }
                     },

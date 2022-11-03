@@ -559,6 +559,9 @@ export class DeploymentResourcePoolServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
@@ -791,6 +794,10 @@ export class DeploymentResourcePoolServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -969,6 +976,9 @@ export class DeploymentResourcePoolServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -1132,6 +1142,9 @@ export class DeploymentResourcePoolServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
@@ -1313,6 +1326,9 @@ export class DeploymentResourcePoolServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
@@ -1520,7 +1536,7 @@ export class DeploymentResourcePoolServiceClient {
    * @param {string} request.name
    *   Required. The name of the DeploymentResourcePool to retrieve.
    *   Format:
-   *   projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1623,7 +1639,7 @@ export class DeploymentResourcePoolServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent location resource where this DeploymentResourcePool will be
-   *   created. Format: projects/{project}/locations/{location}
+   *   created. Format: `projects/{project}/locations/{location}`
    * @param {google.cloud.aiplatform.v1beta1.DeploymentResourcePool} request.deploymentResourcePool
    *   Required. The DeploymentResourcePool to create.
    * @param {string} request.deploymentResourcePoolId
@@ -1776,7 +1792,7 @@ export class DeploymentResourcePoolServiceClient {
    * @param {string} request.name
    *   Required. The name of the DeploymentResourcePool to delete.
    *   Format:
-   *   projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1919,7 +1935,7 @@ export class DeploymentResourcePoolServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent Location which owns this collection of DeploymentResourcePools.
-   *   Format: projects/{project}/locations/{location}
+   *   Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of DeploymentResourcePools to return. The service may
    *   return fewer than this value.
@@ -2028,7 +2044,7 @@ export class DeploymentResourcePoolServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent Location which owns this collection of DeploymentResourcePools.
-   *   Format: projects/{project}/locations/{location}
+   *   Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of DeploymentResourcePools to return. The service may
    *   return fewer than this value.
@@ -2081,7 +2097,7 @@ export class DeploymentResourcePoolServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent Location which owns this collection of DeploymentResourcePools.
-   *   Format: projects/{project}/locations/{location}
+   *   Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of DeploymentResourcePools to return. The service may
    *   return fewer than this value.
@@ -2134,7 +2150,7 @@ export class DeploymentResourcePoolServiceClient {
    * @param {string} request.deploymentResourcePool
    *   Required. The name of the target DeploymentResourcePool to query.
    *   Format:
-   *   projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
    * @param {number} request.pageSize
    *   The maximum number of DeployedModels to return. The service may return
    *   fewer than this value.
@@ -2240,7 +2256,7 @@ export class DeploymentResourcePoolServiceClient {
    * @param {string} request.deploymentResourcePool
    *   Required. The name of the target DeploymentResourcePool to query.
    *   Format:
-   *   projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
    * @param {number} request.pageSize
    *   The maximum number of DeployedModels to return. The service may return
    *   fewer than this value.
@@ -2294,7 +2310,7 @@ export class DeploymentResourcePoolServiceClient {
    * @param {string} request.deploymentResourcePool
    *   Required. The name of the target DeploymentResourcePool to query.
    *   Format:
-   *   projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}
+   *   `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
    * @param {number} request.pageSize
    *   The maximum number of DeployedModels to return. The service may return
    *   fewer than this value.

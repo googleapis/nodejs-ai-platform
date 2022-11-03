@@ -73,7 +73,8 @@ function main(parent) {
    *     "projects/<project_number>/locations/<location>/metadataStores/<metadatastore_name>/contexts/<context_id>"
    *     ```
    *  Each of the above supported filters can be combined together using
-   *  logical operators (`AND` & `OR`).
+   *  logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *  is 5.
    *  For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    */
   // const filter = 'abc123'

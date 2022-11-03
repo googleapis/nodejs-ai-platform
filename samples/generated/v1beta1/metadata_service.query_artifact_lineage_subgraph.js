@@ -63,7 +63,8 @@ function main(artifact) {
    *     `metadata.<field_name>.<type_value>`.
    *     For example: `metadata.field_1.number_value = 10.0`
    *  Each of the above supported filter types can be combined together using
-   *  logical operators (`AND` & `OR`).
+   *  logical operators (`AND` & `OR`). Maximum nested expression depth allowed
+   *  is 5.
    *  For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    */
   // const filter = 'abc123'

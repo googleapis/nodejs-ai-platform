@@ -2086,7 +2086,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 103,
+                    "end": 109,
                     "type": "FULL"
                 }
             ],
@@ -2118,6 +2118,10 @@
                     {
                         "name": "entity_type_specs",
                         "type": "TYPE_MESSAGE[]"
+                    },
+                    {
+                        "name": "start_time",
+                        "type": ".google.protobuf.Timestamp"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
@@ -4498,7 +4502,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 106,
+                    "end": 107,
                     "type": "FULL"
                 }
             ],
@@ -4782,7 +4786,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 109,
+                    "end": 110,
                     "type": "FULL"
                 }
             ],
@@ -5246,7 +5250,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 106,
+                    "end": 107,
                     "type": "FULL"
                 }
             ],
@@ -5666,7 +5670,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 88,
+                    "end": 89,
                     "type": "FULL"
                 }
             ],

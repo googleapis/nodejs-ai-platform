@@ -31,7 +31,7 @@ function main(name) {
   /**
    *  Required. The name of the DeploymentResourcePool to delete.
    *  Format:
-   *  projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}
+   *  `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
    */
   // const name = 'abc123'
 

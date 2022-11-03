@@ -556,6 +556,9 @@ export class SpecialistPoolServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',
             },
             {
@@ -788,6 +791,10 @@ export class SpecialistPoolServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -966,6 +973,9 @@ export class SpecialistPoolServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}',
             },
             {
@@ -1129,6 +1139,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/schedules/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/specialistPools/*}/operations',
@@ -1310,6 +1323,9 @@ export class SpecialistPoolServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/schedules/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/specialistPools/*/operations/*}:wait',
