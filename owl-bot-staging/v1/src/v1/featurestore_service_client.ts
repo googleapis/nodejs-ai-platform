@@ -1461,7 +1461,7 @@ export class FeaturestoreServiceClient {
  *   Required. The ID to use for the Feature, which will become the final component of
  *   the Feature's resource name.
  *
- *   This value may be up to 60 characters, and valid characters are
+ *   This value may be up to 128 characters, and valid characters are
  *   `[a-z0-9_]`. The first character cannot be a number.
  *
  *   The value must be unique within an EntityType.
@@ -1938,6 +1938,10 @@ export class FeaturestoreServiceClient {
  *   [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
  *   specifying entity IDs in the EntityType in
  *   {@link |BatchReadFeatureValuesRequest.request} .
+ * @param {google.protobuf.Timestamp} [request.startTime]
+ *   Optional. Excludes Feature values with feature generation timestamp before this
+ *   timestamp. If not set, retrieve oldest values kept in Feature Store.
+ *   Timestamp, if present, must not have higher than millisecond precision.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
