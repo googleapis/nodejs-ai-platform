@@ -17795,6 +17795,10 @@
                             "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
+                        "instanceConfig": {
+                          "type": "InstanceConfig",
+                          "id": 27
+                        },
                         "modelParameters": {
                           "type": "google.protobuf.Value",
                           "id": 5
@@ -17951,6 +17955,28 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            }
+                          }
+                        },
+                        "InstanceConfig": {
+                          "fields": {
+                            "instanceType": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "keyField": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "includedFields": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "excludedFields": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
