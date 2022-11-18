@@ -55,6 +55,9 @@ const deleteFeaturestore = async () => {
 
 describe('AI platform create featurestore with fixed nodes', async function () {
   this.retries(2);
+  // This is a placeholder change.
+  // I want to trigger the create-featurestore-fixed-nodes-sample.test.js on a pull-request GitHub CI test.
+  // I am investigating failures seen in the nodejs-docs-samples repo: https://github.com/GoogleCloudPlatform/nodejs-docs-samples/actions/runs/3500774352/jobs/5863773156
   it('should create a featurestore', async () => {
     const stdout = execSync(
       `node ./create-featurestore-fixed-nodes-sample.js ${project} ${featurestoreId} ${fixedNodeCount} ${location} ${apiEndpoint}`
