@@ -8,6 +8,7 @@
     "**/benchmark",
     "**/conformance",
     "**/docs",
+    "**/samples",
     "**/scripts",
     "**/protos",
     "**/test",
