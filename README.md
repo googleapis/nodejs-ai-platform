@@ -34,8 +34,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -56,9 +55,14 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/aiplatform
 ```
 
+### Using the client library
 
-
-
+```javascript
+const {DatasetServiceClient} = require('@google-cloud/aiplatform');
+const client = new DatasetServiceClient();
+// Do something with DatasetServiceClient.
+console.info(client);
+```
 
 The [Vertex AI Node.js Client API Reference][client-docs] documentation
 also contains samples.
