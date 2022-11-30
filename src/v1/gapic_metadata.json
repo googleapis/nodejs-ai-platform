@@ -243,6 +243,11 @@
                 "readFeatureValues"
               ]
             },
+            "WriteFeatureValues": {
+              "methods": [
+                "writeFeatureValues"
+              ]
+            },
             "StreamingReadFeatureValues": {
               "methods": [
                 "streamingReadFeatureValues"
@@ -256,6 +261,11 @@
             "ReadFeatureValues": {
               "methods": [
                 "readFeatureValues"
+              ]
+            },
+            "WriteFeatureValues": {
+              "methods": [
+                "writeFeatureValues"
               ]
             }
           }

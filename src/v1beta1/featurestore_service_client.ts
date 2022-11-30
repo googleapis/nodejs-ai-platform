@@ -556,6 +556,9 @@ export class FeaturestoreServiceClient {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',
             },
             {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:cancel',
+            },
+            {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',
             },
             {
@@ -787,6 +790,10 @@ export class FeaturestoreServiceClient {
             },
             {
               delete:
+                '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
+              delete:
                 '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -973,6 +980,9 @@ export class FeaturestoreServiceClient {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',
             },
             {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}',
+            },
+            {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}',
             },
             {
@@ -1139,6 +1149,9 @@ export class FeaturestoreServiceClient {
             {get: '/v1beta1/{name=projects/*/locations/*/models/*}/operations'},
             {
               get: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*}/operations',
+            },
+            {
+              get: '/v1beta1/{name=projects/*/locations/*/persistentResources/*}/operations',
             },
             {
               get: '/v1beta1/{name=projects/*/locations/*/studies/*}/operations',
@@ -1323,6 +1336,9 @@ export class FeaturestoreServiceClient {
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:wait',
+            },
+            {
+              post: '/v1beta1/{name=projects/*/locations/*/persistentResources/*/operations/*}:wait',
             },
             {
               post: '/v1beta1/{name=projects/*/locations/*/studies/*/operations/*}:wait',
@@ -1879,6 +1895,7 @@ export class FeaturestoreServiceClient {
    *     * `monitoring_config.import_features_analysis.anomaly_detection_baseline`
    *     * `monitoring_config.numerical_threshold_config.value`
    *     * `monitoring_config.categorical_threshold_config.value`
+   *     * `offline_storage_ttl_days`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2345,6 +2362,7 @@ export class FeaturestoreServiceClient {
    *     * `labels`
    *     * `online_serving_config.fixed_node_count`
    *     * `online_serving_config.scaling`
+   *     * `online_storage_ttl_days`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

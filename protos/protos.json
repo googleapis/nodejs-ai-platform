@@ -2355,10 +2355,7 @@
                         },
                         "description": {
                           "type": "string",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 16
                         },
                         "metadataSchemaUri": {
                           "type": "string",
@@ -2400,6 +2397,13 @@
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 11
+                        },
+                        "metadataArtifact": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -4344,8 +4348,70 @@
                               "(google.api.method_signature)": "entity_type"
                             }
                           ]
+                        },
+                        "WriteFeatureValues": {
+                          "requestType": "WriteFeatureValuesRequest",
+                          "responseType": "WriteFeatureValuesResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:writeFeatureValues",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "entity_type,payloads"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:writeFeatureValues",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "entity_type,payloads"
+                            }
+                          ]
                         }
                       }
+                    },
+                    "WriteFeatureValuesRequest": {
+                      "fields": {
+                        "entityType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/EntityType"
+                          }
+                        },
+                        "payloads": {
+                          "rule": "repeated",
+                          "type": "WriteFeatureValuesPayload",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WriteFeatureValuesPayload": {
+                      "fields": {
+                        "entityId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "featureValues": {
+                          "keyType": "string",
+                          "type": "FeatureValue",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "WriteFeatureValuesResponse": {
+                      "fields": {}
                     },
                     "ReadFeatureValuesRequest": {
                       "fields": {
@@ -5833,6 +5899,11 @@
                         "importedFeatureValueCount": {
                           "type": "int64",
                           "id": 3
+                        },
+                        "sourceUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
                         },
                         "invalidRowCount": {
                           "type": "int64",
@@ -20524,10 +20595,7 @@
                         },
                         "description": {
                           "type": "string",
-                          "id": 16,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 16
                         },
                         "metadataSchemaUri": {
                           "type": "string",
@@ -20569,6 +20637,13 @@
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 11
+                        },
+                        "metadataArtifact": {
+                          "type": "string",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -22286,6 +22361,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "offlineStorageTtlDays": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -22705,6 +22787,13 @@
                           "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "onlineStorageTtlDays": {
+                          "type": "int32",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "encryptionSpec": {
@@ -24379,6 +24468,11 @@
                         "importedFeatureValueCount": {
                           "type": "int64",
                           "id": 3
+                        },
+                        "sourceUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
                         },
                         "invalidRowCount": {
                           "type": "int64",
