@@ -47,6 +47,7 @@ function main(featurestore) {
    *    * `labels`
    *    * `online_serving_config.fixed_node_count`
    *    * `online_serving_config.scaling`
+   *    * `online_storage_ttl_days`
    */
   // const updateMask = {}
 
