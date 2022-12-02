@@ -8,8 +8,6 @@
 [![npm version](https://img.shields.io/npm/v/@google-cloud/aiplatform.svg)](https://www.npmjs.org/package/@google-cloud/aiplatform)
 
 
-
-
 Google Cloud Vertex AI is an integrated suite of machine learning tools
 and services for building and using ML models with AutoML or custom code.
 It offers both novices and experts the best workbench for the entire
