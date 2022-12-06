@@ -2648,6 +2648,20 @@
                             }
                           ]
                         },
+                        "SearchDataItems": {
+                          "requestType": "SearchDataItemsRequest",
+                          "responseType": "SearchDataItemsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{dataset=projects/*/locations/*/datasets/*}:searchDataItems"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{dataset=projects/*/locations/*/datasets/*}:searchDataItems"
+                              }
+                            }
+                          ]
+                        },
                         "ListSavedQueries": {
                           "requestType": "ListSavedQueriesRequest",
                           "responseType": "ListSavedQueriesResponse",
@@ -2935,6 +2949,132 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SearchDataItemsRequest": {
+                      "oneofs": {
+                        "order": {
+                          "oneof": [
+                            "orderByDataItem",
+                            "orderByAnnotation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "orderByDataItem": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "orderByAnnotation": {
+                          "type": "OrderByAnnotation",
+                          "id": 13
+                        },
+                        "dataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        },
+                        "savedQuery": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/SavedQuery"
+                          }
+                        },
+                        "dataLabelingJob": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "dataItemFilter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "annotationsFilter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "annotationFilters": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
+                        },
+                        "fieldMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 6
+                        },
+                        "annotationsLimit": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "OrderByAnnotation": {
+                          "fields": {
+                            "savedQuery": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchDataItemsResponse": {
+                      "fields": {
+                        "dataItemViews": {
+                          "rule": "repeated",
+                          "type": "DataItemView",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DataItemView": {
+                      "fields": {
+                        "dataItem": {
+                          "type": "DataItem",
+                          "id": 1
+                        },
+                        "annotations": {
+                          "rule": "repeated",
+                          "type": "Annotation",
+                          "id": 2
+                        },
+                        "hasTruncatedAnnotations": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },
@@ -20888,6 +21028,20 @@
                             }
                           ]
                         },
+                        "SearchDataItems": {
+                          "requestType": "SearchDataItemsRequest",
+                          "responseType": "SearchDataItemsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{dataset=projects/*/locations/*/datasets/*}:searchDataItems"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{dataset=projects/*/locations/*/datasets/*}:searchDataItems"
+                              }
+                            }
+                          ]
+                        },
                         "ListSavedQueries": {
                           "requestType": "ListSavedQueriesRequest",
                           "responseType": "ListSavedQueriesResponse",
@@ -21175,6 +21329,132 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SearchDataItemsRequest": {
+                      "oneofs": {
+                        "order": {
+                          "oneof": [
+                            "orderByDataItem",
+                            "orderByAnnotation"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "orderByDataItem": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "orderByAnnotation": {
+                          "type": "OrderByAnnotation",
+                          "id": 13
+                        },
+                        "dataset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Dataset"
+                          }
+                        },
+                        "savedQuery": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/SavedQuery"
+                          }
+                        },
+                        "dataLabelingJob": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "dataItemFilter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "annotationsFilter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "annotationFilters": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 11
+                        },
+                        "fieldMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 6
+                        },
+                        "annotationsLimit": {
+                          "type": "int32",
+                          "id": 7
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 8
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "OrderByAnnotation": {
+                          "fields": {
+                            "savedQuery": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "SearchDataItemsResponse": {
+                      "fields": {
+                        "dataItemViews": {
+                          "rule": "repeated",
+                          "type": "DataItemView",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DataItemView": {
+                      "fields": {
+                        "dataItem": {
+                          "type": "DataItem",
+                          "id": 1
+                        },
+                        "annotations": {
+                          "rule": "repeated",
+                          "type": "Annotation",
+                          "id": 2
+                        },
+                        "hasTruncatedAnnotations": {
+                          "type": "bool",
+                          "id": 3
                         }
                       }
                     },

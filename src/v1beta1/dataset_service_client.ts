@@ -313,6 +313,11 @@ export class DatasetServiceClient {
         'nextPageToken',
         'dataItems'
       ),
+      searchDataItems: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'dataItemViews'
+      ),
       listSavedQueries: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -1481,6 +1486,7 @@ export class DatasetServiceClient {
       'importData',
       'exportData',
       'listDataItems',
+      'searchDataItems',
       'listSavedQueries',
       'getAnnotationSpec',
       'listAnnotations',
@@ -2912,6 +2918,357 @@ export class DatasetServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataItem>;
+  }
+  /**
+   * Searches DataItems in a Dataset.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.orderByDataItem
+   *   A comma-separated list of data item fields to order by, sorted in
+   *   ascending order. Use "desc" after a field name for descending.
+   * @param {google.cloud.aiplatform.v1beta1.SearchDataItemsRequest.OrderByAnnotation} request.orderByAnnotation
+   *   Expression that allows ranking results based on annotation's property.
+   * @param {string} request.dataset
+   *   Required. The resource name of the Dataset from which to search DataItems.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {string} request.savedQuery
+   *   The resource name of a SavedQuery(annotation set in UI).
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+   *   All of the search will be done in the context of this SavedQuery.
+   * @param {string} request.dataLabelingJob
+   *   The resource name of a DataLabelingJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+   *   If this field is set, all of the search will be done in the context of
+   *   this DataLabelingJob.
+   * @param {string} request.dataItemFilter
+   *   An expression for filtering the DataItem that will be returned.
+   *
+   *     * `data_item_id` - for = or !=.
+   *     * `labeled` - for = or !=.
+   *     * `has_annotation(ANNOTATION_SPEC_ID)` - true only for DataItem that
+   *       have at least one annotation with annotation_spec_id =
+   *       `ANNOTATION_SPEC_ID` in the context of SavedQuery or DataLabelingJob.
+   *
+   *   For example:
+   *
+   *   * `data_item=1`
+   *   * `has_annotation(5)`
+   * @param {string} request.annotationsFilter
+   *   An expression for filtering the Annotations that will be returned per
+   *   DataItem.
+   *     * `annotation_spec_id` - for = or !=.
+   * @param {string[]} request.annotationFilters
+   *   An expression that specifies what Annotations will be returned per
+   *   DataItem. Annotations satisfied either of the conditions will be returned.
+   *     * `annotation_spec_id` - for = or !=.
+   *   Must specify `saved_query_id=` - saved query id that annotations should
+   *   belong to.
+   * @param {google.protobuf.FieldMask} request.fieldMask
+   *   Mask specifying which fields of {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
+   * @param {number} request.annotationsLimit
+   *   If set, only up to this many of Annotations will be returned per
+   *   DataItemView. The maximum value is 1000. If not set, the maximum value will
+   *   be used.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer results than requested.
+   *   Default and maximum page size is 100.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by, sorted in ascending order.
+   *   Use "desc" after a field name for descending.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results for the server to return
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token} of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems} call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [DataItemView]{@link google.cloud.aiplatform.v1beta1.DataItemView}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchDataItemsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchDataItems(
+    request?: protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IDataItemView[],
+      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsResponse
+    ]
+  >;
+  searchDataItems(
+    request: protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IDataItemView
+    >
+  ): void;
+  searchDataItems(
+    request: protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IDataItemView
+    >
+  ): void;
+  searchDataItems(
+    request?: protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest,
+          | protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1beta1.IDataItemView
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest,
+      | protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1beta1.IDataItemView
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IDataItemView[],
+      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest | null,
+      protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.searchDataItems(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.orderByDataItem
+   *   A comma-separated list of data item fields to order by, sorted in
+   *   ascending order. Use "desc" after a field name for descending.
+   * @param {google.cloud.aiplatform.v1beta1.SearchDataItemsRequest.OrderByAnnotation} request.orderByAnnotation
+   *   Expression that allows ranking results based on annotation's property.
+   * @param {string} request.dataset
+   *   Required. The resource name of the Dataset from which to search DataItems.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {string} request.savedQuery
+   *   The resource name of a SavedQuery(annotation set in UI).
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+   *   All of the search will be done in the context of this SavedQuery.
+   * @param {string} request.dataLabelingJob
+   *   The resource name of a DataLabelingJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+   *   If this field is set, all of the search will be done in the context of
+   *   this DataLabelingJob.
+   * @param {string} request.dataItemFilter
+   *   An expression for filtering the DataItem that will be returned.
+   *
+   *     * `data_item_id` - for = or !=.
+   *     * `labeled` - for = or !=.
+   *     * `has_annotation(ANNOTATION_SPEC_ID)` - true only for DataItem that
+   *       have at least one annotation with annotation_spec_id =
+   *       `ANNOTATION_SPEC_ID` in the context of SavedQuery or DataLabelingJob.
+   *
+   *   For example:
+   *
+   *   * `data_item=1`
+   *   * `has_annotation(5)`
+   * @param {string} request.annotationsFilter
+   *   An expression for filtering the Annotations that will be returned per
+   *   DataItem.
+   *     * `annotation_spec_id` - for = or !=.
+   * @param {string[]} request.annotationFilters
+   *   An expression that specifies what Annotations will be returned per
+   *   DataItem. Annotations satisfied either of the conditions will be returned.
+   *     * `annotation_spec_id` - for = or !=.
+   *   Must specify `saved_query_id=` - saved query id that annotations should
+   *   belong to.
+   * @param {google.protobuf.FieldMask} request.fieldMask
+   *   Mask specifying which fields of {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
+   * @param {number} request.annotationsLimit
+   *   If set, only up to this many of Annotations will be returned per
+   *   DataItemView. The maximum value is 1000. If not set, the maximum value will
+   *   be used.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer results than requested.
+   *   Default and maximum page size is 100.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by, sorted in ascending order.
+   *   Use "desc" after a field name for descending.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results for the server to return
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token} of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems} call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [DataItemView]{@link google.cloud.aiplatform.v1beta1.DataItemView} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchDataItemsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchDataItemsStream(
+    request?: protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    const defaultCallSettings = this._defaults['searchDataItems'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.searchDataItems.createStream(
+      this.innerApiCalls.searchDataItems as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `searchDataItems`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.orderByDataItem
+   *   A comma-separated list of data item fields to order by, sorted in
+   *   ascending order. Use "desc" after a field name for descending.
+   * @param {google.cloud.aiplatform.v1beta1.SearchDataItemsRequest.OrderByAnnotation} request.orderByAnnotation
+   *   Expression that allows ranking results based on annotation's property.
+   * @param {string} request.dataset
+   *   Required. The resource name of the Dataset from which to search DataItems.
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}`
+   * @param {string} request.savedQuery
+   *   The resource name of a SavedQuery(annotation set in UI).
+   *   Format:
+   *   `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+   *   All of the search will be done in the context of this SavedQuery.
+   * @param {string} request.dataLabelingJob
+   *   The resource name of a DataLabelingJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+   *   If this field is set, all of the search will be done in the context of
+   *   this DataLabelingJob.
+   * @param {string} request.dataItemFilter
+   *   An expression for filtering the DataItem that will be returned.
+   *
+   *     * `data_item_id` - for = or !=.
+   *     * `labeled` - for = or !=.
+   *     * `has_annotation(ANNOTATION_SPEC_ID)` - true only for DataItem that
+   *       have at least one annotation with annotation_spec_id =
+   *       `ANNOTATION_SPEC_ID` in the context of SavedQuery or DataLabelingJob.
+   *
+   *   For example:
+   *
+   *   * `data_item=1`
+   *   * `has_annotation(5)`
+   * @param {string} request.annotationsFilter
+   *   An expression for filtering the Annotations that will be returned per
+   *   DataItem.
+   *     * `annotation_spec_id` - for = or !=.
+   * @param {string[]} request.annotationFilters
+   *   An expression that specifies what Annotations will be returned per
+   *   DataItem. Annotations satisfied either of the conditions will be returned.
+   *     * `annotation_spec_id` - for = or !=.
+   *   Must specify `saved_query_id=` - saved query id that annotations should
+   *   belong to.
+   * @param {google.protobuf.FieldMask} request.fieldMask
+   *   Mask specifying which fields of {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
+   * @param {number} request.annotationsLimit
+   *   If set, only up to this many of Annotations will be returned per
+   *   DataItemView. The maximum value is 1000. If not set, the maximum value will
+   *   be used.
+   * @param {number} request.pageSize
+   *   Requested page size. Server may return fewer results than requested.
+   *   Default and maximum page size is 100.
+   * @param {string} request.orderBy
+   *   A comma-separated list of fields to order by, sorted in ascending order.
+   *   Use "desc" after a field name for descending.
+   * @param {string} request.pageToken
+   *   A token identifying a page of results for the server to return
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token} of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems} call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [DataItemView]{@link google.cloud.aiplatform.v1beta1.DataItemView}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataset_service.search_data_items.js</caption>
+   * region_tag:aiplatform_v1beta1_generated_DatasetService_SearchDataItems_async
+   */
+  searchDataItemsAsync(
+    request?: protos.google.cloud.aiplatform.v1beta1.ISearchDataItemsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataItemView> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        dataset: request.dataset ?? '',
+      });
+    const defaultCallSettings = this._defaults['searchDataItems'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize();
+    return this.descriptors.page.searchDataItems.asyncIterate(
+      this.innerApiCalls['searchDataItems'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataItemView>;
   }
   /**
    * Lists SavedQueries in a Dataset.

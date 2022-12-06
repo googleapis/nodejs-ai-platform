@@ -59,6 +59,13 @@
                 "listDataItemsAsync"
               ]
             },
+            "SearchDataItems": {
+              "methods": [
+                "searchDataItems",
+                "searchDataItemsStream",
+                "searchDataItemsAsync"
+              ]
+            },
             "ListSavedQueries": {
               "methods": [
                 "listSavedQueries",
@@ -125,6 +132,13 @@
                 "listDataItems",
                 "listDataItemsStream",
                 "listDataItemsAsync"
+              ]
+            },
+            "SearchDataItems": {
+              "methods": [
+                "searchDataItems",
+                "searchDataItemsStream",
+                "searchDataItemsAsync"
               ]
             },
             "ListSavedQueries": {
