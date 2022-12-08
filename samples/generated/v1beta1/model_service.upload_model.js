@@ -49,6 +49,16 @@ function main(parent, model) {
    *  Required. The Model to create.
    */
   // const model = {}
+  /**
+   *  Optional. The user-provided custom service account to use to do the model
+   *  upload. If empty, Vertex AI Service
+   *  Agent (https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
+   *  will be used. Users uploading the Model must have the
+   *  `iam.serviceAccounts.actAs` permission on this service account. Also, this
+   *  account must belong to the project specified in the `parent` field and have
+   *  all necessary read permissions.
+   */
+  // const serviceAccount = 'abc123'
 
   // Imports the Aiplatform library
   const {ModelServiceClient} = require('@google-cloud/aiplatform').v1beta1;

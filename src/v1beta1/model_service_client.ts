@@ -2342,6 +2342,14 @@ export class ModelServiceClient {
    *   `[a-z0-9_-]`. The first character cannot be a number or hyphen.
    * @param {google.cloud.aiplatform.v1beta1.Model} request.model
    *   Required. The Model to create.
+   * @param {string} [request.serviceAccount]
+   *   Optional. The user-provided custom service account to use to do the model
+   *   upload. If empty, [Vertex AI Service
+   *   Agent](https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
+   *   will be used. Users uploading the Model must have the
+   *   `iam.serviceAccounts.actAs` permission on this service account. Also, this
+   *   account must belong to the project specified in the `parent` field and have
+   *   all necessary read permissions.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

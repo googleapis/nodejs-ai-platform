@@ -5902,7 +5902,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 72,
+                    "end": 82,
                     "type": "FULL"
                 }
             ],
@@ -5926,6 +5926,10 @@
                     {
                         "name": "model",
                         "type": ".google.cloud.aiplatform.v1beta1.Model"
+                    },
+                    {
+                        "name": "service_account",
+                        "type": "TYPE_STRING"
                     }
                 ],
                 "resultType": ".google.longrunning.Operation",
