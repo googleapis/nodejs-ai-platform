@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -48,7 +48,8 @@ function main(endpoint, instances) {
   // const instances = 1234
   /**
    *  The parameters that govern the prediction. The schema of the parameters may
-   *  be specified via Endpoint's DeployedModels' Model's  google.cloud.aiplatform.v1.DeployedModel.model 
+   *  be specified via Endpoint's DeployedModels' Model's
+   *   google.cloud.aiplatform.v1.DeployedModel.model 
    *  PredictSchemata's google.cloud.aiplatform.v1.Model.predict_schemata 
    *  parameters_schema_uri google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri.
    */

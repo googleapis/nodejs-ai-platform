@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -308,9 +308,9 @@ export class MetadataServiceClient {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/ui/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*}',}],
       },{selector: 'google.cloud.location.Locations.ListLocations',get: '/ui/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=projects/*}/locations',}],
-      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',additional_bindings: [{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',additional_bindings: [{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',}],
+      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',}],
       },{selector: 'google.longrunning.Operations.CancelOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',}],
       },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',}],
       },{selector: 'google.longrunning.Operations.GetOperation',get: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',}],
@@ -752,15 +752,15 @@ export class MetadataServiceClient {
  *   The request object that will be sent.
  * @param {google.cloud.aiplatform.v1.Artifact} request.artifact
  *   Required. The Artifact containing updates.
- *   The Artifact's {@link google.cloud.aiplatform.v1.Artifact.name|Artifact.name} field is used to identify the Artifact to
- *   be updated.
- *   Format:
+ *   The Artifact's {@link google.cloud.aiplatform.v1.Artifact.name|Artifact.name}
+ *   field is used to identify the Artifact to be updated. Format:
  *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
  * @param {google.protobuf.FieldMask} [request.updateMask]
  *   Optional. A FieldMask indicating which fields should be updated.
  *   Functionality of this field is not yet supported.
  * @param {boolean} request.allowMissing
- *   If set to true, and the {@link google.cloud.aiplatform.v1.Artifact|Artifact} is not found, a new {@link google.cloud.aiplatform.v1.Artifact|Artifact} is
+ *   If set to true, and the {@link google.cloud.aiplatform.v1.Artifact|Artifact} is
+ *   not found, a new {@link google.cloud.aiplatform.v1.Artifact|Artifact} is
  *   created.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -832,9 +832,8 @@ export class MetadataServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The resource name of the MetadataStore where the Context should be
- *   created.
- *   Format:
+ *   Required. The resource name of the MetadataStore where the Context should
+ *   be created. Format:
  *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
  * @param {google.cloud.aiplatform.v1.Context} request.context
  *   Required. The Context to create.
@@ -990,16 +989,15 @@ export class MetadataServiceClient {
  *   The request object that will be sent.
  * @param {google.cloud.aiplatform.v1.Context} request.context
  *   Required. The Context containing updates.
- *   The Context's {@link google.cloud.aiplatform.v1.Context.name|Context.name} field is used to identify the Context to be
- *   updated.
- *   Format:
+ *   The Context's {@link google.cloud.aiplatform.v1.Context.name|Context.name} field
+ *   is used to identify the Context to be updated. Format:
  *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
  * @param {google.protobuf.FieldMask} [request.updateMask]
  *   Optional. A FieldMask indicating which fields should be updated.
  *   Functionality of this field is not yet supported.
  * @param {boolean} request.allowMissing
- *   If set to true, and the {@link google.cloud.aiplatform.v1.Context|Context} is not found, a new {@link google.cloud.aiplatform.v1.Context|Context} is
- *   created.
+ *   If set to true, and the {@link google.cloud.aiplatform.v1.Context|Context} is
+ *   not found, a new {@link google.cloud.aiplatform.v1.Context|Context} is created.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1072,9 +1070,8 @@ export class MetadataServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.context
- *   Required. The resource name of the Context that the Artifacts and Executions
- *   belong to.
- *   Format:
+ *   Required. The resource name of the Context that the Artifacts and
+ *   Executions belong to. Format:
  *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
  * @param {string[]} request.artifacts
  *   The resource names of the Artifacts to attribute to the Context.
@@ -1553,16 +1550,16 @@ export class MetadataServiceClient {
  *   The request object that will be sent.
  * @param {google.cloud.aiplatform.v1.Execution} request.execution
  *   Required. The Execution containing updates.
- *   The Execution's {@link google.cloud.aiplatform.v1.Execution.name|Execution.name} field is used to identify the Execution
- *   to be updated.
- *   Format:
+ *   The Execution's {@link google.cloud.aiplatform.v1.Execution.name|Execution.name}
+ *   field is used to identify the Execution to be updated. Format:
  *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
  * @param {google.protobuf.FieldMask} [request.updateMask]
  *   Optional. A FieldMask indicating which fields should be updated.
  *   Functionality of this field is not yet supported.
  * @param {boolean} request.allowMissing
- *   If set to true, and the {@link google.cloud.aiplatform.v1.Execution|Execution} is not found, a new {@link google.cloud.aiplatform.v1.Execution|Execution}
- *   is created.
+ *   If set to true, and the {@link google.cloud.aiplatform.v1.Execution|Execution}
+ *   is not found, a new {@link google.cloud.aiplatform.v1.Execution|Execution} is
+ *   created.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1714,9 +1711,8 @@ export class MetadataServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.execution
- *   Required. The resource name of the Execution whose input and output Artifacts should
- *   be retrieved as a LineageSubgraph.
- *   Format:
+ *   Required. The resource name of the Execution whose input and output
+ *   Artifacts should be retrieved as a LineageSubgraph. Format:
  *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1788,9 +1784,8 @@ export class MetadataServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The resource name of the MetadataStore where the MetadataSchema should
- *   be created.
- *   Format:
+ *   Required. The resource name of the MetadataStore where the MetadataSchema
+ *   should be created. Format:
  *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}`
  * @param {google.cloud.aiplatform.v1.MetadataSchema} request.metadataSchema
  *   Required. The MetadataSchema to create.
@@ -1947,9 +1942,8 @@ export class MetadataServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.artifact
- *   Required. The resource name of the Artifact whose Lineage needs to be retrieved as a
- *   LineageSubgraph.
- *   Format:
+ *   Required. The resource name of the Artifact whose Lineage needs to be
+ *   retrieved as a LineageSubgraph. Format:
  *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
  *
  *   The request may error with FAILED_PRECONDITION if the number of Artifacts,
@@ -2858,8 +2852,8 @@ export class MetadataServiceClient {
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
  *   A page token, received from a previous
- *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores} call. Provide this to retrieve the
- *   subsequent page.
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
+ *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
  *   provided the page token. (Otherwise the request will fail with
@@ -2948,8 +2942,8 @@ export class MetadataServiceClient {
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
  *   A page token, received from a previous
- *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores} call. Provide this to retrieve the
- *   subsequent page.
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
+ *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
  *   provided the page token. (Otherwise the request will fail with
@@ -3005,8 +2999,8 @@ export class MetadataServiceClient {
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
  *   A page token, received from a previous
- *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores} call. Provide this to retrieve the
- *   subsequent page.
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataStores|MetadataService.ListMetadataStores}
+ *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
  *   provided the page token. (Otherwise the request will fail with
@@ -3059,7 +3053,8 @@ export class MetadataServiceClient {
  *   The maximum number of Artifacts to return. The service may return fewer.
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
- *   A page token, received from a previous {@link google.cloud.aiplatform.v1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
+ *   A page token, received from a previous
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
@@ -3183,7 +3178,8 @@ export class MetadataServiceClient {
  *   The maximum number of Artifacts to return. The service may return fewer.
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
- *   A page token, received from a previous {@link google.cloud.aiplatform.v1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
+ *   A page token, received from a previous
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
@@ -3274,7 +3270,8 @@ export class MetadataServiceClient {
  *   The maximum number of Artifacts to return. The service may return fewer.
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
- *   A page token, received from a previous {@link google.cloud.aiplatform.v1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
+ *   A page token, received from a previous
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListArtifacts|MetadataService.ListArtifacts}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
@@ -3364,7 +3361,8 @@ export class MetadataServiceClient {
  *   The maximum number of Contexts to return. The service may return fewer.
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
- *   A page token, received from a previous {@link google.cloud.aiplatform.v1.MetadataService.ListContexts|MetadataService.ListContexts}
+ *   A page token, received from a previous
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListContexts|MetadataService.ListContexts}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
@@ -3492,7 +3490,8 @@ export class MetadataServiceClient {
  *   The maximum number of Contexts to return. The service may return fewer.
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
- *   A page token, received from a previous {@link google.cloud.aiplatform.v1.MetadataService.ListContexts|MetadataService.ListContexts}
+ *   A page token, received from a previous
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListContexts|MetadataService.ListContexts}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
@@ -3587,7 +3586,8 @@ export class MetadataServiceClient {
  *   The maximum number of Contexts to return. The service may return fewer.
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
- *   A page token, received from a previous {@link google.cloud.aiplatform.v1.MetadataService.ListContexts|MetadataService.ListContexts}
+ *   A page token, received from a previous
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListContexts|MetadataService.ListContexts}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
@@ -3681,7 +3681,8 @@ export class MetadataServiceClient {
  *   The maximum number of Executions to return. The service may return fewer.
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
- *   A page token, received from a previous {@link google.cloud.aiplatform.v1.MetadataService.ListExecutions|MetadataService.ListExecutions}
+ *   A page token, received from a previous
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListExecutions|MetadataService.ListExecutions}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
@@ -3805,7 +3806,8 @@ export class MetadataServiceClient {
  *   The maximum number of Executions to return. The service may return fewer.
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
- *   A page token, received from a previous {@link google.cloud.aiplatform.v1.MetadataService.ListExecutions|MetadataService.ListExecutions}
+ *   A page token, received from a previous
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListExecutions|MetadataService.ListExecutions}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
@@ -3896,7 +3898,8 @@ export class MetadataServiceClient {
  *   The maximum number of Executions to return. The service may return fewer.
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
- *   A page token, received from a previous {@link google.cloud.aiplatform.v1.MetadataService.ListExecutions|MetadataService.ListExecutions}
+ *   A page token, received from a previous
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListExecutions|MetadataService.ListExecutions}
  *   call. Provide this to retrieve the subsequent page.
  *
  *   When paginating, all other provided parameters must match the call that
@@ -3988,8 +3991,8 @@ export class MetadataServiceClient {
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
  *   A page token, received from a previous
- *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas} call. Provide this to retrieve the
- *   next page.
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
+ *   call. Provide this to retrieve the next page.
  *
  *   When paginating, all other provided parameters must match the call that
  *   provided the page token. (Otherwise the request will fail with
@@ -4080,8 +4083,8 @@ export class MetadataServiceClient {
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
  *   A page token, received from a previous
- *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas} call. Provide this to retrieve the
- *   next page.
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
+ *   call. Provide this to retrieve the next page.
  *
  *   When paginating, all other provided parameters must match the call that
  *   provided the page token. (Otherwise the request will fail with
@@ -4139,8 +4142,8 @@ export class MetadataServiceClient {
  *   Must be in range 1-1000, inclusive. Defaults to 100.
  * @param {string} request.pageToken
  *   A page token, received from a previous
- *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas} call. Provide this to retrieve the
- *   next page.
+ *   {@link google.cloud.aiplatform.v1.MetadataService.ListMetadataSchemas|MetadataService.ListMetadataSchemas}
+ *   call. Provide this to retrieve the next page.
  *
  *   When paginating, all other provided parameters must match the call that
  *   provided the page token. (Otherwise the request will fail with

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -48,8 +48,8 @@ function main(entityType, featureSpecs) {
    */
   // const featureTime = {}
   /**
-   *  Required. The resource name of the EntityType grouping the Features for which values
-   *  are being imported. Format:
+   *  Required. The resource name of the EntityType grouping the Features for
+   *  which values are being imported. Format:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
    */
   // const entityType = 'abc123'
@@ -59,9 +59,9 @@ function main(entityType, featureSpecs) {
    */
   // const entityIdField = 'abc123'
   /**
-   *  Required. Specifications defining which Feature values to import from the entity. The
-   *  request fails if no feature_specs are provided, and having multiple
-   *  feature_specs for one Feature is not allowed.
+   *  Required. Specifications defining which Feature values to import from the
+   *  entity. The request fails if no feature_specs are provided, and having
+   *  multiple feature_specs for one Feature is not allowed.
    */
   // const featureSpecs = 1234
   /**

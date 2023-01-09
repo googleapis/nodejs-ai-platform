@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,9 +39,11 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  The standard list page token.
-   *  Typically obtained by ListSpecialistPoolsResponse.next_page_token google.cloud.aiplatform.v1.ListSpecialistPoolsResponse.next_page_token  of
-   *  the previous SpecialistPoolService.ListSpecialistPools google.cloud.aiplatform.v1.SpecialistPoolService.ListSpecialistPools  call. Return
-   *  first page if empty.
+   *  Typically obtained by
+   *  ListSpecialistPoolsResponse.next_page_token google.cloud.aiplatform.v1.ListSpecialistPoolsResponse.next_page_token 
+   *  of the previous
+   *  SpecialistPoolService.ListSpecialistPools google.cloud.aiplatform.v1.SpecialistPoolService.ListSpecialistPools 
+   *  call. Return first page if empty.
    */
   // const pageToken = 'abc123'
   /**

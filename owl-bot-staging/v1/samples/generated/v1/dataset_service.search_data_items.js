@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -85,7 +85,8 @@ function main(dataset) {
    */
   // const annotationFilters = 'abc123'
   /**
-   *  Mask specifying which fields of DataItemView google.cloud.aiplatform.v1.DataItemView  to read.
+   *  Mask specifying which fields of
+   *  DataItemView google.cloud.aiplatform.v1.DataItemView  to read.
    */
   // const fieldMask = {}
   /**
@@ -107,8 +108,10 @@ function main(dataset) {
   /**
    *  A token identifying a page of results for the server to return
    *  Typically obtained via
-   *  SearchDataItemsResponse.next_page_token google.cloud.aiplatform.v1.SearchDataItemsResponse.next_page_token  of the previous
-   *  DatasetService.SearchDataItems google.cloud.aiplatform.v1.DatasetService.SearchDataItems  call.
+   *  SearchDataItemsResponse.next_page_token google.cloud.aiplatform.v1.SearchDataItemsResponse.next_page_token 
+   *  of the previous
+   *  DatasetService.SearchDataItems google.cloud.aiplatform.v1.DatasetService.SearchDataItems 
+   *  call.
    */
   // const pageToken = 'abc123'
 

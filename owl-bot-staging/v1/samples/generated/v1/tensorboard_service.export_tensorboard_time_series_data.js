@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(tensorboardTimeSeries) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the TensorboardTimeSeries to export data from.
-   *  Format:
+   *  Required. The resource name of the TensorboardTimeSeries to export data
+   *  from. Format:
    *  `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
    */
   // const tensorboardTimeSeries = 'abc123'
@@ -40,8 +40,8 @@ function main(tensorboardTimeSeries) {
   // const filter = 'abc123'
   /**
    *  The maximum number of data points to return per page.
-   *  The default page_size will be 1000. Values must be between 1 and 10000.
-   *  Values above 10000 will be coerced to 10000.
+   *  The default page_size is 1000. Values must be between 1 and 10000.
+   *  Values above 10000 are coerced to 10000.
    */
   // const pageSize = 1234
   /**
@@ -55,7 +55,7 @@ function main(tensorboardTimeSeries) {
   // const pageToken = 'abc123'
   /**
    *  Field to use to sort the TensorboardTimeSeries' data.
-   *  By default, TensorboardTimeSeries' data will be returned in a pseudo random
+   *  By default, TensorboardTimeSeries' data is returned in a pseudo random
    *  order.
    */
   // const orderBy = 'abc123'

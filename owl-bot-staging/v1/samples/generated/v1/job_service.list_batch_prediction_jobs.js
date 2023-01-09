@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -60,8 +60,10 @@ function main(parent) {
   /**
    *  The standard list page token.
    *  Typically obtained via
-   *  ListBatchPredictionJobsResponse.next_page_token google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token  of the previous
-   *  JobService.ListBatchPredictionJobs google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs  call.
+   *  ListBatchPredictionJobsResponse.next_page_token google.cloud.aiplatform.v1.ListBatchPredictionJobsResponse.next_page_token 
+   *  of the previous
+   *  JobService.ListBatchPredictionJobs google.cloud.aiplatform.v1.JobService.ListBatchPredictionJobs 
+   *  call.
    */
   // const pageToken = 'abc123'
   /**

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -53,8 +53,8 @@ function main(featurestore, destination, entityTypeSpecs) {
    */
   // const bigqueryReadInstances = {}
   /**
-   *  Required. The resource name of the Featurestore from which to query Feature values.
-   *  Format:
+   *  Required. The resource name of the Featurestore from which to query Feature
+   *  values. Format:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}`
    */
   // const featurestore = 'abc123'
@@ -72,16 +72,16 @@ function main(featurestore, destination, entityTypeSpecs) {
    */
   // const passThroughFields = 1234
   /**
-   *  Required. Specifies EntityType grouping Features to read values of and settings.
-   *  Each EntityType referenced in
+   *  Required. Specifies EntityType grouping Features to read values of and
+   *  settings. Each EntityType referenced in
    *  BatchReadFeatureValuesRequest.entity_type_specs  must have a column
    *  specifying entity IDs in the EntityType in
    *  BatchReadFeatureValuesRequest.request   .
    */
   // const entityTypeSpecs = 1234
   /**
-   *  Optional. Excludes Feature values with feature generation timestamp before this
-   *  timestamp. If not set, retrieve oldest values kept in Feature Store.
+   *  Optional. Excludes Feature values with feature generation timestamp before
+   *  this timestamp. If not set, retrieve oldest values kept in Feature Store.
    *  Timestamp, if present, must not have higher than millisecond precision.
    */
   // const startTime = {}

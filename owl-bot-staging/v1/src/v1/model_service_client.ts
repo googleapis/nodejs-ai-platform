@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -303,9 +303,9 @@ export class ModelServiceClient {
       lroOptions.protoJson = protoFilesRoot;
       lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/ui/{name=projects/*/locations/*}',additional_bindings: [{get: '/v1/{name=projects/*/locations/*}',}],
       },{selector: 'google.cloud.location.Locations.ListLocations',get: '/ui/{name=projects/*}/locations',additional_bindings: [{get: '/v1/{name=projects/*}/locations',}],
-      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',additional_bindings: [{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',}],
-      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',}],
-      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',additional_bindings: [{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',}],
+      },{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:getIamPolicy',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:getIamPolicy',}],
+      },{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:setIamPolicy',body: '*',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:setIamPolicy',body: '*',}],
+      },{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',additional_bindings: [{post: '/v1/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*}:testIamPermissions',},{post: '/ui/{resource=projects/*/locations/*/featurestores/*/entityTypes/*}:testIamPermissions',}],
       },{selector: 'google.longrunning.Operations.CancelOperation',post: '/ui/{name=projects/*/locations/*/operations/*}:cancel',additional_bindings: [{post: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}:cancel',},{post: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}:cancel',}],
       },{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{delete: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/models/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/studies/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{delete: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',}],
       },{selector: 'google.longrunning.Operations.GetOperation',get: '/ui/{name=projects/*/locations/*/operations/*}',additional_bindings: [{get: '/ui/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDeploymentJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/edgeDevices/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/ui/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/savedQueries/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/annotationSpecs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/datasets/*/dataItems/*/annotations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/deploymentResourcePools/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/endpoints/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/featurestores/*/entityTypes/*/features/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/customJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/dataLabelingJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/hyperparameterTuningJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexes/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/indexEndpoints/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/modelDeploymentMonitoringJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/migratableResources/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/models/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/models/*/evaluations/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/studies/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/studies/*/trials/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/trainingPipelines/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/pipelineJobs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/specialistPools/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/operations/*}',},{get: '/v1/{name=projects/*/locations/*/tensorboards/*/experiments/*/runs/*/timeSeries/*/operations/*}',}],
@@ -586,7 +586,8 @@ export class ModelServiceClient {
  *   must update them separately.
  * @param {google.protobuf.FieldMask} request.updateMask
  *   Required. The update mask applies to the resource.
- *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
+ *   For the `FieldMask` definition, see
+ *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1043,8 +1044,8 @@ export class ModelServiceClient {
  *   Required. The resource name of the Location into which to upload the Model.
  *   Format: `projects/{project}/locations/{location}`
  * @param {string} [request.parentModel]
- *   Optional. The resource name of the model into which to upload the version. Only
- *   specify this field when uploading a new version.
+ *   Optional. The resource name of the model into which to upload the version.
+ *   Only specify this field when uploading a new version.
  * @param {string} [request.modelId]
  *   Optional. The ID to use for the uploaded Model, which will become the final
  *   component of the model resource name.
@@ -1148,9 +1149,12 @@ export class ModelServiceClient {
 /**
  * Deletes a Model.
  *
- * A model cannot be deleted if any {@link google.cloud.aiplatform.v1.Endpoint|Endpoint} resource has a
- * {@link google.cloud.aiplatform.v1.DeployedModel|DeployedModel} based on the model in its
- * {@link google.cloud.aiplatform.v1.Endpoint.deployed_models|deployed_models} field.
+ * A model cannot be deleted if any
+ * {@link google.cloud.aiplatform.v1.Endpoint|Endpoint} resource has a
+ * {@link google.cloud.aiplatform.v1.DeployedModel|DeployedModel} based on the
+ * model in its
+ * {@link google.cloud.aiplatform.v1.Endpoint.deployed_models|deployed_models}
+ * field.
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1246,13 +1250,14 @@ export class ModelServiceClient {
  *
  * Model version can only be deleted if there are no {@link |DeployedModels}
  * created from it. Deleting the only version in the Model is not allowed. Use
- * {@link google.cloud.aiplatform.v1.ModelService.DeleteModel|DeleteModel} for deleting the Model instead.
+ * {@link google.cloud.aiplatform.v1.ModelService.DeleteModel|DeleteModel} for
+ * deleting the Model instead.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. The name of the model version to be deleted, with a version ID explicitly
- *   included.
+ *   Required. The name of the model version to be deleted, with a version ID
+ *   explicitly included.
  *
  *   Example: `projects/{project}/locations/{location}/models/{model}@1234`
  * @param {object} [options]
@@ -1342,7 +1347,8 @@ export class ModelServiceClient {
 /**
  * Exports a trained, exportable Model to a location specified by the
  * user. A Model is considered to be exportable if it has at least one
- * {@link google.cloud.aiplatform.v1.Model.supported_export_formats|supported export format}.
+ * [supported export
+ * format][google.cloud.aiplatform.v1.Model.supported_export_formats].
  *
  * @param {Object} request
  *   The request object that will be sent.
@@ -1449,7 +1455,8 @@ export class ModelServiceClient {
  *   both snake_case and camelCase are supported.
  *
  *     * `model` supports = and !=. `model` represents the Model ID,
- *       i.e. the last segment of the Model's {@link google.cloud.aiplatform.v1.Model.name|resource name}.
+ *       i.e. the last segment of the Model's [resource
+ *       name][google.cloud.aiplatform.v1.Model.name].
  *     * `display_name` supports = and !=
  *     * `labels` supports general map functions that is:
  *       * `labels.key=value` - key:value equality
@@ -1466,8 +1473,10 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
- *   {@link google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token}
+ *   of the previous
+ *   {@link google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels}
+ *   call.
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
  * @param {string} request.orderBy
@@ -1562,7 +1571,8 @@ export class ModelServiceClient {
  *   both snake_case and camelCase are supported.
  *
  *     * `model` supports = and !=. `model` represents the Model ID,
- *       i.e. the last segment of the Model's {@link google.cloud.aiplatform.v1.Model.name|resource name}.
+ *       i.e. the last segment of the Model's [resource
+ *       name][google.cloud.aiplatform.v1.Model.name].
  *     * `display_name` supports = and !=
  *     * `labels` supports general map functions that is:
  *       * `labels.key=value` - key:value equality
@@ -1579,8 +1589,10 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
- *   {@link google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token}
+ *   of the previous
+ *   {@link google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels}
+ *   call.
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
  * @param {string} request.orderBy
@@ -1642,7 +1654,8 @@ export class ModelServiceClient {
  *   both snake_case and camelCase are supported.
  *
  *     * `model` supports = and !=. `model` represents the Model ID,
- *       i.e. the last segment of the Model's {@link google.cloud.aiplatform.v1.Model.name|resource name}.
+ *       i.e. the last segment of the Model's [resource
+ *       name][google.cloud.aiplatform.v1.Model.name].
  *     * `display_name` supports = and !=
  *     * `labels` supports general map functions that is:
  *       * `labels.key=value` - key:value equality
@@ -1659,8 +1672,10 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token} of the previous
- *   {@link google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelsResponse.next_page_token|ListModelsResponse.next_page_token}
+ *   of the previous
+ *   {@link google.cloud.aiplatform.v1.ModelService.ListModels|ModelService.ListModels}
+ *   call.
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
  * @param {string} request.orderBy
@@ -1720,8 +1735,8 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|ListModelVersionsResponse.next_page_token} of the previous
- *   {@link |ModelService.ListModelversions} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|ListModelVersionsResponse.next_page_token}
+ *   of the previous {@link |ModelService.ListModelversions} call.
  * @param {string} request.filter
  *   An expression for filtering the results of the request. For field names
  *   both snake_case and camelCase are supported.
@@ -1736,6 +1751,15 @@ export class ModelServiceClient {
  *     * `labels.myKey="myValue"`
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
+ * @param {string} request.orderBy
+ *   A comma-separated list of fields to order by, sorted in ascending order.
+ *   Use "desc" after a field name for descending.
+ *   Supported fields:
+ *
+ *     * `create_time`
+ *     * `update_time`
+ *
+ *   Example: `update_time asc, create_time desc`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1817,8 +1841,8 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|ListModelVersionsResponse.next_page_token} of the previous
- *   {@link |ModelService.ListModelversions} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|ListModelVersionsResponse.next_page_token}
+ *   of the previous {@link |ModelService.ListModelversions} call.
  * @param {string} request.filter
  *   An expression for filtering the results of the request. For field names
  *   both snake_case and camelCase are supported.
@@ -1833,6 +1857,15 @@ export class ModelServiceClient {
  *     * `labels.myKey="myValue"`
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
+ * @param {string} request.orderBy
+ *   A comma-separated list of fields to order by, sorted in ascending order.
+ *   Use "desc" after a field name for descending.
+ *   Supported fields:
+ *
+ *     * `create_time`
+ *     * `update_time`
+ *
+ *   Example: `update_time asc, create_time desc`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1881,8 +1914,8 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|ListModelVersionsResponse.next_page_token} of the previous
- *   {@link |ModelService.ListModelversions} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelVersionsResponse.next_page_token|ListModelVersionsResponse.next_page_token}
+ *   of the previous {@link |ModelService.ListModelversions} call.
  * @param {string} request.filter
  *   An expression for filtering the results of the request. For field names
  *   both snake_case and camelCase are supported.
@@ -1897,6 +1930,15 @@ export class ModelServiceClient {
  *     * `labels.myKey="myValue"`
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
+ * @param {string} request.orderBy
+ *   A comma-separated list of fields to order by, sorted in ascending order.
+ *   Use "desc" after a field name for descending.
+ *   Supported fields:
+ *
+ *     * `create_time`
+ *     * `update_time`
+ *
+ *   Example: `update_time asc, create_time desc`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -1947,8 +1989,10 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
- *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token}
+ *   of the previous
+ *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations}
+ *   call.
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
  * @param {object} [options]
@@ -2035,8 +2079,10 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
- *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token}
+ *   of the previous
+ *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations}
+ *   call.
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
  * @param {object} [options]
@@ -2090,8 +2136,10 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token} of the previous
- *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelEvaluationsResponse.next_page_token|ListModelEvaluationsResponse.next_page_token}
+ *   of the previous
+ *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluations|ModelService.ListModelEvaluations}
+ *   call.
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
  * @param {object} [options]
@@ -2135,8 +2183,8 @@ export class ModelServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
- *   from. Format:
+ *   Required. The resource name of the ModelEvaluation to list the
+ *   ModelEvaluationSlices from. Format:
  *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
  * @param {string} request.filter
  *   The standard list filter.
@@ -2147,8 +2195,10 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token} of the previous
- *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token}
+ *   of the previous
+ *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices}
+ *   call.
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
  * @param {object} [options]
@@ -2226,8 +2276,8 @@ export class ModelServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
- *   from. Format:
+ *   Required. The resource name of the ModelEvaluation to list the
+ *   ModelEvaluationSlices from. Format:
  *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
  * @param {string} request.filter
  *   The standard list filter.
@@ -2238,8 +2288,10 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token} of the previous
- *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token}
+ *   of the previous
+ *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices}
+ *   call.
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
  * @param {object} [options]
@@ -2284,8 +2336,8 @@ export class ModelServiceClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The resource name of the ModelEvaluation to list the ModelEvaluationSlices
- *   from. Format:
+ *   Required. The resource name of the ModelEvaluation to list the
+ *   ModelEvaluationSlices from. Format:
  *   `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
  * @param {string} request.filter
  *   The standard list filter.
@@ -2296,8 +2348,10 @@ export class ModelServiceClient {
  * @param {string} request.pageToken
  *   The standard list page token.
  *   Typically obtained via
- *   {@link google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token} of the previous
- *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices} call.
+ *   {@link google.cloud.aiplatform.v1.ListModelEvaluationSlicesResponse.next_page_token|ListModelEvaluationSlicesResponse.next_page_token}
+ *   of the previous
+ *   {@link google.cloud.aiplatform.v1.ModelService.ListModelEvaluationSlices|ModelService.ListModelEvaluationSlices}
+ *   call.
  * @param {google.protobuf.FieldMask} request.readMask
  *   Mask specifying which fields to read.
  * @param {object} [options]

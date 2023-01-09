@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(specialistPool, updateMask) {
-  // [START aiplatform_v1_generated_SpecialistPoolService_UpdateSpecialistPool_async]
+function main(tensorboard) {
+  // [START aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,35 +29,31 @@ function main(specialistPool, updateMask) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The SpecialistPool which replaces the resource on the server.
+   *  Required. The name of the Tensorboard resource.
+   *  Format:
+   *  `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
    */
-  // const specialistPool = {}
-  /**
-   *  Required. The update mask applies to the resource.
-   */
-  // const updateMask = {}
+  // const tensorboard = 'abc123'
 
   // Imports the Aiplatform library
-  const {SpecialistPoolServiceClient} = require('@google-cloud/aiplatform').v1;
+  const {TensorboardServiceClient} = require('@google-cloud/aiplatform').v1;
 
   // Instantiates a client
-  const aiplatformClient = new SpecialistPoolServiceClient();
+  const aiplatformClient = new TensorboardServiceClient();
 
-  async function callUpdateSpecialistPool() {
+  async function callReadTensorboardUsage() {
     // Construct request
     const request = {
-      specialistPool,
-      updateMask,
+      tensorboard,
     };
 
     // Run request
-    const [operation] = await aiplatformClient.updateSpecialistPool(request);
-    const [response] = await operation.promise();
+    const response = await aiplatformClient.readTensorboardUsage(request);
     console.log(response);
   }
 
-  callUpdateSpecialistPool();
-  // [END aiplatform_v1_generated_SpecialistPoolService_UpdateSpecialistPool_async]
+  callReadTensorboardUsage();
+  // [END aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_async]
 }
 
 process.on('unhandledRejection', err => {

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,13 +29,13 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Location from which to list the IndexEndpoints.
-   *  Format: `projects/{project}/locations/{location}`
+   *  Required. The resource name of the Location from which to list the
+   *  IndexEndpoints. Format: `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
   /**
-   *  Optional. An expression for filtering the results of the request. For field names
-   *  both snake_case and camelCase are supported.
+   *  Optional. An expression for filtering the results of the request. For field
+   *  names both snake_case and camelCase are supported.
    *    * `index_endpoint` supports = and !=. `index_endpoint` represents the
    *       IndexEndpoint ID, ie. the last segment of the IndexEndpoint's
    *       resourcename google.cloud.aiplatform.v1.IndexEndpoint.name.
@@ -59,8 +59,10 @@ function main(parent) {
   /**
    *  Optional. The standard list page token.
    *  Typically obtained via
-   *  ListIndexEndpointsResponse.next_page_token google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token  of the previous
-   *  IndexEndpointService.ListIndexEndpoints google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints  call.
+   *  ListIndexEndpointsResponse.next_page_token google.cloud.aiplatform.v1.ListIndexEndpointsResponse.next_page_token 
+   *  of the previous
+   *  IndexEndpointService.ListIndexEndpoints google.cloud.aiplatform.v1.IndexEndpointService.ListIndexEndpoints 
+   *  call.
    */
   // const pageToken = 'abc123'
   /**
