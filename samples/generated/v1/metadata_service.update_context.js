@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,9 +30,8 @@ function main(context) {
    */
   /**
    *  Required. The Context containing updates.
-   *  The Context's Context.name google.cloud.aiplatform.v1.Context.name  field is used to identify the Context to be
-   *  updated.
-   *  Format:
+   *  The Context's Context.name google.cloud.aiplatform.v1.Context.name  field
+   *  is used to identify the Context to be updated. Format:
    *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
    */
   // const context = {}
@@ -42,8 +41,8 @@ function main(context) {
    */
   // const updateMask = {}
   /**
-   *  If set to true, and the Context google.cloud.aiplatform.v1.Context  is not found, a new Context google.cloud.aiplatform.v1.Context  is
-   *  created.
+   *  If set to true, and the Context google.cloud.aiplatform.v1.Context  is
+   *  not found, a new Context google.cloud.aiplatform.v1.Context  is created.
    */
   // const allowMissing = true
 

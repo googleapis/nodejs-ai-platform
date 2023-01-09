@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,16 +29,17 @@ function main(entityType, payloads) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the EntityType for the entities being written.
-   *  Value format: `projects/{project}/locations/{location}/featurestores/
+   *  Required. The resource name of the EntityType for the entities being
+   *  written. Value format:
+   *  `projects/{project}/locations/{location}/featurestores/
    *  {featurestore}/entityTypes/{entityType}`. For example,
    *  for a machine learning model predicting user clicks on a website, an
    *  EntityType ID could be `user`.
    */
   // const entityType = 'abc123'
   /**
-   *  Required. The entities to be written. Up to 100,000 feature values can be written
-   *  across all `payloads`.
+   *  Required. The entities to be written. Up to 100,000 feature values can be
+   *  written across all `payloads`.
    */
   // const payloads = 1234
 

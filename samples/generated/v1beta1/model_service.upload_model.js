@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,8 +34,8 @@ function main(parent, model) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The resource name of the model into which to upload the version. Only
-   *  specify this field when uploading a new version.
+   *  Optional. The resource name of the model into which to upload the version.
+   *  Only specify this field when uploading a new version.
    */
   // const parentModel = 'abc123'
   /**

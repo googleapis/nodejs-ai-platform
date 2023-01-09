@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,8 +38,8 @@ function main(entityType) {
    */
   // const selectTimeRangeAndFeature = {}
   /**
-   *  Required. The resource name of the EntityType grouping the Features for which values
-   *  are being deleted from. Format:
+   *  Required. The resource name of the EntityType grouping the Features for
+   *  which values are being deleted from. Format:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
    */
   // const entityType = 'abc123'

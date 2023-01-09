@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,8 +39,8 @@ function main(name) {
   /**
    *  The standard list page token.
    *  Typically obtained via
-   *  ListModelVersionsResponse.next_page_token google.cloud.aiplatform.v1beta1.ListModelVersionsResponse.next_page_token  of the previous
-   *  ModelService.ListModelversions   call.
+   *  ListModelVersionsResponse.next_page_token google.cloud.aiplatform.v1beta1.ListModelVersionsResponse.next_page_token 
+   *  of the previous ModelService.ListModelversions   call.
    */
   // const pageToken = 'abc123'
   /**
@@ -58,6 +58,15 @@ function main(name) {
    *  Mask specifying which fields to read.
    */
   // const readMask = {}
+  /**
+   *  A comma-separated list of fields to order by, sorted in ascending order.
+   *  Use "desc" after a field name for descending.
+   *  Supported fields:
+   *    * `create_time`
+   *    * `update_time`
+   *  Example: `update_time asc, create_time desc`.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Aiplatform library
   const {ModelServiceClient} = require('@google-cloud/aiplatform').v1beta1;

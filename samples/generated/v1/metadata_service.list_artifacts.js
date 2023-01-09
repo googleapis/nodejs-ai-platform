@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,7 +40,8 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  A page token, received from a previous MetadataService.ListArtifacts google.cloud.aiplatform.v1.MetadataService.ListArtifacts 
+   *  A page token, received from a previous
+   *  MetadataService.ListArtifacts google.cloud.aiplatform.v1.MetadataService.ListArtifacts 
    *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other provided parameters must match the call that
    *  provided the page token. (Otherwise the request will fail with

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,8 +39,8 @@ function main(parent, feature, featureId) {
    */
   // const feature = {}
   /**
-   *  Required. The ID to use for the Feature, which will become the final component of
-   *  the Feature's resource name.
+   *  Required. The ID to use for the Feature, which will become the final
+   *  component of the Feature's resource name.
    *  This value may be up to 128 characters, and valid characters are
    *  `[a-z0-9_]`. The first character cannot be a number.
    *  The value must be unique within an EntityType.

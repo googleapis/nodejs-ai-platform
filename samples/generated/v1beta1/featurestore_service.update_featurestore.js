@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,9 +29,8 @@ function main(featurestore) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The Featurestore's `name` field is used to identify the Featurestore to be
-   *  updated.
-   *  Format:
+   *  Required. The Featurestore's `name` field is used to identify the
+   *  Featurestore to be updated. Format:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}`
    */
   // const featurestore = {}
@@ -47,7 +46,7 @@ function main(featurestore) {
    *    * `labels`
    *    * `online_serving_config.fixed_node_count`
    *    * `online_serving_config.scaling`
-   *    * `online_storage_ttl_days`
+   *    * `online_storage_ttl_days` (available in Preview)
    */
   // const updateMask = {}
 

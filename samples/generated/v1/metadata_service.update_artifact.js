@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,9 +30,8 @@ function main(artifact) {
    */
   /**
    *  Required. The Artifact containing updates.
-   *  The Artifact's Artifact.name google.cloud.aiplatform.v1.Artifact.name  field is used to identify the Artifact to
-   *  be updated.
-   *  Format:
+   *  The Artifact's Artifact.name google.cloud.aiplatform.v1.Artifact.name 
+   *  field is used to identify the Artifact to be updated. Format:
    *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
    */
   // const artifact = {}
@@ -42,7 +41,8 @@ function main(artifact) {
    */
   // const updateMask = {}
   /**
-   *  If set to true, and the Artifact google.cloud.aiplatform.v1.Artifact  is not found, a new Artifact google.cloud.aiplatform.v1.Artifact  is
+   *  If set to true, and the Artifact google.cloud.aiplatform.v1.Artifact  is
+   *  not found, a new Artifact google.cloud.aiplatform.v1.Artifact  is
    *  created.
    */
   // const allowMissing = true

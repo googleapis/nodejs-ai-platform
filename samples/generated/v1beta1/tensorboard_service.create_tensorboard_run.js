@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,8 +29,8 @@ function main(parent, tensorboardRun, tensorboardRunId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the TensorboardExperiment to create the TensorboardRun
-   *  in. Format:
+   *  Required. The resource name of the TensorboardExperiment to create the
+   *  TensorboardRun in. Format:
    *  `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
    */
   // const parent = 'abc123'
@@ -39,7 +39,7 @@ function main(parent, tensorboardRun, tensorboardRunId) {
    */
   // const tensorboardRun = {}
   /**
-   *  Required. The ID to use for the Tensorboard run, which will become the final
+   *  Required. The ID to use for the Tensorboard run, which becomes the final
    *  component of the Tensorboard run's resource name.
    *  This value should be 1-128 characters, and valid characters
    *  are /[a-z][0-9]-/.

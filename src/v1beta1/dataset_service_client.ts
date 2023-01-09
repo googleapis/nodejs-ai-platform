@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1678,8 +1678,8 @@ export class DatasetServiceClient {
    *   Required. The Dataset which replaces the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource.
-   *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
-   *   Updatable fields:
+   *   For the `FieldMask` definition, see
+   *   {@link google.protobuf.FieldMask|google.protobuf.FieldMask}. Updatable fields:
    *
    *     * `display_name`
    *     * `description`
@@ -2161,8 +2161,8 @@ export class DatasetServiceClient {
    *   Format:
    *   `projects/{project}/locations/{location}/datasets/{dataset}`
    * @param {number[]} request.importConfigs
-   *   Required. The desired input locations. The contents of all input locations will be
-   *   imported in one batch.
+   *   Required. The desired input locations. The contents of all input locations
+   *   will be imported in one batch.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2968,7 +2968,8 @@ export class DatasetServiceClient {
    *   Must specify `saved_query_id=` - saved query id that annotations should
    *   belong to.
    * @param {google.protobuf.FieldMask} request.fieldMask
-   *   Mask specifying which fields of {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
+   *   Mask specifying which fields of
+   *   {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
    * @param {number} request.annotationsLimit
    *   If set, only up to this many of Annotations will be returned per
    *   DataItemView. The maximum value is 1000. If not set, the maximum value will
@@ -2982,8 +2983,10 @@ export class DatasetServiceClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems} call.
+   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems}
+   *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3120,7 +3123,8 @@ export class DatasetServiceClient {
    *   Must specify `saved_query_id=` - saved query id that annotations should
    *   belong to.
    * @param {google.protobuf.FieldMask} request.fieldMask
-   *   Mask specifying which fields of {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
+   *   Mask specifying which fields of
+   *   {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
    * @param {number} request.annotationsLimit
    *   If set, only up to this many of Annotations will be returned per
    *   DataItemView. The maximum value is 1000. If not set, the maximum value will
@@ -3134,8 +3138,10 @@ export class DatasetServiceClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems} call.
+   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems}
+   *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3220,7 +3226,8 @@ export class DatasetServiceClient {
    *   Must specify `saved_query_id=` - saved query id that annotations should
    *   belong to.
    * @param {google.protobuf.FieldMask} request.fieldMask
-   *   Mask specifying which fields of {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
+   *   Mask specifying which fields of
+   *   {@link google.cloud.aiplatform.v1beta1.DataItemView|DataItemView} to read.
    * @param {number} request.annotationsLimit
    *   If set, only up to this many of Annotations will be returned per
    *   DataItemView. The maximum value is 1000. If not set, the maximum value will
@@ -3234,8 +3241,10 @@ export class DatasetServiceClient {
    * @param {string} request.pageToken
    *   A token identifying a page of results for the server to return
    *   Typically obtained via
-   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token} of the previous
-   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems} call.
+   *   {@link google.cloud.aiplatform.v1beta1.SearchDataItemsResponse.next_page_token|SearchDataItemsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.DatasetService.SearchDataItems|DatasetService.SearchDataItems}
+   *   call.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

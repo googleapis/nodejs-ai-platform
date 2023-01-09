@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,15 +29,17 @@ function main(tensorboard, timeSeries) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Tensorboard containing TensorboardTimeSeries to
-   *  read data from. Format:
+   *  Required. The resource name of the Tensorboard containing
+   *  TensorboardTimeSeries to read data from. Format:
    *  `projects/{project}/locations/{location}/tensorboards/{tensorboard}`.
-   *  The TensorboardTimeSeries referenced by time_series google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest.time_series  must be sub
-   *  resources of this Tensorboard.
+   *  The TensorboardTimeSeries referenced by
+   *  time_series google.cloud.aiplatform.v1.BatchReadTensorboardTimeSeriesDataRequest.time_series 
+   *  must be sub resources of this Tensorboard.
    */
   // const tensorboard = 'abc123'
   /**
-   *  Required. The resource names of the TensorboardTimeSeries to read data from. Format:
+   *  Required. The resource names of the TensorboardTimeSeries to read data
+   *  from. Format:
    *  `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
    */
   // const timeSeries = 'abc123'

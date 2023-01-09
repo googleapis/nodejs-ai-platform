@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,12 +40,12 @@ function main(endpoint, deployedModelId) {
   // const deployedModelId = 'abc123'
   /**
    *  If this field is provided, then the Endpoint's
-   *  traffic_split google.cloud.aiplatform.v1beta1.Endpoint.traffic_split  will be overwritten with it. If
-   *  last DeployedModel is being undeployed from the Endpoint, the
-   *  Endpoint.traffic_split  will always end up empty when this call returns.
-   *  A DeployedModel will be successfully undeployed only if it doesn't have
-   *  any traffic assigned to it when this method executes, or if this field
-   *  unassigns any traffic to it.
+   *  traffic_split google.cloud.aiplatform.v1beta1.Endpoint.traffic_split 
+   *  will be overwritten with it. If last DeployedModel is being undeployed from
+   *  the Endpoint, the Endpoint.traffic_split  will always end up empty when
+   *  this call returns. A DeployedModel will be successfully undeployed only if
+   *  it doesn't have any traffic assigned to it when this method executes, or if
+   *  this field unassigns any traffic to it.
    */
   // const trafficSplit = 1234
 

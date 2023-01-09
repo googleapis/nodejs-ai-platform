@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -62,11 +62,11 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  A page token, received from a previous
-   *  FeaturestoreService.ListFeaturestores google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores  call.
-   *  Provide this to retrieve the subsequent page.
+   *  FeaturestoreService.ListFeaturestores google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores 
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  FeaturestoreService.ListFeaturestores google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores  must
-   *  match the call that provided the page token.
+   *  FeaturestoreService.ListFeaturestores google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeaturestores 
+   *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -39,8 +39,8 @@ function main(parent, requests) {
    */
   // const parent = 'abc123'
   /**
-   *  Required. The request message specifying the TensorboardTimeSeries to create.
-   *  A maximum of 1000 TensorboardTimeSeries can be created in a batch.
+   *  Required. The request message specifying the TensorboardTimeSeries to
+   *  create. A maximum of 1000 TensorboardTimeSeries can be created in a batch.
    */
   // const requests = 1234
 

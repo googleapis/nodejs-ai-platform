@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,8 +35,8 @@ function main(name, importConfigs) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The desired input locations. The contents of all input locations will be
-   *  imported in one batch.
+   *  Required. The desired input locations. The contents of all input locations
+   *  will be imported in one batch.
    */
   // const importConfigs = 1234
 

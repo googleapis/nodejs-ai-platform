@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,8 +32,8 @@ function main(updateMask, tensorboardExperiment) {
    *  Required. Field mask is used to specify the fields to be overwritten in the
    *  TensorboardExperiment resource by the update.
    *  The fields specified in the update_mask are relative to the resource, not
-   *  the full request. A field will be overwritten if it is in the mask. If the
-   *  user does not provide a mask then all fields will be overwritten if new
+   *  the full request. A field is overwritten if it's in the mask. If the
+   *  user does not provide a mask then all fields are overwritten if new
    *  values are specified.
    */
   // const updateMask = {}

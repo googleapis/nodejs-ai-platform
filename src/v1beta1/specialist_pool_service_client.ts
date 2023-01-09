@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -2080,9 +2080,11 @@ export class SpecialistPoolServiceClient {
    *   The standard list page size.
    * @param {string} request.pageToken
    *   The standard list page token.
-   *   Typically obtained by {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token} of
-   *   the previous {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools} call. Return
-   *   first page if empty.
+   *   Typically obtained by
+   *   {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
+   *   call. Return first page if empty.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read. FieldMask represents a set of
    * @param {object} [options]
@@ -2184,9 +2186,11 @@ export class SpecialistPoolServiceClient {
    *   The standard list page size.
    * @param {string} request.pageToken
    *   The standard list page token.
-   *   Typically obtained by {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token} of
-   *   the previous {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools} call. Return
-   *   first page if empty.
+   *   Typically obtained by
+   *   {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
+   *   call. Return first page if empty.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read. FieldMask represents a set of
    * @param {object} [options]
@@ -2236,9 +2240,11 @@ export class SpecialistPoolServiceClient {
    *   The standard list page size.
    * @param {string} request.pageToken
    *   The standard list page token.
-   *   Typically obtained by {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token} of
-   *   the previous {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools} call. Return
-   *   first page if empty.
+   *   Typically obtained by
+   *   {@link google.cloud.aiplatform.v1beta1.ListSpecialistPoolsResponse.next_page_token|ListSpecialistPoolsResponse.next_page_token}
+   *   of the previous
+   *   {@link google.cloud.aiplatform.v1beta1.SpecialistPoolService.ListSpecialistPools|SpecialistPoolService.ListSpecialistPools}
+   *   call. Return first page if empty.
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read. FieldMask represents a set of
    * @param {object} [options]

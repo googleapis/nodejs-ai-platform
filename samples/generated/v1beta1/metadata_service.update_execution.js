@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ function main(execution) {
    */
   /**
    *  Required. The Execution containing updates.
-   *  The Execution's Execution.name google.cloud.aiplatform.v1beta1.Execution.name  field is used to identify the Execution
-   *  to be updated.
-   *  Format:
+   *  The Execution's
+   *  Execution.name google.cloud.aiplatform.v1beta1.Execution.name  field is
+   *  used to identify the Execution to be updated. Format:
    *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
    */
   // const execution = {}
@@ -42,8 +42,9 @@ function main(execution) {
    */
   // const updateMask = {}
   /**
-   *  If set to true, and the Execution google.cloud.aiplatform.v1beta1.Execution  is not found, a new Execution google.cloud.aiplatform.v1beta1.Execution 
-   *  is created.
+   *  If set to true, and the
+   *  Execution google.cloud.aiplatform.v1beta1.Execution  is not found, a new
+   *  Execution google.cloud.aiplatform.v1beta1.Execution  is created.
    */
   // const allowMissing = true
 

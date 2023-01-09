@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -36,10 +36,10 @@ function main(parent, tensorboardTimeSeries) {
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The user specified unique ID to use for the TensorboardTimeSeries, which
-   *  will become the final component of the TensorboardTimeSeries's resource
-   *  name.
-   *  This value should match "[a-z0-9][a-z0-9-]{0, 127}"
+   *  Optional. The user specified unique ID to use for the
+   *  TensorboardTimeSeries, which becomes the final component of the
+   *  TensorboardTimeSeries's resource name. This value should match
+   *  "[a-z0-9][a-z0-9-]{0, 127}"
    */
   // const tensorboardTimeSeriesId = 'abc123'
   /**

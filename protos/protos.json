@@ -2394,6 +2394,11 @@
                           "type": "string",
                           "id": 7
                         },
+                        "savedQueries": {
+                          "rule": "repeated",
+                          "type": "SavedQuery",
+                          "id": 9
+                        },
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 11
@@ -2455,6 +2460,78 @@
                         "annotationsFilter": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SavedQuery": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/SavedQuery",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 12
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotationFilter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "problemType": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "annotationSpecCount": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "supportAutomlTraining": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -3215,78 +3292,6 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
-                        }
-                      }
-                    },
-                    "SavedQuery": {
-                      "options": {
-                        "(google.api.resource).type": "aiplatform.googleapis.com/SavedQuery",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "metadata": {
-                          "type": "google.protobuf.Value",
-                          "id": 12
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "annotationFilter": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "problemType": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "annotationSpecCount": {
-                          "type": "int32",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "supportAutomlTraining": {
-                          "type": "bool",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
                         }
                       }
                     },
@@ -6733,6 +6738,13 @@
                           }
                         },
                         "ConvexAutomatedStoppingSpec": {
+                          "oneofs": {
+                            "_updateAllStoppedTrials": {
+                              "oneof": [
+                                "updateAllStoppedTrials"
+                              ]
+                            }
+                          },
                           "fields": {
                             "maxStepCount": {
                               "type": "int64",
@@ -6753,6 +6765,13 @@
                             "useElapsedDuration": {
                               "type": "bool",
                               "id": 5
+                            },
+                            "updateAllStoppedTrials": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           }
                         },
@@ -12403,6 +12422,10 @@
                         "readMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 5
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -15859,6 +15882,24 @@
                             }
                           ]
                         },
+                        "ReadTensorboardUsage": {
+                          "requestType": "ReadTensorboardUsageRequest",
+                          "responseType": "ReadTensorboardUsageResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{tensorboard=projects/*/locations/*/tensorboards/*}:readUsage",
+                            "(google.api.method_signature)": "tensorboard"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{tensorboard=projects/*/locations/*/tensorboards/*}:readUsage"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard"
+                            }
+                          ]
+                        },
                         "UpdateTensorboard": {
                           "requestType": "UpdateTensorboardRequest",
                           "responseType": "google.longrunning.Operation",
@@ -16421,6 +16462,50 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        }
+                      }
+                    },
+                    "ReadTensorboardUsageRequest": {
+                      "fields": {
+                        "tensorboard": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        }
+                      }
+                    },
+                    "ReadTensorboardUsageResponse": {
+                      "fields": {
+                        "monthlyUsageData": {
+                          "keyType": "string",
+                          "type": "PerMonthUsageData",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "PerUserUsageData": {
+                          "fields": {
+                            "username": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "viewCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "PerMonthUsageData": {
+                          "fields": {
+                            "userUsageData": {
+                              "rule": "repeated",
+                              "type": "PerUserUsageData",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -20781,6 +20866,11 @@
                           "type": "string",
                           "id": 7
                         },
+                        "savedQueries": {
+                          "rule": "repeated",
+                          "type": "SavedQuery",
+                          "id": 9
+                        },
                         "encryptionSpec": {
                           "type": "EncryptionSpec",
                           "id": 11
@@ -20842,6 +20932,78 @@
                         "annotationsFilter": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "SavedQuery": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/SavedQuery",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Value",
+                          "id": 12
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "annotationFilter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "problemType": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "annotationSpecCount": {
+                          "type": "int32",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "supportAutomlTraining": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -21602,78 +21764,6 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
-                        }
-                      }
-                    },
-                    "SavedQuery": {
-                      "options": {
-                        "(google.api.resource).type": "aiplatform.googleapis.com/SavedQuery",
-                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}"
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "metadata": {
-                          "type": "google.protobuf.Value",
-                          "id": 12
-                        },
-                        "createTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "updateTime": {
-                          "type": "google.protobuf.Timestamp",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "annotationFilter": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "problemType": {
-                          "type": "string",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "annotationSpecCount": {
-                          "type": "int32",
-                          "id": 10,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "supportAutomlTraining": {
-                          "type": "bool",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
                         }
                       }
                     },
@@ -25554,6 +25644,13 @@
                           }
                         },
                         "ConvexAutomatedStoppingSpec": {
+                          "oneofs": {
+                            "_updateAllStoppedTrials": {
+                              "oneof": [
+                                "updateAllStoppedTrials"
+                              ]
+                            }
+                          },
                           "fields": {
                             "maxStepCount": {
                               "type": "int64",
@@ -25574,6 +25671,13 @@
                             "useElapsedDuration": {
                               "type": "bool",
                               "id": 5
+                            },
+                            "updateAllStoppedTrials": {
+                              "type": "bool",
+                              "id": 6,
+                              "options": {
+                                "proto3_optional": true
+                              }
                             }
                           }
                         },
@@ -30795,6 +30899,10 @@
                         "readMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 5
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -34959,6 +35067,24 @@
                             }
                           ]
                         },
+                        "ReadTensorboardUsage": {
+                          "requestType": "ReadTensorboardUsageRequest",
+                          "responseType": "ReadTensorboardUsageResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{tensorboard=projects/*/locations/*/tensorboards/*}:readUsage",
+                            "(google.api.method_signature)": "tensorboard"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{tensorboard=projects/*/locations/*/tensorboards/*}:readUsage"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "tensorboard"
+                            }
+                          ]
+                        },
                         "UpdateTensorboard": {
                           "requestType": "UpdateTensorboardRequest",
                           "responseType": "google.longrunning.Operation",
@@ -35521,6 +35647,50 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        }
+                      }
+                    },
+                    "ReadTensorboardUsageRequest": {
+                      "fields": {
+                        "tensorboard": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Tensorboard"
+                          }
+                        }
+                      }
+                    },
+                    "ReadTensorboardUsageResponse": {
+                      "fields": {
+                        "monthlyUsageData": {
+                          "keyType": "string",
+                          "type": "PerMonthUsageData",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "PerUserUsageData": {
+                          "fields": {
+                            "username": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "viewCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "PerMonthUsageData": {
+                          "fields": {
+                            "userUsageData": {
+                              "rule": "repeated",
+                              "type": "PerUserUsageData",
+                              "id": 1
+                            }
                           }
                         }
                       }

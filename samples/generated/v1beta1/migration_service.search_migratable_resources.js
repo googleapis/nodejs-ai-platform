@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,10 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The location that the migratable resources should be searched from.
-   *  It's the Vertex AI location that the resources can be migrated to, not
-   *  the resources' original location.
-   *  Format:
+   *  Required. The location that the migratable resources should be searched
+   *  from. It's the Vertex AI location that the resources can be migrated to,
+   *  not the resources' original location. Format:
    *  `projects/{project}/locations/{location}`
    */
   // const parent = 'abc123'
@@ -48,7 +47,8 @@ function main(parent) {
   /**
    *  A filter for your search. You can use the following types of filters:
    *  *   Resource type filters. The following strings filter for a specific type
-   *      of MigratableResource google.cloud.aiplatform.v1beta1.MigratableResource:
+   *      of
+   *      MigratableResource google.cloud.aiplatform.v1beta1.MigratableResource:
    *      *   `ml_engine_model_version:*`
    *      *   `automl_model:*`
    *      *   `automl_dataset:*`

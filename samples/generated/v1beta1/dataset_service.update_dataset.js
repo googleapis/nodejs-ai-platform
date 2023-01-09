@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,8 +34,8 @@ function main(dataset, updateMask) {
   // const dataset = {}
   /**
    *  Required. The update mask applies to the resource.
-   *  For the `FieldMask` definition, see google.protobuf.FieldMask google.protobuf.FieldMask.
-   *  Updatable fields:
+   *  For the `FieldMask` definition, see
+   *  google.protobuf.FieldMask google.protobuf.FieldMask. Updatable fields:
    *    * `display_name`
    *    * `description`
    *    * `labels`

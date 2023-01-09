@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,7 +33,8 @@ function main(indexEndpoint, updateMask) {
    */
   // const indexEndpoint = {}
   /**
-   *  Required. The update mask applies to the resource. See google.protobuf.FieldMask google.protobuf.FieldMask.
+   *  Required. The update mask applies to the resource. See
+   *  google.protobuf.FieldMask google.protobuf.FieldMask.
    */
   // const updateMask = {}
 

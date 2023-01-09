@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -40,18 +40,18 @@ function main(parent) {
   // const filter = 'abc123'
   /**
    *  The maximum number of Tensorboards to return. The service may return
-   *  fewer than this value. If unspecified, at most 100 Tensorboards will be
-   *  returned. The maximum value is 100; values above 100 will be coerced to
+   *  fewer than this value. If unspecified, at most 100 Tensorboards are
+   *  returned. The maximum value is 100; values above 100 are coerced to
    *  100.
    */
   // const pageSize = 1234
   /**
    *  A page token, received from a previous
-   *  TensorboardService.ListTensorboards google.cloud.aiplatform.v1beta1.TensorboardService.ListTensorboards  call.
-   *  Provide this to retrieve the subsequent page.
+   *  TensorboardService.ListTensorboards google.cloud.aiplatform.v1beta1.TensorboardService.ListTensorboards 
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  TensorboardService.ListTensorboards google.cloud.aiplatform.v1beta1.TensorboardService.ListTensorboards  must
-   *  match the call that provided the page token.
+   *  TensorboardService.ListTensorboards google.cloud.aiplatform.v1beta1.TensorboardService.ListTensorboards 
+   *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**

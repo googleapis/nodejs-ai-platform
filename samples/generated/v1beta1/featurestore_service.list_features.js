@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -63,11 +63,11 @@ function main(parent) {
   // const pageSize = 1234
   /**
    *  A page token, received from a previous
-   *  FeaturestoreService.ListFeatures google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures  call.
-   *  Provide this to retrieve the subsequent page.
+   *  FeaturestoreService.ListFeatures google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures 
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
-   *  FeaturestoreService.ListFeatures google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures  must
-   *  match the call that provided the page token.
+   *  FeaturestoreService.ListFeatures google.cloud.aiplatform.v1beta1.FeaturestoreService.ListFeatures 
+   *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
   /**
@@ -85,10 +85,12 @@ function main(parent) {
    */
   // const readMask = {}
   /**
-   *  If set, return the most recent ListFeaturesRequest.latest_stats_count google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count 
+   *  If set, return the most recent
+   *  ListFeaturesRequest.latest_stats_count google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count 
    *  of stats for each Feature in response. Valid value is 0, 10. If number of
-   *  stats exists < ListFeaturesRequest.latest_stats_count google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count, return all
-   *  existing stats.
+   *  stats exists <
+   *  ListFeaturesRequest.latest_stats_count google.cloud.aiplatform.v1beta1.ListFeaturesRequest.latest_stats_count,
+   *  return all existing stats.
    */
   // const latestStatsCount = 1234
 

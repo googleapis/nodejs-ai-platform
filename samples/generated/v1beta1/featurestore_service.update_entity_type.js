@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,9 +29,8 @@ function main(entityType) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The EntityType's `name` field is used to identify the EntityType to be
-   *  updated.
-   *  Format:
+   *  Required. The EntityType's `name` field is used to identify the EntityType
+   *  to be updated. Format:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
    */
   // const entityType = {}
@@ -53,7 +52,7 @@ function main(entityType) {
    *    * `monitoring_config.import_features_analysis.anomaly_detection_baseline`
    *    * `monitoring_config.numerical_threshold_config.value`
    *    * `monitoring_config.categorical_threshold_config.value`
-   *    * `offline_storage_ttl_days`
+   *    * `offline_storage_ttl_days` (available in Preview)
    */
   // const updateMask = {}
 

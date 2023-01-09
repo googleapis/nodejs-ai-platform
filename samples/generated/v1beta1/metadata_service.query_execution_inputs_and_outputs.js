@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -29,9 +29,8 @@ function main(execution) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Execution whose input and output Artifacts should
-   *  be retrieved as a LineageSubgraph.
-   *  Format:
+   *  Required. The resource name of the Execution whose input and output
+   *  Artifacts should be retrieved as a LineageSubgraph. Format:
    *  `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
    */
   // const execution = 'abc123'

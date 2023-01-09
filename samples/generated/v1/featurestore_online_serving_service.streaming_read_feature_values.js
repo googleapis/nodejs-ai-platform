@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -38,14 +38,14 @@ function main(entityType, entityIds, featureSelector) {
    */
   // const entityType = 'abc123'
   /**
-   *  Required. IDs of entities to read Feature values of. The maximum number of IDs is
-   *  100. For example, for a machine learning model predicting user clicks on a
-   *  website, an entity ID could be `user_123`.
+   *  Required. IDs of entities to read Feature values of. The maximum number of
+   *  IDs is 100. For example, for a machine learning model predicting user
+   *  clicks on a website, an entity ID could be `user_123`.
    */
   // const entityIds = 'abc123'
   /**
-   *  Required. Selector choosing Features of the target EntityType. Feature IDs will be
-   *  deduplicated.
+   *  Required. Selector choosing Features of the target EntityType. Feature IDs
+   *  will be deduplicated.
    */
   // const featureSelector = {}
 

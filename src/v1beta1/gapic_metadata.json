@@ -1928,6 +1928,11 @@
                 "getTensorboard"
               ]
             },
+            "ReadTensorboardUsage": {
+              "methods": [
+                "readTensorboardUsage"
+              ]
+            },
             "CreateTensorboardExperiment": {
               "methods": [
                 "createTensorboardExperiment"
@@ -2081,6 +2086,11 @@
             "GetTensorboard": {
               "methods": [
                 "getTensorboard"
+              ]
+            },
+            "ReadTensorboardUsage": {
+              "methods": [
+                "readTensorboardUsage"
               ]
             },
             "CreateTensorboardExperiment": {

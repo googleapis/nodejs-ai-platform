@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -41,14 +41,16 @@ function main(endpoint, instances) {
    *  in case of AutoML Models, or, in case of customer created Models, the
    *  behaviour is as documented by that Model.
    *  The schema of any single instance may be specified via Endpoint's
-   *  DeployedModels' Model's google.cloud.aiplatform.v1beta1.DeployedModel.model 
+   *  DeployedModels'
+   *  Model's google.cloud.aiplatform.v1beta1.DeployedModel.model 
    *  PredictSchemata's google.cloud.aiplatform.v1beta1.Model.predict_schemata 
    *  instance_schema_uri google.cloud.aiplatform.v1beta1.PredictSchemata.instance_schema_uri.
    */
   // const instances = 1234
   /**
    *  The parameters that govern the prediction. The schema of the parameters may
-   *  be specified via Endpoint's DeployedModels' Model's  google.cloud.aiplatform.v1beta1.DeployedModel.model 
+   *  be specified via Endpoint's DeployedModels' Model's
+   *   google.cloud.aiplatform.v1beta1.DeployedModel.model 
    *  PredictSchemata's google.cloud.aiplatform.v1beta1.Model.predict_schemata 
    *  parameters_schema_uri google.cloud.aiplatform.v1beta1.PredictSchemata.parameters_schema_uri.
    */

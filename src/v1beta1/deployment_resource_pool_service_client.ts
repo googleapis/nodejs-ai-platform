@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -1654,8 +1654,8 @@ export class DeploymentResourcePoolServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent location resource where this DeploymentResourcePool will be
-   *   created. Format: `projects/{project}/locations/{location}`
+   *   Required. The parent location resource where this DeploymentResourcePool
+   *   will be created. Format: `projects/{project}/locations/{location}`
    * @param {google.cloud.aiplatform.v1beta1.DeploymentResourcePool} request.deploymentResourcePool
    *   Required. The DeploymentResourcePool to create.
    * @param {string} request.deploymentResourcePoolId
@@ -1950,8 +1950,8 @@ export class DeploymentResourcePoolServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent Location which owns this collection of DeploymentResourcePools.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent Location which owns this collection of
+   *   DeploymentResourcePools. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of DeploymentResourcePools to return. The service may
    *   return fewer than this value.
@@ -2059,8 +2059,8 @@ export class DeploymentResourcePoolServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent Location which owns this collection of DeploymentResourcePools.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent Location which owns this collection of
+   *   DeploymentResourcePools. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of DeploymentResourcePools to return. The service may
    *   return fewer than this value.
@@ -2112,8 +2112,8 @@ export class DeploymentResourcePoolServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent Location which owns this collection of DeploymentResourcePools.
-   *   Format: `projects/{project}/locations/{location}`
+   *   Required. The parent Location which owns this collection of
+   *   DeploymentResourcePools. Format: `projects/{project}/locations/{location}`
    * @param {number} request.pageSize
    *   The maximum number of DeploymentResourcePools to return. The service may
    *   return fewer than this value.
